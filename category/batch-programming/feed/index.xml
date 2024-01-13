@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Batch Programming Archives - Armour Infosec</title>
+	<atom:link href="https://www.armourinfosec.com/category/batch-programming/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.armourinfosec.com/category/batch-programming/</link>
+	<description>Do Your Part - Be Security Smart</description>
+	<lastBuildDate>Mon, 16 Jan 2017 04:56:09 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+
+<image>
+	<url>https://www.armourinfosec.com/wp-content/uploads/2018/02/ai.png</url>
+	<title>Batch Programming Archives - Armour Infosec</title>
+	<link>https://www.armourinfosec.com/category/batch-programming/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Batch file Programming</title>
+		<link>https://www.armourinfosec.com/batch-file-programming/</link>
+					<comments>https://www.armourinfosec.com/batch-file-programming/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Mon, 28 Sep 2015 04:09:10 +0000</pubDate>
+				<category><![CDATA[Batch Programming]]></category>
+		<category><![CDATA[Windows]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=704</guid>
+
+					<description><![CDATA[<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/batch-file-programming/">Batch file Programming</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<section class="wpb-content-wrapper"><div id="vc_row-65a2a39ba7eb3" class="vc_row wpb_row vc_row-fluid thegem-custom-65a2a39ba7e7c355"><div class="wpb_column vc_column_container vc_col-sm-12 thegem-custom-65a2a39bb3cb08066" ><div class="vc_column-inner thegem-custom-inner-65a2a39bb3cb6 "><div class="wpb_wrapper thegem-custom-65a2a39bb3cb08066">
+	
+		<div class="wpb_text_column wpb_content_element  thegem-vc-text thegem-custom-65a2a39bb40c57448"  >
+			<div class="wpb_wrapper">
+				<p><strong>What is a batch file?</strong></p>
+<p>A batch file is a collection of instructions that are used to run multiple commands at a time. It is basically a bundle of packages that are written In a sequence so that user does not have to put commands and instructions again and again. These files contain .bat extension. This means that you have to save the batch files by using .bat extension at the end of file name. These are basically DOS commands and also can run on command prompt.<span id="more-704"></span></p>
+<p><strong>How to write a batch file?</strong></p>
+<p>To write a batch file, first open a text editor (i.e, <strong>Notepad or Notepad++</strong>).</p>
+<p>In Notepad, type the commands which you want to execute.</p>
+<p>Example &#8211;<br />
+@echo off<br />
+echo Hi Armour Infosec!!</p>
+<p>pause</p>
+<p>&nbsp;</p>
+<p>Save them with .bat extension.</p>
+<p>The output will be shown in command prompt as &#8211;<br />
+Hi Armour Infosec!!</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+			</div>
+			<style>@media screen and (max-width: 1023px) {.thegem-vc-text.thegem-custom-65a2a39bb40c57448{display: block!important;}}@media screen and (max-width: 767px) {.thegem-vc-text.thegem-custom-65a2a39bb40c57448{display: block!important;}}@media screen and (max-width: 1023px) {.thegem-vc-text.thegem-custom-65a2a39bb40c57448{position: relative !important;}}@media screen and (max-width: 767px) {.thegem-vc-text.thegem-custom-65a2a39bb40c57448{position: relative !important;}}</style>
+		</div>
+	
+</div></div></div></div>
+</section><p>The post <a rel="nofollow" href="https://www.armourinfosec.com/batch-file-programming/">Batch file Programming</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/batch-file-programming/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Android Archives - Armour Infosec</title>
+	<atom:link href="https://www.armourinfosec.com/category/android/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.armourinfosec.com/category/android/</link>
+	<description>Do Your Part - Be Security Smart</description>
+	<lastBuildDate>Mon, 16 Jan 2017 04:51:54 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+
+<image>
+	<url>https://www.armourinfosec.com/wp-content/uploads/2018/02/ai.png</url>
+	<title>Android Archives - Armour Infosec</title>
+	<link>https://www.armourinfosec.com/category/android/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Best Hacking Apps For Android</title>
+		<link>https://www.armourinfosec.com/best-hacking-apps-for-android/</link>
+					<comments>https://www.armourinfosec.com/best-hacking-apps-for-android/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Mon, 28 Sep 2015 05:32:09 +0000</pubDate>
+				<category><![CDATA[Android]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=731</guid>
+
+					<description><![CDATA[<p>Top hacking apps for Android smart phones and tablets AnDOSid AnDOSid tag’s posts with two unique numbers which relate to...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/best-hacking-apps-for-android/">Best Hacking Apps For Android</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<h4><a href="https://www.armourinfosec.com/android/best-hacking-apps-for-android/"><img decoding="async" fetchpriority="high" class="alignleft size-full wp-image-803" src="https://www.armourinfosec.com/wp-content/uploads/2015/09/Hacking-Apps-For-Android.png" alt="Hacking-Apps-For-Android" width="450" height="300" srcset="https://www.armourinfosec.com/wp-content/uploads/2015/09/Hacking-Apps-For-Android.png 450w, https://www.armourinfosec.com/wp-content/uploads/2015/09/Hacking-Apps-For-Android-300x200.png 300w" sizes="(max-width: 450px) 100vw, 450px" /></a>Top hacking apps for Android smart phones and tablets</h4>
+<p><strong>AnDOSid</strong></p>
+<p>AnDOSid tag’s posts with two unique numbers which relate to the Android device that sent the request. AnDOSid allows security professionals to simulate a DOS attack.</p>
+<p><strong>AndroRAT</strong></p>
+<p><strong>Androrat</strong> is a client/server application developed in Java Android for the client side and in Java/Swing for the Server. The name <strong>Androrat</strong> is a mix of Android and RAT (Remote Access Tool)<span id="more-731"></span></p>
+<p><strong>APKInspector</strong></p>
+<p>APKinspector is another open source project that comes to reverse and analyze Android applications. project owners have created a graphical interface to allow visualizing the structure of the application modules this will make security analysts select the good Android application that is safe to use.</p>
+<p><strong>dSploit</strong></p>
+<p>dSploit is an advance toolkit to perform network security assesments on mobile phones. It is a complete toolkit so you can perform various attacks like password sniffing, real time traffic manipulation, etc</p>
+<p><strong>DroidSheep</strong></p>
+<p>DroidSheep [Root] is an Android app for Security analysis in wireless networks and capturing facebook, twitter, linkedin and other accounts.</p>
+<p><strong>Faceniff</strong></p>
+<p>FaceNiff is an Android app that allows you to sniff and intercept web session profiles over the WiFi that your mobile is connected to.</p>
+<p><strong>Hackode </strong></p>
+<p>Hackode is an android app developed by Ravi Kumar for penetration testers, ethical hackers and cyber security professionals. It contains various modules including Reconnaissance, Scanning, Exploits and Security Feed.</p>
+<p><strong>Nmap for Android</strong></p>
+<p>Nmap is a popular network security scanner which is also available for android devices. It is used by professionals for network exploration. It works on both non-rooted and rooted phones, But if your device is rooted then you have access to some more features.</p>
+<p><strong>Penetrate Pro</strong></p>
+<p>Penetrate Pro is an excellent Android app that calculates WEP / WPA keys for some wireless routers. Also, no advertising and 3G routers search based on Thomson.</p>
+<p><strong> SpoofApp</strong></p>
+<p><em>SpoofApp</em> is a Revolutionary iPhone Caller ID Spoofing, Voice Changing, and Call Recording Application.</p>
+<p><strong>Network Spoofer</strong></p>
+<p>Network Spoofer lets you change websites on other people&#8217;s computers from an Android phone.</p>
+<p><strong>WhatsApp Sniffer</strong></p>
+<p>WhatsApp Sniffer Android APK is a Android Application that lets you see anyone’s WhatsApp Conversations as long as you know their phone number</p>
+<p><strong> Wi-Fi Killer</strong></p>
+<p>this app you can disable internet connection for a device on the same network. So if someone (anyone) is abusing the internet wasting precious bandwidth for a Justin Bieber video clips you could just kill their connection and stay happy with a full bandwidth just for yourself.</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/best-hacking-apps-for-android/">Best Hacking Apps For Android</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/best-hacking-apps-for-android/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

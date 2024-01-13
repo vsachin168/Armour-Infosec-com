@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>how to install yum Archives - Armour Infosec</title>
+	<atom:link href="https://www.armourinfosec.com/tag/how-to-install-yum/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.armourinfosec.com/tag/how-to-install-yum/</link>
+	<description>Do Your Part - Be Security Smart</description>
+	<lastBuildDate>Fri, 10 Apr 2020 19:50:10 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+
+<image>
+	<url>https://www.armourinfosec.com/wp-content/uploads/2018/02/ai.png</url>
+	<title>how to install yum Archives - Armour Infosec</title>
+	<link>https://www.armourinfosec.com/tag/how-to-install-yum/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>What is YUM ? How to Install YUM in Linux ?</title>
+		<link>https://www.armourinfosec.com/what-is-yum-rhel/</link>
+					<comments>https://www.armourinfosec.com/what-is-yum-rhel/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Sat, 29 Aug 2015 17:21:27 +0000</pubDate>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[how to install yum]]></category>
+		<category><![CDATA[what is yum]]></category>
+		<category><![CDATA[yum commands]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=592</guid>
+
+					<description><![CDATA[<p>In this blog, we will learn about &#8220;What is YUM ?&#8221; and How to Install YUM in RHEL Linux with...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/what-is-yum-rhel/">What is YUM ? How to Install YUM in Linux ?</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>In this blog, we will learn about &#8220;What is YUM ?&#8221; and How to Install YUM in RHEL Linux with the local repository. <code>YUM</code> is the primary tool for getting, installing, deleting, querying, and managing Red Hat Enterprise Linux RPM software packages from official Red Hat software repositories, as well as other third-party repositories. So let&#8217;s start to the point. You can also find <strong><a href="https://www.armourinfosec.com/yum-commands-cheat-sheet/">Yum Commands</a> Cheat Sheet</strong> at the end of this blog.</p>
+<h2>What is YUM?</h2>
+<p><strong>YUM</strong> (<strong>Yellowdog Updater Modified</strong>) is an open-source command-line as well as a graphical based package management tool for <strong>RPM</strong> (<strong>RedHat Package Manager</strong>) <a href="https://www.armourinfosec.com/linux/what-is-yum/"><img decoding="async" fetchpriority="high" class="alignright wp-image-829 size-medium" title="what is yum" src="https://www.armourinfosec.com/wp-content/uploads/2015/09/yum-300x200.png" alt="what is yum" width="300" height="200" srcset="https://www.armourinfosec.com/wp-content/uploads/2015/09/yum-300x200.png 300w, https://www.armourinfosec.com/wp-content/uploads/2015/09/yum.png 450w" sizes="(max-width: 300px) 100vw, 300px" /></a>based Linux systems. It allows users and system administrators to easily install, update, remove or search software packages on a system. It was developed and released by <strong>Seth Vidal</strong> under <strong>GPL</strong> (<strong>General Public License</strong>) as an open-source, which means anyone can be allowed to download and access the code to fix bugs and develop customized packages. <strong>YUM</strong> uses numerous third-party repositories to install packages automatically by resolving their dependencies issues.</p>
+<p>&nbsp;</p>
+<p>General Configuration file of yum is located at <strong>/etc/yum.conf</strong><br />
+You can see this file with any editor</p>
+<h3>Installation of Yum Server with local repository</h3>
+<p>We can install a local repository for YUM with DVD/ISO file. If you have DVD then Copy the entire Linux OS DVD&#8217;s content to Hard-drive. Insert DVD into DVD-RW and go to the mounting point of DVD.</p>
+<p>To make a directory (folder) on root.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true ">[root@localhost ~]# cd /
+[root@localhost /]# mkdir rhel7</pre>
+<p>To go on the mounting point of DVD. cd [Mounting Location]</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true ">[root@localhost ~]# cd /run/media/root/rhel-server-7/</pre>
+<p>Copy all entire Linux OS DVD&#8217;s into <strong>/rhel7</strong> directory (folder)</p>
+<p>If you have an iso file of Rhel OS then follow how to mount ISO image in <strong>rhel</strong>.<br />
+Go where there you have copied the entire OS DVD. To go on the Packages Directory. Then Install the <strong>createrepo</strong> package. To install package</p>
+<p>It gives dependencies error. Then you have install depend packages</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true "># rpm -ivh deltarpm-*
+# rpm -ivh python- deltarpm-*</pre>
+<p>Then you have to again install the <strong>createrepo</strong> package</p>
+<p>To make &#8220;Createrepo&#8221; Database for the local repository which is used for YUM. Go to packages directory which is copied already. Go to the location of packages.</p>
+<p>Create repo database</p>
+<p>Or</p>
+<p>Create a file with repo as an extension and specify the YUM details in <strong>/etc/yum.repos.d</strong> directory (folder)</p>
+<p>yum.repos.d this is a directory which contains all repository. now we create our new repo with any editor.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true "># vim rhel.repo
+[RHEL]
+name=local_repo
+baseurl=file:/rhel7/Packages/
+:wq!</pre>
+<p>&nbsp;</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true ">[rhel] :- Title of yum repo,
+name=rhel  :- name of yum repo
+baseurl=file:/rhel7/Packages/ :- location of Rpm packages
+gpgcheck=0 :- verify rpm to RPM-GPG-key (gpgcheck=0 Disabal, gpgcheck=1 Enable)</pre>
+<p>&nbsp;</p>
+<p>Now we can create successful YUM repository, Verify run the yum command</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true "># yum check
+# yum repolist all</pre>
+<h4>Yum Commands Cheat Sheat</h4>
+<p><a href="https://www.armourinfosec.com/yum-commands-cheat-sheet/"><strong>Click here</strong></a> to go the blog.</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/what-is-yum-rhel/">What is YUM ? How to Install YUM in Linux ?</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/what-is-yum-rhel/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

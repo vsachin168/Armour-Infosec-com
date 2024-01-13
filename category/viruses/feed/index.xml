@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Viruses Archives - Armour Infosec</title>
+	<atom:link href="https://www.armourinfosec.com/category/viruses/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.armourinfosec.com/category/viruses/</link>
+	<description>Do Your Part - Be Security Smart</description>
+	<lastBuildDate>Wed, 18 Jan 2017 04:36:19 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+
+<image>
+	<url>https://www.armourinfosec.com/wp-content/uploads/2018/02/ai.png</url>
+	<title>Viruses Archives - Armour Infosec</title>
+	<link>https://www.armourinfosec.com/category/viruses/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Computer Viruses</title>
+		<link>https://www.armourinfosec.com/computer-viruses/</link>
+					<comments>https://www.armourinfosec.com/computer-viruses/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Sun, 02 Aug 2015 14:44:46 +0000</pubDate>
+				<category><![CDATA[Viruses]]></category>
+		<category><![CDATA[computer Viruses]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=314</guid>
+
+					<description><![CDATA[<p>A computer virus is a program which can replicate and attach itself to a program or files infecting the system...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/computer-viruses/">Computer Viruses</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p style="text-align: justify;"><a href="https://www.armourinfosec.com/viruses/computer-viruses/"><img decoding="async" fetchpriority="high" class="size-full wp-image-856 alignright" src="https://www.armourinfosec.com/wp-content/uploads/2015/08/virus-detected.png" alt="virus detected" width="450" height="300" srcset="https://www.armourinfosec.com/wp-content/uploads/2015/08/virus-detected.png 450w, https://www.armourinfosec.com/wp-content/uploads/2015/08/virus-detected-300x200.png 300w" sizes="(max-width: 450px) 100vw, 450px" /></a>A computer virus is a program which can replicate and attach itself to a program or files infecting the system without its knowledge. A Computer virus can be spread from one host to another by sharing infected file or by downloading infected files from un-trusted sources. All computer viruses are man-made, they spread only with human assistance and support.</p>
+<p><strong>Possible ways to get virus into Computers</strong></p>
+<p>Virus can be installed in a computer by downloading applications from un-trusted sites, by a removable medium like USB, CD, DVD’s and sharing files from one infected computer to another also virus comes through attachments with e-mails.<span id="more-314"></span></p>
+<ol>
+<li><strong>Opening a e-mail attachments</strong>: Whenever you download files with extension .exe, vbs, shs, pif, bat, cmd etc received via email attachment. There is a chance of virus getting into your system. Sometimes the attachments contain an executable code with double extension like hi.doc.exe. If you open such types of files, virus will enter into your system.</li>
+</ol>
+<ol start="2">
+<li><strong>Downloading files from un-trusted sites:</strong> Generally, virus is hidden in the files or program and enters your system whenever you download softwares or applications from untrusted websites.</li>
+</ol>
+<ol start="3">
+<li><strong>Removable Medium: </strong>Whenever you copy files or download files from an infected removable medium like USB, CD, DVD drives then the virus may enter into your system.</li>
+</ol>
+<ol start="4">
+<li><strong>Downloading games: </strong>Virus and worms may enter into a system when you try to download or install a game on your computer. The malicious program may be hidden in the files you download.</li>
+</ol>
+<ol start="5">
+<li><strong>Sharing files: </strong>Virus will install into your system whenever you share files from one infected computer to another computer.</li>
+</ol>
+<p><strong>Signs of Computer Virus</strong></p>
+<ul>
+<li>Computer runs more slowly than normal</li>
+<li>Computer stops responding or locks up often</li>
+<li>Computer crashes and restarts every few minutes</li>
+<li>Computer restarts on its own and then fails to run normally</li>
+<li>Applications on your computer don&#8217;t work correctly</li>
+<li>Disks or disk drives are inaccessible</li>
+<li>Can&#8217;t print correctly</li>
+<li>Unusual error messages</li>
+<li>Distorted menus and dialog boxes</li>
+</ul>
+<p><strong>How to prevent virus?</strong></p>
+<p><strong>Check for attachments</strong>: Always check the attachments by scanning before you open them and make sure that the attachments are received from the known user.</p>
+<p><strong>Check for Extensions: </strong>Always check the file extension before you download and avoid downloading the files with double extension.</p>
+<p><strong>Browser settings:</strong> Always set the browser settings to allow the sites only from trusted websites.</p>
+<p><strong>Ignore e-mails from unknown users: </strong>Avoid downloading the files from unknown user, and it is always better to ignore or delete the files from unknown users.</p>
+<p><strong>Anti-Virus Software</strong>: Always use anti-virus software and update with latest patches and scan the files before you download.</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/computer-viruses/">Computer Viruses</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/computer-viruses/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

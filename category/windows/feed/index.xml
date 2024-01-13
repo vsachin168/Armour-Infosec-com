@@ -1,0 +1,1097 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Windows Archives - Armour Infosec</title>
+	<atom:link href="https://www.armourinfosec.com/category/windows/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.armourinfosec.com/category/windows/</link>
+	<description>Do Your Part - Be Security Smart</description>
+	<lastBuildDate>Wed, 18 Jan 2017 04:37:39 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+
+<image>
+	<url>https://www.armourinfosec.com/wp-content/uploads/2018/02/ai.png</url>
+	<title>Windows Archives - Armour Infosec</title>
+	<link>https://www.armourinfosec.com/category/windows/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>User Shell Folders</title>
+		<link>https://www.armourinfosec.com/user-shell-folders/</link>
+					<comments>https://www.armourinfosec.com/user-shell-folders/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Sat, 03 Oct 2015 07:01:34 +0000</pubDate>
+				<category><![CDATA[Windows]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=776</guid>
+
+					<description><![CDATA[<p>The windows operating system stores user profile information in a User Shell Folders. Windows stores the location of per-user special...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/user-shell-folders/">User Shell Folders</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p><a href="https://www.armourinfosec.com/windows/user-shell-folders/"><img decoding="async" fetchpriority="high" class="alignleft wp-image-789 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2015/10/User-Shell-Folders.png" alt="User-Shell-Folders" width="450" height="300" srcset="https://www.armourinfosec.com/wp-content/uploads/2015/10/User-Shell-Folders.png 450w, https://www.armourinfosec.com/wp-content/uploads/2015/10/User-Shell-Folders-300x200.png 300w" sizes="(max-width: 450px) 100vw, 450px" /></a>The windows operating system stores user profile information in a User Shell Folders. Windows stores the location of per-user special folders under the following registry key:</p>
+<p>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders<span id="more-776"></span></p>
+<table>
+<tbody>
+<tr>
+<td width="98"><strong><span style="color: #b20002;">Name</span> </strong></td>
+<td width="281"><span style="color: #b20002;"><strong>Default Path</strong></span></td>
+<td width="259"><span style="color: #b20002;"><strong>Description</strong></span></td>
+</tr>
+<tr>
+<td width="98">appdata</td>
+<td width="281">%userprofile%\appdata\roaming</td>
+<td width="259">Application-specific data.</td>
+</tr>
+<tr>
+<td width="98">cache</td>
+<td width="281">%userprofile%\appdata\local\microsoft\windows\temporary internet files</td>
+<td width="259">Save temporary files folder of internet explorer</td>
+</tr>
+<tr>
+<td width="98">cookies</td>
+<td width="281">%userprofile%\appdata\roaming\microsoft\windows\cookies</td>
+<td width="259">Windows internet explorer cookies.</td>
+</tr>
+<tr>
+<td width="98">desktop</td>
+<td width="281">%userprofile%\desktop</td>
+<td width="259">Shortcuts to display on the desktop.</td>
+</tr>
+<tr>
+<td width="98">favorites</td>
+<td width="281">%userprofile%\favorites</td>
+<td width="259">Links to favorite websites.</td>
+</tr>
+<tr>
+<td width="98">history</td>
+<td width="281">%userprofile%\appdata\local\microsoft\windows\history</td>
+<td width="259">Internet explorer history.</td>
+</tr>
+<tr>
+<td width="98">local appdata</td>
+<td width="281">%userprofile%\appdata\local</td>
+<td width="259">Application settings and data that do not roam with the profile. Usually either machine specific, or too large to roam effectively.</td>
+</tr>
+<tr>
+<td width="98">my music</td>
+<td width="281">%userprofile%\music</td>
+<td width="259">Default location for users music.</td>
+</tr>
+<tr>
+<td width="98">my pictures</td>
+<td width="281">%userprofile%\pictures</td>
+<td width="259">Default location for users pictures.</td>
+</tr>
+<tr>
+<td width="98">nethood</td>
+<td width="281">%userprofile%\appdata\roaming\microsoft\windows\network shortcuts</td>
+<td width="259">Shortcuts to network neighborhood items.</td>
+</tr>
+<tr>
+<td width="98">personal</td>
+<td width="281">%userprofile%\documents</td>
+<td width="259">The new default location for any documents that the user creates</td>
+</tr>
+<tr>
+<td width="98">printhood</td>
+<td width="281">%userprofile%\appdata\roaming\microsoft\windows\printer shortcuts</td>
+<td width="259">Shortcuts to printer folder items.</td>
+</tr>
+<tr>
+<td width="98">programs</td>
+<td width="281">%userprofile%\appdata\roaming\microsoft\windows\start menu\programs</td>
+<td width="259">User-specific programs directory</td>
+</tr>
+<tr>
+<td width="98">recent</td>
+<td width="281">%userprofile%\appdata\roaming\microsoft\windows\recent</td>
+<td width="259">Shortcuts to the most recently used documents.</td>
+</tr>
+<tr>
+<td width="98">sendto</td>
+<td width="281">%userprofile%\appdata\roaming\microsoft\windows\sendto</td>
+<td width="259">Shortcuts to locations to which the user often sends files.</td>
+</tr>
+<tr>
+<td width="98">start menu</td>
+<td width="281">%userprofile%\appdata\roaming\microsoft\windows\start menu</td>
+<td width="259">Menu items for the start menu.</td>
+</tr>
+<tr>
+<td width="98">startup</td>
+<td width="281">%userprofile%\appdata\roaming\microsoft\windows\start menu\programs\startup</td>
+<td width="259">Programs or shortcuts placed in the startup folder will run whenever windows starts</td>
+</tr>
+<tr>
+<td width="98">templates</td>
+<td width="281">%userprofile%\appdata\roaming\microsoft\windows\templates</td>
+<td width="259">Shortcuts to template items.</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/user-shell-folders/">User Shell Folders</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/user-shell-folders/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Shell folder in windows</title>
+		<link>https://www.armourinfosec.com/shell-folder-in-windows/</link>
+					<comments>https://www.armourinfosec.com/shell-folder-in-windows/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Fri, 02 Oct 2015 15:55:54 +0000</pubDate>
+				<category><![CDATA[Windows]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=771</guid>
+
+					<description><![CDATA[<p>Special or shell folder in windows Shell folders in Windows are specific folders that are used as the default location...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/shell-folder-in-windows/">Shell folder in windows</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p><strong><a href="https://www.armourinfosec.com/windows/shell-folder-in-windows/"><img decoding="async" class="wp-image-794 size-full alignright" src="https://www.armourinfosec.com/wp-content/uploads/2015/10/Shell-folders.png" alt="Shell folders" width="450" height="300" srcset="https://www.armourinfosec.com/wp-content/uploads/2015/10/Shell-folders.png 450w, https://www.armourinfosec.com/wp-content/uploads/2015/10/Shell-folders-300x200.png 300w" sizes="(max-width: 450px) 100vw, 450px" /></a>Special or shell folder in windows </strong></p>
+<p>Shell folders in Windows are specific folders that are used as the default location for specific file types.</p>
+<p><strong class="uiterm">Registry </strong><strong class="uiterm">Configuration</strong>:- HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders</p>
+<p>Press Window + R, then type <strong>Shell: folder shortcut</strong>,  then press enter.</p>
+<p>Example:- To open the windows installation folder.</p>
+<p>Press Window + R, then type <strong>shell:Windows</strong> then press enter<span id="more-771"></span></p>
+<table style="height: 7788px;" width="760">
+<tbody>
+<tr>
+<td width="199"><span style="color: #b20002;"><strong>Shell: folder shortcut</strong></span></td>
+<td width="266"><span style="color: #b20002;"><strong>Description</strong></span></td>
+<td width="174"><span style="color: #b20002;"><strong> folder Type</strong></span></td>
+</tr>
+<tr>
+<td width="199">shell:addnewprogramsfolder</td>
+<td width="266">To open the control panel &#8220;install a program from the network&#8221; applet</td>
+<td width="174">Internet Explorer</td>
+</tr>
+<tr>
+<td width="199">shell:administrative tools</td>
+<td width="266">To open the user‘s start menu\administrative tools folder (if any)</td>
+<td width="174">Internet Explorer</td>
+</tr>
+<tr>
+<td width="199">shell:appdata</td>
+<td width="266">To open the user‘s application data folder</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:appupdatesfolder</td>
+<td width="266">To display installed windows updates</td>
+<td width="174">System folder</td>
+</tr>
+<tr>
+<td width="199">shell:cache</td>
+<td width="266">To open the temporary internet files folder</td>
+<td width="174">Internet Explorer</td>
+</tr>
+<tr>
+<td width="199">shell:cd burning</td>
+<td width="266">To open the folder where files are stored before being burned to disc</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:changeremoveprogramsfolder</td>
+<td width="266">To open the control panel &#8220;uninstall or change a program&#8221; applet</td>
+<td width="174">Internet Explorer</td>
+</tr>
+<tr>
+<td width="199">shell:common administrative tools</td>
+<td width="266">To open all users start menu\administrative tools folder</td>
+<td width="174">Internet Explorer</td>
+</tr>
+<tr>
+<td width="199">shell:common appdata</td>
+<td width="266">To open the public application data folder</td>
+<td width="174">System folder</td>
+</tr>
+<tr>
+<td width="199">shell:common desktop</td>
+<td width="266">To open the public desktop</td>
+<td width="174">System folder</td>
+</tr>
+<tr>
+<td width="199">shell:common documents</td>
+<td width="266">To open the public documents folder</td>
+<td width="174">System folder</td>
+</tr>
+<tr>
+<td width="199">shell:common programs</td>
+<td width="266">To open the public start menu programs folder</td>
+<td width="174">System folder</td>
+</tr>
+<tr>
+<td width="199">shell:common start menu</td>
+<td width="266">To open the public start menu folder</td>
+<td width="174">System folder</td>
+</tr>
+<tr>
+<td width="199">shell:common startup</td>
+<td width="266">To open the public startup folder</td>
+<td width="174">System folder</td>
+</tr>
+<tr>
+<td width="199">shell:common templates</td>
+<td width="266">To open the public templates folder</td>
+<td width="174">System folder</td>
+</tr>
+<tr>
+<td width="199">shell:commondownloads</td>
+<td width="266">To open the public downloads folder</td>
+<td width="174">System folder</td>
+</tr>
+<tr>
+<td width="199">shell:commonmusic</td>
+<td width="266">To open the public music folder</td>
+<td width="174">Multimedia</td>
+</tr>
+<tr>
+<td width="199">shell:commonpictures</td>
+<td width="266">To open the public pictures folder</td>
+<td width="174">Multimedia</td>
+</tr>
+<tr>
+<td width="199">shell:commonringtones</td>
+<td width="266">To open the public ringtones folder.</td>
+<td width="174">System folder</td>
+</tr>
+<tr>
+<td width="199">shell:commonvideo</td>
+<td width="266">To open the public video folder</td>
+<td width="174">Multimedia</td>
+</tr>
+<tr>
+<td width="199">shell:conflictfolder</td>
+<td width="266">To display sync centre conflicts</td>
+<td width="174">Windows Sync Centre</td>
+</tr>
+<tr>
+<td width="199">shell:connectionsfolder</td>
+<td width="266">To open the list of network connections</td>
+<td width="174">Internet Explorer</td>
+</tr>
+<tr>
+<td width="199">shell:contacts</td>
+<td width="266">To open the user‘s windows contacts folder</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:controlpanelfolder</td>
+<td width="266">To display the control panel</td>
+<td width="174">Internet Explorer</td>
+</tr>
+<tr>
+<td width="199">shell:cookies</td>
+<td width="266">To open the internet explorer cookies folder</td>
+<td width="174">Internet Explorer</td>
+</tr>
+<tr>
+<td width="199">shell:credentialmanager</td>
+<td width="266">To open the user‘s credentials folder</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:cryptokeys</td>
+<td width="266">To open the user‘s encryption keys folder</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:cscfolder</td>
+<td width="266">To open the client side cache offline files folder, if supported</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:default gadgets</td>
+<td width="266">To open the default sidebar gadgets folder</td>
+<td width="174">Internet Explorer</td>
+</tr>
+<tr>
+<td width="199">shell:desktop</td>
+<td width="266">To open the user‘s desktop folder</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:documentslibrary</td>
+<td width="266">To open the documents library</td>
+<td width="174">Library</td>
+</tr>
+<tr>
+<td width="199">shell:downloads</td>
+<td width="266">To open the user‘s downloads folder</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:dpapikeys</td>
+<td width="266">To opens the user‘s appdata\roaming\microsoft\protect folder</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:favorites</td>
+<td width="266">To open the internet explorer favorites folder</td>
+<td width="174">Internet Explorer</td>
+</tr>
+<tr>
+<td width="199">shell:fonts</td>
+<td width="266">To open the fonts folder</td>
+<td width="174">System folder</td>
+</tr>
+<tr>
+<td width="199">shell:gadgets</td>
+<td width="266">To open the user folder of downloaded sidebar gadgets</td>
+<td width="174">Internet Explorer</td>
+</tr>
+<tr>
+<td width="199">shell:games</td>
+<td width="266">To open the games folder</td>
+<td width="174">System folder</td>
+</tr>
+<tr>
+<td width="199">shell:gametasks</td>
+<td width="266">To open the user‘s game explorer folder</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:history</td>
+<td width="266">To open the user‘s history folder</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:homegroupcurrentuserfolder</td>
+<td width="266">To open the homegroup folder for the currently logged-on user (if any)</td>
+<td width="174">System folder</td>
+</tr>
+<tr>
+<td width="199">shell:homegroupfolder</td>
+<td width="266">To open the homegroup folder</td>
+<td width="174">System folder</td>
+</tr>
+<tr>
+<td width="199">shell:immersive application shortcuts</td>
+<td width="266">To display metro app shortcuts (windows 8)</td>
+<td width="174">Internet Explorer</td>
+</tr>
+<tr>
+<td width="199">shell:implicitappshortcuts</td>
+<td width="266">To open the hidden implicitappshortcuts folder</td>
+<td width="174">Internet Explorer</td>
+</tr>
+<tr>
+<td width="199">shell:internetfolder</td>
+<td width="266">To launches internet explorer applets and applications</td>
+<td width="174">Internet Explorer</td>
+</tr>
+<tr>
+<td width="199">shell:libraries</td>
+<td width="266">To open the libraries folder</td>
+<td width="174">Library</td>
+</tr>
+<tr>
+<td width="199">shell:links</td>
+<td width="266">To open the user‘s links folder</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:local appdata</td>
+<td width="266">To open the user‘s application data folder</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:musiclibrary</td>
+<td width="266">To display your music library</td>
+<td width="174">Library</td>
+</tr>
+<tr>
+<td width="199">shell:my music</td>
+<td width="266">To open the user‘s music folder</td>
+<td width="174">Multimedia</td>
+</tr>
+<tr>
+<td width="199">shell:my pictures</td>
+<td width="266">To open the user‘s pictures folder</td>
+<td width="174">Multimedia</td>
+</tr>
+<tr>
+<td width="199">shell:my video</td>
+<td width="266">To open the user‘s videos folder</td>
+<td width="174">Multimedia</td>
+</tr>
+<tr>
+<td width="199">shell:mycomputerfolder</td>
+<td width="266">To open the computer folder</td>
+<td width="174">System folder</td>
+</tr>
+<tr>
+<td width="199">shell:nethood</td>
+<td width="266">To open the user‘s network places folder</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:networkplacesfolder</td>
+<td width="266">To open the network places folder</td>
+<td width="174">System folder</td>
+</tr>
+<tr>
+<td width="199">shell:oem links</td>
+<td width="266">To display links provided by your pc manufacturer (if any)</td>
+<td width="174">System folder</td>
+</tr>
+<tr>
+<td width="199">shell:original images</td>
+<td width="266">To open the windows photo gallery original images folder, if installed</td>
+<td width="174">Multimedia</td>
+</tr>
+<tr>
+<td width="199">shell:personal</td>
+<td width="266">To open the user‘s documents folder</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:photoalbums</td>
+<td width="266">To open the user‘s pictures\slide shows folder (if present)</td>
+<td width="174">Multimedia</td>
+</tr>
+<tr>
+<td width="199">shell:pictureslibrary</td>
+<td width="266">To display your pictures library</td>
+<td width="174">Library</td>
+</tr>
+<tr>
+<td width="199">shell:playlists</td>
+<td width="266">To open the user‘s \music\playlists folder</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:printersfolder</td>
+<td width="266">To open the printers folder</td>
+<td width="174">System folder</td>
+</tr>
+<tr>
+<td width="199">shell:printhood</td>
+<td width="266">To open the user‘s printer shortcuts folder</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:profile</td>
+<td width="266">To open the user‘s profile folder</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:programfiles</td>
+<td width="266">To open the program files folder</td>
+<td width="174">Internet Explorer</td>
+</tr>
+<tr>
+<td width="199">shell:programfilescommon</td>
+<td width="266">To open the program files\common files folder</td>
+<td width="174">Internet Explorer</td>
+</tr>
+<tr>
+<td width="199">shell:programfilescommonx86</td>
+<td width="266">To open the common files for 32-bit programs stored on 64-bit windows,</td>
+<td width="174">Internet Explorer</td>
+</tr>
+<tr>
+<td width="199">shell:programfilesx86</td>
+<td width="266">To display 32-bit programs stored on 64-bit windows,</td>
+<td width="174">Internet Explorer</td>
+</tr>
+<tr>
+<td width="199">shell:programs</td>
+<td width="266">To open the user‘s start menu programs folder</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:public</td>
+<td width="266">To open the users\public folder (shared files)</td>
+<td width="174">System folder</td>
+</tr>
+<tr>
+<td width="199">shell:publicgametasks</td>
+<td width="266">To open the public game explorer folder</td>
+<td width="174">System folder</td>
+</tr>
+<tr>
+<td width="199">shell:publiclibraries</td>
+<td width="266">To display public libraries, if any</td>
+<td width="174">Library</td>
+</tr>
+<tr>
+<td width="199">shell:publicusertiles</td>
+<td width="266">To open the public user tiles folder</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:quick launch</td>
+<td width="266">To open the quick launch folder (disabled by default)</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:recent</td>
+<td width="266">To open the user‘s recent documents folder</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:recyclebinfolder</td>
+<td width="266">To open the recycle bin</td>
+<td width="174">System folder</td>
+</tr>
+<tr>
+<td width="199">shell:resourcedir</td>
+<td width="266">To open the windows resources folder (themes are stored here)</td>
+<td width="174">System folder</td>
+</tr>
+<tr>
+<td width="199">shell:ringtones</td>
+<td width="266">To display the user&#8217;s ringtones folder</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:roaming tiles</td>
+<td width="266">To display further user tiles</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:samplemusic</td>
+<td width="266">To open the sample music folder</td>
+<td width="174">Multimedia</td>
+</tr>
+<tr>
+<td width="199">shell:samplepictures</td>
+<td width="266">To open the sample pictures folder</td>
+<td width="174">Multimedia</td>
+</tr>
+<tr>
+<td width="199">shell:samplevideos</td>
+<td width="266">To open the sample videos folder</td>
+<td width="174">Multimedia</td>
+</tr>
+<tr>
+<td width="199">shell:savedgames</td>
+<td width="266">To open the saved games folder</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:searches</td>
+<td width="266">To open the saved searches folder</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:searchhomefolder</td>
+<td width="266">To open the windows search tool</td>
+<td width="174">Internet Explorer</td>
+</tr>
+<tr>
+<td width="199">shell:sendto</td>
+<td width="266">To open the user‘s send to folder</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:start menu</td>
+<td width="266">To open the user‘s start menu folder</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:startup</td>
+<td width="266">To open the user‘s startup folder</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:synccenterfolder</td>
+<td width="266">To display sync centre</td>
+<td width="174">Windows Sync Centre</td>
+</tr>
+<tr>
+<td width="199">shell:syncresultsfolder</td>
+<td width="266">To display sync centre results</td>
+<td width="174">Windows Sync Centre</td>
+</tr>
+<tr>
+<td width="199">shell:syncsetupfolder</td>
+<td width="266">To open the sync centre setup options</td>
+<td width="174">Windows Sync Centre</td>
+</tr>
+<tr>
+<td width="199">shell:system</td>
+<td width="266">To open the windows system folder</td>
+<td width="174">System folder</td>
+</tr>
+<tr>
+<td width="199">shell:systemcertificates</td>
+<td width="266">To open the user‘s certificates folder</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:systemx86</td>
+<td width="266">To open the windows system folder for 32-bit files on 64-bit windows,</td>
+<td width="174">System folder</td>
+</tr>
+<tr>
+<td width="199">shell:templates</td>
+<td width="266">To open the user‘s templates folder</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:user pinned</td>
+<td width="266">To access shortcuts pinned to the start menu or taskbar</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:userprofiles</td>
+<td width="266">To open the folder holding all user profiles</td>
+<td width="174">System folder</td>
+</tr>
+<tr>
+<td width="199">shell:usertiles</td>
+<td width="266">To display your user tiles (the images you can use for your account)</td>
+<td width="174">User folder</td>
+</tr>
+<tr>
+<td width="199">shell:videoslibrary</td>
+<td width="266">To display your videos library</td>
+<td width="174">Library</td>
+</tr>
+<tr>
+<td width="199">shell:windows</td>
+<td width="266">To open the windows installation folder (usually \windows)</td>
+<td width="174">System folder</td>
+</tr>
+</tbody>
+</table>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/shell-folder-in-windows/">Shell folder in windows</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/shell-folder-in-windows/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Run Commands for Windows</title>
+		<link>https://www.armourinfosec.com/run-commands-for-windows/</link>
+					<comments>https://www.armourinfosec.com/run-commands-for-windows/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Fri, 02 Oct 2015 14:46:15 +0000</pubDate>
+				<category><![CDATA[Windows]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=764</guid>
+
+					<description><![CDATA[<p>Run Commands for Windows Press Window + R, then type RUN command, then press enter. Run commands are just like...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/run-commands-for-windows/">Run Commands for Windows</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p><strong><a href="https://www.armourinfosec.com/windows/run-commands-for-windows/"><img decoding="async" class="wp-image-797 size-full alignleft" src="https://www.armourinfosec.com/wp-content/uploads/2015/10/Run-Commands-for-Windows.png" alt="Run Commands for Windows" width="450" height="300" srcset="https://www.armourinfosec.com/wp-content/uploads/2015/10/Run-Commands-for-Windows.png 450w, https://www.armourinfosec.com/wp-content/uploads/2015/10/Run-Commands-for-Windows-300x200.png 300w" sizes="(max-width: 450px) 100vw, 450px" /></a></strong></p>
+<h2><strong>Run Commands for Windows</strong></h2>
+<p>Press Window + R, then type RUN command, then press enter. Run commands are just like using command prompt in a GUI environment.</p>
+<p>Example:- To run notepad</p>
+<p>Press Window + R, then type <strong>notepad</strong> then press enter from RUN menu<span id="more-764"></span></p>
+<table>
+<tbody>
+<tr>
+<td width="249"><span style="color: #b20002;"><strong>Commands</strong></span></td>
+<td width="292"><span style="color: #b20002;"><strong>Description</strong></span></td>
+</tr>
+<tr>
+<td width="249">colorcpl.exe</td>
+<td width="292">To open color management</td>
+</tr>
+<tr>
+<td width="249">azman.msc</td>
+<td width="292">To open authorization manager</td>
+</tr>
+<tr>
+<td width="249">calc</td>
+<td width="292">To open calculator</td>
+</tr>
+<tr>
+<td width="249">certmgr.msc</td>
+<td width="292">To open certificate manager</td>
+</tr>
+<tr>
+<td width="249">chkdsk</td>
+<td width="292">To check disk state and functioning</td>
+</tr>
+<tr>
+<td width="249">cmd</td>
+<td width="292">To open command prompt</td>
+</tr>
+<tr>
+<td width="249">compmgmt.msc</td>
+<td width="292">To open computer management</td>
+</tr>
+<tr>
+<td width="249">control</td>
+<td width="292">To open control panel</td>
+</tr>
+<tr>
+<td width="249">control access.cpl</td>
+<td width="292">To open ease of access</td>
+</tr>
+<tr>
+<td width="249">control color</td>
+<td width="292">To open color and appearance</td>
+</tr>
+<tr>
+<td width="249">control folders</td>
+<td width="292">To open folder options</td>
+</tr>
+<tr>
+<td width="249">control fonts</td>
+<td width="292">To set fonts from control panel</td>
+</tr>
+<tr>
+<td width="249">control keyboard</td>
+<td width="292">To open keyboard properties</td>
+</tr>
+<tr>
+<td width="249">control mouse</td>
+<td width="292">To open mouse properties</td>
+</tr>
+<tr>
+<td width="249">control netconnections</td>
+<td width="292">To open network connections</td>
+</tr>
+<tr>
+<td width="249">control printers</td>
+<td width="292">To open devices and printers</td>
+</tr>
+<tr>
+<td width="249">control schedtasks</td>
+<td width="292">To open Task scheduler</td>
+</tr>
+<tr>
+<td width="249">control userpasswords2</td>
+<td width="292">To open User accounts</td>
+</tr>
+<tr>
+<td width="249">control wuaucpl.cpl</td>
+<td width="292">To open windows update menu</td>
+</tr>
+<tr>
+<td width="249">credwiz</td>
+<td width="292">To open backup and restore menu</td>
+</tr>
+<tr>
+<td width="249">dcomcnfg</td>
+<td width="292">To open Component service</td>
+</tr>
+<tr>
+<td width="249">desk.cpl</td>
+<td width="292">To open Desktop resolution</td>
+</tr>
+<tr>
+<td width="249">devmgmt.msc</td>
+<td width="292">To open Device manager</td>
+</tr>
+<tr>
+<td width="249">dfrgui</td>
+<td width="292">To optimize drives</td>
+</tr>
+<tr>
+<td width="249">dialer</td>
+<td width="292">To open phone dialer</td>
+</tr>
+<tr>
+<td width="249">diskmgmt.msc</td>
+<td width="292">To open disk manager</td>
+</tr>
+<tr>
+<td width="249">diskpart</td>
+<td width="292">To open Disk partition utility in cmd</td>
+</tr>
+<tr>
+<td width="249">dxdiag</td>
+<td width="292">To open Directx diagnostics</td>
+</tr>
+<tr>
+<td width="249">eventvwr.msc</td>
+<td width="292">To open event viewer</td>
+</tr>
+<tr>
+<td width="249">firewall.cpl</td>
+<td width="292">To open firewall menu</td>
+</tr>
+<tr>
+<td width="249">fsmgmt.msc</td>
+<td width="292">To open shared folders menu</td>
+</tr>
+<tr>
+<td width="249">gpedit.msc</td>
+<td width="292">To open local group policy editor</td>
+</tr>
+<tr>
+<td width="249">inetcpl.cpl</td>
+<td width="292">To open internet options</td>
+</tr>
+<tr>
+<td width="249">ipconfig</td>
+<td width="292">To see ip address in cmd</td>
+</tr>
+<tr>
+<td width="249">iscsicpl</td>
+<td width="292">To open iscsi properties</td>
+</tr>
+<tr>
+<td width="249">logoff</td>
+<td width="292">To logoff current user</td>
+</tr>
+<tr>
+<td width="249">lpksetup</td>
+<td width="292">To install or uninstall display drivers</td>
+</tr>
+<tr>
+<td width="249">magnify</td>
+<td width="292">To open magnifier</td>
+</tr>
+<tr>
+<td width="249">mmsys.cpl</td>
+<td width="292">To open sound manager</td>
+</tr>
+<tr>
+<td width="249">msconfig</td>
+<td width="292">To open system configuration</td>
+</tr>
+<tr>
+<td width="249">msdt</td>
+<td width="292">To open microsoft support diagnostics</td>
+</tr>
+<tr>
+<td width="249">msinfo32</td>
+<td width="292">To open system information</td>
+</tr>
+<tr>
+<td width="249">mspaint</td>
+<td width="292">To open paint</td>
+</tr>
+<tr>
+<td width="249">mstsc</td>
+<td width="292">To open remote desktop connection</td>
+</tr>
+<tr>
+<td width="249">ncpa.cpl</td>
+<td width="292">To open network connection menu</td>
+</tr>
+<tr>
+<td width="249">netplwiz</td>
+<td width="292">To open user accounts</td>
+</tr>
+<tr>
+<td width="249">notepad</td>
+<td width="292">To open notepad</td>
+</tr>
+<tr>
+<td width="249">osk</td>
+<td width="292">To open on screen keyboard</td>
+</tr>
+<tr>
+<td width="249">perfmon.msc</td>
+<td width="292">To open performance monitor</td>
+</tr>
+<tr>
+<td width="249">powercfg.cpl</td>
+<td width="292">To open power options</td>
+</tr>
+<tr>
+<td width="249">regedit</td>
+<td width="292">To open registry editor</td>
+</tr>
+<tr>
+<td width="249">rsop.msc</td>
+<td width="292">To open resultant set of policy</td>
+</tr>
+<tr>
+<td width="249">secpol.msc</td>
+<td width="292">To open Local security policy</td>
+</tr>
+<tr>
+<td width="249">services.msc</td>
+<td width="292">To open service manager</td>
+</tr>
+<tr>
+<td width="249">shrpubw</td>
+<td width="292">To open shared folder wizard</td>
+</tr>
+<tr>
+<td width="249">sigverif</td>
+<td width="292">To open file signature verification</td>
+</tr>
+<tr>
+<td width="249">slui</td>
+<td width="292">To activate windows with a product key</td>
+</tr>
+<tr>
+<td width="249">sndvol</td>
+<td width="292">To open volume mixer</td>
+</tr>
+<tr>
+<td width="249">sysdm.cpl</td>
+<td width="292">To open system properties</td>
+</tr>
+<tr>
+<td width="249">syskey</td>
+<td width="292">To securing windows account database</td>
+</tr>
+<tr>
+<td width="249">system.ini</td>
+<td width="292">To open system app support file in notepad</td>
+</tr>
+<tr>
+<td width="249">taskmgr</td>
+<td width="292">To open task manager</td>
+</tr>
+<tr>
+<td width="249">telephon.cpl</td>
+<td width="292">To open Location manager</td>
+</tr>
+<tr>
+<td width="249">telnet</td>
+<td width="292">To open telnet client</td>
+</tr>
+<tr>
+<td width="249">timedate.cpl</td>
+<td width="292">To open date and time manager</td>
+</tr>
+<tr>
+<td width="249">tpmInit</td>
+<td width="292">TPM security manager</td>
+</tr>
+<tr>
+<td width="249">verifier</td>
+<td width="292">To open driver verifier manager</td>
+</tr>
+<tr>
+<td width="249">wf.msc</td>
+<td width="292">To open windows firewall and advanced security</td>
+</tr>
+<tr>
+<td width="249">winver</td>
+<td width="292">To see windows version</td>
+</tr>
+<tr>
+<td width="249">wmimgmt.msc</td>
+<td width="292">To open WMI console</td>
+</tr>
+<tr>
+<td width="249">write</td>
+<td width="292">To open default text editor</td>
+</tr>
+<tr>
+<td width="249">wusa</td>
+<td width="292">To open windows update standalone manager</td>
+</tr>
+</tbody>
+</table>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/run-commands-for-windows/">Run Commands for Windows</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/run-commands-for-windows/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Batch file Programming</title>
+		<link>https://www.armourinfosec.com/batch-file-programming/</link>
+					<comments>https://www.armourinfosec.com/batch-file-programming/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Mon, 28 Sep 2015 04:09:10 +0000</pubDate>
+				<category><![CDATA[Batch Programming]]></category>
+		<category><![CDATA[Windows]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=704</guid>
+
+					<description><![CDATA[<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/batch-file-programming/">Batch file Programming</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<section class="wpb-content-wrapper"><div id="vc_row-65a2a1f80f8f3" class="vc_row wpb_row vc_row-fluid thegem-custom-65a2a1f80f8e1790"><div class="wpb_column vc_column_container vc_col-sm-12 thegem-custom-65a2a1f8195d06470" ><div class="vc_column-inner thegem-custom-inner-65a2a1f8195d4 "><div class="wpb_wrapper thegem-custom-65a2a1f8195d06470">
+	
+		<div class="wpb_text_column wpb_content_element  thegem-vc-text thegem-custom-65a2a1f8199394339"  >
+			<div class="wpb_wrapper">
+				<p><strong>What is a batch file?</strong></p>
+<p>A batch file is a collection of instructions that are used to run multiple commands at a time. It is basically a bundle of packages that are written In a sequence so that user does not have to put commands and instructions again and again. These files contain .bat extension. This means that you have to save the batch files by using .bat extension at the end of file name. These are basically DOS commands and also can run on command prompt.<span id="more-704"></span></p>
+<p><strong>How to write a batch file?</strong></p>
+<p>To write a batch file, first open a text editor (i.e, <strong>Notepad or Notepad++</strong>).</p>
+<p>In Notepad, type the commands which you want to execute.</p>
+<p>Example &#8211;<br />
+@echo off<br />
+echo Hi Armour Infosec!!</p>
+<p>pause</p>
+<p>&nbsp;</p>
+<p>Save them with .bat extension.</p>
+<p>The output will be shown in command prompt as &#8211;<br />
+Hi Armour Infosec!!</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+			</div>
+			<style>@media screen and (max-width: 1023px) {.thegem-vc-text.thegem-custom-65a2a1f8199394339{display: block!important;}}@media screen and (max-width: 767px) {.thegem-vc-text.thegem-custom-65a2a1f8199394339{display: block!important;}}@media screen and (max-width: 1023px) {.thegem-vc-text.thegem-custom-65a2a1f8199394339{position: relative !important;}}@media screen and (max-width: 767px) {.thegem-vc-text.thegem-custom-65a2a1f8199394339{position: relative !important;}}</style>
+		</div>
+	
+</div></div></div></div>
+</section><p>The post <a rel="nofollow" href="https://www.armourinfosec.com/batch-file-programming/">Batch file Programming</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/batch-file-programming/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>New Features in Windows 10</title>
+		<link>https://www.armourinfosec.com/new-features-in-windows-10/</link>
+					<comments>https://www.armourinfosec.com/new-features-in-windows-10/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Sun, 02 Aug 2015 14:19:11 +0000</pubDate>
+				<category><![CDATA[Windows]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=302</guid>
+
+					<description><![CDATA[<p>Hello Hello, goodbye passwords windows 10 include a new technology called windows hello that can identify you biometrically &#8211; for...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/new-features-in-windows-10/">New Features in Windows 10</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p style="text-align: justify;"><strong><a href="https://www.armourinfosec.com/windows/new-features-in-windows-10/"><img decoding="async" class="alignleft size-full wp-image-863" src="https://www.armourinfosec.com/wp-content/uploads/2015/08/window-10.png" alt="window-10" width="450" height="300" srcset="https://www.armourinfosec.com/wp-content/uploads/2015/08/window-10.png 450w, https://www.armourinfosec.com/wp-content/uploads/2015/08/window-10-300x200.png 300w" sizes="(max-width: 450px) 100vw, 450px" /></a>Hello </strong></p>
+<p style="text-align: justify;">Hello, goodbye passwords windows 10 include a new technology called windows hello that can identify you biometrically &#8211; for example, using a fingerprint reader or iris scanner if your computer has one. It&#8217;s faster and easier then entering a password. A technology called passport will let you use your windows identity to identify yourself to third &#8211; party websites and applications.</p>
+<p style="text-align: justify;"><strong>Windows Defender comes on board</strong></p>
+<p style="text-align: justify;">Windows Defender has always had a slightly awkward relationship with Windows, not being exactly a standalone application but nor being fully integrated into the OS. In Windows 10. its basic controls have been brought into the main Settings app, making it feel like a more coherent part of the system.<span id="more-302"></span></p>
+<p style="text-align: justify;"><strong>Updated Command Prompt</strong></p>
+<p style="text-align: justify;"><img decoding="async" class="aligncenter wp-image-304 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2015/08/cmd.jpg" alt="cmd in windows 10" width="1006" height="546" srcset="https://www.armourinfosec.com/wp-content/uploads/2015/08/cmd.jpg 1006w, https://www.armourinfosec.com/wp-content/uploads/2015/08/cmd-300x163.jpg 300w" sizes="(max-width: 1006px) 100vw, 1006px" /></p>
+<p style="text-align: justify;">The command prompt harks back to the MS-DOS days, but in Windows 10 it gets a modest update: at last you can freely resize command prompt windows, and select, copy and paste text just as you can in regular Windows applications. You can also adjust the opacity of the window, if you don&#8217;t like staring at a big black box.</p>
+<p style="text-align: justify;"><strong>Secure Boot is here to stay</strong></p>
+<p style="text-align: justify;">As with Windows 8, all computers and tablets sold with Windows 10 will be required to use Secure Boot, making it harder for malware to tamper with the system. In a notable change, however, it&#8217;s no longer required that manufacturers allow the user to configure Secure Boot themselves. That might prove controversial, as it means we might see Windows 10 devices on which it&#8217;s completely impossible to install a different operating system.</p>
+<p style="text-align: justify;"><strong>Uninstall from the Start menu</strong></p>
+<p style="text-align: justify;">Windows’ Programs and Features interface is straightforward enough, but it’s buried away in the control panel, where it can be a drag to open it up and find the application you want to uninstall. Windows 10 provides an Uninstall link directly on the Start menu, for both desktop and Modern apps-a small but welcome step towards easier housekeeping.</p>
+<p style="text-align: justify;"><strong>Edge browser</strong></p>
+<p style="text-align: justify;">New editions of Windows have traditionally brought a new release of Internet Explorer, but Windows 10 replaces it with a new, fast and lightweight default browser-originally codenamed “Project Spartan&#8221; but now officially called Microsoft Edge. Its feature set is limited, but since it&#8217;s a Universal app it has a very light footprint and works with both laptops and tablets.</p>
+<p style="text-align: justify;"><strong>Cortana</strong></p>
+<p style="text-align: justify;">Cortana debuted last year on Windows Phone as a voice-controlled “digital personal assistant&#8221; -effectively. Microsoft’s answer to Siri. In Windows 10, it retains its natural-language processing abilities, so you can enter commands such as “what’s the weather going to be like tomorrow?&#8221; or “set an alarm for 7pm&#8221; &#8211; although we&#8217;ve found results very hit and miss so far.</p>
+<p style="text-align: justify;"><strong>Talk to me</strong></p>
+<p style="text-align: justify;">Cortana also retains voice-recognition capabilities: click the microphone icon and you can start asking questions using your device’s microphone: Cortana learnsyourvoice over time, although we found accuracy was pretty good straight out of the box. An optional feature called “Hey Cortana&#8221; sets the OS into an always-listening mode, so you don’t even need to click.</p>
+<p style="text-align: justify;"><strong>Multiple desktops</strong></p>
+<p style="text-align: justify;">In the bottom right of the Task View, an unobtrusive icon invites you to add a new desktop. Yes, Windows 10 lets you set up multiple desktops, each with its own applications and windows &#8211; handy for those who like to set up specific workspaces for different projects. You can switch desktops in the Task View, or by holding down Windows+Ctrl and pressing the left or right cursor key.</p>
+<p style="text-align: justify;"><strong>How many editions?</strong></p>
+<p style="text-align: justify;">Windows XP came in Home and Professional editions; Vista upped the stakes to six major versions. For Windows 10, we’re back to two mainstream desktop editions: Windows 10 Home, which includes all the standard features, and Windows 10 Pro, with extra management and security features. There will also be Enterprise and Education editions designed to serve specific markets, as well as the Mobile and IoT Core editions for different hardware types.</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/new-features-in-windows-10/">New Features in Windows 10</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/new-features-in-windows-10/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>SEO Archives - Armour Infosec</title>
+	<atom:link href="https://www.armourinfosec.com/category/seo/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.armourinfosec.com/category/seo/</link>
+	<description>Do Your Part - Be Security Smart</description>
+	<lastBuildDate>Mon, 16 Jan 2017 05:09:39 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+
+<image>
+	<url>https://www.armourinfosec.com/wp-content/uploads/2018/02/ai.png</url>
+	<title>SEO Archives - Armour Infosec</title>
+	<link>https://www.armourinfosec.com/category/seo/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>On Page SEO</title>
+		<link>https://www.armourinfosec.com/on-page-seo/</link>
+					<comments>https://www.armourinfosec.com/on-page-seo/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Sat, 12 Sep 2015 17:38:55 +0000</pubDate>
+				<category><![CDATA[SEO]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=674</guid>
+
+					<description><![CDATA[<p>The factors which are controlled by a developer and the coding of their page. Following are the factors of On...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/on-page-seo/">On Page SEO</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p style="text-align: justify;"><a href="www.armourinfosec.com/seo/on-page-seo/"><img decoding="async" fetchpriority="high" class="alignright size-full wp-image-810" src="https://www.armourinfosec.com/wp-content/uploads/2015/09/seo.png" alt="seo" width="450" height="300" srcset="https://www.armourinfosec.com/wp-content/uploads/2015/09/seo.png 450w, https://www.armourinfosec.com/wp-content/uploads/2015/09/seo-300x200.png 300w" sizes="(max-width: 450px) 100vw, 450px" /></a>The factors which are controlled by a developer and the coding of their page. Following are the factors of <strong>On Page SEO</strong>:-</p>
+<p style="text-align: justify;"><strong>Using Keywords</strong></p>
+<p style="text-align: justify;">Keywords are very important in a search process. They are the main blocks of language or search. All the things which are related to a keyword planning are the basic needs of a Search engine. When a search engine crawl websites it also crawls the keywords given in a website for the search allowance.<span id="more-674"></span></p>
+<p style="text-align: justify;">Following are the points which make a keyword optimized:-</p>
+<p style="text-align: justify;"><strong>Range of a keyword</strong>:- Don’t make a keyword “SPAM”. Most of the websites contains keywords which repeat themselves again and again, this is known as keyword stuffing and is concerned as spamming. Use less repeated keywords in the meta tag for the accuracy, repeated keywords are not good for a positive SEO.</p>
+<p style="text-align: justify;"><strong>Weight of a keyword</strong>:- The number of keywords appearing on your web page compared to the total number of words appearing on that same page is known as weight of a keyword. To make it easy create some smaller pages, generally just a paragraph long that emphasizes a particular keyword. By keeping the words minimum in just a paragraph for a particular keyword, you can increase the weight of the keyword you are describing.</p>
+<p style="text-align: justify;"><strong>Places to put Keywords</strong></p>
+<p style="text-align: justify;">Following are the places where you can place keywords:-</p>
+<p style="text-align: justify;">Title tags <strong>&lt;title&gt; &lt;/title&gt;</strong></p>
+<p style="text-align: justify;">Meta name description <strong>&lt;meta name =”description”&gt;</strong></p>
+<p style="text-align: justify;">Meta name keyword <strong>&lt;meta name=”keyword”&gt;</strong></p>
+<p style="text-align: justify;">Headline tag <strong>&lt;h1&gt;</strong></p>
+<p style="text-align: justify;">href tag <strong>&lt;a href=&#8221;http://yourcompany.com&/#8221;&gt;keywords&lt;/a&gt;</strong></p>
+<p style="text-align: justify;">In the body</p>
+<p style="text-align: justify;">In alt tags</p>
+<p style="text-align: justify;">In comment tags &lt;!&#8211; insert comments here&gt;</p>
+<p style="text-align: justify;">In URL or Website address</p>
+<h4 style="text-align: justify;">Meta Tags</h4>
+<p style="text-align: justify;">A term meta tag is used to define data I terms of metadata. These tags are used to store information about web pages and are displayed on browser. The meta tag &lt;meta&gt; always goes inside head element &lt;head&gt;.</p>
+<p style="text-align: justify;">Following are the important types of meta tags:-</p>
+<p style="text-align: justify;"><strong>Meta Description Tags.</strong></p>
+<p style="text-align: justify;"><strong>Meta Keyword Tags.</strong></p>
+<p style="text-align: justify;">Ex:- <strong>&lt;meta name=&#8221;keywords&#8221; content=&#8221;Keyword1 Keyword2 Keyphrase1 etc. Some unique words (not more than 40 words)&#8221;&gt;</strong></p>
+<p style="text-align: justify;"><strong>&lt;meta name=&#8221;description&#8221; content=&#8221;An accurate, keyword-rich description Not more than 150 characters&#8221;&gt;</strong></p>
+<p style="text-align: justify;"><strong>Things to remember:-</strong></p>
+<p style="text-align: justify;">Use a different meta description tag for each page, if you place a good title and description on it there stands a better chance of being found for a page, as each page is different.</p>
+<p style="text-align: justify;">Use keywords in your meta description tag.</p>
+<p style="text-align: justify;">Try not to repeat the words again and again, but try to use multiple syntaxes of your key words.</p>
+<p style="text-align: justify;">Use less than 150 characters in a meta tag description of a single web page.</p>
+<p style="text-align: justify;">Use synonyms for your main keywords.</p>
+<p style="text-align: justify;">Use unique keywords.</p>
+<p style="text-align: justify;">Do not repeat any given phrase.</p>
+<p style="text-align: justify;">Use robots meta tag if you don’t want any of your page indexed or link followed which looks like:- <strong>&lt;meta name=&#8221;robots&#8221; content=&#8221;noindex,nofollow&#8221;&gt;</strong></p>
+<h4 style="text-align: justify;">Title Tag</h4>
+<p style="text-align: justify;">It is an HTML tag which appears in &lt;head&gt; tag of a web page which contains the page title. Title tag is the name of the page that appears on the top of the browser. A HTML title tag is put inside the head tag. This is the one page on a webpage where your keywords must be preset.</p>
+<p style="text-align: justify;">Things to remember:-</p>
+<p style="text-align: justify;">Use Unique titles.</p>
+<p style="text-align: justify;">Begin the title of your home page with your Primary Keyword Phrase, followed by your best Secondary Keyword Phrases.</p>
+<p style="text-align: justify;">If you are including your company’s name, add it at the end of the title.</p>
+<p style="text-align: justify;">Do not repeat your keyword more than 2-4 times in a title.</p>
+<p style="text-align: justify;">Make sure the &lt;title&gt; tag is the first element in the &lt;head&gt; section of your page, this makes it easier for Google to find the page.</p>
+<h4 style="text-align: justify;">Anchor Tag</h4>
+<p style="text-align: justify;">Anchor text is the visible character and word that hyperlinks display when linking to another document or location on the web. It is used for navigation purpose. It can be used as an information about a given link.</p>
+<p style="text-align: justify;">Ex :- <strong>&lt;a href=&#8221;page.html&#8221; title=&#8221;Anchor Title&#8221;&gt;Anchor Text&lt;/a&gt;</strong></p>
+<p style="text-align: justify;">Things to remember:-</p>
+<p style="text-align: justify;">The Anchor Title plays a very important role and is seen by most of the search engines. The anchor title should have appropriate keywords.</p>
+<p style="text-align: justify;">The Anchor Text is another important part, which should be selected very carefully because this text is used not only for search engines but also for navigation purpose.</p>
+<p style="text-align: justify;">The otherpage.html is the link to another webpage. This link could be to an external site. Here, you need to ensure that the linked page does exist; otherwise it is called a broken link, which gives a bad impression to search engines as well as to site visitors.</p>
+<p style="text-align: justify;">Anchor Text can be replaced by an image. So, while using an image in place of an anchor text, it should be checked that you have put alt tag properly. An image alt tag should have appropriate keywords.</p>
+<p style="text-align: justify;">Ex :- &lt;a href=&#8221;page.html&#8221; title=&#8221;Anchor Title&#8221;&gt; &lt;img src=&#8221;image.gif&#8221; alt=&#8221;keywords&#8221; /&gt; &lt;/a&gt;</p>
+<h4 style="text-align: justify;">Content</h4>
+<p style="text-align: justify;">Content plays an important role in SEO. It includes what you see on the site. It contains text, images and even links to other websites. A website must have rich content which</p>
+<h4 style="text-align: justify;">Places To</h4>
+<p style="text-align: justify;">is easier to understand for readers. It shows popularity of a website by giving superior quality of information related to your website. Always give a fresh quality of content to the viewers with no duplication of information.</p>
+<h4 style="text-align: justify;">Seo Content</h4>
+<p style="text-align: justify;">Content plays an important role in SEO. It includes what you see on the site. It contains text, images and even links to other websites. A website must have rich content which is easier to understand for readers. It shows popularity of a website by giving superior quality of information related to your website. Always give a fresh quality of content to the viewers with no duplication of information.</p>
+<h4 style="text-align: justify;">Content Writing (Copywriting)</h4>
+<p style="text-align: justify;">It involves all the keywords and informatory phrases which makes good content for a website. The content should be directed for the specified target audience. Density of a Keyword must be strictly used as per search engine guidelines. Do not use confusing, ambiguous, and complex language. Use small statements to make your content more understandable. Keep your web pages short and divide your web page content also into short paragraphs. Always write your content after a serious thought. Keep your title, keywords, link text, metatags up-to-date, unique, and interesting.</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/on-page-seo/">On Page SEO</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/on-page-seo/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Basics of SEO</title>
+		<link>https://www.armourinfosec.com/basics-of-seo/</link>
+					<comments>https://www.armourinfosec.com/basics-of-seo/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Sat, 12 Sep 2015 17:08:47 +0000</pubDate>
+				<category><![CDATA[SEO]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=671</guid>
+
+					<description><![CDATA[<p>SEO Design and Development SEO is a way of promoting a website in a healthy way, so that it can...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/basics-of-seo/">Basics of SEO</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<h4 style="text-align: justify;"><a href="www.armourinfosec.com/seo/basics-of-seo/"><img decoding="async" class="alignleft size-full wp-image-810" src="https://www.armourinfosec.com/wp-content/uploads/2015/09/seo.png" alt="seo" width="450" height="300" srcset="https://www.armourinfosec.com/wp-content/uploads/2015/09/seo.png 450w, https://www.armourinfosec.com/wp-content/uploads/2015/09/seo-300x200.png 300w" sizes="(max-width: 450px) 100vw, 450px" /></a></h4>
+<h2 style="text-align: justify;">SEO Design and Development</h2>
+<p style="text-align: justify;">SEO is a way of promoting a website in a healthy way, so that it can originates itself on the top of PR (Page Rank) of any search engine. Search engine is a limited organizer which does limited jobs like crawling and indexing. The main principle of the search engine is that how things are interpreted and their content are organized.</p>
+<p style="text-align: justify;">A webpage doesn’t always look the same to us as it looks to a search engine. In this section we’ll focus on technical aspects of building web pages so they are structured for both search engines and human visitors alike. These are the following aspects which are necessary to point out –<span id="more-671"></span></p>
+<p style="text-align: justify;"><strong>Indexable content</strong> – To make your content indexable, you should remember these.</p>
+<p style="text-align: justify;"><strong>Providing alt text for images</strong> &#8211; Assign images in gif, jpg, or png format &#8220;alt attributes&#8221; in HTML to give search engines a text description of the visual content.Give search boxes with navigation and crawable links. Give flash or java plug-ins with text on the page. Provide a transcript for video and audio content if the words and phrases used are meant to be indexed by the engines. Many websites have some problems with indexable content, so double checking is necessary in the case of SEO. By using tools like Google cache, SEO browser etc. we can see what elements of our content are visible and indexable to the engines. Using the google cache, we can give images alt text so that if the image isn’t load, the link where it exists will appear so that we can see which text is applied on which image.</p>
+<h4 style="text-align: justify;"><strong>Anatomy of a link</strong></h4>
+<p style="text-align: justify;">&lt;a href=https://www.armourinfosec.com/&gt;Ethical hacking institute&lt;/a&gt;</p>
+<p style="text-align: justify;">&lt;a href – Start of link tag href=https://www.armourinfosec.com/ &#8211; Link referral location &gt;Ethical hacking institute – Visible/anchor text of link &lt;/a&gt; &#8211; Closure of link tag</p>
+<p style="text-align: justify;">Link tags contain images, text, or other can objects, these all parts provide a clickable area on the page that users can easily move to another page. These links can be used to navigate from one element to other known as hyperlinks. In this example, the URL https://www.armourinfosec.com/ is referenced. Next, the visible portion of the link for visitors, called anchor text in the SEO world, describes the page the link points to. The linked-to page is about Ethical hacking courses detail regarded to the institute “Armour Infosec”, thus the anchor text &#8220;Ethical hacking institute.&#8221; The &#8220;&lt;/a&gt;&#8221; tag closes the link to constrain the linked text between the tags and prevent the link from encompassing other elements on the page.</p>
+<p style="text-align: justify;">This is the most basic format of a link, and it is understandable to the search engines. The crawlers know that they should add this link to the engines’ link graph of the web, use it to calculate query-independent variables (like Google’s Page Rank), and follow it to index the contents of the referenced page.</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/basics-of-seo/">Basics of SEO</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/basics-of-seo/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>What is SEO ( Search engine optimization)</title>
+		<link>https://www.armourinfosec.com/what-is-seo-search-engine-optimization/</link>
+					<comments>https://www.armourinfosec.com/what-is-seo-search-engine-optimization/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Sat, 12 Sep 2015 16:50:08 +0000</pubDate>
+				<category><![CDATA[SEO]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=664</guid>
+
+					<description><![CDATA[<p>Search Engine Optimization (SEO) is the planning of optimizing web pages or whole sites in a manner to make them...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/what-is-seo-search-engine-optimization/">What is SEO ( Search engine optimization)</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p><a href="https://www.armourinfosec.com/seo/what-is-seo-search-engine-optimization/"><img decoding="async" class="alignright size-full wp-image-810" src="https://www.armourinfosec.com/wp-content/uploads/2015/09/seo.png" alt="seo" width="450" height="300" srcset="https://www.armourinfosec.com/wp-content/uploads/2015/09/seo.png 450w, https://www.armourinfosec.com/wp-content/uploads/2015/09/seo-300x200.png 300w" sizes="(max-width: 450px) 100vw, 450px" /></a>Search Engine Optimization (SEO) is the planning of optimizing web pages or whole sites in a manner to make them search engine friendly, thus getting higher ranks in search engine race.</p>
+<p><strong>What is SEO?</strong></p>
+<p>Search Engine Optimization is basically a trend followed by peoples to make their websites highly ranked on Search engines without paying anything to anyone. It is a technique which makes a website or a web page more understandable to the search engine, so that the search engine will easily grab the website and makes it available on the top pages to the world. It makes a website rich from the rest. There are many aspects to SEO, from the words on your page to the way other sites link to you on the web. SEO isn&#8217;t just about building search engine-friendly websites. It&#8217;s about making your site better for people too.<span id="more-664"></span></p>
+<h4>Categories of SEO</h4>
+<p><strong>White hat SEO</strong> – A positive way to make SEO for a website. This can be done a person who does SEO in a manner to make a website highly ranked without making a website blacklisted. This can be done by following the guidelines of Search engine. It ensures good quality of content and web pages.</p>
+<p><strong>Black hat SEO</strong> – A negative approach to make SEO for a website. This can be done by a person who does SEO in a manner that the effect of a website goes down. This method is also known as spamdexing. This can be done by page hijacking, wrong redirection, use of invalid URLs, Doorway or Gateway pages, Keyword stuffing, meta tag stuffing.</p>
+<h4>Types of SEO</h4>
+<p><strong>On-page SEO</strong> &#8211; This type of SEO can be done by giving good content, keyword selection, putting keywords on correct places, make every page title more understandable to the audience.</p>
+<p><strong>Off-page SEO</strong> &#8211; This type of SEO can be done by building links, increasing their popularity by submitting open directories, link exchange, redirection etc .</p>
+<h4>Why SEO is a need?</h4>
+<p>Search engines works on the principle of “People looking for what you offer?”. It can easily manage websites with the content and keywords. If search engines cannot find your site, or add your content to their databases, you miss out on incredible opportunities to drive traffic to your site.</p>
+<h4>How search engine works?</h4>
+<p>Search engine follows some patterns to deliver search results. The patterns are:-</p>
+<p><strong>Processing</strong> &#8211; Processing works in a way that whenever a request is given to the search engine, it will show the list of websites as their rankings over the search engine optimization. it compares the search string in the search request with the indexed pages in the database.</p>
+<p><strong>Crawling</strong> &#8211; It is a process of fetching all the web pages from a website. This can be done by a software, called spider or crawler. Screaming frog is an example of a web seo spider software.</p>
+<p><strong>Indexing</strong> &#8211; This is a process of creating index for all the fetched web pages and keeping them in a huge database from where it can be later accessed. To see whether a website had indexed or not &#8211; site:www.domain name.com (ex:- site:www.armourinfosec.com)</p>
+<p><strong>Calculating relevancy</strong> – It checks that whether more than one page contains the search string or not, so the search engine starts calculating the relevancy of each of the pages in its index to the search string.</p>
+<p><strong>Retreiving results</strong> –this process is all about how the search engine gives the accurate matched results. Basically, it is nothing more than simply displaying them in the browser.</p>
+<h4>Website Domain</h4>
+<p>In the world of E-commerce business through internet, the first thing that a person thinks about is the website’s domain name. Before choosing the domain name you should keep these points in mind &#8211;</p>
+<ul>
+<li>Your targeted audience.</li>
+<li>Your targeted geographical area.</li>
+<li>Your Brand name.</li>
+<li>What will you give to your audience i.e, items or just content.</li>
+<li>An idea to develop your business.</li>
+</ul>
+<p>Keeping these points in mind will help you to making your domain name more attractive. You have to convince your audience about your motive and intentions about your business. There are two things which help us to make our domain name effective. First is brand name and the other one is the combination of effective keywords. These things are helpful for the audience to remember your domain name without any other keyword guess. Keep two or three keywords in the domain name so that they will be easy to memorize. Yahoo, bing, google, godaddy, ebay are the popular examples of effective domain names.</p>
+<h4>SEO Copywriting</h4>
+<p>SEO Copywriting is the way of writing view able text on a web page in such a manner that it reads well for the surfer, and also targets specific search terms. Its purpose is to rank highly content contained sites in the search engines for the targeted search terms.</p>
+<p>&nbsp;</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/what-is-seo-search-engine-optimization/">What is SEO ( Search engine optimization)</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/what-is-seo-search-engine-optimization/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

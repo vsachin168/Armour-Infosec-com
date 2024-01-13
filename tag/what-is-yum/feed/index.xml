@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>what is yum Archives - Armour Infosec</title>
+	<atom:link href="https://www.armourinfosec.com/tag/what-is-yum/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.armourinfosec.com/tag/what-is-yum/</link>
+	<description>Do Your Part - Be Security Smart</description>
+	<lastBuildDate>Fri, 10 Apr 2020 19:50:10 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+
+<image>
+	<url>https://www.armourinfosec.com/wp-content/uploads/2018/02/ai.png</url>
+	<title>what is yum Archives - Armour Infosec</title>
+	<link>https://www.armourinfosec.com/tag/what-is-yum/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Yum Commands Cheat Sheet for RHEL</title>
+		<link>https://www.armourinfosec.com/yum-commands-cheat-sheet/</link>
+					<comments>https://www.armourinfosec.com/yum-commands-cheat-sheet/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Mon, 06 Apr 2020 10:59:56 +0000</pubDate>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[cheat sheet]]></category>
+		<category><![CDATA[what is yum]]></category>
+		<category><![CDATA[yum]]></category>
+		<category><![CDATA[yum commands]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=25782</guid>
+
+					<description><![CDATA[<p>In this blog, we will learn how to install, update, remove, find packages, manage packages and repositories on Linux systems...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/yum-commands-cheat-sheet/">Yum Commands Cheat Sheet for RHEL</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>In this blog, we will learn how to install, update, remove, find packages, manage packages and repositories on Linux systems using YUM (Yellowdog Updater Modified) tool developed by RedHat. This blog also contains a Cheat Sheet of some basic commands of YUM.</p>
+<h3>What is YUM?</h3>
+<p><img decoding="async" fetchpriority="high" class="alignright wp-image-829" title="YUM Commands Cheat Sheet" src="https://www.armourinfosec.com/wp-content/uploads/2015/09/yum.png" alt="YUM Commands Cheat Sheet" width="321" height="214" srcset="https://www.armourinfosec.com/wp-content/uploads/2015/09/yum.png 450w, https://www.armourinfosec.com/wp-content/uploads/2015/09/yum-300x200.png 300w" sizes="(max-width: 321px) 100vw, 321px" /></p>
+<p><strong>YUM</strong> (<strong>Yellowdog Updater Modified</strong>) is an open-source command-line as well as a graphical based package management tool for <strong>RPM</strong> (<strong>RedHat Package Manager</strong>) based Linux systems. It allows users and system administrators to easily install, update, remove or search software packages on a system. It was developed and released by <strong>Seth Vidal</strong> under <strong>GPL</strong> (<strong>General Public License</strong>) as an open-source, which means anyone can be allowed to download and access the code to fix bugs and develop customized packages. <strong>YUM</strong> uses numerous third-party repositories to install packages automatically by resolving their dependencies issues.</p>
+<p>Following example, usages show the most commonly used options for performing package installation with yum :</p>
+<h4>Install a Package with YUM</h4>
+<p>To install a package called <a href="https://www.mozilla.org/en-US/firefox/linux/" target="_blank" rel="noopener noreferrer">Firefox</a>, just run the below command it will automatically find and install all required dependencies for Firefox.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum install firefox
+
+Loaded plugins: fastestmirror
+Dependencies Resolved
+
+===================================================================================================================================================================================================================
+Package Arch Version Repository Size
+===================================================================================================================================================================================================================
+Installing:
+firefox x86_64 68.6.0-1.el7.centos updates 94 M
+
+Transaction Summary
+===================================================================================================================================================================================================================
+Install 1 Package
+
+Total download size: 94 M
+Is this ok [y/d/N]: y
+Downloading packages:
+firefox-68.6.0-1.el7.centos.x86_64.rpm | 94 MB 00:03:04
+Installing : firefox-68.6.0-1.el7.centos.x86_64 1/1
+Verifying : firefox-68.6.0-1.el7.centos.x86_64 1/1
+
+Installed:
+   firefox.x86_64 0:68.6.0-1.el7.centos
+
+Complete!</pre>
+<p>The above command will ask confirmation before installing any package on your system. If you want to install packages automatically without asking any confirmation, use option<span style="color: #ff0000;"><strong> -y</strong></span> as shown in the below example.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum -y remove firefox</pre>
+<h4>Removing a Package with YUM</h4>
+<p>To remove a package completely with their all dependencies, just run the following command as shown below.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum remove firefox.x86_64
+
+Loaded plugins: fastestmirror
+Dependencies Resolved
+
+=========================================================================================================================================================
+Package Arch Version Repository Size
+=========================================================================================================================================================
+Removing:
+firefox x86_64 68.6.0-1.el7.centos @updates 230 M
+
+Transaction Summary
+=========================================================================================================================================================
+Remove 1 Package
+
+Installed size: 230 M
+Is this ok [y/N]: y
+
+Running transaction
+Erasing : firefox-68.6.0-1.el7.centos.x86_64
+
+Verifying : firefox-68.6.0-1.el7.centos.x86_64 1/1
+
+Removed:
+      firefox.x86_64 0:68.6.0-1.el7.centos
+
+Complete!</pre>
+<p>Same way the above command will ask confirmation before removing a package. To disable confirmation prompt just add option <span style="color: #ff0000;"><strong>-y</strong> </span>as shown in below.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum -y remove firefox</pre>
+<h4>Upgrading a Package using YUM</h4>
+<p>We can also upgrade any installed package to the latest stable version. For e.g. we&#8217;ve to upgrade the version of <span style="color: #ff0000;"><strong>vsftd</strong><span style="color: #000000;">.</span></span> Just run the following command it will automatically resolve all dependencies issues and install them.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum upgrade vsftpd
+
+Loaded plugins: fastestmirror
+Dependencies Resolved
+
+==========================================================================================================================================================
+ Package  Arch  Version  Repository  Size
+==========================================================================================================================================================
+Updating:
+ vsftpd   i386  2.0.5-24.el5_8.1  updates  144 k
+
+Transaction Summary
+==========================================================================================================================================================
+Install       0 Package(s)
+Upgrade       1 Package(s)
+
+Total size: 144 k
+Is this ok [y/N]: y
+Downloading Packages:
+Transaction Test Succeeded
+Running Transaction
+  Updating       : vsftpd                                                                     1/2
+  Cleanup        : vsftpd                                                                     2/2
+
+Updated:
+  vsftpd.i386 0:2.0.5-24.el5_8.1
+
+Complete!</pre>
+<h4>Downgrading a Package using YUM</h4>
+<p>There will be occasions when a program update may have lead to an unstable system due to hardware compatibility issues. For this or whatever the reason, if you want your previous version program back, you need to know how to downgrade the applications.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum downgrade httpd-2.2.3-22.el5
+
+Dependencies Resolved
+
+====================================================================================================================================================
+Package Arch Version Repository Size
+====================================================================================================================================================
+Installing:
+httpd i386 2.2.3-22.el5 rhel-i386-server-5 1.2 M
+Removing:
+httpd i386 2.2.3-31.el5 installed 3.1 M
+Removing for dependencies:
+httpd-manual i386 2.2.3-31.el5 installed 3.4 M
+mod_ssl i386 1:2.2.3-31.el5 installed 173 k
+
+Transaction Summary
+====================================================================================================================================================
+Install 1 Package(s)
+Update 0 Package(s)
+Remove 3 Package(s)
+
+Total download size: 1.2 M
+Is this ok [y/N]:</pre>
+<h4>List Packages using YUM</h4>
+<p>Use the <span style="color: #ff0000;"><strong>list</strong></span> function to search for the specific package with name, recently installed, updates available, etc. For example, to search for a package called <span style="color: #ff0000;"><strong>OpenSSH</strong></span>, use the command.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum list openssh
+
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+* base: centos.mirrors.estointernet.in
+* extras: centos.mirrors.estointernet.in
+* updates: centos.mirrors.estointernet.in
+Installed Packages
+openssh.x86_64        7.4p1-21.el7       @anaconda</pre>
+<p>To list all the installed packages in a system, use the following command.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true "># yum list installed</pre>
+<p>To list all recently installed packages, use the following command.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true "># yum list recent</pre>
+<p>Use the following command to list the packages with updates available.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true "># yum list updates</pre>
+<h4>Search for a Package using YUM</h4>
+<p>If you don’t remember the exact name of the package, then use <span style="color: #ff0000;"><strong>search</strong></span> function to search all the available packages to match the name of the package you specified. For example, to search all the packages that match the word .</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum search firefox
+
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+* base: centos.excellmedia.net
+* extras: centos.excellmedia.net
+* updates: centos.excellmedia.net
+=================================================== N/S matched: firefox =============================================================
+firefox.i686 : Mozilla Firefox Web browser
+firefox.x86_64 : Mozilla Firefox Web browser</pre>
+<h4>Get Information of a Package using YUM</h4>
+<p>Say you would like to know the information about a package before installing it. To get information about a package just issue the below command.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum info firefox
+
+Loaded plugins: fastestmirror
+* base: centos.excellmedia.net
+* extras: centos.excellmedia.net
+* updates: centos.excellmedia.net
+Available Packages
+Name : firefox
+Arch : i686
+Version : 68.6.0
+Release : 1.el7.centos
+Size : 97 M
+Repo : updates/7/x86_64
+Summary : Mozilla Firefox Web browser
+URL : https://www.mozilla.org/firefox/
+License : MPLv1.1 or GPLv2+ or LGPLv2+
+Description : Mozilla Firefox is an open-source web browser, designed for standards compliance, performance and portability.</pre>
+<h4>List all Dependencies of a Package using YUM</h4>
+<p>You can check the list of all Dependencies required by a specific package using the following command.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum deplist vsftpd
+
+Loaded plugins: fastestmirror
+* base: mirrors.praction.in
+* extras: mirrors.praction.in
+* updates: mirrors.praction.in
+package: vsftpd.x86_64 3.0.2-25.el7
+dependency: /bin/bash
+provider: bash.x86_64 4.2.46-33.el7
+dependency: /bin/sh
+provider: bash.x86_64 4.2.46-33.el7
+dependency: libc.so.6(GLIBC_2.15)(64bit)</pre>
+<h4>Yum Provides Function</h4>
+<p>Yum <span style="color: #ff0000;"><strong>provides</strong></span> function is used to find which package a specific file belongs to. For example, if you would like to know the name of the package that has the <span style="color: #ff0000;"><strong>/etc/ssh/sshd_config</strong></span>.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum provides /etc/ssh/sshd_config
+
+Loaded plugins: fastestmirror
+* base: centos.excellmedia.net
+* extras: centos.excellmedia.net
+* updates: centos.excellmedia.net
+openssh-server-7.4p1-21.el7.x86_64 : An open source SSH server daemon
+Repo : base
+Matched from:
+Filename : /etc/ssh/sshd_config
+
+openssh-server-7.4p1-21.el7.x86_64 : An open source SSH server daemon
+Repo : @anaconda
+Matched from:
+Filename : /etc/ssh/sshd_config</pre>
+<h4>Check for Available Updates using Yum</h4>
+<p>Find how many installed packages on your system have updates available, use the following command to check.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true "># yum check-update</pre>
+<h4>Update System using Yum</h4>
+<p>To keep your system up-to-date with all security and binary package updates, run the following command. It will install all the latest patches and security updates to your system.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true "># yum update</pre>
+<h4>List all available Group Packages</h4>
+<p>In Linux, number of packages are bundled to a particular group. Instead of installing individual packages with yum, you can install a particular group that will install all the related packages that belong to the group. For example to list all the available groups, just issue following command.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true "># yum groups list
+
+Loaded plugins: fastestmirror
+* base: centos.excellmedia.net
+* extras: centos.mirror.snu.edu.in
+* updates: centos.mirror.snu.edu.in
+Available Environment Groups:
+Minimal Install
+Compute Node
+Infrastructure Server
+File and Print Server
+Basic Web Server
+Virtualization Host
+Server with GUI
+GNOME Desktop
+KDE Plasma Workspaces
+Development and Creative Workstation
+Available Groups:
+Compatibility Libraries
+Graphical Administration Tools
+Security Tools
+System Administration Tools</pre>
+<h4>Install a Group Packages</h4>
+<p>Install a particular package group, use option <strong>groups install</strong>. For example, to install “<strong>Development Tools</strong>“, execute the below command.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true "># yum groups install "Development Tools"</pre>
+<h4>Update a Group Packages</h4>
+<p>To update any existing installed group packages, just run the following command as shown below.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true "># yum groups update 'DNS Name Server'</pre>
+<h4>Get details of a Group Packages</h4>
+<p>Display details about a group of packages from the system, just use the below command.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true ">yum groups info "System Administration Tools"</pre>
+<h4>Remove a Group Packages</h4>
+<p>Delete or remove any existing installed group from the system, just use the below command.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true ">#yum groups remove 'DNS Name Server'</pre>
+<h4>List Enabled Yum Repositories</h4>
+<p>Get the list of all enabled Yum repositories in your system, use following command.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum repolist
+
+Loaded plugins: fastestmirror
+* base: centos.excellmedia.net
+* extras: centos.excellmedia.net
+* updates: centos.excellmedia.net
+repo id                          repo name                                          status
+base/7/x86_64                CentOS-7 - Base                                        10,097
+extras/7/x86_64              CentOS-7 - Extras                                         341
+updates/7/x86_64             CentOS-7 - Updates                                      1,787
+repolist: 12,225</pre>
+<h4>List all Enabled and Disabled Yum Repositories</h4>
+<p>The following command will display all enabled and disabled yum repositories on the system.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true "># yum repolist all</pre>
+<h4>Interactive Yum Shell</h4>
+<p>Yum utility provides a custom shell where you can execute multiple commands.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum shell
+
+Loaded plugins: fastestmirror
+&gt; search named
+Loading mirror speeds from cached hostfile
+* base: centos.excellmedia.net
+* extras: centos.excellmedia.net
+* updates: centos.excellmedia.net
+======================================================== N/S matched: named =================================================================
+pcp-pmda-named.x86_64 : Performance Co-Pilot (PCP) metrics for Named
+bind-chroot.x86_64 : A chroot runtime environment for the ISC BIND DNS server, named(8)
+bind-sdb-chroot.x86_64 : A chroot runtime environment for the ISC BIND DNS server, named-sdb(8)
+
+Name and summary matches only, use "search all" for everything.
+&gt;</pre>
+<h4>Clean Yum Cache</h4>
+<p>By default yum keeps all the repository enabled package data in <strong>/var/cache/yum/</strong> with each sub-directory, to clean all cached files from enabled repository, you need to run the following command regularly to clean up all the cache and make sure that there is nothing unnecessary space is using.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum clean all</pre>
+<h4>View History of Yum</h4>
+<p>To view all the past transactions of yum command, just use the following command.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># yum history
+
+Loaded plugins: fastestmirror
+ID | Login user | Date and time | Action(s) | Altered
+-------------------------------------------------------------------------------
+8 | root &lt;root&gt; | 2020-04-06 13:09 | Install | 1
+7 | root &lt;root&gt; | 2020-04-06 12:15 | Install | 31
+6 | root &lt;root&gt; | 2020-04-06 12:02 | Erase | 1 EE
+5 | root &lt;root&gt; | 2020-04-06 11:43 | Install | 1
+4 | root &lt;root&gt; | 2020-04-06 11:39 | Erase | 1 EE
+3 | root &lt;root&gt; | 2020-03-30 17:17 | Install | 84
+2 | root &lt;root&gt; | 2020-03-30 17:15 | Install | 1
+1 | System &lt;unset&gt; | 2020-03-30 16:50 | Install | 301
+history list</pre>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/yum-commands-cheat-sheet/">Yum Commands Cheat Sheet for RHEL</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/yum-commands-cheat-sheet/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>What is YUM ? How to Install YUM in Linux ?</title>
+		<link>https://www.armourinfosec.com/what-is-yum-rhel/</link>
+					<comments>https://www.armourinfosec.com/what-is-yum-rhel/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Sat, 29 Aug 2015 17:21:27 +0000</pubDate>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[how to install yum]]></category>
+		<category><![CDATA[what is yum]]></category>
+		<category><![CDATA[yum commands]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=592</guid>
+
+					<description><![CDATA[<p>In this blog, we will learn about &#8220;What is YUM ?&#8221; and How to Install YUM in RHEL Linux with...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/what-is-yum-rhel/">What is YUM ? How to Install YUM in Linux ?</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>In this blog, we will learn about &#8220;What is YUM ?&#8221; and How to Install YUM in RHEL Linux with the local repository. <code>YUM</code> is the primary tool for getting, installing, deleting, querying, and managing Red Hat Enterprise Linux RPM software packages from official Red Hat software repositories, as well as other third-party repositories. So let&#8217;s start to the point. You can also find <strong><a href="https://www.armourinfosec.com/yum-commands-cheat-sheet/">Yum Commands</a> Cheat Sheet</strong> at the end of this blog.</p>
+<h2>What is YUM?</h2>
+<p><strong>YUM</strong> (<strong>Yellowdog Updater Modified</strong>) is an open-source command-line as well as a graphical based package management tool for <strong>RPM</strong> (<strong>RedHat Package Manager</strong>) <a href="https://www.armourinfosec.com/linux/what-is-yum/"><img decoding="async" class="alignright wp-image-829 size-medium" title="what is yum" src="https://www.armourinfosec.com/wp-content/uploads/2015/09/yum-300x200.png" alt="what is yum" width="300" height="200" srcset="https://www.armourinfosec.com/wp-content/uploads/2015/09/yum-300x200.png 300w, https://www.armourinfosec.com/wp-content/uploads/2015/09/yum.png 450w" sizes="(max-width: 300px) 100vw, 300px" /></a>based Linux systems. It allows users and system administrators to easily install, update, remove or search software packages on a system. It was developed and released by <strong>Seth Vidal</strong> under <strong>GPL</strong> (<strong>General Public License</strong>) as an open-source, which means anyone can be allowed to download and access the code to fix bugs and develop customized packages. <strong>YUM</strong> uses numerous third-party repositories to install packages automatically by resolving their dependencies issues.</p>
+<p>&nbsp;</p>
+<p>General Configuration file of yum is located at <strong>/etc/yum.conf</strong><br />
+You can see this file with any editor</p>
+<h3>Installation of Yum Server with local repository</h3>
+<p>We can install a local repository for YUM with DVD/ISO file. If you have DVD then Copy the entire Linux OS DVD&#8217;s content to Hard-drive. Insert DVD into DVD-RW and go to the mounting point of DVD.</p>
+<p>To make a directory (folder) on root.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true ">[root@localhost ~]# cd /
+[root@localhost /]# mkdir rhel7</pre>
+<p>To go on the mounting point of DVD. cd [Mounting Location]</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true ">[root@localhost ~]# cd /run/media/root/rhel-server-7/</pre>
+<p>Copy all entire Linux OS DVD&#8217;s into <strong>/rhel7</strong> directory (folder)</p>
+<p>If you have an iso file of Rhel OS then follow how to mount ISO image in <strong>rhel</strong>.<br />
+Go where there you have copied the entire OS DVD. To go on the Packages Directory. Then Install the <strong>createrepo</strong> package. To install package</p>
+<p>It gives dependencies error. Then you have install depend packages</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true "># rpm -ivh deltarpm-*
+# rpm -ivh python- deltarpm-*</pre>
+<p>Then you have to again install the <strong>createrepo</strong> package</p>
+<p>To make &#8220;Createrepo&#8221; Database for the local repository which is used for YUM. Go to packages directory which is copied already. Go to the location of packages.</p>
+<p>Create repo database</p>
+<p>Or</p>
+<p>Create a file with repo as an extension and specify the YUM details in <strong>/etc/yum.repos.d</strong> directory (folder)</p>
+<p>yum.repos.d this is a directory which contains all repository. now we create our new repo with any editor.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true "># vim rhel.repo
+[RHEL]
+name=local_repo
+baseurl=file:/rhel7/Packages/
+:wq!</pre>
+<p>&nbsp;</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true ">[rhel] :- Title of yum repo,
+name=rhel  :- name of yum repo
+baseurl=file:/rhel7/Packages/ :- location of Rpm packages
+gpgcheck=0 :- verify rpm to RPM-GPG-key (gpgcheck=0 Disabal, gpgcheck=1 Enable)</pre>
+<p>&nbsp;</p>
+<p>Now we can create successful YUM repository, Verify run the yum command</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true "># yum check
+# yum repolist all</pre>
+<h4>Yum Commands Cheat Sheat</h4>
+<p><a href="https://www.armourinfosec.com/yum-commands-cheat-sheet/"><strong>Click here</strong></a> to go the blog.</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/what-is-yum-rhel/">What is YUM ? How to Install YUM in Linux ?</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/what-is-yum-rhel/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

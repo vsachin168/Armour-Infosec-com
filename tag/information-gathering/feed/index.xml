@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>information gathering Archives - Armour Infosec</title>
+	<atom:link href="https://www.armourinfosec.com/tag/information-gathering/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.armourinfosec.com/tag/information-gathering/</link>
+	<description>Do Your Part - Be Security Smart</description>
+	<lastBuildDate>Fri, 07 Feb 2020 08:45:57 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+
+<image>
+	<url>https://www.armourinfosec.com/wp-content/uploads/2018/02/ai.png</url>
+	<title>information gathering Archives - Armour Infosec</title>
+	<link>https://www.armourinfosec.com/tag/information-gathering/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Nmap Cheat Sheet</title>
+		<link>https://www.armourinfosec.com/nmap-cheat-sheet/</link>
+					<comments>https://www.armourinfosec.com/nmap-cheat-sheet/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Sat, 25 Nov 2017 14:41:24 +0000</pubDate>
+				<category><![CDATA[Ethical Hacking]]></category>
+		<category><![CDATA[Information Gathering]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Penetration Testing]]></category>
+		<category><![CDATA[information gathering]]></category>
+		<category><![CDATA[nmap]]></category>
+		<category><![CDATA[penetration testing]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=25088</guid>
+
+					<description><![CDATA[<p>Network Mapper (Nmap) also known as the God of Port Scanners used for network discovery and the basis for most...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/nmap-cheat-sheet/">Nmap Cheat Sheet</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p><strong>Network Mapper (Nmap)</strong> also known as the <strong>God of Port Scanners</strong> used for network discovery and the basis for most security enumeration during the initial stages of a <a href="https://www.armourinfosec.com/category/penetration-testing/">Penetration Testing</a>. Nmap has a multitude of options and when you first start playing with this excellent tool it can be a bit daunting. In this cheat sheet you will find a series of practical example commands for running Nmap and getting the most of this powerful tool. Below is Nmap Cheat Sheet and Helpful Tips and Techniques.</p>
+<p>Keep in mind that this cheat sheet merely touches the surface of the available options. The <a href="http://nmap.org/docs.html">Nmap Documentation portal</a> is your reference for digging deeper into the options available.</p>
+<h4><strong>Nmap in a nutshell</strong></h4>
+<ul>
+<li>Target Specification</li>
+<li>Host Discovery</li>
+<li>Port Specification</li>
+<li>Service Discovery / Version Detection</li>
+<li>Operating System Version Detection</li>
+<li>Firewall / IDS Evasion and Spoofing</li>
+<li>Time and Performance based Scan</li>
+<li>Output of Scan</li>
+<li>Vulnerability / Exploit Detection, using Nmap Scripts (NSE)</li>
+</ul>
+<h5><strong>Target Specification</strong></h5>
+<p>Scan a single IP</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1</pre>
+<p>Scan specific IPs</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 192.168.1.5</pre>
+<p>Scan a Range</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1-254</pre>
+<p>Scan a Domain / Host</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap nmap scanme.nmap.org</pre>
+<p>Scan Targets from a File</p>
+<pre class="theme:familiar lang:sh decode:true ">namp -iL targets.txt</pre>
+<p>Exclude the Listed Host from the Target Range</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap --exclude 192.168.1.5 192.168.1.1-10</pre>
+<h5><strong>Host Discovery</strong></h5>
+<p>To List given targets only, no Scan</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -sL 192.168.1.1-3</pre>
+<p>To Disable Port Scanning, Host Discovery only</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -sn 192.168.1.1/24</pre>
+<p>To Disable Host Discovery. Port scan only</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -Pn 192.168.1.1-5</pre>
+<p>TCP SYN discovery on given port</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -PS 80,21 192.168.1.1</pre>
+<p>TCP ACK discovery on given port</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -PA 80,21 192.168.1.1</pre>
+<p>UDP discovery on given port</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -PU 53 192.168.1.1</pre>
+<h5><strong>Port Specification</strong></h5>
+<p>Scan a given Port (i.e 21 here)</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -p 21 192.168.1.1</pre>
+<p>Scan the given Port Range</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -p 21-100 192.168.1.1</pre>
+<p>Scan the multiple TCP and UDP ports</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -p U:53,T:21-25,80 192.168.1.1</pre>
+<p>Scan all 65535 ports</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -p- 192.168.1.1</pre>
+<p>Scans the given Service Name</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -p http,https 192.168.1.1</pre>
+<p>Scans the Top 100 ports</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -F 192.168.1.1</pre>
+<h5><strong>Service Discovery / Version Detection</strong></h5>
+<p>Detect Version of the Running Services</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -sV 192.168.1.1</pre>
+<p>To set intensity range between 0 to 9. Higher number increases possibility of correctness</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -sV --version-intensity 5 192.168.1.1</pre>
+<p>To enable the light mode(intensity =2). It is faster but have less possibility of correctness</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap  -sV --version-light 192.168.1.1</pre>
+<p>To enables the intense mode(intensity =9). It is slower but have more possibility of correctness</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -sV --version-all 192.168.1.1</pre>
+<h5><strong>Operating System Version Detection</strong></h5>
+<p>Detect the Operating system</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -sV 192.168.1.1</pre>
+<p>Aggressive mode i.e OS, Service Version, Trace route.</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -A 192.168.1.1</pre>
+<h5><strong>Firewall / IDS Evasion and Spoofing</strong></h5>
+<p>Use tiny fragmented IP packets. Its harder for packet filters</p>
+<pre class="theme:familiar lang:default decode:true">nmap -f 192.168.1.1</pre>
+<p>Used to set our own offset size</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap --mtu 32 192.168.1.1</pre>
+<p>Use the Spoofed IP to scan</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -D decoy-ip1,decoy-ip2, your-own-ip remote-host-ip</pre>
+<p>Scans target.com from example.com (Domain Name Spoofing)</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -S example.com target.com</pre>
+<p>Uses the given port as a source</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -g 53 192.168.1.1</pre>
+<p>Appends random data to sent packets</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap --data-length 200 192.168.1.1</pre>
+<h5><strong>Time and Performance based Scan</strong></h5>
+<p>Slow scan</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -T0 192.168.1.1</pre>
+<p>Sneaky scan</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -T1 192.168.1.1</pre>
+<p>Timely scan</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -T2 192.168.1.1</pre>
+<p>Default scan</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -T3 192.168.1.1</pre>
+<p>Aggressive scan</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -T4 192.168.1.1</pre>
+<p>Very Aggressive scan</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -T5 192.168.1.1</pre>
+<h5><strong>Output of Scan</strong></h5>
+<p>To scan in the Verbose mode (-vv for greater effect)</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -v 192.168.1.1</pre>
+<p>Save the scan results to the scan.file</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 -oN scan.file</pre>
+<p>Save the results in xml.file</p>
+<pre class="theme:familiar lang:sh decode:true">nmap 192.168.1.1 -oX xml.file</pre>
+<p>Save the results in grep.file</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 -oG grep.file</pre>
+<p>Saves the Output in the three major formats at once</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 -oA result</pre>
+<p>To scan in the debug mode (-dd for greater effect)</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 -d</pre>
+<p>To see all the packets sent and received</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 -T4 --packet-trace</pre>
+<h5><strong>Vulnerability / Exploit Detection, using Nmap Scripts (NSE)</strong></h5>
+<p>Scan with default NSE Scripts</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 -sC</pre>
+<p>Scan with given NSE Script ( Example: nmap.nse )</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 --script=nmap.nse</pre>
+<p>Use script with arguments</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 –script=nmap.nse --script-args user=admin</pre>
+<p>&nbsp;</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/nmap-cheat-sheet/">Nmap Cheat Sheet</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/nmap-cheat-sheet/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

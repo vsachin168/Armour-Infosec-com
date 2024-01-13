@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Information Gathering Archives - Armour Infosec</title>
+	<atom:link href="https://www.armourinfosec.com/category/information-gathering/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.armourinfosec.com/category/information-gathering/</link>
+	<description>Do Your Part - Be Security Smart</description>
+	<lastBuildDate>Fri, 07 Feb 2020 08:45:57 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+
+<image>
+	<url>https://www.armourinfosec.com/wp-content/uploads/2018/02/ai.png</url>
+	<title>Information Gathering Archives - Armour Infosec</title>
+	<link>https://www.armourinfosec.com/category/information-gathering/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>WordPress Enumeration</title>
+		<link>https://www.armourinfosec.com/wordpress-enumeration/</link>
+					<comments>https://www.armourinfosec.com/wordpress-enumeration/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Sat, 25 Jan 2020 14:21:12 +0000</pubDate>
+				<category><![CDATA[Enumeration]]></category>
+		<category><![CDATA[Information Gathering]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=25347</guid>
+
+					<description><![CDATA[<p>WordPress User Enumeration These 10 enumeration techniques are a very fast way to identify users of a WordPress installation. With...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/wordpress-enumeration/">WordPress Enumeration</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<h1 class="btx-post-title post-title entry-title">WordPress User Enumeration</h1>
+<p>These <strong>10 enumeration techniques</strong> are a very fast way to <strong>identify users</strong> of a WordPress installation. With valid usernames effective <strong>brute force attacks</strong> can be attempted to <strong>guess the password</strong> of the user accounts.</p>
+<h2>Introduction to WordPress Security</h2>
+<p>There are many common attack vectors that hackers use to attack a WordPress website. In this article we expose many of the common avenues for attack. By revealing these, you can help build your website’s defenses against WordPress attacks.</p>
+<p>There are some great guides available on securing a WordPress installation, this article is not intended to repeat those. To get started with securing a WordPress installation, try the excellent guide on <a href="https://wordpress.org/">wordpress.org</a> or the comprehensive guide on the <a href="https://owasp.org/">OWASP</a> site.</p>
+<p>It is noteworthy that in a managed WordPress hosting service, some of the attacks (and mitigation) listed below will be the responsibility of the hosting provider. If you are self hosting then security and maintenance is your responsibility. Ready to start? Grab our hoodie and start hacking!</p>
+<p>In this article we are going to discuss several ways to identify the valid usernames of any WordPress website.</p>
+<h2>Table Of Contents:</h2>
+<p>1.Usernames enumerating through the Author Archives</p>
+<p>2.WordPress Enumeration via JSON API</p>
+<p>3.WordPress Enumeration via the Login Form</p>
+<p>4.Enumerating WordPress Core Version</p>
+<p>5.WordPress Plugin (and version) Enumeration</p>
+<p>6. WordPress Theme Enumeration</p>
+<p>7.Directory Indexing</p>
+<p>8.Server Vulnerability Testing</p>
+<p>9.WP Scan</p>
+<p>10.Nmap NSE Scripts for WordPress</p>
+<h4>1.Enumerate Usernames Through the Author Archives :</h4>
+<p>In many WordPress installations, it is possible to enumerate WordPress usernames through the author archives, including the admin username. To access the author archives, we just need to add author=n (where n equals any integer) as a parameter to the WordPress home page, as shown below:</p>
+<pre class="theme:familiar lang:sh decode:true ">http://example.com/?author=1</pre>
+<p>The request will be automatically redirected by WordPress to its counterparts:</p>
+<pre class="theme:familiar lang:sh decode:true ">http://example.com/author/admin/</pre>
+<p>Using this method, we will be able to identify all the usernames by fuzzing the author parameter.</p>
+<h4>2.WordPress Enumeration via JSON API :</h4>
+<p>Using a json endpoint, it may be possible to get a list of users on the site. This was restricted in version 4.7.1 that shows only the user that has published a post and the user that has been configured. Prior to this version, all the users were shown by default.</p>
+<pre class="theme:familiar lang:xhtml decode:true ">https://wordpressexample.com/wp-json/wp/v2/users</pre>
+<p>User Enumeration via the JSON user Endpoint</p>
+<p><img decoding="async" fetchpriority="high" class="alignnone wp-image-25352 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/11-1.png" alt="" width="741" height="613" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/11-1.png 741w, https://www.armourinfosec.com/wp-content/uploads/2020/01/11-1-300x248.png 300w" sizes="(max-width: 741px) 100vw, 741px" /></p>
+<p>&nbsp;</p>
+<h4>3.WordPress Enumeration via the Login Form :</h4>
+<p>You must confirm valid users with the login form. Brute forcing the user name is possible using the login form as the response is different for a valid as opposed to an invalid account. Using a tool such as Burp Intruder in Burp Suite, we would load a list of possible usernames and cycle through HTTP POST requests to the WordPress login form, examining the response in each case.</p>
+<p>A HTTP response that matches &#8220;invalid password&#8221; indicates that the username is valid. We could then move on to attacking the password using the same process with a common password list.</p>
+<p><img decoding="async" class="alignnone wp-image-25353 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/2-1.png" alt="" width="266" height="300" /></p>
+<p>&nbsp;</p>
+<h4>4.Enumerating WordPress Core Version :</h4>
+<p>Three simple methods can be used to determine the core version of WordPress.</p>
+<h5>4.1 Meta Generator</h5>
+<p>Check the HTML source of the page for a meta generator tag in the HEAD section of the HTML source. This example is taken from the source of a default WP install of the version 3.5.2 and of twenty twelve theme. From the source HTML:</p>
+<pre class="theme:familiar lang:css decode:true ">&lt;meta name="generator" content="WordPress 3.5.2" /&gt;</pre>
+<h5>4.2 Version in readme.html</h5>
+<p>If the meta tag has been disabled, check for the presence of /readme.html from root of the install. Early versions of WordPress had the version right there at the top of the Read Me file. But the newer versions of WordPress have removed the version from the ReadMe file.</p>
+<p><img decoding="async" class="alignnone wp-image-25354" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/3-1.png" alt="" width="741" height="79" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/3-1.png 854w, https://www.armourinfosec.com/wp-content/uploads/2020/01/3-1-300x32.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/01/3-1-768x82.png 768w" sizes="(max-width: 741px) 100vw, 741px" /></p>
+<p>Version in HTML source of site.</p>
+<p>In the HTML source, the version is often appended as a parameter on links to javascript and css resources that the page is loading. Depending on the plugin, this will not always be the case and sites that have minified js and css may not have all this information leaks present.</p>
+<h5>4.3 Security Vulnerabilities in WordPress Core</h5>
+<p>If an attacker finds a site with an older WordPress Core version, this may be directly exploitable via a security vulnerability in the WordPress core, In addition, it is a clear indication that the site is not well maintained. In a poorly managed site, other components (plugins / themes) may not have been updated; in this case, the chance of a successful attack has increased considerably.</p>
+<h4>5.WordPress Plugin (and version) Enumeration :</h4>
+<p>During WordPress Plugin Enumeration, we attempt to find as many installed plugins as we can (even those that are disabled). The knowledge of the installed WordPress plugins may allow us to identify the version and research whether it is vulnerable to known exploits.</p>
+<p>Passive analysis: It can be used to find plugins through regular HTTP requests to the WordPress site.<br />
+Active enumeration: It is more aggressive and usually involves using a script or tool to perform hundreds or even thousands of mostly invalid HTTP requests.</p>
+<p>Reading through the HTML source of the WordPress site can reveal installed plugins through javascript links, comments and resources, such as CSS that are loaded into the page. These are the easiest plugins to discover and require no aggressive testing of the target site. Even the HTTP headers can reveal information such as the X-Powered-By header that reveals the presence of the W3-Total-Cache plugin. Some plugins do not leave traces in the HTML source; to find all the installed plugins you have to be more aggressive. A number of tools can brute force known plugin lists from the path /wp-content/plugins/ * plugin to test * /. The web server response will usually reveal valid directories (often with HTTP 403) as opposed to unknown directories on the web server with its HTTP response code.</p>
+<p>Once you have a list of plugins that are present on the site, your WordPress scanner or manual requests can be used to determine the version of the plugin. In the readme.txt, we can see the version of the plugin. Compare this against known exploits and we can get a good idea if the site is vulnerable without actually throwing the exploit.</p>
+<h4>6. WordPress Theme Enumeration :</h4>
+<p>WordPress themes can contain vulnerabilities that might expose the site to compromise. Themes are collections of PHP code with HTML and CSS resources. More complex themes have more included components and are more likely to introduce security vulnerabilities. The enumeration of the theme is similar to the detection of plugins. The theme path is often visible in the HTML of the page source. The CSS file getting loaded from the theme will often reveal the path. With the path we have the theme name, and we can load the readme.txt to confirm the theme in use and its version.</p>
+<pre class="theme:familiar lang:sh decode:true ">curl http://examplewp.com/wp-content/themes/Avada/readme.txt</pre>
+<p>An important consideration when testing for vulnerable WordPress Themes (and plugins) is that a theme that is installed yet not active may still have code that is accessible and vulnerable. This is why brute force testing for theme paths is an important step when assessing an unknown WordPress installation.</p>
+<p><img decoding="async" class="alignnone wp-image-25355" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/4-1.png" alt="" width="741" height="108" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/4-1.png 900w, https://www.armourinfosec.com/wp-content/uploads/2020/01/4-1-300x44.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/01/4-1-768x112.png 768w" sizes="(max-width: 741px) 100vw, 741px" /></p>
+<h4>7.Directory Indexing :</h4>
+<p>Directory indexing enabled on plugins directory. Directory indexing is a function of the web server that allows you to view the contents of a directory in the web accessible path. Viewing the contents of a directory allows an attacker to gather valuable information about the installation such as installed plugins and themes without the need to brute force the paths.</p>
+<p>To check for directory indexing, you can browse to folder locations and see if you get a response that includes &#8220;Index Of&#8221; and a list of folders / files. Common locations to check would be:</p>
+<pre class="theme:familiar lang:sh decode:true">/wp-content/
+/wp-content/plugins/
+/wp-content/themes/
+/uploads/
+/images/</pre>
+<h4>8.Server Vulnerability Testing :</h4>
+<p>In this phase, we move into testing network services rather than direct testing of the WordPress installation. Port scanning is the standard technique for the discovery of network services running on the server.</p>
+<p>Services that might be present on a WordPress host:</p>
+<p><strong>MySQL</strong> Server Remotely Accessible (port 3306)<br />
+<strong>CPANEL</strong> administration login portal (port 2082 / 2083)<br />
+<strong>Webmin</strong> administration (port 10000)<br />
+<strong>FTP</strong> service for file system access<br />
+<strong>SSH</strong> for remote control<br />
+Other web services with admin or other sites (port 8080 / 8888 etc)</p>
+<p>Any of the above services may allow access to or control of the server through either a security vulnerability or a compromised password. Port scanning can be conducted using the excellent Nmap Port Scanner or an alternative security tool. Carrying on from our enumeration of network services using the port scanner, we could run vulnerability scans against the discovered services to identify exploitable services or other items of interest.</p>
+<h5>8.1 Nikto Vulnerability Scanner</h5>
+<p>Nikto is another vulnerability scanner that focuses on the discovery of known vulnerable scripts, configuration mistakes and other web server items of interest. The Nikto tool has been around for many years yet still finds a place in the penetration testers toolbox. Tools such as this throw tens of thousands of tests against the target in an attempt to discover known vulnerabilities and other low hanging fruits. It is a noisy process filling the target system logs with 404&#8217;s and other errors. Not recommended if you are going after a target ninja style (pentest / red team).</p>
+<h4>9.WPScan :</h4>
+<p>WPScan is a popular WordPress security testing tool that ties many of these simple enumeration techniques together, enabling users to quickly enumerate a WordPress installation. It has a commercial license that restricts the use for personal testing of WordPress sites and non-commercial usage.It attempts to identify users, plugins, and themes, depending on the selected command line options, and also show vulnerabilities for each of the discovered plugins.</p>
+<p><img decoding="async" class="alignnone wp-image-25357 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/6-1.png" alt="" width="500" height="197" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/6-1.png 500w, https://www.armourinfosec.com/wp-content/uploads/2020/01/6-1-300x118.png 300w" sizes="(max-width: 500px) 100vw, 500px" /></p>
+<p><a href="https://github.com/wpscanteam/wpscan">https://github.com/wpscanteam/wpscan</a></p>
+<h4>10.Nmap NSE Scripts for WordPress :</h4>
+<p>Nmap comes bundled with NSE scripts that extend the functionality of this popular port scanner. A few of the Nmap NSE scripts are particularly helpful for enumerating WordPress users, plugins, and themes using the same techniques we have previously discussed. The best thing about this option is that if you have Nmap installed, you already have these scripts ready to go.</p>
+<pre class="theme:familiar lang:sh decode:true ">┌─[root@Dasagreeva]─[/usr/share/nmap/scripts]
+└──╼ #ls -lha |grep wordpress
+-rw-r--r-- 1 root root 5.0K Nov 26 14:51 http-wordpress-brute.nse
+-rw-r--r-- 1 root root 11K Nov 26 14:51 http-wordpress-enum.nse
+-rw-r--r-- 1 root root 4.6K Nov 26 14:51 http-wordpress-users.nse</pre>
+<p>&nbsp;</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/wordpress-enumeration/">WordPress Enumeration</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/wordpress-enumeration/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Nmap Cheat Sheet</title>
+		<link>https://www.armourinfosec.com/nmap-cheat-sheet/</link>
+					<comments>https://www.armourinfosec.com/nmap-cheat-sheet/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Sat, 25 Nov 2017 14:41:24 +0000</pubDate>
+				<category><![CDATA[Ethical Hacking]]></category>
+		<category><![CDATA[Information Gathering]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Penetration Testing]]></category>
+		<category><![CDATA[information gathering]]></category>
+		<category><![CDATA[nmap]]></category>
+		<category><![CDATA[penetration testing]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=25088</guid>
+
+					<description><![CDATA[<p>Network Mapper (Nmap) also known as the God of Port Scanners used for network discovery and the basis for most...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/nmap-cheat-sheet/">Nmap Cheat Sheet</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p><strong>Network Mapper (Nmap)</strong> also known as the <strong>God of Port Scanners</strong> used for network discovery and the basis for most security enumeration during the initial stages of a <a href="https://www.armourinfosec.com/category/penetration-testing/">Penetration Testing</a>. Nmap has a multitude of options and when you first start playing with this excellent tool it can be a bit daunting. In this cheat sheet you will find a series of practical example commands for running Nmap and getting the most of this powerful tool. Below is Nmap Cheat Sheet and Helpful Tips and Techniques.</p>
+<p>Keep in mind that this cheat sheet merely touches the surface of the available options. The <a href="http://nmap.org/docs.html">Nmap Documentation portal</a> is your reference for digging deeper into the options available.</p>
+<h4><strong>Nmap in a nutshell</strong></h4>
+<ul>
+<li>Target Specification</li>
+<li>Host Discovery</li>
+<li>Port Specification</li>
+<li>Service Discovery / Version Detection</li>
+<li>Operating System Version Detection</li>
+<li>Firewall / IDS Evasion and Spoofing</li>
+<li>Time and Performance based Scan</li>
+<li>Output of Scan</li>
+<li>Vulnerability / Exploit Detection, using Nmap Scripts (NSE)</li>
+</ul>
+<h5><strong>Target Specification</strong></h5>
+<p>Scan a single IP</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1</pre>
+<p>Scan specific IPs</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 192.168.1.5</pre>
+<p>Scan a Range</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1-254</pre>
+<p>Scan a Domain / Host</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap nmap scanme.nmap.org</pre>
+<p>Scan Targets from a File</p>
+<pre class="theme:familiar lang:sh decode:true ">namp -iL targets.txt</pre>
+<p>Exclude the Listed Host from the Target Range</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap --exclude 192.168.1.5 192.168.1.1-10</pre>
+<h5><strong>Host Discovery</strong></h5>
+<p>To List given targets only, no Scan</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -sL 192.168.1.1-3</pre>
+<p>To Disable Port Scanning, Host Discovery only</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -sn 192.168.1.1/24</pre>
+<p>To Disable Host Discovery. Port scan only</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -Pn 192.168.1.1-5</pre>
+<p>TCP SYN discovery on given port</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -PS 80,21 192.168.1.1</pre>
+<p>TCP ACK discovery on given port</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -PA 80,21 192.168.1.1</pre>
+<p>UDP discovery on given port</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -PU 53 192.168.1.1</pre>
+<h5><strong>Port Specification</strong></h5>
+<p>Scan a given Port (i.e 21 here)</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -p 21 192.168.1.1</pre>
+<p>Scan the given Port Range</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -p 21-100 192.168.1.1</pre>
+<p>Scan the multiple TCP and UDP ports</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -p U:53,T:21-25,80 192.168.1.1</pre>
+<p>Scan all 65535 ports</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -p- 192.168.1.1</pre>
+<p>Scans the given Service Name</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -p http,https 192.168.1.1</pre>
+<p>Scans the Top 100 ports</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -F 192.168.1.1</pre>
+<h5><strong>Service Discovery / Version Detection</strong></h5>
+<p>Detect Version of the Running Services</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -sV 192.168.1.1</pre>
+<p>To set intensity range between 0 to 9. Higher number increases possibility of correctness</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -sV --version-intensity 5 192.168.1.1</pre>
+<p>To enable the light mode(intensity =2). It is faster but have less possibility of correctness</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap  -sV --version-light 192.168.1.1</pre>
+<p>To enables the intense mode(intensity =9). It is slower but have more possibility of correctness</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -sV --version-all 192.168.1.1</pre>
+<h5><strong>Operating System Version Detection</strong></h5>
+<p>Detect the Operating system</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -sV 192.168.1.1</pre>
+<p>Aggressive mode i.e OS, Service Version, Trace route.</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -A 192.168.1.1</pre>
+<h5><strong>Firewall / IDS Evasion and Spoofing</strong></h5>
+<p>Use tiny fragmented IP packets. Its harder for packet filters</p>
+<pre class="theme:familiar lang:default decode:true">nmap -f 192.168.1.1</pre>
+<p>Used to set our own offset size</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap --mtu 32 192.168.1.1</pre>
+<p>Use the Spoofed IP to scan</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -D decoy-ip1,decoy-ip2, your-own-ip remote-host-ip</pre>
+<p>Scans target.com from example.com (Domain Name Spoofing)</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -S example.com target.com</pre>
+<p>Uses the given port as a source</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -g 53 192.168.1.1</pre>
+<p>Appends random data to sent packets</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap --data-length 200 192.168.1.1</pre>
+<h5><strong>Time and Performance based Scan</strong></h5>
+<p>Slow scan</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -T0 192.168.1.1</pre>
+<p>Sneaky scan</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -T1 192.168.1.1</pre>
+<p>Timely scan</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -T2 192.168.1.1</pre>
+<p>Default scan</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -T3 192.168.1.1</pre>
+<p>Aggressive scan</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -T4 192.168.1.1</pre>
+<p>Very Aggressive scan</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -T5 192.168.1.1</pre>
+<h5><strong>Output of Scan</strong></h5>
+<p>To scan in the Verbose mode (-vv for greater effect)</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -v 192.168.1.1</pre>
+<p>Save the scan results to the scan.file</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 -oN scan.file</pre>
+<p>Save the results in xml.file</p>
+<pre class="theme:familiar lang:sh decode:true">nmap 192.168.1.1 -oX xml.file</pre>
+<p>Save the results in grep.file</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 -oG grep.file</pre>
+<p>Saves the Output in the three major formats at once</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 -oA result</pre>
+<p>To scan in the debug mode (-dd for greater effect)</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 -d</pre>
+<p>To see all the packets sent and received</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 -T4 --packet-trace</pre>
+<h5><strong>Vulnerability / Exploit Detection, using Nmap Scripts (NSE)</strong></h5>
+<p>Scan with default NSE Scripts</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 -sC</pre>
+<p>Scan with given NSE Script ( Example: nmap.nse )</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 --script=nmap.nse</pre>
+<p>Use script with arguments</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 –script=nmap.nse --script-args user=admin</pre>
+<p>&nbsp;</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/nmap-cheat-sheet/">Nmap Cheat Sheet</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/nmap-cheat-sheet/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Best Firefox Addons for Hacking</title>
+		<link>https://www.armourinfosec.com/best-firefox-addons-for-hacking/</link>
+					<comments>https://www.armourinfosec.com/best-firefox-addons-for-hacking/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Tue, 13 Oct 2015 06:16:02 +0000</pubDate>
+				<category><![CDATA[Ethical Hacking]]></category>
+		<category><![CDATA[Information Gathering]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=913</guid>
+
+					<description><![CDATA[<p>Firefox add-ons are useful for penetration testers and security analysts. These penetration testing add-ons helps in performing different kinds of...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/best-firefox-addons-for-hacking/">Best Firefox Addons for Hacking</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p style="text-align: justify;"><a href="https://www.armourinfosec.com/ethical-hacking/best-firefox-addons-for-hacking"><img decoding="async" class="wp-image-916 size-full alignright" src="https://www.armourinfosec.com/wp-content/uploads/2015/10/firefox.jpg" alt="firefox" width="450" height="241" srcset="https://www.armourinfosec.com/wp-content/uploads/2015/10/firefox.jpg 450w, https://www.armourinfosec.com/wp-content/uploads/2015/10/firefox-300x161.jpg 300w" sizes="(max-width: 450px) 100vw, 450px" /></a>Firefox add-ons are useful for penetration testers and security analysts. These penetration testing add-ons helps in performing different kinds of attacks, and modify request headers direct from the browser. This way, it reduces the use of a separate tool for most of the penetration testing related tasks.<span id="more-913"></span></p>
+<h5><span style="color: #000000;"><strong>Stop Tracking ( Disconnect )</strong></span></h5>
+<p>Stop tracking with “Disconnect”<br />
+&#8211; open source and<br />
+&#8211; loads pages 44% faster.<br />
+&#8211; save upto 39% of bandwidth<br />
+&#8211; stops tracking more than 2,000+ third-party sites<br />
+&#8211; keeps your searches private<br />
+&#8211; was named the best privacy tool by the New York Times (2016),</p>
+<p><a href="https://addons.mozilla.org/en-US/firefox/addon/disconnect/">https://addons.mozilla.org/en-US/firefox/addon/disconnect/</a></p>
+<h5><span style="color: #000000;"><strong>Cookie Quick Manager</strong></span></h5>
+<p>This add-on helps you perform various operations on cookies like viewing, searching, creating, and even editing them.<br />
+<a href="https://addons.mozilla.org/en-US/firefox/addon/cookie-quick-manager/">https://addons.mozilla.org/en-US/firefox/addon/cookie-quick-manager/</a></p>
+<h5><span style="color: #000000;"><strong>HackBar Quantum</strong></span></h5>
+<p>Unlike the previous version of Hackbar, this one is compatible with firefox quantum also. This tool helps in testing sql injections, XSS holes and site security.</p>
+<p><a href="https://addons.mozilla.org/en-US/firefox/addon/hackbar-quantum/?src=recommended">https://addons.mozilla.org/en-US/firefox/addon/hackbar-quantum/?src=recommended</a></p>
+<h5><span style="color: #000000;"><strong>HTTPS Everywhere</strong></span></h5>
+<p>Encrypt the web! With this tool as your add-on, you can apply HTTPS ecryption automatically on all the sites even on those where https: prefix is omitted.</p>
+<p><a href="https://addons.mozilla.org/en-US/firefox/addon/https-everywhere/">https://addons.mozilla.org/en-US/firefox/addon/https-everywhere/</a></p>
+<h5><span style="color: #000000;"><strong>Greasemonkey</strong></span></h5>
+<p>Allows you to customize the way a web page displays or behaves, by using small bits of JavaScript.</p>
+<p><a href="https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/" target="_blank" rel="noopener noreferrer">https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/</a></p>
+<h5><span style="color: #000000;"><strong>Injector</strong></span></h5>
+<p>Its a lightweight web app bug finder. With the provision of custom injection lists, one can intercept and replay web requests.</p>
+<p><a href="https://addons.mozilla.org/en-US/firefox/addon/injector/">https://addons.mozilla.org/en-US/firefox/addon/injector/</a></p>
+<h5><span style="color: #000000;"><strong>User-Agent Switcher and Manager</strong></span></h5>
+<p>This is among the coolest ones. You can spoof your user-agent so that it becomes impossible for websites to know specific details about our browser , thus protecting your identity and it also unlocks other utilities like some websites can be made to load much faster if you spoof your user-agent with a mobile device.</p>
+<p><a href="https://addons.mozilla.org/en-US/firefox/addon/user-agent-string-switcher/">https://addons.mozilla.org/en-US/firefox/addon/user-agent-string-switcher/</a></p>
+<h5><span style="color: #000000;"><strong>Easy XSS</strong></span></h5>
+<p>Its a simple to use plugin. It provides you with a menu of various xss payloads. With just one click it gets copied to clipboard and now all we have to do is to paste it in the desired input tag.</p>
+<p><a href="https://addons.mozilla.org/en-US/firefox/addon/easy-xss/">https://addons.mozilla.org/en-US/firefox/addon/easy-xss/</a></p>
+<h5><span style="color: #000000;"><strong>Wappalyzer</strong></span></h5>
+<p>While doing web app pentesting, its necessary to know the technologies and the software used in building the app and of course the version also. With wappalyzer, it can all be done with single click.</p>
+<p><a href="https://addons.mozilla.org/en-US/firefox/addon/wappalyzer/">https://addons.mozilla.org/en-US/firefox/addon/wappalyzer/</a></p>
+<h5><span style="color: #000000;"><strong>BuiltWith</strong></span></h5>
+<p>Its used in finding the technologies used behind a Web application. If Wappalyzer, misses something out, it can be verified with Buildwith.</p>
+<p><a href="https://addons.mozilla.org/en-US/firefox/addon/builtwith/">https://addons.mozilla.org/en-US/firefox/addon/builtwith/</a></p>
+<h5><span style="color: #000000;"><strong>Web developer</strong></span></h5>
+<p>It provides an interface to inspect the HTML, CSS , script code for the web page. You can also edit the code and it will display the current output.</p>
+<p><a href="https://addons.mozilla.org/en-US/firefox/addon/web-developer/?src=search">https://addons.mozilla.org/en-US/firefox/addon/web-developer/?src=search</a></p>
+<h5><span style="color: #000000;"><strong>Tor browser</strong></span></h5>
+<p>Thats the first thing which pops up in mind when we are talking about online privacy,anonymity and encryption. It’s a modified version of Firefox and it comes with pre-installed privacy add-ons, encryption and an advanced proxy.</p>
+<p><a href="https://www.torproject.org/">https://www.torproject.org/</a></p>
+<h5><span style="color: #000000;"><strong>Tamper Data for FF Quantum</strong></span></h5>
+<p>&#8211; Monitor live requests<br />
+&#8211; Edit headers on live requests<br />
+&#8211; Cancel live requests<br />
+&#8211; Redirect live requests</p>
+<p>Usage: Click the blue cloud in the toolbar to start tampering. When you&#8217;re done, click it again to stop.</p>
+<p><a href="https://addons.mozilla.org/en-US/firefox/addon/tamper-data-for-ff-quantum/">https://addons.mozilla.org/en-US/firefox/addon/tamper-data-for-ff-quantum/</a></p>
+<h5><span style="color: #000000;"><strong>uBlock Origin</strong></span></h5>
+<p>An efficient blocker which at the same time is soft on CPU and memory. It can load and enforce thousands more filters than other popular blockers out there.<br />
+Usage: The big power button in the popup is to permanently disable/enable uBlock for the current web site. It applies to the current web site only, it is not a global power button.</p>
+<p><a href="https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/">https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/</a></p>
+<h5><span style="color: #000000;"><strong>NoScript Security Suite</strong></span></h5>
+<p><span style="color: #000000;">This tool allows potentially malicious web content to run only from sites trusted by you. This tool also protects you from attacks like XSS and other web exploits. Its more of defensive rather than offensive tool, still worth trying.</span></p>
+<p><a href="https://addons.mozilla.org/en-US/firefox/addon/noscript/">https://addons.mozilla.org/en-US/firefox/addon/noscript/</a></p>
+<h5><span style="color: #000000;"><strong>anonymoX</strong></span></h5>
+<p>AnonymoX is an initiative for anonymization on the internet. The aim is to restore the users right of anonymity in the web. Most websites monitor the behaviour of their users, giving the websites hosts the ability to analyze the general users behaviour and create detailed user profiles, which are frequently sold to third parties.</p>
+<p>A threat for freedom of speech on the internet manifests in the repression through federal or private organizations. More and more governments censor websites with the excuse of child safety, copyright infringement or the fight against terrorism and thereby limit the freedom of speech.</p>
+<p>Easy anonymous web browsing.</p>
+<p>– Change your IP-Address and country</p>
+<p>– Visit blocked or censored websites.</p>
+<p>– Delete cookies, show your public ip, and more</p>
+<p><a href="https://addons.mozilla.org/En-us/firefox/addon/anonymox/?src=collection&amp;collection_id=0ec8ac59-73ee-422b-9828-1002ac75369f" target="_blank" rel="noopener noreferrer">https://addons.mozilla.org/En-us/firefox/addon/anonymox/?src=collection&amp;collection_id=0ec8ac59-73ee-422b-9828-1002ac75369f</a></p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/best-firefox-addons-for-hacking/">Best Firefox Addons for Hacking</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/best-firefox-addons-for-hacking/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Online Information Gathering Tools</title>
+		<link>https://www.armourinfosec.com/online-information-gathering-tools/</link>
+					<comments>https://www.armourinfosec.com/online-information-gathering-tools/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Mon, 14 Sep 2015 19:20:55 +0000</pubDate>
+				<category><![CDATA[Ethical Hacking]]></category>
+		<category><![CDATA[Information Gathering]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=690</guid>
+
+					<description><![CDATA[<p>A collection of uncomplicated, powerful network tools. http://www.yougetsignal.com/ This tool performs a reverse IP domain check which takes the domain...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/online-information-gathering-tools/">Online Information Gathering Tools</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p><a href="https://www.armourinfosec.com/ethical-hacking/online-information-gathering-tools/"><img decoding="async" class="alignleft size-full wp-image-805" src="https://www.armourinfosec.com/wp-content/uploads/2015/09/Online-Information-Gathering.png" alt="Online Information Gathering" width="450" height="300" srcset="https://www.armourinfosec.com/wp-content/uploads/2015/09/Online-Information-Gathering.png 450w, https://www.armourinfosec.com/wp-content/uploads/2015/09/Online-Information-Gathering-300x200.png 300w" sizes="(max-width: 450px) 100vw, 450px" /></a>A collection of uncomplicated, powerful network tools. <a href="http://www.yougetsignal.com/" target="_blank">http://www.yougetsignal.com/<br />
+</a>This tool performs a reverse IP domain check which takes the domain name or IP address of a web server and searches for other sites known to be hosted on that same web server. Data is gathered from search engine results, which is not guaranteed to be complete. Knowing the other web sites hosted on a web server is important from both an SEO and web filtering perspective, particularly for those on shared web hosting plans.<span id="more-690"></span></p>
+<p><a href="http://www.yougetsignal.com/tools/web-sites-on-web-server" target="_blank">http://www.yougetsignal.com/tools/web-sites-on-web-server</a></p>
+<p>The port forwarding tester is a utility used to identify your external IP address and detect open ports on your connection. This tool is useful for finding out if your port forwarding is setup correctly or if your server applications are being blocked by a firewall</p>
+<p><a href="http://www.yougetsignal.com/tools/open-ports" target="_blank">http://www.yougetsignal.com/tools/open-ports</a></p>
+<p>The reverse e-mail lookup allows you to quickly find where an e-mail originated from.</p>
+<p><a href="http://www.yougetsignal.com/tools/reverse-email-lookup" target="_blank">http://www.yougetsignal.com/tools/reverse-email-lookup</a></p>
+<p>This tool performs a WHOIS lookup on a remote address. A WHOIS lookup can help determine the owner of a domain name or an IP address on the Internet.</p>
+<p><a href="http://www.yougetsignal.com/tools/whois-lookup" target="_blank">http://www.yougetsignal.com/tools/whois-lookup</a></p>
+<p>The complete free set of network troubleshooting domain testing tools that just work.</p>
+<p><strong>DNS Tools</strong>:- DNS Lookup, DNS Traversal, DNS Tracer (DNS Traceroute), DNS Blacklist Check (arbl), DNS Recon, Reverse DNS Lookup / Scan, DNS Server Fingerprint.</p>
+<p><strong>Network / Internet Tools</strong>:- Port Scan (nmap), Trace Route, Tracepath, NetBIOS Scan/Check, Wake On Lan, CIDR/Netmask Calculator, NTP Server Test, MX Records Retriever</p>
+<p><strong>Web / HTTP Tools</strong>:- SSL Certificate Info, HTTP Header Retrieval, Plain Text WEB/URL Browser, HTTPRecon (HTTP Fingerprinting), Meta Tags Retriever, URL Encode / Decode, RAW URL Encode / Decode, Base64 Encode / Decode</p>
+<p><strong>Database Lookups</strong>:- RFC Lookup, MAC Address Lookup, Default Password Lookup, Abuse Contact Lookup, IP/Host Locater, WhoIS Lookup</p>
+<p><strong>Ping Tools</strong>:- Ping, PathPing, TCPing, Ping-Row</p>
+<p><a href="https://w3dt.net/" target="_blank">https://w3dt.net/</a></p>
+<p>intoDNS checks the health and configuration of DNS and mail servers.</p>
+<p><a href="http://www.intodns.com/" target="_blank">http://www.intodns.com/</a></p>
+<p>Web technology information profiler tool. Find out what a website is built with.</p>
+<p><a href="http://builtwith.com/" target="_blank">http://builtwith.com/</a></p>
+<p>Domain information, whois &amp; dns report</p>
+<p><a href="http://www.domaincrawler.com/" target="_blank">http://www.domaincrawler.com/</a></p>
+<p>Research domain ownership with Whois Lookup: Get ownership info, IP address history, rank, traffic, SEO &amp; more. Find available domains &amp; domains for sale.</p>
+<p><a href="http://www.domaintools.com/" target="_blank">http://www.domaintools.com/</a></p>
+<p>Find information on any domain name or website. Large database of whois information, DNS, domain names, name servers, IPs, and tools for searching and monitoring domain names</p>
+<p><a href="http://www.who.is/" target="_blank">http://www.who.is/</a></p>
+<p>Secure Domain Name Searches, Registration &amp; Availability. Use Our Free Whois Lookup Database to Search for &amp; Reserve</p>
+<p><a href="https://www.whois.net/" target="_blank">https://www.whois.net/</a></p>
+<p>online tools for the daily administration of networks.</p>
+<p><a href="http://en.dnstools.ch/" target="_blank">http://en.dnstools.ch/</a></p>
+<p>Free online network tools, including traceroute, nslookup, dig, whois, ping, and our own Domain Dossier and Email Dossier. Works with IPv6. Some source code included.</p>
+<p><a href="http://centralops.net/co" target="_blank">http://centralops.net/co</a></p>
+<p>DNS tools, Network tools, Email tools, DNS reporting and IP information gathering. Explore monitoring products and free DNS tools at DNSstuff.</p>
+<p><a href="http://www.dnsstuff.com/" target="_blank">http://www.dnsstuff.com/</a></p>
+<p>Research domain ownership with Whois Lookup: Get ownership info, IP address history, rank, traffic, SEO &amp; more. Find available domains &amp; domains for sale.</p>
+<p><a href="http://whois.domaintools.com/" target="_blank">http://whois.domaintools.com/</a></p>
+<p>View IP information</p>
+<p><a href="https://geoiptool.com/" target="_blank">https://geoiptool.com/</a></p>
+<p>Internet Archive is a non-profit digital library offering free universal access to books, movies &amp; music, as well as 436 billion archived web pages.</p>
+<p><a href="https://archive.org/index.php" target="_blank">https://archive.org/index.php</a></p>
+<p>The most comprehensive people search on the web. Pipl finds high-quality results in pages that cannot be found on regular search engines. Free People Search.</p>
+<p><a href="https://pipl.com/" target="_blank">https://pipl.com/</a></p>
+<p>Find people free with Zabasearch directory engine that includes free people search, reverse phone number lookup, address lookup, and more.</p>
+<p><a href="http://www.zabasearch.com/" target="_blank">http://www.zabasearch.com/</a></p>
+<p>TinEye is a reverse image search engine. Search by image: Give it an image and it will tell you where the image appears on the web.</p>
+<p><a href="https://www.tineye.com/" target="_blank">https://www.tineye.com/</a></p>
+<p>Find search engines from the UK, USA, and many other countries.</p>
+<p><a href="http://www.searchenginecolossus.com/" target="_blank">http://www.searchenginecolossus.com/</a></p>
+<p>Zuula is an innovative Internet search service that gives its users quick access to web, image, news blog and job search results from all the major search engines.With Zuula, users have the ability to get search results from their favorite search engine, such as Google or Yahoo!, but they also have one-click access to search results from a number of other search engines.</p>
+<p><a href="http://zuula.com/" target="_blank">http://zuula.com/</a></p>
+<p>Reverse IP Lookup &amp; Domain Check DNS Tool by myIPneighbors to find all domains hosted on an IP address by domain or IP address.</p>
+<p><a href="http://www.myipneighbors.com/" target="_blank">http://www.myipneighbors.com/</a></p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/online-information-gathering-tools/">Online Information Gathering Tools</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/online-information-gathering-tools/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

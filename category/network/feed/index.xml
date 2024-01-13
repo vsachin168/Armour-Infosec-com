@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Network Archives - Armour Infosec</title>
+	<atom:link href="https://www.armourinfosec.com/category/network/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.armourinfosec.com/category/network/</link>
+	<description>Do Your Part - Be Security Smart</description>
+	<lastBuildDate>Fri, 07 Feb 2020 05:12:44 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+
+<image>
+	<url>https://www.armourinfosec.com/wp-content/uploads/2018/02/ai.png</url>
+	<title>Network Archives - Armour Infosec</title>
+	<link>https://www.armourinfosec.com/category/network/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>What is IP Address ?</title>
+		<link>https://www.armourinfosec.com/what-is-ip-address/</link>
+					<comments>https://www.armourinfosec.com/what-is-ip-address/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Mon, 11 Jul 2016 08:18:15 +0000</pubDate>
+				<category><![CDATA[Network]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=1442</guid>
+
+					<description><![CDATA[<p>IP Address: It’s in general a name assign to a computer, address of a computer. It serves two principles: Host...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/what-is-ip-address/">What is IP Address ?</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p><strong>IP Address:</strong></p>
+<p><img decoding="async" class="wp-image-1443 alignleft" src="https://www.armourinfosec.com/wp-content/uploads/2016/07/ip-address.jpg" alt="ip-address" width="298" height="149" srcset="https://www.armourinfosec.com/wp-content/uploads/2016/07/ip-address.jpg 490w, https://www.armourinfosec.com/wp-content/uploads/2016/07/ip-address-300x150.jpg 300w" sizes="(max-width: 298px) 100vw, 298px" />It’s in general a name assign to a computer, address of a computer. It serves two principles: Host and Network. The Internet Assigned Numbers Authority (IANA) manages the IP address globally to local internet registries (Internet Service Providers). The designers of IP Address defined it as a 32 Bit number, and this system is called Internet Protocol Version 4. There are four sessions. Each session contain 8 Bits.  It’s in the numeric format ex: 0.0.0.0 To 255.255.255.255<span id="more-1442"></span></p>
+<p><strong>MIN To MAX</strong></p>
+<p>The min range is from 0 to 255 in all the four sessions.</p>
+<p><strong>IP Versions:</strong></p>
+<p>Two versions of Internet protocols (IP) are in use IP version 4 and IP version 6. Each IP versions define there IP address differently. IPv6 are used but, IPv4 is more preferred in India today.</p>
+<p><strong>IPv4 Address:</strong></p>
+<p>It’s and address consisting of 32 bit which limit the address space to 255. IPv4 reserves some address for Private networks and Public networks. IP version 4 are represented in dot decimal notation, which consists of four decimal numbers each ranging from 0 – 255, separated by dots. Each part represents a group of 8 bits.</p>
+<p><strong>Sub netting:</strong></p>
+<p>IP addresses are divided in two parts: Network – Host. Most significant eight bits in an address is called network number and the remaining bits were called host networks within the network. The classes (A B C) were defined for universal addressing. The following table gives an overview of the classes in IP address.</p>
+<p><strong>Classes defined.</strong></p>
+<table width="631">
+<tbody>
+<tr>
+<td width="210"><strong>CLASS A</strong></td>
+<td width="210"><strong>CLASS B</strong></td>
+<td width="210"><strong>CLASS C</strong></td>
+</tr>
+<tr>
+<td width="210">0 – 127</td>
+<td width="210">128 – 191</td>
+<td width="210">192 – 223</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Private IP in each class</strong></p>
+<table width="631">
+<tbody>
+<tr>
+<td width="210">CLASS A</td>
+<td width="210">CLASS B</td>
+<td width="210">CLASS C</td>
+</tr>
+<tr>
+<td width="210">10.0.0.0 TO 10.255.255.255</td>
+<td width="210">172.16.0.0 TO 172.31.255.255</td>
+<td width="210">192.168.0.0 TO 192.168.255.255</td>
+</tr>
+</tbody>
+</table>
+<p><strong>IP Address (Networks &#8211; Hosts)</strong></p>
+<table>
+<tbody>
+<tr>
+<td width="205">CLASS A</td>
+<td width="205">CLASS B</td>
+<td width="205">CLASS C</td>
+</tr>
+<tr>
+<td width="205">N+H+H+H</td>
+<td width="205">N+N+H+H</td>
+<td width="205">N+N+N+H</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Private Address</strong></p>
+<p>As the IP Address needs to be unique, end to end connectivity was envisioned for communication with internet hosts. However it was not necessary as private networks developed and public address space needs to be conserved. Computer does not connect to internet, such as factory machines connect through TCP/IP which does not need to unique.</p>
+<p>By &#8211; <strong>Gurjeet Kaur.</strong></p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/what-is-ip-address/">What is IP Address ?</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/what-is-ip-address/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

