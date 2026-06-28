@@ -27,6 +27,8 @@ const LOGO_PATH = path.join(REPO, 'public', 'logo', 'armour-infosec-red-black.pn
 const BRAND = 'Armour Infosec'
 const WEBSITE = 'armourinfosec.com'
 const PHONE = '+91 99777 47168'
+const EMAIL = 'info@armourinfosec.com'
+const ADDRESS = '674, Sudama Dwar, Narendra Tiwari Marg, Sudama Nagar, Indore, Madhya Pradesh 452009'
 const TRAINING_URL = 'https://www.armourinfosec.com/training/'
 
 // ----- shared light palette -----
@@ -296,8 +298,11 @@ function drawFooter(doc: Doc) {
     const saved = doc.page.margins.bottom
     doc.page.margins.bottom = 0
     doc.save(); doc.strokeColor(HAIR).lineWidth(0.75).moveTo(left, y).lineTo(left + w, y).stroke(); doc.restore()
-    doc.fillColor(SOFT).font('Courier').fontSize(8).text(`${BRAND} · ${WEBSITE} · ${PHONE}`, left, y + 8, { width: w * 0.75, lineBreak: false })
-    doc.fillColor(SOFT).font('Courier').fontSize(8).text(`Page ${i - range.start + 1} of ${range.count}`, left + w * 0.75, y + 8, { width: w * 0.25, align: 'right', lineBreak: false })
+    doc.fillColor(SOFT).font('Courier').fontSize(7)
+      .text(ADDRESS, left, y + 6, { width: w - 78, lineBreak: false })
+      .text(`Page ${i - range.start + 1} of ${range.count}`, left + w - 78, y + 6, { width: 78, align: 'right', lineBreak: false })
+    doc.fillColor(SOFT).font('Courier').fontSize(7)
+      .text(`${PHONE}   ·   ${EMAIL}   ·   ${WEBSITE}`, left, y + 16, { width: w, lineBreak: false })
     doc.page.margins.bottom = saved
   }
 }

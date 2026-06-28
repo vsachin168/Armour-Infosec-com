@@ -18,6 +18,9 @@ const LOGO_PATH = path.join(REPO, 'public', 'logo', 'armour-infosec-red-black.pn
 const BRAND = 'Armour Infosec'
 const TAGLINE = 'Hands-On Cyber Security Training · Indore, India'
 const WEBSITE = 'armourinfosec.com'
+const PHONE = '+91 99777 47168'
+const EMAIL = 'info@armourinfosec.com'
+const ADDRESS = '674, Sudama Dwar, Narendra Tiwari Marg, Sudama Nagar, Indore, Madhya Pradesh 452009'
 
 // Clean professional palette (matches the redesigned website)
 const BG = '#ffffff'      // page background (white paper)
@@ -249,7 +252,7 @@ function drawFooter(doc: Doc) {
   // so pdfkit's auto-pagination doesn't fire. With margins.bottom = 22 and 8pt
   // text (lineHeight ≈ 10), max footerY is page.height - 32. We pick 808 to keep
   // a slim 12pt visual margin below the footer text.
-  const footerY = doc.page.height - 34
+  const footerY = doc.page.height - 44
   for (let i = range.start; i < range.start + range.count; i++) {
     doc.switchToPage(i)
 
@@ -261,19 +264,16 @@ function drawFooter(doc: Doc) {
       .stroke()
     doc.restore()
 
-    doc.fillColor(SOFT).font('Helvetica').fontSize(8)
-      .text(
-        `${BRAND}  ·  ${WEBSITE}`,
-        doc.page.margins.left,
-        footerY,
-        { width: contentWidth(doc) / 2, align: 'left', lineBreak: false, height: 10 },
-      )
+    doc.fillColor(SOFT).font('Helvetica').fontSize(7)
+      .text(ADDRESS, doc.page.margins.left, footerY, { width: contentWidth(doc) - 78, align: 'left', lineBreak: false, height: 9 })
       .text(
         `Page ${i - range.start + 1} of ${range.count}`,
-        doc.page.margins.left + contentWidth(doc) / 2,
+        doc.page.margins.left + contentWidth(doc) - 78,
         footerY,
-        { width: contentWidth(doc) / 2, align: 'right', lineBreak: false, height: 10 },
+        { width: 78, align: 'right', lineBreak: false, height: 9 },
       )
+    doc.fillColor(SOFT).font('Helvetica').fontSize(7)
+      .text(`${PHONE}   ·   ${EMAIL}   ·   ${WEBSITE}`, doc.page.margins.left, footerY + 10, { width: contentWidth(doc), align: 'left', lineBreak: false, height: 9 })
   }
 }
 

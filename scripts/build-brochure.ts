@@ -747,10 +747,11 @@ function drawFooter(doc: Doc) {
     doc.save()
     doc.strokeColor(HAIR).lineWidth(0.75).moveTo(left, y).lineTo(left + w, y).stroke()
     doc.restore()
-    doc.fillColor(SOFT).font('Courier').fontSize(8)
-      .text(`${BRAND} · ${WEBSITE} · Course Brochure 2026`, left, y + 8, { width: w * 0.7, lineBreak: false })
-    doc.fillColor(SOFT).font('Courier').fontSize(8)
-      .text(`Page ${i - range.start + 1} of ${range.count}`, left + w * 0.7, y + 8, { width: w * 0.3, align: 'right', lineBreak: false })
+    doc.fillColor(SOFT).font('Courier').fontSize(7)
+      .text(ADDRESS, left, y + 6, { width: w - 78, lineBreak: false })
+      .text(`Page ${i - range.start + 1} of ${range.count}`, left + w - 78, y + 6, { width: 78, align: 'right', lineBreak: false })
+    doc.fillColor(SOFT).font('Courier').fontSize(7)
+      .text(`${PHONE}   ·   ${EMAIL}   ·   ${WEBSITE}`, left, y + 16, { width: w, lineBreak: false })
     doc.page.margins.bottom = savedBottom
   }
 }
