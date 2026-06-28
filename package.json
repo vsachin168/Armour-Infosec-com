@@ -1,0 +1,37 @@
+{
+  "name": "armour-infosec",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build:syllabus": "tsx scripts/build-syllabus-pdfs.ts",
+    "build:brochure": "tsx scripts/build-brochure.ts",
+    "build:roadmap": "tsx scripts/build-roadmap-pdf.ts",
+    "prebuild": "npm run build:syllabus && npm run build:brochure && npm run build:roadmap",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "export": "next build"
+  },
+  "dependencies": {
+    "framer-motion": "^12.38.0",
+    "lucide-react": "^1.16.0",
+    "next": "^14.2.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/pdfkit": "^0.17.6",
+    "@types/qrcode": "^1.5.6",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "autoprefixer": "^10.4.0",
+    "pdfkit": "^0.18.0",
+    "postcss": "^8.4.0",
+    "qrcode": "^1.5.4",
+    "tailwindcss": "^3.4.0",
+    "tsx": "^4.22.1",
+    "typescript": "^5.4.0"
+  }
+}
