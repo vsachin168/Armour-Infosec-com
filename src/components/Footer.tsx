@@ -15,6 +15,7 @@ const footerLinks = {
     { href: '/services/digital-forensics-incident-response/', label: 'Digital Forensics' },
   ],
   training: [
+    { href: '/training/roadmap/', label: 'Cybersecurity Roadmap' },
     { href: '/training/ai-ml-penetration-testing/', label: 'AI/ML Penetration Testing' },
     { href: '/training/ethical-hacking/', label: 'Certified Ethical Hacking & Penetration Testing' },
     { href: '/training/web-application-security/', label: 'Advanced Web Application Security Testing' },
