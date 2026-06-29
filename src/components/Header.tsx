@@ -184,7 +184,7 @@ export function Header() {
                       isOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-1 pointer-events-none'
                     }`}
                   >
-                    <div className="w-[640px] max-w-[calc(100vw-2rem)] rounded-2xl bg-white/[0.98] dark:bg-cyber-card/95 backdrop-blur-2xl border border-gray-200 dark:border-cyber-border shadow-2xl p-6">
+                    <div className="w-[640px] max-w-[calc(100vw-2rem)] rounded-xl bg-white dark:bg-cyber-card border border-gray-200 dark:border-cyber-border shadow-[0_10px_30px_rgba(0,0,0,0.18)] p-6">
                       <div className="grid grid-cols-2 gap-6">
                         {entry.groups.map((group, gi) => (
                           <div key={gi}>
@@ -209,10 +209,10 @@ export function Header() {
                                   <li key={item.href}>
                                     <Link
                                       href={item.href}
-                                      className={`block px-2.5 py-2 text-[13px] rounded-md transition-colors leading-snug ${
+                                      className={`block px-2.5 py-2 text-[13px] font-medium rounded-md transition-colors leading-snug ${
                                         itemActive
-                                          ? 'text-accent bg-accent/10'
-                                          : 'text-slate-800 dark:text-slate-200 hover:text-accent hover:bg-accent/5 dark:hover:bg-white/[0.05]'
+                                          ? 'text-blue-600 bg-gray-100 dark:text-accent dark:bg-accent/10'
+                                          : 'text-gray-800 dark:text-slate-200 hover:text-blue-600 hover:bg-gray-100 dark:hover:text-accent dark:hover:bg-white/[0.06]'
                                       }`}
                                     >
                                       {item.label}
