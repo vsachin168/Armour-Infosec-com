@@ -286,6 +286,28 @@ function drawRoadmap(doc: Doc, qr: Buffer) {
       mapNode(doc, x, el.y, NODE_W, NODE_H, el.r, cx)
     } else mapCapstone(doc, cx, el.y, CAP_H)
   }
+
+  // ── Complete Program Bundle — all courses at one discounted price ──
+  const bundleTotal = Object.values(trainingData).reduce((s, d) => s + Number(d.price.replace(/[^0-9]/g, '')), 0)
+  const bundleFee = 55000
+  const inr = (n: number) => 'Rs ' + n.toLocaleString('en-IN')
+  const by = y + 12
+  const bh = 44
+  panel(doc, left, by, w, bh, { fill: PANEL_HI, stroke: ACCENT, radius: 10 })
+  doc.fillColor(ACCENT).font('Courier-Bold').fontSize(7).text('// COMPLETE PROGRAM BUNDLE', left + 16, by + 10, { lineBreak: false })
+  doc.fillColor(INK).font('Helvetica-Bold').fontSize(12.5).text(`All ${TOTAL_COURSES} courses, one price`, left + 16, by + 22, { lineBreak: false })
+  const bundleCols = [
+    { label: 'TOTAL VALUE', value: inr(bundleTotal), color: SOFT, strike: true, size: 11, vy: 22 },
+    { label: 'BUNDLE FEE', value: inr(bundleFee), color: ACCENT, strike: false, size: 17, vy: 19 },
+    { label: 'YOU SAVE', value: inr(bundleTotal - bundleFee), color: CAPSTONE, strike: false, size: 11, vy: 22 },
+  ]
+  const bColW = 92
+  const bStartX = left + w - 16 - bundleCols.length * bColW
+  bundleCols.forEach((c, i) => {
+    const bx = bStartX + i * bColW
+    doc.fillColor(SOFT).font('Courier-Bold').fontSize(6).text(c.label, bx, by + 10, { width: bColW - 6, lineBreak: false })
+    doc.fillColor(c.color).font('Helvetica-Bold').fontSize(c.size).text(c.value, bx, by + c.vy, { width: bColW - 6, strike: c.strike, lineBreak: false })
+  })
 }
 
 // ============================================================
