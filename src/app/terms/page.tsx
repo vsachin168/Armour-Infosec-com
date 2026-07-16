@@ -17,6 +17,9 @@ const SECTIONS: LegalSection[] = [
     body: (
       <>
         <p>
+          This website is owned and operated by <strong>Sachin Verma</strong> (&ldquo;Owner&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;).
+        </p>
+        <p>
           By accessing the Armour Infosec website at <strong>armourinfosec.com</strong> or by enrolling in any course, requesting an assessment, or otherwise engaging our services, you agree to be bound by these Terms of Service. If you do not accept these terms in full, please discontinue use of the website and services.
         </p>
         <p>
