@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { PageHero } from '@/components/ui/PageHero'
 import { AnimatedSection, StaggerContainer, StaggerItem } from '@/components/ui/AnimatedSection'
@@ -121,6 +121,62 @@ const courses: { key: string; href: string; icon: React.ReactNode; isNew?: boole
   { key: 'wordpress-administration', href: '/training/wordpress-administration/', icon: <Globe className="w-5 h-5" /> },
   { key: 'php-development', href: '/training/php-development/', icon: <Code className="w-5 h-5" /> },
 ]
+
+const inr = (n: number) => '₹' + n.toLocaleString('en-IN')
+const TOTAL_FEE = Object.values(trainingData).reduce(
+  (sum, d) => sum + Number(d.price.replace(/[^0-9]/g, '')),
+  0
+)
+const BUNDLE_FEE = 55000
+const BUNDLE_SAVINGS = TOTAL_FEE - BUNDLE_FEE
+// Limited-time bundle offer — edit this date to reset the 30-day window (IST end-of-day).
+const OFFER_END = new Date('2026-08-15T23:59:59+05:30').getTime()
+
+function BundleCountdown() {
+  const [remaining, setRemaining] = useState<number | null>(null)
+
+  useEffect(() => {
+    const tick = () => setRemaining(OFFER_END - Date.now())
+    tick()
+    const id = setInterval(tick, 1000)
+    return () => clearInterval(id)
+  }, [])
+
+  // Avoid hydration mismatch: render nothing until the client clock is read.
+  if (remaining === null) return null
+  if (remaining <= 0) return null
+
+  const s = Math.floor(remaining / 1000)
+  const units = [
+    { label: 'Days', value: Math.floor(s / 86400) },
+    { label: 'Hours', value: Math.floor((s % 86400) / 3600) },
+    { label: 'Mins', value: Math.floor((s % 3600) / 60) },
+    { label: 'Secs', value: s % 60 },
+  ]
+
+  return (
+    <div className="mb-8">
+      <p className="font-mono text-xs uppercase tracking-widest text-accent mb-3">
+        Limited-time offer ends in
+      </p>
+      <div className="flex items-center justify-center gap-3 sm:gap-4">
+        {units.map((u) => (
+          <div
+            key={u.label}
+            className="min-w-[64px] rounded-lg border border-accent/30 bg-cyber-dark/60 px-3 py-2"
+          >
+            <p className="text-2xl sm:text-3xl font-bold font-mono text-gray-900 dark:text-white tabular-nums">
+              {String(u.value).padStart(2, '0')}
+            </p>
+            <p className="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400 font-mono">
+              {u.label}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
 
 export default function TrainingPage() {
   const roadmapRef = useRef<HTMLElement | null>(null)
@@ -302,7 +358,10 @@ export default function TrainingPage() {
                     <div className="relative pt-4 mt-auto">
                       <div className="absolute top-0 left-0 right-0 cyber-divider" />
                       <div className="flex items-center justify-between">
-                        <span className="text-xs text-gray-500 dark:text-gray-400 font-mono">{data.modules.length} modules</span>
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-accent text-base font-bold font-mono">{data.price}</span>
+                          <span className="text-xs text-gray-500 dark:text-gray-400 font-mono">· {data.modules.length} modules</span>
+                        </div>
                         <span className="inline-flex items-center text-accent text-sm font-mono opacity-0 group-hover:opacity-100 transition-opacity">
                           View Curriculum <ArrowRight className="w-4 h-4 ml-1" />
                         </span>
@@ -312,6 +371,43 @@ export default function TrainingPage() {
                 </GlowCard>
               )
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Complete Program Bundle */}
+      <section className="py-16 bg-cyber-dark relative transition-colors duration-300">
+        <div className="absolute top-0 left-0 right-0 cyber-divider" />
+        <div className="absolute bottom-0 left-0 right-0 cyber-divider" />
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="rounded-2xl border border-accent/30 bg-accent/5 p-8 sm:p-10 text-center">
+            <span className="font-mono text-xs text-accent uppercase tracking-widest">// All-in-One</span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mt-2 mb-2">
+              Complete Program Bundle
+            </h2>
+            <p className="text-gray-500 dark:text-gray-400 mb-8">
+              Enrol in all {Object.keys(trainingData).length} courses together and save.
+            </p>
+            <BundleCountdown />
+            <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 mb-8">
+              <div>
+                <p className="text-xs text-gray-500 dark:text-gray-400 font-mono mb-1">Total Value</p>
+                <p className="text-xl sm:text-2xl font-medium text-gray-400 dark:text-gray-500 line-through">{inr(TOTAL_FEE)}</p>
+              </div>
+              <div>
+                <p className="text-xs text-accent font-mono mb-1">Bundle Fee</p>
+                <p className="text-3xl sm:text-4xl font-bold text-accent">{inr(BUNDLE_FEE)}</p>
+              </div>
+              <div className="inline-flex items-center rounded-full border border-accent/40 bg-accent/10 px-4 py-2">
+                <span className="text-accent font-bold font-mono text-sm">Save {inr(BUNDLE_SAVINGS)}</span>
+              </div>
+            </div>
+            <Link
+              href="/contact/"
+              className="inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3 font-semibold text-white hover:bg-accent-dim transition-all"
+            >
+              Enrol in Complete Program <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>

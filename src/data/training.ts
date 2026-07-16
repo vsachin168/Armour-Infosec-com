@@ -3,6 +3,7 @@ import { TrainingPageData } from '@/components/TrainingPageTemplate'
 export const trainingData: Record<string, TrainingPageData> = {
   'ethical-hacking': {
     slug: 'ceh-pt',
+    price: '₹25,000',
     tag: 'Ethical Hacking & Penetration Testing',
     title: 'Certified Ethical Hacking &',
     highlight: 'Penetration Testing',
@@ -129,6 +130,7 @@ export const trainingData: Record<string, TrainingPageData> = {
 
   'web-application-security': {
     slug: 'wapt',
+    price: '₹25,000',
     tag: 'Web Application Security',
     title: 'Advanced Web Application',
     highlight: 'Security Testing',
@@ -259,6 +261,7 @@ export const trainingData: Record<string, TrainingPageData> = {
 
   'api-security': {
     slug: 'api-sec',
+    price: '₹10,000',
     tag: 'API Security',
     title: 'API Security & Advanced',
     highlight: 'API Exploitation',
@@ -409,6 +412,7 @@ export const trainingData: Record<string, TrainingPageData> = {
 
   'active-directory-security': {
     slug: 'ad-pentest',
+    price: '₹10,000',
     tag: 'Active Directory Security',
     title: 'Active Directory Security &',
     highlight: 'Enterprise Attacks',
@@ -524,6 +528,7 @@ export const trainingData: Record<string, TrainingPageData> = {
 
   'wireless-security': {
     slug: 'wifi-sec',
+    price: '₹10,000',
     tag: 'Wireless Security',
     title: 'Wireless Security &',
     highlight: 'WiFi Penetration Testing',
@@ -641,6 +646,7 @@ export const trainingData: Record<string, TrainingPageData> = {
 
   'python-security': {
     slug: 'python-hack',
+    price: '₹5,000',
     tag: 'Python for Security',
     title: 'Python for Security',
     highlight: 'Professionals',
@@ -757,6 +763,7 @@ export const trainingData: Record<string, TrainingPageData> = {
 
   'windows-infrastructure': {
     slug: 'win-infra',
+    price: '₹10,000',
     tag: 'Windows Server Administration',
     title: 'Enterprise Windows',
     highlight: 'Infrastructure Security',
@@ -875,6 +882,7 @@ export const trainingData: Record<string, TrainingPageData> = {
 
   'linux-administration': {
     slug: 'linux-admin',
+    price: '₹10,000',
     tag: 'Linux Server Administration',
     title: 'Linux Administration &',
     highlight: 'Server Hardening',
@@ -1014,6 +1022,7 @@ export const trainingData: Record<string, TrainingPageData> = {
 
   'wordpress-administration': {
     slug: 'wp-admin',
+    price: '₹5,000',
     tag: 'WordPress Administration',
     title: 'Secure WordPress',
     highlight: 'Administration',
@@ -1141,6 +1150,7 @@ export const trainingData: Record<string, TrainingPageData> = {
 
   'php-development': {
     slug: 'php-sec',
+    price: '₹5,000',
     tag: 'PHP Development',
     title: 'Secure PHP',
     highlight: 'Development',
@@ -1277,6 +1287,7 @@ export const trainingData: Record<string, TrainingPageData> = {
 
   'ai-ml-penetration-testing': {
     slug: 'ai-ml-pt',
+    price: '₹20,000',
     tag: 'AI / ML Security & Red Teaming',
     title: 'AI/ML Penetration',
     highlight: 'Testing',
@@ -1403,6 +1414,7 @@ export const trainingData: Record<string, TrainingPageData> = {
 
   'mobile-application-penetration-testing': {
     slug: 'mapt',
+    price: '₹20,000',
     tag: 'Mobile Application Security',
     title: 'Mobile Application',
     highlight: 'Penetration Testing',

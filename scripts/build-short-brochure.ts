@@ -188,14 +188,14 @@ function drawProgram(doc: Doc) {
 // Page 2 — Roadmap map
 // ============================================================
 
-type Resolved = { name: string; level: string; count: number; color: string }
+type Resolved = { name: string; level: string; count: number; color: string; price: string }
 function resolveCourse(c: RoadmapCourse): Resolved {
   const color = courseColor(c)
   if (c.key && trainingData[c.key]) {
     const d = trainingData[c.key]
-    return { name: c.name, level: d.level, count: d.modules.length, color }
+    return { name: c.name, level: d.level, count: d.modules.length, color, price: d.price.replace('₹', 'Rs ') }
   }
-  return { name: c.name, level: c.level ?? '', count: c.modules?.length ?? 0, color }
+  return { name: c.name, level: c.level ?? '', count: c.modules?.length ?? 0, color, price: '' }
 }
 
 function mapPill(doc: Doc, cx: number, y: number, h: number, id: string, label: string, accent: string) {
@@ -210,7 +210,11 @@ function mapPill(doc: Doc, cx: number, y: number, h: number, id: string, label: 
 function mapNode(doc: Doc, x: number, y: number, w: number, h: number, r: Resolved, cx: number) {
   doc.save(); doc.fillColor(WHITE).roundedRect(x, y, w, h, 6).fill(); doc.strokeColor(HAIR).lineWidth(0.75).roundedRect(x, y, w, h, 6).stroke(); doc.restore()
   doc.save(); doc.fillColor(r.color).roundedRect(x, y, 3.5, h, 1.5).fill(); doc.restore()
-  doc.fillColor(INK).font('Helvetica-Bold').fontSize(7.8).text(r.name, x + 9, y + 5, { width: w - 16, height: 18, lineGap: 0, ellipsis: true })
+  const priceW = r.price ? doc.font('Helvetica-Bold').fontSize(7.8).widthOfString(r.price) + 6 : 0
+  doc.fillColor(INK).font('Helvetica-Bold').fontSize(7.8).text(r.name, x + 9, y + 5, { width: w - 16 - priceW, height: 18, lineGap: 0, ellipsis: true })
+  if (r.price) {
+    doc.fillColor(r.color).font('Helvetica-Bold').fontSize(7.8).text(r.price, x + 9, y + 5, { width: w - 16, align: 'right' })
+  }
   doc.fillColor(r.color).font('Courier-Bold').fontSize(6).text(`${r.level ? r.level.toUpperCase() + '  ·  ' : ''}${r.count} MODULES`, x + 9, y + h - 10, { width: w - 16, lineBreak: false })
   const midY = y + h / 2
   doc.save(); doc.fillColor(WHITE).circle(cx, midY, 5).fill(); doc.fillColor(r.color).circle(cx, midY, 3.1).fill(); doc.restore()

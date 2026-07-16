@@ -26,6 +26,7 @@ export interface TrainingPageData {
   overview: string
   duration: CourseDuration
   level: string
+  price: string
   prerequisites: string[]
   modules: { title: string; topics: string[] }[]
   outcomes: string[]
@@ -90,6 +91,8 @@ export function TrainingPageTemplate({ data }: { data: TrainingPageData }) {
     offers: {
       '@type': 'Offer',
       category: 'Cyber Security Training',
+      price: data.price.replace(/[^0-9.]/g, ''),
+      priceCurrency: 'INR',
       url: `${businessUrl}/contact/`,
       availability: 'https://schema.org/InStock',
     },
@@ -145,6 +148,7 @@ export function TrainingPageTemplate({ data }: { data: TrainingPageData }) {
           { label: 'Training', href: '/training/' },
           { label: data.title + ' ' + data.highlight },
         ]}
+        price={data.price}
       />
 
       {/* Quick Info Bar */}

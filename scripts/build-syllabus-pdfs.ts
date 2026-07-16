@@ -319,6 +319,7 @@ async function generate(slug: string): Promise<void> {
     infoRow(doc, 'Duration', `${course.duration.months} Months / ${course.duration.weeks} Weeks / ${course.duration.totalHours} Hours`)
     infoRow(doc, 'Level', course.level)
     infoRow(doc, 'Modules', String(course.modules.length))
+    infoRow(doc, 'Course Fee', course.price.replace('₹', 'Rs '))
     infoRow(doc, 'Format', 'Hands-on Labs / Hybrid (Online + Indore Classroom)')
 
     if (course.overview?.trim()) {

@@ -60,14 +60,14 @@ function paintPageBackground(doc: Doc) {
 const resolveColor = (c: string) => (c.startsWith('var(') ? ACCENT : c)
 const fmtLevel = (level: string) => level.replace(/\s+to\s+/i, ' to ')
 
-type Resolved = { name: string; color: string; level: string; count: number; modules: string[] }
+type Resolved = { name: string; color: string; level: string; count: number; modules: string[]; price: string }
 
 function resolveCourse(c: RoadmapCourse): Resolved {
   if (c.key && trainingData[c.key]) {
     const d = trainingData[c.key]
-    return { name: c.name, color: resolveColor(c.color), level: fmtLevel(d.level), count: d.modules.length, modules: d.modules.map((m) => m.title) }
+    return { name: c.name, color: resolveColor(c.color), level: fmtLevel(d.level), count: d.modules.length, modules: d.modules.map((m) => m.title), price: d.price.replace('₹', 'Rs ') }
   }
-  return { name: c.name, color: resolveColor(c.color), level: c.level ?? '', count: c.modules?.length ?? 0, modules: c.modules ?? [] }
+  return { name: c.name, color: resolveColor(c.color), level: c.level ?? '', count: c.modules?.length ?? 0, modules: c.modules ?? [], price: '' }
 }
 
 const ALL_COURSES = ROADMAP_TIERS.flatMap((t) => t.courses)
@@ -134,8 +134,13 @@ function drawMapNode(doc: Doc, x: number, y: number, w: number, h: number, c: Re
   doc.save()
   doc.fillColor(c.color).roundedRect(x, y, 3.5, h, 1.5).fill()
   doc.restore()
+  const priceW = c.price ? doc.font('Helvetica-Bold').fontSize(7.8).widthOfString(c.price) + 6 : 0
   doc.fillColor(INK).font('Helvetica-Bold').fontSize(7.8)
-    .text(c.name, x + 9, y + 5, { width: w - 16, height: 18, lineGap: 0, ellipsis: true })
+    .text(c.name, x + 9, y + 5, { width: w - 16 - priceW, height: 18, lineGap: 0, ellipsis: true })
+  if (c.price) {
+    doc.fillColor(c.color).font('Helvetica-Bold').fontSize(7.8)
+      .text(c.price, x + 9, y + 5, { width: w - 16, align: 'right' })
+  }
   const meta = `${c.level ? c.level.toUpperCase() + '  ·  ' : ''}${c.count} MODULES`
   doc.fillColor(c.color).font('Helvetica-Bold').fontSize(6)
     .text(meta, x + 9, y + h - 11, { width: w - 16, lineBreak: false, characterSpacing: 0.3 })

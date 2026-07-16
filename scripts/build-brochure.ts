@@ -130,7 +130,7 @@ function sectionTop(doc: Doc, kicker: string, title: string, sub?: string, conti
 // Content resolution (single source of truth — never invented)
 // ============================================================
 
-type Resolved = { name: string; level: string; duration: string; count: number; modules: string[]; summary: string; color: string }
+type Resolved = { name: string; level: string; duration: string; count: number; modules: string[]; summary: string; color: string; price: string }
 
 function resolveCourse(c: RoadmapCourse): Resolved {
   const color = courseColor(c)
@@ -144,9 +144,10 @@ function resolveCourse(c: RoadmapCourse): Resolved {
       modules: d.modules.map((m) => m.title),
       summary: d.description,
       color,
+      price: d.price.replace('₹', 'Rs '),
     }
   }
-  return { name: c.name, level: c.level ?? '', duration: '', count: c.modules?.length ?? 0, modules: c.modules ?? [], summary: '', color }
+  return { name: c.name, level: c.level ?? '', duration: '', count: c.modules?.length ?? 0, modules: c.modules ?? [], summary: '', color, price: '' }
 }
 
 const CATALOGUE = ROADMAP_TIERS.flatMap((t) => t.courses).filter((c) => c.key && trainingData[c.key])
@@ -345,7 +346,11 @@ function mapNode(doc: Doc, x: number, y: number, w: number, h: number, r: Resolv
   doc.save()
   doc.fillColor(r.color).roundedRect(x, y, 3.5, h, 1.5).fill()
   doc.restore()
-  doc.fillColor(INK).font('Helvetica-Bold').fontSize(7.8).text(r.name, x + 9, y + 5, { width: w - 16, height: 18, lineGap: 0, ellipsis: true })
+  const priceW = r.price ? doc.font('Helvetica-Bold').fontSize(7.8).widthOfString(r.price) + 6 : 0
+  doc.fillColor(INK).font('Helvetica-Bold').fontSize(7.8).text(r.name, x + 9, y + 5, { width: w - 16 - priceW, height: 18, lineGap: 0, ellipsis: true })
+  if (r.price) {
+    doc.fillColor(r.color).font('Helvetica-Bold').fontSize(7.8).text(r.price, x + 9, y + 5, { width: w - 16, align: 'right' })
+  }
   const meta = `${r.level ? r.level.toUpperCase() + '  ·  ' : ''}${r.count} MODULES`
   doc.fillColor(r.color).font('Courier-Bold').fontSize(6).text(meta, x + 9, y + h - 10, { width: w - 16, lineBreak: false })
   const midY = y + h / 2
@@ -449,8 +454,12 @@ function courseCard(doc: Doc, x: number, y: number, cw: number, ch: number, c: R
   doc.restore()
   const px = x + 16
   const pw = cw - 30
+  const priceW = r.price ? doc.font('Helvetica-Bold').fontSize(11).widthOfString(r.price) + 8 : 0
   doc.fillColor(INK).font('Helvetica-Bold').fontSize(11)
-    .text(r.name, px, y + 13, { width: pw, height: 30, lineGap: 1, ellipsis: true })
+    .text(r.name, px, y + 13, { width: pw - priceW, height: 30, lineGap: 1, ellipsis: true })
+  if (r.price) {
+    doc.fillColor(r.color).font('Helvetica-Bold').fontSize(11).text(r.price, px, y + 13, { width: pw, align: 'right' })
+  }
   const meta = [r.level.toUpperCase(), r.duration.toUpperCase(), `${r.count} MODULES`].filter(Boolean).join('  ·  ')
   doc.fillColor(r.color).font('Courier-Bold').fontSize(6.5).text(meta, px, y + 46, { width: pw, lineBreak: false })
   doc.fillColor(SOFT).font('Helvetica').fontSize(8.6).text(r.summary, px, y + 61, { width: pw, height: ch - 71, lineGap: 2.5, ellipsis: true })
@@ -732,6 +741,52 @@ async function drawContact(doc: Doc) {
 }
 
 // ============================================================
+// Complete Program Bundle (fees)
+// ============================================================
+
+function drawBundle(doc: Doc) {
+  sectionTop(
+    doc,
+    'Complete Program Bundle',
+    'All 12 Courses, One Price',
+    'Enrol in the full guided path — every course from Foundation to the CISE capstone — as a single discounted bundle. Limited-time offer, valid for 30 days.',
+  )
+
+  const left = doc.page.margins.left
+  const w = contentWidth(doc)
+  const total = Object.values(trainingData).reduce((s, d) => s + Number(d.price.replace(/[^0-9]/g, '')), 0)
+  const fee = 55000
+  const save = total - fee
+  const inr = (n: number) => 'Rs ' + n.toLocaleString('en-IN')
+
+  const y = doc.y + 6
+  const cardH = 132
+  panel(doc, left, y, w, cardH, { fill: PANEL_HI, stroke: ACCENT, strokeOpacity: 0.35, radius: 12 })
+
+  doc.fillColor(ACCENT).font('Courier-Bold').fontSize(9).text('// ALL-IN-ONE', left + 26, y + 22, { lineBreak: false })
+  doc.fillColor(INK).font('Helvetica-Bold').fontSize(16).text('Enrol in all 12 courses together and save', left + 26, y + 38, { lineBreak: false })
+
+  const colY = y + 74
+  const colW = (w - 52) / 3
+  const cols: { label: string; value: string; kind: 'strike' | 'big' | 'save' }[] = [
+    { label: 'TOTAL VALUE', value: inr(total), kind: 'strike' },
+    { label: 'BUNDLE FEE', value: inr(fee), kind: 'big' },
+    { label: 'YOU SAVE', value: inr(save), kind: 'save' },
+  ]
+  cols.forEach((c, i) => {
+    const cx = left + 26 + i * colW
+    doc.fillColor(SOFT).font('Courier-Bold').fontSize(7.5).text(c.label, cx, colY, { width: colW - 12, lineBreak: false })
+    if (c.kind === 'strike') {
+      doc.fillColor(SOFT).font('Helvetica-Bold').fontSize(15).text(c.value, cx, colY + 14, { width: colW - 12, strike: true, lineBreak: false })
+    } else if (c.kind === 'big') {
+      doc.fillColor(ACCENT).font('Helvetica-Bold').fontSize(24).text(c.value, cx, colY + 8, { width: colW - 12, lineBreak: false })
+    } else {
+      doc.fillColor(CAPSTONE).font('Helvetica-Bold').fontSize(15).text(c.value, cx, colY + 14, { width: colW - 12, lineBreak: false })
+    }
+  })
+}
+
+// ============================================================
 // Footer (unified across every page)
 // ============================================================
 
@@ -783,6 +838,7 @@ async function main() {
   doc.addPage(); drawAbout(doc)
   doc.addPage(); drawRoadmap(doc)
   doc.addPage(); drawRoadmapMap(doc)
+  doc.addPage(); drawBundle(doc)
   doc.addPage(); drawBreakdown(doc)
   doc.addPage(); drawTools(doc)
   doc.addPage(); drawModes(doc); drawCerts(doc) // modes + certs share one page

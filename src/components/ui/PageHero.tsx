@@ -10,9 +10,10 @@ interface PageHeroProps {
   highlight: string
   description: string
   breadcrumbs: { label: string; href?: string }[]
+  price?: string
 }
 
-export function PageHero({ tag, title, highlight, description, breadcrumbs }: PageHeroProps) {
+export function PageHero({ tag, title, highlight, description, breadcrumbs, price }: PageHeroProps) {
   return (
     <section className="relative pt-32 pb-20 bg-cyber-darker overflow-hidden transition-colors duration-300">
       <div className="absolute inset-0 bg-gradient-to-b from-cyber-darker via-cyber-darker/95 to-cyber-dark" />
@@ -36,6 +37,12 @@ export function PageHero({ tag, title, highlight, description, breadcrumbs }: Pa
           <p className="text-lg sm:text-xl text-gray-500 dark:text-gray-400 max-w-3xl leading-relaxed">
             {description}
           </p>
+          {price && (
+            <div className="mt-8 inline-flex items-baseline gap-3 rounded-lg border border-accent/30 bg-accent/10 px-5 py-3">
+              <span className="font-mono text-xs uppercase tracking-widest text-accent">Course Fee</span>
+              <span className="text-2xl sm:text-3xl font-bold text-accent">{price}</span>
+            </div>
+          )}
         </motion.div>
       </div>
     </section>
