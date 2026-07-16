@@ -119,7 +119,7 @@ const SECTIONS: LegalSection[] = [
           Refund eligibility is determined by course type and engagement stage. For training, a partial refund may be available within fourteen (14) days of enrolment if no more than 20% of the curriculum has been accessed. Consulting and assessment engagements are non-refundable once the engagement has commenced, except as expressly agreed in writing.
         </p>
         <p>
-          If a refund is approved, the amount will be credited within 7-14 days.
+          If a refund is approved, the amount will be credited within 7-14 working business days.
         </p>
         <p>
           Enrolment is also subject to our{' '}
