@@ -58,6 +58,7 @@ const COMPANY_LINKS: SitemapLink[] = [
 const LEGAL_LINKS: SitemapLink[] = [
   { label: 'Privacy Policy', href: '/privacy-policy/' },
   { label: 'Terms of Service', href: '/terms/' },
+  { label: 'Academic Policy', href: '/academic-policy/' },
 ]
 
 function LinkList({ links, ariaLabel }: { links: SitemapLink[]; ariaLabel: string }) {

@@ -222,6 +222,13 @@ export function Footer() {
             >
               Privacy Policy
             </Link>
+            <span aria-hidden="true" className="text-gray-300 dark:text-gray-700">·</span>
+            <Link
+              href="/academic-policy/"
+              className="text-gray-500 dark:text-gray-400 hover:text-accent transition-colors underline decoration-transparent decoration-2 underline-offset-4 hover:decoration-accent/60"
+            >
+              Academic Policy
+            </Link>
           </nav>
           <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400 font-mono">
             <span className="flex items-center gap-1">

@@ -53,6 +53,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     entry('/terms/', 0.3, 'yearly'),
     entry('/privacy-policy/', 0.3, 'yearly'),
+    entry('/academic-policy/', 0.3, 'yearly'),
     entry('/sitemap/', 0.2, 'monthly'),
   ]
 }
