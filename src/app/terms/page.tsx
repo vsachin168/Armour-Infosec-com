@@ -121,6 +121,13 @@ const SECTIONS: LegalSection[] = [
         <p>
           If a refund is approved, the amount will be credited within 7-14 days.
         </p>
+        <p>
+          Enrolment is also subject to our{' '}
+          <Link href="/academic-policy/" className="text-accent hover:underline">
+            Academic Policy
+          </Link>
+          . Dismissal or termination for academic misconduct or a breach of that policy forfeits any eligibility for a refund.
+        </p>
       </>
     ),
   },
